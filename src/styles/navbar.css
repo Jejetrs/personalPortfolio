@@ -1,0 +1,318 @@
+header.portfolio-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 8px clamp(12px, 4vw, 32px);
+  border: 0 !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  transition: padding 920ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+header.portfolio-navbar > div:first-child {
+  width: min(
+    1840px,
+    calc(100% + 2 * clamp(12px, 4vw, 32px) - 2 * var(--portfolio-page-gutter) + 32px)
+  ) !important;
+  max-width: 1840px !important;
+  height: 62px !important;
+  margin: 0 auto;
+  padding: 6px 8px !important;
+  gap: clamp(10px, 2vw, 24px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.52) !important;
+  backdrop-filter: blur(28px) saturate(175%);
+  -webkit-backdrop-filter: blur(28px) saturate(175%);
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  transition:
+    width 920ms cubic-bezier(0.16, 1, 0.3, 1),
+    max-width 920ms cubic-bezier(0.16, 1, 0.3, 1),
+    height 920ms cubic-bezier(0.16, 1, 0.3, 1),
+    padding 920ms cubic-bezier(0.16, 1, 0.3, 1),
+    gap 920ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 920ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 920ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 920ms cubic-bezier(0.16, 1, 0.3, 1),
+    backdrop-filter 920ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+header.portfolio-navbar.is-compact {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  transition-duration: 720ms;
+}
+
+header.portfolio-navbar.is-compact > div:first-child {
+  width: min(960px, 100%) !important;
+  max-width: 960px !important;
+  transition-duration: 720ms;
+  height: 54px !important;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+  gap: clamp(8px, 1.5vw, 18px) !important;
+  box-shadow: 0 9px 26px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.78);
+}
+
+header.portfolio-navbar > div:first-child > a:first-child {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  text-decoration: none;
+}
+
+header.portfolio-navbar > div:first-child > a:first-child > div:first-child {
+  display: flex;
+  transition: width 720ms cubic-bezier(0.22, 1, 0.36, 1), height 720ms cubic-bezier(0.22, 1, 0.36, 1), flex-basis 720ms cubic-bezier(0.22, 1, 0.36, 1), border-radius 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(79, 70, 229, 0.12);
+  border-radius: 50%;
+  background: linear-gradient(145deg, #6366f1, #4338ca) !important;
+  color: #fff !important;
+  box-shadow: 0 3px 8px rgba(79, 70, 229, 0.24) !important;
+}
+
+header.portfolio-navbar > div:first-child > a:first-child > div:nth-child(2) {
+  display: flex !important;
+  min-width: 0;
+  color: #334155;
+}
+
+header.portfolio-navbar > div:first-child > a:first-child > span.portfolio-brand-mark {
+  display: flex !important;
+  align-items: center;
+  color: #172033;
+  white-space: nowrap;
+}
+
+header.portfolio-navbar > div:first-child > a:first-child > div:nth-child(2) > div {
+  margin: 0 !important;
+}
+
+header.portfolio-navbar > div:first-child > a:first-child > div:nth-child(2) > div:nth-child(2) {
+  display: none !important;
+}
+
+header.portfolio-navbar > div:first-child > a:first-child > div:nth-child(2) > div:first-child > span {
+  color: #172033 !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+header.portfolio-navbar nav {
+  display: flex !important;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(14px, 2.2vw, 32px) !important;
+  min-width: 0;
+  margin-left: auto;
+  transition: gap 720ms cubic-bezier(0.22, 1, 0.36, 1), margin-left 720ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+header.portfolio-navbar > div:first-child > div:last-child {
+  margin-left: clamp(10px, 2vw, 28px) !important;
+}
+
+header.portfolio-navbar nav a:not([href^="mailto:"]) {
+  display: inline-flex;
+  height: 1.4em;
+  align-items: center;
+  overflow: hidden;
+  color: #334155 !important;
+  font-size: clamp(11px, 1.1vw, 16px) !important;
+  font-weight: 500 !important;
+  line-height: 1.25;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+
+header.portfolio-navbar nav a[aria-current="page"] {
+  color: #4f46e5 !important;
+  font-weight: 700 !important;
+  box-shadow: inset 0 -2px 0 #4f46e5;
+}
+
+header.portfolio-navbar nav a:not([href^="mailto:"])::after {
+  display: none !important;
+}
+
+.portfolio-nav-roll {
+  display: grid;
+  overflow: hidden;
+}
+
+.portfolio-nav-roll > span {
+  display: block;
+  grid-area: 1 / 1;
+  transition: transform 360ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.portfolio-nav-roll > span:first-child {
+  transform: translateY(0);
+}
+
+.portfolio-nav-roll > span:last-child {
+  transform: translateY(110%);
+}
+
+header.portfolio-navbar nav a:not([href^="mailto:"]):hover .portfolio-nav-roll > span:first-child,
+header.portfolio-navbar nav a:not([href^="mailto:"]):focus-visible .portfolio-nav-roll > span:first-child {
+  animation: portfolio-nav-roll-out 360ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+header.portfolio-navbar nav a:not([href^="mailto:"]):hover .portfolio-nav-roll > span:last-child,
+header.portfolio-navbar nav a:not([href^="mailto:"]):focus-visible .portfolio-nav-roll > span:last-child {
+  animation: portfolio-nav-roll-in 360ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes portfolio-nav-roll-out {
+  to {
+    transform: translateY(-110%);
+  }
+}
+
+@keyframes portfolio-nav-roll-in {
+  to {
+    transform: translateY(0);
+  }
+}
+
+header.portfolio-navbar a[href^="mailto:"] {
+  display: inline-flex;
+  min-height: 48px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 8px !important;
+  padding: 0 22px !important;
+  border: 1px solid rgba(148, 163, 184, 0.34) !important;
+  border-radius: 9999px !important;
+  background: rgba(255, 255, 255, 0.62) !important;
+  color: #1d1d1f !important;
+  font-size: clamp(11px, 1.1vw, 16px) !important;
+  font-weight: 600 !important;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: min-height 920ms cubic-bezier(0.16, 1, 0.3, 1), padding 920ms cubic-bezier(0.16, 1, 0.3, 1), font-size 920ms cubic-bezier(0.16, 1, 0.3, 1), gap 920ms cubic-bezier(0.16, 1, 0.3, 1), background-color 920ms cubic-bezier(0.16, 1, 0.3, 1), border-color 920ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+header.portfolio-navbar.is-compact > div:first-child > a:first-child > div:first-child {
+  width: 36px;
+  height: 36px;
+  flex-basis: 36px;
+  transition: width 720ms cubic-bezier(0.22, 1, 0.36, 1), height 720ms cubic-bezier(0.22, 1, 0.36, 1), flex-basis 720ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+header.portfolio-navbar.is-compact .portfolio-brand-mark > img {
+  display: none;
+}
+
+header.portfolio-navbar.is-compact a[href^="mailto:"] {
+  min-height: 40px;
+  padding-right: 16px !important;
+  padding-left: 16px !important;
+  transition-duration: 720ms;
+}
+
+header.portfolio-navbar a[href^="mailto:"] .material-symbols-outlined {
+  color: #4f46e5;
+}
+
+header.portfolio-navbar a[href^="mailto:"] svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+}
+
+header.portfolio-navbar a:focus-visible {
+  outline: 3px solid #a5b4fc;
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  header.portfolio-navbar {
+    padding: 8px 10px;
+  }
+
+  header.portfolio-navbar > div:first-child {
+    height: 56px !important;
+    padding: 6px !important;
+    gap: 6px !important;
+  }
+
+  header.portfolio-navbar.is-compact {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  header.portfolio-navbar > div:first-child > a:first-child > div:first-child {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+
+  header.portfolio-navbar.is-compact > div:first-child > a:first-child > div:first-child {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+  }
+
+  header.portfolio-navbar > div:first-child > a:first-child {
+    gap: 7px;
+  }
+
+  header.portfolio-navbar > div:first-child > a:first-child > span,
+  header.portfolio-navbar > div:first-child > a:first-child > div:nth-child(2) > div:first-child > span {
+    font-size: 10px !important;
+  }
+
+  header.portfolio-navbar nav {
+    flex: 0 1 auto;
+    gap: clamp(6px, 2vw, 10px) !important;
+    margin-left: auto;
+  }
+
+  header.portfolio-navbar nav a:not([href^="mailto:"]) {
+    font-size: 10px !important;
+  }
+
+  header.portfolio-navbar a[href^="mailto:"] {
+    min-height: 40px;
+    gap: 0 !important;
+    padding: 0 9px !important;
+  }
+
+  header.portfolio-navbar.is-compact a[href^="mailto:"] {
+    min-height: 36px;
+    padding-right: 7px !important;
+    padding-left: 7px !important;
+  }
+
+  header.portfolio-navbar > div:first-child > div:last-child {
+    margin-left: 8px !important;
+  }
+
+  header.portfolio-navbar a[href^="mailto:"] > span:not(.material-symbols-outlined) {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header.portfolio-navbar,
+  header.portfolio-navbar > div:first-child,
+  header.portfolio-navbar a[href^="mailto:"] {
+    transition: none;
+  }
+
+  .portfolio-nav-roll > span {
+    transition: none;
+  }
+}
