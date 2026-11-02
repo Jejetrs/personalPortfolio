@@ -7,7 +7,7 @@ export default function HonorsCarouselTrack() {
             Digistar Class Internship 2026
           </h3>
           <p className="text-xs font-semibold text-slate-600 text-center mt-1">
-            - Top 3 Pitching -
+            - Designer Intern -
           </p>
           <div className="h-36 rounded-2xl bg-gradient-to-br from-amber-50 via-orange-50 to-rose-100 border border-amber-200 p-0 flex flex-col items-center justify-center text-center mt-4">
             <span className="text-[10px] font-mono font-bold tracking-widest text-purple-700">
