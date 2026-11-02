@@ -6,27 +6,24 @@
 
   /* Navbar */
   html body header.portfolio-navbar {
-    padding: 6px 10px;
+    padding: 6px 12px;
   }
   html body header.portfolio-navbar > div:first-child {
+    width: 100% !important;
+    max-width: 100% !important;
     height: 52px !important;
-    padding: 4px 6px !important;
-    gap: 6px !important;
-  }
-  html body header.portfolio-navbar > div:first-child > a:first-child span:not(.portfolio-brand-mark) {
-    display: none;
-  }
-  html body header.portfolio-navbar .portfolio-brand-mark > span[aria-hidden="true"] {
-    display: none !important;
+    padding: 4px 8px !important;
+    gap: 0 !important;
   }
   html body header.portfolio-navbar nav {
-    flex: 1;
-    justify-content: flex-end;
-    gap: 2px !important;
+    flex: 1 1 auto;
+    justify-content: space-between;
+    gap: 0 !important;
     font-size: 12px !important;
+    margin-left: 0 !important;
   }
   html body header.portfolio-navbar .portfolio-nav-link {
-    padding: 6px 8px;
+    padding: 6px 2px;
   }
 
   /* Section spacing */
@@ -34,6 +31,7 @@
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
   }
+
   html body main {
     row-gap: 0;
   }
@@ -210,5 +208,41 @@
     padding: 0.2rem 0.5rem !important;
     font-size: 9px !important;
     white-space: nowrap;
+  }
+}
+
+@keyframes mobile-brand-glow {
+  50% {
+    box-shadow: 0 0 9px 3px rgb(99 102 241 / 75%);
+  }
+}
+
+@media (max-width: 767px) {
+  html body header.portfolio-navbar > div:first-child > a:first-child {
+    display: flex;
+    flex: 0 0 12px;
+    width: 12px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 4px;
+  }
+  html body header.portfolio-navbar > div:first-child > a:first-child > span.portfolio-brand-mark {
+    display: none !important;
+  }
+  html body header.portfolio-navbar > div:first-child > a:first-child::before {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #6366f1;
+    box-shadow: 0 0 6px 2px rgb(99 102 241 / 55%);
+    content: "";
+    animation: mobile-brand-glow 2s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body header.portfolio-navbar > div:first-child > a:first-child::before {
+    animation: none;
   }
 }
