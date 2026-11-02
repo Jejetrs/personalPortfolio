@@ -6,6 +6,7 @@ import { renderTrainingEvidence, bindTrainingEvidence } from './trainingEvidence
 const CERTIFICATE_FILES = {
   'company-panel-1': { title: 'PT Telekomunikasi Indonesia — Magang Generasi Bertalenta', url: '/assets/certificate/DCI2026.pdf' },
   'company-panel-2': { title: 'Coding Camp powered by DBS Foundation 2026 — Facilitator', type: 'images', urls: ['/assets/certificate/Coding%20Camp%202026%20Facilitator%20sertif1.webp', '/assets/certificate/Coding%20Camp%202026%20Facilitator%20sertif2.webp'] },
+  'b2b-pitching': { title: 'Digistar Class Intern 2026 — B2B Pitching Competition', url: '/assets/certificate/DCI%20B2B.pdf' },
   'training-1': { title: 'Asah led by Dicoding × Accenture', url: '/assets/certificate/ASAH%202025.pdf' },
   'training-2': { title: 'Coding Camp powered by DBS Foundation 2025', url: '/assets/certificate/CC%202025.pdf' },
   'training-3': { title: 'Digistar Class 2024 by Telkom', url: '/assets/certificate/DCI2024.pdf' },

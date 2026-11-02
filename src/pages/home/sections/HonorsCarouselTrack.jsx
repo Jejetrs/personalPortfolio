@@ -25,11 +25,47 @@ export default function HonorsCarouselTrack() {
         </div>
         <div className="space-y-2 mt-3">
           <p className="text-[11px] text-slate-600 leading-relaxed">
-            Led team meetings and coordinated team activities throughout the project. Represented the team during the final pitching, presenting the project and its key solutions to stakeholders.
+            Throughout my Designer Internship, I contributed to design system improvements, product design, and team collaboration while developing my technical, analytical, and professional skills.
           </p>
           <div className="flex items-center justify-between text-[10px] font-mono border-t border-slate-200 pt-2 text-slate-600">
             <span className="font-bold text-purple-700">
               TELKOM INDONESIA
+            </span>
+            <span>
+              AUG 2026
+            </span>
+          </div>
+        </div>
+      </article>
+      <article aria-label="Digistar Class Intern 2026 B2B Pitching, 3rd Place" data-certificate="/assets/certificate/DCI%20B2B.pdf" className="honor-card bg-white rounded-[26px] p-4 border border-slate-200 shadow-[0_8px_32px_rgba(0,0,0,0.08)] flex flex-col justify-between">
+        <div>
+          <h3 className="font-extrabold text-[#131b2e] text-sm sm:text-base text-center leading-tight">
+            Digistar Class Intern 2026 · B2B
+          </h3>
+          <p className="text-xs font-semibold text-slate-600 text-center mt-1">
+            - 3rd Place · Pitching Competition -
+          </p>
+          <div className="h-36 rounded-2xl bg-gradient-to-br from-amber-50 via-orange-50 to-rose-100 border border-amber-200 p-0 flex flex-col items-center justify-center text-center mt-4">
+            <span className="text-[10px] font-mono font-bold tracking-widest text-purple-700">
+              TELKOM INDONESIA
+            </span>
+            {" "}
+            <span className="text-base font-black text-slate-800 mt-3">
+              3RD PLACE · B2B PITCHING
+            </span>
+            {" "}
+            <span className="text-[10px] font-mono text-slate-600 mt-2">
+              AUG 2026
+            </span>
+          </div>
+        </div>
+        <div className="space-y-2 mt-3">
+          <p className="text-[11px] text-slate-600 leading-relaxed">
+            Led team meetings and coordinated team activities throughout the project. Represented the team during the final pitching, presenting the project and its key solutions to stakeholders.
+          </p>
+          <div className="flex items-center justify-between text-[10px] font-mono border-t border-slate-200 pt-2 text-slate-600">
+            <span className="font-bold text-purple-700">
+              B2B PITCHING
             </span>
             <span>
               AUG 2026

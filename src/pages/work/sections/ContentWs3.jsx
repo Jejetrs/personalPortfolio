@@ -106,11 +106,11 @@ export default function ContentWs3() {
           </span>
         </AppLink>
       </div>
-      <div className="flex items-center gap-3 rounded-xl border border-emerald-200/80 bg-emerald-50/50 p-3.5">
+      <div className="flex flex-wrap items-center gap-3 rounded-xl border border-emerald-200/80 bg-emerald-50/50 p-3.5">
         <span className="material-symbols-outlined flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-700 text-white">
           emoji_events
         </span>
-        <div>
+        <div className="min-w-0 flex-1">
           <span className="block text-[10px] font-bold uppercase tracking-wider text-emerald-800 font-label-kicker">
             Team Achievement
           </span>
@@ -118,6 +118,12 @@ export default function ContentWs3() {
             3rd Place · Internal B2B Pitching Competition
           </p>
         </div>
+        <button type="button" data-certificate-key="b2b-pitching" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-emerald-700 px-3.5 py-2 text-xs font-bold text-white shadow-sm transition hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">
+          <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
+            workspace_premium
+          </span>
+          View Certificate
+        </button>
       </div>
     </div>
   );
