@@ -641,8 +641,8 @@ html body .about-project-category[aria-pressed="true"] {
 .ct {
   position: relative;
   overflow: hidden;
-  margin: clamp(1.5rem, 3vw, 2.5rem) 0 0;
-  padding: clamp(2.4rem, 6vw, 4.5rem) clamp(1.2rem, 4vw, 3.5rem);
+  margin: clamp(0.75rem, 2vw, 1.5rem) 0 0;
+  padding: clamp(1.8rem, 4.5vw, 3.25rem) clamp(1.2rem, 4vw, 3.5rem);
   border-radius: clamp(1.6rem, 4vw, 3rem);
   background: var(--rf-ink);
   color: #fff;
@@ -685,6 +685,10 @@ html body .about-project-category[aria-pressed="true"] {
   color: #c9cde4;
   line-height: 1.65;
 }
+.ct-lead strong {
+  color: #fff;
+  font-weight: 800;
+}
 .ct-links {
   display: grid;
   gap: 0.7rem;
@@ -700,6 +704,22 @@ html body .about-project-category[aria-pressed="true"] {
   color: #fff;
   text-decoration: none;
   transition: transform 0.35s var(--rf-ease), background 0.25s, color 0.25s;
+}
+.ct-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 2rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.65rem;
+  background: rgba(255, 255, 255, 0.16);
+}
+.ct-icon svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+.ct-link > span:nth-child(2) {
+  flex: 1;
 }
 .ct-link b {
   display: block;

@@ -5,7 +5,7 @@ export default function CompanyPanel3() {
     <section className="company-stage space-y-6 hidden" id="company-panel-3">
       <p className="wk-lead">
         <span>
-          {"Where it started: explaining code to other students, workshop after workshop."}
+          {"Where it began: sharing technical knowledge and learning how to guide others."}
           <small>LepKom Gunadarma University Laboratory · Apr 2023 – Sep 2026</small>
         </span>
       </p>

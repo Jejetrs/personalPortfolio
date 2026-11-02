@@ -1136,12 +1136,15 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       const ctl = new AbortController();
       const timer = setTimeout(() => ctl.abort(), 12000);
       try {
+        if (health) {
+          const response = await fetch(health, { cache: 'no-store', signal: ctl.signal });
+          return { ok: response.ok, why: 'health endpoint HTTP ' + response.status };
+        }
         const file = await readLiveStatusFile();
         const entry = file && file[url];
         if (entry && Date.now() - new Date(entry.checked).getTime() < 12 * 3600 * 1000) {
           return { ok: !!entry.active, why: 'live-status.json (' + entry.checked + ')' };
         }
-        if (health) { const r = await fetch(health, { cache: 'no-store', signal: ctl.signal }); return { ok: r.ok, why: 'health endpoint HTTP ' + r.status }; }
         try {
           const res = await fetch(url, { cache: 'no-store', credentials: 'omit', signal: ctl.signal });
           const problem = analyseLivePage(res, await res.text());

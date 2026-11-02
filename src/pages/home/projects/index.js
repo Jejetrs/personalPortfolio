@@ -40,7 +40,7 @@ export const PROJECTS = [
     category: "team",
     title: "Project Management & Team Leadership",
     description: "How I plan, track and hand off work as a project manager, product manager and team leader across three capstone and competition teams.",
-    images: ["/assets/projects/Project%20Management/pm-cover.webp"],
+    images: ["/assets/events/B2B%20DCI%202026/Team%20Monitoring.png"],
     Card: PmLeadershipCard,
   },
   {

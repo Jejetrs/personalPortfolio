@@ -37,7 +37,7 @@ export default function HonorsCarouselTrack() {
           </div>
         </div>
       </article>
-      <article aria-label="Coding Camp 2026 Facilitator" data-certificates='["/assets/certificate/Coding%20Camp%202026%20Facilitator%20sertif1.webp","/assets/certificate/Coding%20Camp%202026%20Facilitator%20sertif2.webp"]' className="honor-card bg-white rounded-[26px] p-4 border border-slate-200 shadow-[0_8px_32px_rgba(0,0,0,0.08)] flex flex-col justify-between">
+      <article aria-label="Coding Camp 2026 Facilitator" data-certificate="/assets/certificate/Coding%20Camp%202026%20Facilitator.pdf" className="honor-card bg-white rounded-[26px] p-4 border border-slate-200 shadow-[0_8px_32px_rgba(0,0,0,0.08)] flex flex-col justify-between">
         <div>
           <h3 className="font-extrabold text-[#131b2e] text-sm sm:text-base text-center leading-tight">
             Coding Camp 2026

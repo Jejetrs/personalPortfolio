@@ -10,7 +10,7 @@ const CAMP = '/assets/experience/Coding Camp Cohort 2025/';
 const DIGI = '/assets/experience/Digistar Class 2024/';
 const SIC = '/assets/experience/Samsung Innovation Campus/';
 
-const drivePreview = (id) => `https://drive.google.com/file/d/${id}/preview`;
+const drivePreview = (id) => `https://drive.google.com/file/d/${id}/preview?rm=minimal`;
 
 /** size: wide = spans 2 columns, tall = spans 2 rows. gallery = extra images opened together in the viewer. */
 const EVIDENCE = {
@@ -87,6 +87,12 @@ const EVIDENCE = {
     group: 'samsung',
     heading: 'Documentation',
     lead: 'AgroSense on the bench and on stage: a working hydroponic prototype, team mentoring and the final pitch.',
+    video: {
+      id: '1ZCeQb2X0lZQ7DzovJzCLxNJg3BcT7fQC',
+      poster: SIC + 'Product Thinking.png',
+      title: 'Samsung Innovation Campus project video',
+      text: 'Watch the AgroSense project presentation and the team journey from prototype to pitch.',
+    },
     tiles: [
       {
         src: SIC + 'Agrosense IoT Hardware1.jpeg', kicker: 'Prototype', title: 'AgroSense IoT hardware', text: 'The ESP32 sensor prototype from four angles.', size: 'wide',
@@ -98,6 +104,7 @@ const EVIDENCE = {
       },
       { src: SIC + 'Mentoring Session.jpeg', kicker: 'Mentorship', title: 'Mentoring session', text: 'Feedback that sharpened the product.' },
       { src: SIC + 'Product Thinking.png', kicker: 'Product thinking', title: 'From idea to product', text: 'Turning a farming problem into a clear product direction.' },
+      { src: SIC + 'Team Profile.jpeg', kicker: 'Team', title: 'AgroSense team', text: 'The team behind the Samsung Innovation Campus project.' },
     ],
     docs: [],
     note: 'Original prototype, mentoring and pitching photos from Samsung Innovation Campus.',

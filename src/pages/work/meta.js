@@ -527,8 +527,9 @@ export const PAGE_CSS = `
 .ev-project-btn span{transition:transform .18s}.ev-project-btn:hover span{transform:translateX(3px)}
 .ev-feature .ev-project-btn{background:#fff;color:#312e81}
 .ev-player{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#050b22;box-shadow:0 0 0 1px rgba(255,255,255,.14)}
-.ev-player iframe,.ev-play{position:absolute;inset:0;width:100%;height:100%;border:0}
-.ev-player-source-guard{position:absolute;z-index:2;top:0;right:0;width:76px;height:58px;background:transparent}
+.ev-player iframe{position:absolute;z-index:1;inset:0;width:100%;height:100%;border:0;touch-action:manipulation}
+.ev-play{position:absolute;inset:0;width:100%;height:100%;border:0}
+.ev-player-source-guard{position:absolute;z-index:2;top:0;right:0;width:76px;height:58px;background:transparent;pointer-events:none}
 .ev-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.ev-play{display:grid;place-items:center;padding:0;cursor:pointer;background:#0f1a38;color:#4f46e5}
 .ev-play img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6;transition:opacity .2s,transform .4s}
 .ev-play:hover img{opacity:.8;transform:scale(1.03)}
@@ -557,7 +558,7 @@ export const PAGE_CSS = `
 .ev-doc small{display:block;margin-top:2px;font-size:11px;line-height:1.45;color:#64708f}
 .ev-doc-open{margin-left:auto;flex:none;font-size:11px;font-weight:800;color:#4f46e5}
 .ev-note{margin:0;font-size:11px;color:#7b86a3}
-@media(max-width:900px){.ev-full{grid-column:1/-1}.ev-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:170px}.ev-feature{grid-template-columns:minmax(0,1fr)}.ev-text{max-height:60px;opacity:1}}
+@media(max-width:900px){.ev-full{grid-column:1/-1}.ev-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:170px}.ev-feature{grid-template-columns:minmax(0,1fr)}.ev-player{width:100%;min-height:0;aspect-ratio:16/9}.ev-text{max-height:60px;opacity:1}}
 @media(max-width:560px){.ev{padding:0 12px;border-radius:10px}.ev-grid{gap:10px;grid-auto-rows:150px}.ev-caption{padding:12px}.ev-caption strong{font-size:12.5px}.ev-text{display:none}.ev-docs-grid{grid-template-columns:1fr}}
 .ev-project-btn{background:#312e81;color:#fff}
 

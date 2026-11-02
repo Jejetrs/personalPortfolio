@@ -26,8 +26,10 @@ export default function AboutPart1Part1() {
           <span className="hx-role">Digital Product Development</span>
         </p>
         <p className="hx-lead">
-          I like problems that start out messy. I research them, design the product, and build it myself, so what leaves my desk
-          is something people can actually use.
+          I enjoy understanding real problems and turning ideas into <strong>human-centered digital products</strong>. With
+          experience in <strong>research and analysis, UI/UX design, AI/ML, and full-stack development</strong>, I bring together
+          user needs, business goals, and technical understanding to design, build, and improve meaningful solutions through
+          hands-on work and team collaboration.
         </p>
         <p
           aria-label="Turning user needs into clear and lasting products"

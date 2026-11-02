@@ -5,7 +5,7 @@ import UxDropdown from './UxDropdown.jsx';
 
 export default function SmartFocusAlertCard1() {
   return (
-      <article className="rounded-2xl bg-[#f6f8fd] border border-blue-100 shadow-sm relative overflow-hidden project-card-item p-4 sm:p-6 space-y-4" data-category="aiml web uiux" id="smart-focus-alert-card-1">
+      <article className="rounded-2xl bg-[#f6f8fd] border border-blue-100 shadow-sm relative overflow-hidden project-card-item p-4 sm:p-6 space-y-4" data-category="aiml web uiux" id="smart-focus-alert-card-1" data-live-url="https://www.figma.com/proto/pBIGNOVNe6UQSEpDH3sqxK/SMART-FOCUS?node-id=19-556&p=f&t=h6tQAszTVhB3iYr3-1&scaling=scale-down-width&content-scaling=fixed&page-id=9%3A108&starting-point-node-id=19%3A556" data-live-health="https://smartfocus.up.railway.app/">
         <div className="relative z-10 space-y-4">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7 space-y-4">
@@ -35,6 +35,7 @@ export default function SmartFocusAlertCard1() {
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
+                    <PrivateLink label="GitHub" restricted />
                     
                     <a className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-semibold text-xs transition shadow-xs" href="https://www.figma.com/proto/pBIGNOVNe6UQSEpDH3sqxK/SMART-FOCUS?node-id=19-556&amp;p=f&amp;t=njEg9MLtPiUcaLq1-1&amp;scaling=scale-down-width&amp;content-scaling=fixed&amp;page-id=9%3A108&amp;starting-point-node-id=19%3A556" target="_blank" rel="noopener noreferrer">
                       <span className="">
@@ -44,7 +45,12 @@ export default function SmartFocusAlertCard1() {
                         ↗
                       </span>
                     </a>
-                    <PrivateLink label="Live app" />
+                    <span className="dev-switch" data-live-badge="" data-state="checking" role="switch" aria-checked="false" aria-readonly="true" aria-disabled="true" aria-label="Live deploy status" tabIndex="-1">
+                      <span className="dev-switch-label">Live deploy</span>
+                      <span className="dev-switch-track"><i></i></span>
+                      <span className="dev-switch-text" data-live-text="">Checking…</span>
+                    </span>
+                    <a className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-semibold text-xs transition shadow-xs" hidden data-live-link="" target="_blank" rel="noopener noreferrer">Open Live App ↗</a>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 flex-wrap">

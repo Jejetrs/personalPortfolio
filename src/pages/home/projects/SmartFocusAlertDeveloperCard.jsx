@@ -176,7 +176,7 @@ export default function SmartFocusAlertDeveloperCard() {
 .sf{--dev-acc:#1d4ed8;--dev-line:#bfdbfe}
 
 `}</style>
-      <article className="project-card-item sf relative overflow-hidden" id="smart-focus-alert-developer-card" data-category="developer fullstack flask computer-vision">
+      <article className="project-card-item sf relative overflow-hidden" id="smart-focus-alert-developer-card" data-category="developer fullstack flask computer-vision" data-live-url="https://www.figma.com/proto/pBIGNOVNe6UQSEpDH3sqxK/SMART-FOCUS?node-id=19-556&p=f&t=h6tQAszTVhB3iYr3-1&scaling=scale-down-width&content-scaling=fixed&page-id=9%3A108&starting-point-node-id=19%3A556" data-live-health="https://smartfocus.up.railway.app/">
         <div className="dev-top">
           <div className="dev-tags">
             <span className="dev-num sf-number">
@@ -200,10 +200,16 @@ export default function SmartFocusAlertDeveloperCard() {
             
           </div>
           <div className="dev-actions">
+            <PrivateLink label="GitHub" restricted />
             <button type="button" className="dev-btn ghost" data-sf-goto="uiux" data-sf-target="smart-focus-alert-card-1">
               UI/UX case study ↗
             </button>
-            <PrivateLink label="Live app" />
+            <span className="dev-switch" data-live-badge="" data-state="checking" role="switch" aria-checked="false" aria-readonly="true" aria-disabled="true" aria-label="Live deploy status" tabIndex="-1">
+              <span className="dev-switch-label">Live deploy</span>
+              <span className="dev-switch-track"><i></i></span>
+              <span className="dev-switch-text" data-live-text="">Checking…</span>
+            </span>
+            <a className="dev-btn solid" hidden data-live-link="" target="_blank" rel="noopener noreferrer">Open Live App ↗</a>
           </div>
         </div>
         <div className="hero">

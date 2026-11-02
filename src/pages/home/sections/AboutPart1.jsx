@@ -1,10 +1,10 @@
 import AboutPart1Part1 from './AboutPart1Part1.jsx';
 
 const PILLARS = [
-  ["01", "Understand the business", "Read the market and the competitors first, so the design solves a real problem."],
-  ["02", "Design for people", "Turn needs into flows, prototypes and interfaces that get tested before they get built."],
-  ["03", "Keep the team moving", "Plan, schedule and unblock, from the first kickoff through the final pitch."],
-  ["04", "Build it properly", "Full-stack, APIs and ML, so the idea works outside the mockup too."],
+  ["01", "Understand the Problem", "Explore business needs, market trends, and user challenges before defining a solution."],
+  ["02", "Design with Purpose", "Turn research insights into clear user flows, intuitive interfaces, and testable prototypes."],
+  ["03", "Align People & Progress", "Coordinate responsibilities, timelines, and discussions to keep teams working toward shared goals."],
+  ["04", "Bring Ideas to Life", "Build functional solutions through frontend, backend, APIs, and AI/ML integration."],
 ];
 
 export default function AboutPart1() {

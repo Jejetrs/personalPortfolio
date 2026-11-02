@@ -31,6 +31,7 @@ export default function TrusteeBusinessCard() {
 #trustee-business-card .tr-vbar span{margin-left:6px;font-size:10px;font-weight:700;color:#c9d3f6;letter-spacing:.03em}
 #trustee-business-card .tr-vstage{position:relative;aspect-ratio:16/9;background:#050b22}
 #trustee-business-card .tr-vstage iframe{display:block;width:100%;height:100%;border:0;background:#050b22}
+#trustee-business-card .tr-video-source-guard{position:absolute;z-index:2;top:0;right:0;width:76px;height:58px;background:transparent}
 #trustee-business-card .tr-novideo{position:absolute;left:0;right:0;bottom:0;display:grid;gap:2px;padding:9px 12px;background:linear-gradient(0deg,rgba(5,11,34,.94),rgba(5,11,34,.7));font-size:10.5px;color:#c9d3f6;text-align:left}
 #trustee-business-card .tr-novideo[hidden]{display:none}
 #trustee-business-card .tr-novideo b{color:#fff;font-size:11.5px}
@@ -271,11 +272,12 @@ export default function TrusteeBusinessCard() {
                 </div>
                 <div className="tr-vstage">
                   <iframe
-                    src="https://drive.google.com/file/d/1KmV3Y6WtxhT6N3Vzw_N_4ln9kGBPIGPC/preview"
+                    src="https://drive.google.com/file/d/1KmV3Y6WtxhT6N3Vzw_N_4ln9kGBPIGPC/preview?rm=minimal"
                     title="Trustee solution pitch video"
                     allow="autoplay"
                     allowFullScreen
                   />
+                  <span className="tr-video-source-guard" aria-hidden="true" />
                 </div>
               </div>
             </div>

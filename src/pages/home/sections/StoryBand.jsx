@@ -56,7 +56,7 @@ export default function StoryBand() {
           <i aria-hidden="true">→</i>
           <span>Lead</span>
           <i aria-hidden="true">→</i>
-          <span>Ship</span>
+          <span>Deliver</span>
           <small>Each step added a layer; the projects below show all four.</small>
         </p>
       </div>

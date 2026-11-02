@@ -288,10 +288,10 @@ export default function CivisionProjectCard() {
                   </div>
                   <div className="md:col-span-6 bg-white/95 rounded-xl p-3 border border-blue-100 shadow-xs space-y-2 flex flex-col justify-between">
                     <div className="space-y-1.5">
+                      <p className="text-[11px] font-semibold text-slate-800">
+                        Product Management & UI/UX Designer
+                      </p>
                       <ul className="text-[11px] text-slate-600 space-y-0.5 pl-3 list-disc marker:text-blue-500">
-                        <li className="font-semibold text-slate-800">
-                          Project Manager and UI/UX Designer
-                        </li>
                         <li className="">
                           Led the end-to-end design experience
                         </li>

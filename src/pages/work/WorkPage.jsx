@@ -19,10 +19,10 @@ export default function WorkPage() {
             Experience
           </p>
           <h1>
-            Four roles, one thread: <em>turning messy work into something others can use.</em>
+            Different roles, one goal: <em>making things work better.</em>
           </h1>
           <p>
-            Design systems at Telkom, an AI cohort as facilitator, ML submissions as reviewer, and a programming lab where it all began.
+            From product design and development to team coordination, each experience has taught me something new about solving problems and building better solutions together.
           </p>
           <ul className="wk-chips">
             <li className="wk-chip">

@@ -12,15 +12,23 @@ const PROGRAMS = [
     id: "digistar",
     tab: "Digistar Capstone",
     role: "Project Management",
-    kicker: "Team 32 · Best 3 Use Case",
-    headline: "One shared sheet, one rhythm for the whole team",
+    kicker: "DIGISTAR CAPSTONE · PROJECT MANAGEMENT",
+    headline: "Keeping the Team Aligned, From Planning to Pitching",
     body:
-      "The capstone ran on the program's own sequence: mentoring, consultative-selling role play, pitching practice, then the pitch. I mapped our tasks onto that sequence so nobody had to ask what came next.",
-    stats: [["Best 3", "use case team"], ["4", "program stages"]],
+      "Leading Team 32 meant keeping everyone informed and moving toward the same goal. I used a shared monitoring sheet to organize tasks, track deadlines, and coordinate our progress through mentoring, project discussions, and final pitching.",
+    contributionsLabel: "MY CONTRIBUTIONS",
+    stats: [],
     points: [
-      "Laid the team's tasks against the program stages, from mentor feedback to final pitch",
-      "Tracked tasks and deadlines in a shared sheet the whole team could open",
-      "Used role-play and pitch practice as checkpoints, not extras",
+      "Project Planning: Organized tasks and milestones around the program timeline.",
+      "Progress Monitoring: Maintained a shared tracker to keep responsibilities and deadlines visible.",
+      "Team Coordination: Supported discussions, mentoring follow-ups, and pitching preparation.",
+    ],
+    playbookTitle: "HOW WE BROUGHT TRUSTEE FROM RESEARCH TO PITCH",
+    playbook: [
+      ["01 · Business Research & Analysis", "Analyzed Shopee's business context, competitors, and customer challenges to identify product opportunities."],
+      ["02 · Business Strategy & Solution Planning", "Developed the Business Model Canvas and helped shape Trustee's proposed value and business direction."],
+      ["03 · Team Coordination", "Led team discussions, tracked project activities, and aligned business requirements with the AI team's work."],
+      ["04 · Solution Pitching", "Presented Trustee's business problem, proposed AI solution, and value proposition, contributing to our Top 3 pitching achievement."],
     ],
     links: [{ label: "Open the Trustee case study", href: "/?project=trustee-business-card", internal: true }],
     photos: [
@@ -37,15 +45,23 @@ const PROGRAMS = [
     id: "arkavidia",
     tab: "Arkavidia 9.0",
     role: "Product Management",
-    kicker: "Hackvidia · 24 hours · National finalist",
-    headline: "Agreeing on the product before anyone opened an editor",
+    kicker: "PRODUCT MANAGEMENT · ARKAVIDIA 9.0",
+    headline: "Turning Ideas into a Clear Product Direction",
     body:
-      "In a 24-hour hackathon the cheapest mistake to fix is the one on paper. I owned the product side: what AiDorse does for an MSME, the flow a user follows, and what we could honestly demo by the pitch.",
-    stats: [["24 h", "idea to pitch"], ["Top 10", "national finalist"]],
+      "During a 24-hour hackathon, I helped shape AiDorse, an AI-powered endorsement platform for MSMEs. My role focused on defining the product direction, designing user flows, and aligning the team around a solution we could realistically develop and present.",
+    contributionsLabel: "MY CONTRIBUTIONS",
+    stats: [["24h", "Hackathon Sprint"], ["Top 10", "National Finalist"]],
     points: [
-      "Drew the AiDorse user flow first, so design and code could run in parallel",
-      "Tested the idea with an industry practitioner before building further",
-      "Coordinated pitch and demo rehearsals up to the finals",
+      "Product Planning: Defined key features and user flows to guide design and development.",
+      "Product Validation: Discussed the solution with an industry practitioner to refine its direction.",
+      "Team Coordination: Aligned product discussions, development priorities, and final pitching.",
+    ],
+    playbookTitle: "HOW WE SHAPED AIDORSE IN 24 HOURS",
+    playbook: [
+      ["01 · Product Direction", "Defined AiDorse's core features and value proposition for MSMEs."],
+      ["02 · User Experience Planning", "Mapped user flows and designed interfaces to guide the development process."],
+      ["03 · Technical Alignment", "Collaborated with frontend, backend, and AI teammates to align product needs with technical feasibility."],
+      ["04 · Validation & Pitching", "Refined the concept through industry feedback and prepared the product story for final pitching."],
     ],
     links: [],
     photos: [
@@ -63,17 +79,25 @@ const PROGRAMS = [
   {
     id: "action",
     tab: "ACTION 2025",
-    role: "Project Management & Leader",
-    kicker: "ASAH capstone · 31 Oct – 15 Dec 2025",
-    headline: "A 46-day plan every learning path could read at a glance",
+    role: "Project Management & Team Leadership",
+    kicker: "PROJECT MANAGEMENT & TEAM LEADERSHIP",
+    headline: "Keeping the Team Aligned from Planning to Delivery",
     body:
-      "I led the team and wrote its schedule. The plan split the capstone into learning paths, put a milestone on every week, and kept uncertain work visibly separate from committed work.",
-    stats: [["3", "learning paths"], ["29", "activities"], ["6", "milestones"]],
+      "As the LeadSight Capstone Team Leader, I coordinated project planning across Machine Learning, Front-End, and Back-End teams. I helped organize responsibilities, track milestones, and support collaboration to keep development aligned with our project goals.",
+    contributionsLabel: "MY CONTRIBUTIONS",
+    stats: [["3", "Learning Paths"], ["29", "Scheduled Activities"], ["6-Week", "Timeline"]],
     points: [
-      "One schedule per path (ML, Front-End, Back-End) plus a shared M6 for brief, slides and video",
-      "Model tuning and bug fixing marked as conditional, so buffer sat where uncertainty lived",
-      "A PIC and status column on every activity, so progress read from one checklist",
-      "End-to-end test of Front-End, Back-End, ML and database before the final hand-off",
+      "Project Planning: Created a shared timeline with clear tasks, responsibilities, and milestones across three learning paths.",
+      "Team Coordination: Led regular discussions and progress check-ins to keep everyone aligned.",
+      "Risk & Issue Management: Identified conditional tasks, such as model optimization and bug fixing, to account for development uncertainties.",
+      "Integration & Delivery: Coordinated the team's preparation for integration testing, documentation, and final presentation.",
+    ],
+    playbookTitle: "HOW I MANAGED THE LEADSIGHT CAPSTONE",
+    playbook: [
+      ["01 · Project Planning", "Structured the six-week timeline across Machine Learning, Front-End, and Back-End development."],
+      ["02 · Progress Monitoring", "Organized tasks, responsibilities, and milestones in a shared tracker to keep the team aligned."],
+      ["03 · Risk & Issue Management", "Planned for potential delays, model optimization, and bug fixes throughout development."],
+      ["04 · Integration & Delivery", "Coordinated preparation for system integration, testing, documentation, and final presentation."],
     ],
     links: [],
     photos: [
@@ -115,6 +139,7 @@ const STYLE = `
 .pmx h2{margin:0;font-size:30px;line-height:1.1;letter-spacing:-.03em;font-weight:800}
 .pmx h2 span{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .pmx .lead{margin:0;max-width:46ch;color:var(--mut);font-size:13.5px}
+.pmx .contributions-label{margin:18px 0 8px;font:700 11px/1 "JetBrains Mono",monospace;letter-spacing:.14em;color:var(--acc2)}
 .pmx .roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0 0}
 .pmx .role{position:relative;display:flex;flex-direction:column;gap:3px;padding:14px 16px;text-align:left;font:inherit;color:inherit;cursor:pointer;border:1px solid var(--line);border-radius:16px;background:#ffffffb8;transition:transform .25s,box-shadow .25s,background .25s,border-color .25s}
 .pmx .role:hover{transform:translateY(-2px);box-shadow:0 10px 24px #234c731a}
@@ -240,11 +265,11 @@ export default function PmLeadershipCard() {
           <div>
             <p className="eyebrow">Project management · leadership</p>
             <h2>
-              How I keep projects <span>moving</span>
+              How I Keep Projects <span>on Track</span>
             </h2>
           </div>
           <p className="lead">
-            The events above tell what happened. This is how the work was planned, tracked and handed off, in three different roles.
+            A closer look at how I plan, coordinate, and support team progress across different projects.
           </p>
         </div>
 
@@ -271,10 +296,16 @@ export default function PmLeadershipCard() {
                 </div>
               ))}
             </div>
+            {program.contributionsLabel && <p className="contributions-label">{program.contributionsLabel}</p>}
             <ol className="pts">
-              {program.points.map((point) => (
-                <li key={point}>{point}</li>
-              ))}
+              {program.points.map((point) => {
+                const separator = point.indexOf(": ");
+                return (
+                  <li key={point}>
+                    {separator > 0 ? <><b>{point.slice(0, separator + 1)}</b>{point.slice(separator + 1)}</> : point}
+                  </li>
+                );
+              })}
             </ol>
             {program.links.map((link) => (
               <a className="cta" key={link.href} href={link.href}>
@@ -317,9 +348,9 @@ export default function PmLeadershipCard() {
             </div>
           </div>
           <div>
-            <p className="sec">The playbook behind all three</p>
+            <p className="sec">{program.playbookTitle || "The playbook behind all three"}</p>
             <div className="play">
-              {PLAYBOOK.map(([title, text]) => (
+              {(program.playbook || PLAYBOOK).map(([title, text]) => (
                 <div key={title}>
                   <b>{title}</b>
                   <span>{text}</span>

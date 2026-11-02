@@ -5,7 +5,7 @@ const STEPS = [
     title: "Know the user, test the assumptions",
     text: "Who they are, what they do today, and what I only think I know.",
     design: ["Interviews & surveys", "Card sorting", "Affinity diagram"],
-    tech: ["Data profiling in Python"],
+    tech: ["Data Profiling"],
     proof: "AOShuttle · card sorting reshaped the app structure",
   },
   {

@@ -2,7 +2,7 @@ import PrivateLink from "./PrivateLink.jsx";
 
 export default function NuscaProjectCard2() {
   return (
-      <article className="relative overflow-hidden project-card-item rounded-3xl border border-emerald-200/80 bg-gradient-to-br from-[#f0fdf4] via-[#ecfdf5] to-[#e6fcf1] p-5 sm:p-7 shadow-sm transition-all duration-300" id="nusca-project-card-2">
+      <article className="relative overflow-hidden project-card-item rounded-3xl border border-emerald-200/80 bg-gradient-to-br from-[#f0fdf4] via-[#ecfdf5] to-[#e6fcf1] p-5 sm:p-7 shadow-sm transition-all duration-300" id="nusca-project-card-2" data-live-url="https://nusca.vercel.app/">
         <div className="pointer-events-none absolute -right-16 -top-20 h-72 w-72 rounded-full bg-emerald-200/40 blur-3xl"></div>
         <div className="pointer-events-none absolute -bottom-20 -left-12 h-64 w-64 rounded-full bg-teal-200/30 blur-2xl"></div>
         <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 project-card-header">
@@ -28,8 +28,13 @@ export default function NuscaProjectCard2() {
             </span>
           </div>
           <div className="flex items-center gap-2">
-            
-            <PrivateLink label="Live app" />
+            <PrivateLink label="GitHub" restricted />
+            <span className="dev-switch" data-live-badge="" data-state="checking" role="switch" aria-checked="false" aria-readonly="true" aria-disabled="true" aria-label="Live deploy status" tabIndex="-1">
+              <span className="dev-switch-label">Live deploy</span>
+              <span className="dev-switch-track"><i></i></span>
+              <span className="dev-switch-text" data-live-text="">Checking…</span>
+            </span>
+            <a className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-xs transition shadow-xs" hidden data-live-link="" target="_blank" rel="noopener noreferrer">Open Live App ↗</a>
           </div>
         </div>
         <div className="relative z-10 grid grid-cols-1 items-center gap-6 lg:grid-cols-12 pb-4">

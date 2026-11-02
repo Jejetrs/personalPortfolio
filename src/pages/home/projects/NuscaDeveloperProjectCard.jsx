@@ -127,7 +127,7 @@ export default function NuscaDeveloperProjectCard() {
 .nu .nu-dgrid{padding-top:0}
 
 `}</style>
-      <article className="project-card-item nu relative overflow-hidden" id="nusca-developer-project-card" data-category="developer fullstack react fastapi">
+      <article className="project-card-item nu relative overflow-hidden" id="nusca-developer-project-card" data-category="developer fullstack react fastapi" data-live-url="https://nusca.vercel.app/">
         <div className="dev-top">
           <div className="dev-tags">
             <span className="dev-num sf-number">
@@ -151,13 +151,19 @@ export default function NuscaDeveloperProjectCard() {
             
           </div>
           <div className="dev-actions">
+            <PrivateLink label="GitHub" restricted />
             <button type="button" className="dev-btn ghost" data-sf-goto="uiux" data-sf-target="nusca-project-card-1">
               UI/UX case study ↗
             </button>
             <button type="button" className="dev-btn ghost" data-sf-goto="aiml" data-sf-target="nusca-project-card-2">
               AI/ML case study ↗
             </button>
-            <PrivateLink label="Live app" />
+            <span className="dev-switch" data-live-badge="" data-state="checking" role="switch" aria-checked="false" aria-readonly="true" aria-disabled="true" aria-label="Live deploy status" tabIndex="-1">
+              <span className="dev-switch-label">Live deploy</span>
+              <span className="dev-switch-track"><i></i></span>
+              <span className="dev-switch-text" data-live-text="">Checking…</span>
+            </span>
+            <a className="dev-btn solid" hidden data-live-link="" target="_blank" rel="noopener noreferrer">Open Live App ↗</a>
           </div>
         </div>
         <div className="nu-grid">

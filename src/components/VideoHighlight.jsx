@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 /** Google Drive share id → inline player URL. */
-export const drivePreviewUrl = (id) => `https://drive.google.com/file/d/${id}/preview`;
+export const drivePreviewUrl = (id) => `https://drive.google.com/file/d/${id}/preview?rm=minimal`;
 
 /**
  * The player is created on first click so the card stays light until someone

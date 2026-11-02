@@ -105,17 +105,24 @@ export default function HomePage() {
             <div className="ct-copy">
               <p className="ct-kicker">
                 <span aria-hidden="true" />
-                Open to opportunities
+                OPEN TO WORK &amp; OPPORTUNITIES
               </p>
               <h2>
-                Let&apos;s build something <em>people actually use.</em>
+                Open to new opportunities.
               </h2>
               <p className="ct-lead">
-                Product design, AI/ML or front-end roles, internships included. A short note about the problem you are working on is the best way to start.
+                I&apos;m currently seeking opportunities in <strong>Product Management, Business Analysis, UI/UX Design, AI/ML, and Software Development.</strong>
+                <br /><br />
+                Feel free to connect with me on LinkedIn or reach out via email.
               </p>
             </div>
             <div className="ct-links">
               <a className="ct-link linkedin" href="https://www.linkedin.com/in/jessica-trs" target="_blank" rel="noopener noreferrer">
+                <span className="ct-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M5.2 8.1H1.5V22h3.7V8.1ZM3.35 2A2.16 2.16 0 1 0 3.35 6.3 2.16 2.16 0 0 0 3.35 2ZM22.5 14.03c0-4.18-2.23-6.13-5.2-6.13-2.4 0-3.47 1.32-4.07 2.25V8.1H9.53V22h3.7v-6.88c0-1.82.35-3.58 2.6-3.58 2.21 0 2.24 2.08 2.24 3.7V22h3.7l.73-7.97Z" />
+                  </svg>
+                </span>
                 <span>
                   <b>LinkedIn</b>
                   <small>Connect professionally</small>
@@ -123,6 +130,12 @@ export default function HomePage() {
                 <i aria-hidden="true">↗</i>
               </a>
               <a className="ct-link" href="mailto:jssicatheresia@gmail.com">
+                <span className="ct-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2.5" y="4.5" width="19" height="15" rx="2" />
+                    <path d="m3.5 6 8.5 6.5L20.5 6" />
+                  </svg>
+                </span>
                 <span>
                   <b>Email</b>
                   <small>jssicatheresia@gmail.com</small>

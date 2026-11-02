@@ -116,7 +116,7 @@ export default function LeadsightProjectCard() {
             </span>
           </div>
           <div className="dev-actions">
-            <a className="dev-btn ghost" href="https://github.com/Jejetrs" target="_blank" rel="noopener noreferrer">
+            <a className="dev-btn ghost" href="https://github.com/LeadSight" target="_blank" rel="noopener noreferrer">
               GitHub ↗
             </a>
             <a className="dev-btn solid" data-live-link="" hidden target="_blank" rel="noopener noreferrer">

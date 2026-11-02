@@ -2,7 +2,7 @@
 import { writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-const URLS = ['https://predictive-analytic-diabetes.streamlit.app/', 'https://bike-rental-analysis-dashboard.streamlit.app/', 'https://nusca.vercel.app/', 'https://jnotes-application.vercel.app/login', 'https://smartfocus.up.railway.app'];
+const URLS = ['https://predictive-analytic-diabetes.streamlit.app/', 'https://bike-rental-analysis-dashboard.streamlit.app/', 'https://nusca.vercel.app/', 'https://jnotes-application.vercel.app/login', 'https://smartfocus.up.railway.app/'];
 const BAD = /(\b404\b|\b50[0-4]\b|not[_ -]?found|could not be found|doesn'?t exist|application (error|failed|not found)|bad gateway|service unavailable|internal server error|something went wrong|has been (deleted|disabled|suspended)|deployment_)/i;
 async function check(url) {
   try {

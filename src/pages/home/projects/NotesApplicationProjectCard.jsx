@@ -113,7 +113,7 @@ export default function NotesApplicationProjectCard() {
             </span>
           </div>
           <div className="dev-actions">
-            <a className="dev-btn ghost" href="https://github.com/Jejetrs" target="_blank" rel="noopener noreferrer">
+            <a className="dev-btn ghost" href="https://github.com/Jejetrs/Notes-Application" target="_blank" rel="noopener noreferrer">
               GitHub ↗
             </a>
             <a className="dev-btn solid" href="https://jnotes-application.vercel.app/login" target="_blank" rel="noopener noreferrer" data-live-link="">
