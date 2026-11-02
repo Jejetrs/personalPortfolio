@@ -1,13 +1,7 @@
 import { useState } from "react";
 
-/** Google Drive share id → inline player URL. */
 export const drivePreviewUrl = (id) => `https://drive.google.com/file/d/${id}/preview?rm=minimal`;
 
-/**
- * The player is created on first click so the card stays light until someone
- * actually wants to watch. The sandbox blocks the preview from opening the
- * source in a new window.
- */
 export default function VideoHighlight({ driveId, poster, label = "Capstone highlight", title, caption, accent = "#4f46e5" }) {
   const [playing, setPlaying] = useState(false);
   return (

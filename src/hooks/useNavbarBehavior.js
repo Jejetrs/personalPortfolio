@@ -1,11 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-/**
- * Sticky-navbar behaviour:
- *  - `compact` once the page is scrolled (with hysteresis, as in the original design)
- *  - `activeId` scroll-spy over the sections targeted by in-page links
- */
 export default function useNavbarBehavior(sectionIds, navbarRef) {
   const { pathname } = useLocation();
   const [compact, setCompact] = useState(false);
@@ -80,7 +75,6 @@ export default function useNavbarBehavior(sectionIds, navbarRef) {
     };
   }, [idsKey, pathname, navbarRef]);
 
-  /** Call when an in-page link is clicked so the highlight follows immediately. */
   const selectSection = useCallback((id) => {
     waiting.current = true;
     setActiveId(id);

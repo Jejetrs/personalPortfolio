@@ -1,9 +1,5 @@
 import { useEffect, useInsertionEffect } from "react";
 
-/**
- * Page-level `<head>`/`<html>`/`<body>` configuration that the original
- * static pages declared individually.
- */
 export default function useDocumentMeta({ title, htmlClass = "", bodyClass = "", tailwindConfig, css, cssId }) {
   useEffect(() => {
     const previous = document.title;
@@ -30,7 +26,6 @@ export default function useDocumentMeta({ title, htmlClass = "", bodyClass = "",
     if (tailwindConfig && window.tailwind) window.tailwind.config = tailwindConfig;
   }, [tailwindConfig]);
 
-  // Page CSS goes into <head> before Tailwind's generated sheet, matching the original cascade order.
   useInsertionEffect(() => {
     if (!css) return undefined;
     const style = document.createElement("style");

@@ -1,9 +1,4 @@
-/* Project showcase (category filter, card rail, detail view) ported from the original inline script.
- *
- * The data and the detail markup now come from React: `projects` is the PROJECTS registry and
- * `renderDetail` / `clearDetail` mount the selected project's card component into the detail panel.
- * The enhancers below then wire the freshly rendered card (carousels, labs, galleries, live status).
- */
+/* Project showcase */
 import { handlers } from './projectHandlers.js';
 import { renderPdf } from '@/lib/pdfCanvas.js';
 import { getProjectAssets, getProjectProfileAsset } from '@/pages/home/projects/projectAssets.js';
@@ -81,13 +76,43 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       aiml: 'Developing intelligent solutions using machine learning, computer vision, NLP, and AI integration to address real-world challenges.',
       developer: 'Building functional and scalable web applications through frontend development, backend services, REST APIs, database integration, testing, and deployment.'
     };
+    const categoryProjectOrder = {
+      aiml: [
+        'nusca-project-card-2',
+        'smart-focus-alert-card-2',
+        'beauty-glossary-card',
+        'skin-classification-card',
+        'diabetes-risk-card',
+        'movie-recommender-card',
+        'whatsapp-sentiment-card',
+        'bank-fraud-card',
+        'bikesharing-card',
+      ],
+      developer: [
+        'movie-review-project-card',
+        'nusca-developer-project-card',
+        'smart-focus-alert-developer-card',
+        'leadsight-project-card',
+        'openmusic-api-project-card',
+        'bookshelf-api-project-card',
+        'notes-application-project-card',
+      ],
+    };
     const heading = document.getElementById('about-project-heading');
     const description = document.getElementById('about-project-description');
     const emptyState = document.getElementById('about-project-empty');
     let activeCategory = 'uiux';
 
     function getVisibleProjects() {
-      return projectData.filter((project) => project.category === activeCategory);
+      const visibleProjects = projectData.filter((project) => project.category === activeCategory);
+      const projectOrder = categoryProjectOrder[activeCategory];
+      if (!projectOrder) return visibleProjects;
+
+      const orderIndex = new Map(projectOrder.map((id, index) => [id, index]));
+      return visibleProjects.sort((a, b) =>
+        (orderIndex.get(a.id) ?? Number.MAX_SAFE_INTEGER)
+        - (orderIndex.get(b.id) ?? Number.MAX_SAFE_INTEGER)
+      );
     }
 
     function findSelectedCard() {
@@ -592,7 +617,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         }));
       }
 
-      card.querySelectorAll('[data-gallery] figure').forEach((figure, index) => {
+      card.querySelectorAll('[data-gallery] figure, [data-openmusic-gallery] [data-openmusic-slide]').forEach((figure, index) => {
         const item = imageAssets[index];
         if (!item) return;
         const image = figure.querySelector('img') || document.createElement('img');
@@ -600,11 +625,27 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         image.alt = `${card.querySelector('h2')?.textContent.trim() || card.id} — ${item.title}`;
         image.loading = index === 0 ? 'eager' : 'lazy';
         image.decoding = 'async';
-        if (!image.parentElement) figure.querySelector('[class*="-ph"]')?.replaceWith(image);
+        if (!image.parentElement) figure.querySelector('[class*="-ph"], [class*="placeholder"]')?.replaceWith(image);
       });
 
       const supportingImages = assets.filter((item) => item?.type === 'supporting-image');
       const documentAssets = assets.filter((item) => item?.type === 'pdf' || item?.type === 'file');
+      const inlineDocumentAssets = new Set();
+      card.querySelectorAll('[data-project-file-inline]').forEach((target) => {
+        const item = documentAssets.find((asset) => asset.title === target.dataset.projectFileInline);
+        if (!item) return;
+
+        const link = document.createElement('a');
+        link.href = item.src;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.className = 'shrink-0 rounded-full border border-rose-200 bg-rose-50 px-2 py-1 text-[9px] font-bold text-rose-700 transition hover:border-rose-300 hover:bg-rose-100';
+        link.textContent = 'PDF ↗';
+        link.setAttribute('aria-label', `Open ${item.title} PDF`);
+        target.replaceWith(link);
+        inlineDocumentAssets.add(item);
+      });
+      const remainingDocumentAssets = documentAssets.filter((item) => !inlineDocumentAssets.has(item));
       const highlights = card.querySelector('[data-project-highlights]');
       if (highlights && supportingImages.length) {
         highlights.replaceChildren(...supportingImages.map((item) => {
@@ -625,7 +666,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
           return itemCard;
         }));
       }
-      if (documentAssets.length && !card.querySelector('.project-asset-files')) {
+      if (remainingDocumentAssets.length && !card.querySelector('.project-asset-files')) {
         const section = document.createElement('section');
         section.className = 'project-asset-files mt-4 rounded-2xl border border-slate-200 bg-white/80 p-4';
         const heading = document.createElement('h3');
@@ -633,7 +674,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         heading.textContent = 'Project files';
         const list = document.createElement('div');
         list.className = 'mt-2 flex flex-wrap gap-2';
-        documentAssets.forEach((item) => {
+        remainingDocumentAssets.forEach((item) => {
           const link = document.createElement('a');
           link.href = item.src;
           link.target = '_blank';
@@ -754,7 +795,6 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
           pointerStart = null;
         });
         stage.addEventListener('wheel', (event) => {
-          // Only horizontal gestures move the gallery; vertical scrolling keeps scrolling the page.
           if (total < 2 || Math.abs(event.deltaX) <= Math.abs(event.deltaY) || Math.abs(event.deltaX) < 12) return;
           event.preventDefault();
           const now = performance.now();
@@ -1119,7 +1159,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       if (/^[-–—_.\s]*$/.test(text) && !hasApp) return 'empty page';
       return null;
     }
-    // Links confirmed as live deployments: always shown as Active (add new confirmed links here).
+    // Confirmed deployments
     const TRUSTED_LIVE_URLS = [
       'https://jnotes-application.vercel.app/login',
       'https://jnotes-application.vercel.app/',
@@ -1867,7 +1907,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         const topBar = document.createElement('span');
         topBar.className = 'relative z-10 flex items-center justify-between';
         const number = document.createElement('span');
-        number.className = 'rounded-full bg-amber-300 px-3 py-1 font-mono text-xs font-extrabold text-slate-950';
+        number.className = 'rounded-full bg-orange-400 px-3 py-1 font-mono text-xs font-extrabold text-slate-950';
         number.textContent = String(index + 1).padStart(2, '0');
         topBar.append(number);
         card.appendChild(topBar);

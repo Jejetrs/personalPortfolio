@@ -19,7 +19,7 @@ const CHAPTERS = [
   },
   {
     when: "2026",
-    verb: "Ship",
+    verb: "Deliver",
     title: "Work other people depend on",
     text: "Telkom Magenta internship as a Designer (Mar–Jul), 30+ INAPROC components audited, 3rd in the Digistar B2B pitch, and Coding Camp facilitator for 20+ learners.",
   },
@@ -34,8 +34,11 @@ export default function StoryBand() {
         <header className="sb-head">
           <p className="sb-kicker">How I got here</p>
           <h2 id="story-title">
-            One habit since 2023: <em>make it work for the next person.</em>
+            Learning, growing, and finding my way through experience.
           </h2>
+          <p>
+            Every year has brought new opportunities to explore, work with different people, and take on greater responsibilities.
+          </p>
         </header>
         <ol className="sb-track">
           {CHAPTERS.map((chapter, index) => (

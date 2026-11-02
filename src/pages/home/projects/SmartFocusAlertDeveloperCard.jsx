@@ -146,7 +146,7 @@ export default function SmartFocusAlertDeveloperCard() {
 .sf .sf-code-frame .sf-code pre{font-size:9.5px;line-height:1.55;overflow:hidden}
 .sf .sf-code-frame .sf-code header{margin-bottom:6px}
 
-/* ===== harmonised with UI/UX + AI/ML cards (typography, spacing, radii, dropdown) ===== */
+/* Developer card */
 .sf.project-card-item{padding:1.25rem!important;border:1px solid #dbeafe!important;border-radius:1.5rem!important;background:linear-gradient(135deg,#f6f8fd,#eef4ff)!important;box-shadow:0 1px 2px rgba(0,0,0,.05)!important}
 @media(min-width:640px){.sf.project-card-item{padding:1.5rem!important}}
 .sf{color:#0f172a;font-size:12px;line-height:1.5}

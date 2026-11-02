@@ -143,13 +143,13 @@ export default function HonorsCarouselTrack() {
           </div>
         </div>
       </article>
-      <article aria-label="Hackvidia 9.0 Arkavidia ITB, National Finalist" data-certificate="/assets/certificate/Arkavidia%209.0%20Finalist.pdf" className="honor-card bg-white rounded-[26px] p-4 border border-slate-200 shadow-[0_8px_32px_rgba(0,0,0,0.08)] flex flex-col justify-between">
+      <article aria-label="Hackvidia 9.0 Arkavidia ITB, Finalist" data-certificate="/assets/certificate/Arkavidia%209.0%20Finalist.pdf" className="honor-card bg-white rounded-[26px] p-4 border border-slate-200 shadow-[0_8px_32px_rgba(0,0,0,0.08)] flex flex-col justify-between">
         <div>
           <h3 className="font-extrabold text-[#131b2e] text-sm sm:text-base text-center leading-tight">
             Hackvidia 9.0 (Arkavidia ITB)
           </h3>
           <p className="text-xs font-semibold text-slate-600 text-center mt-1">
-            - National Finalist -
+            - Finalist -
           </p>
           <div className="h-36 rounded-2xl bg-gradient-to-br from-slate-900 via-indigo-950 to-purple-950 border border-indigo-700 p-0 flex flex-col items-center justify-center text-center mt-4">
             <span className="text-[10px] font-mono font-bold tracking-widest text-indigo-300">
@@ -157,7 +157,7 @@ export default function HonorsCarouselTrack() {
             </span>
             {" "}
             <span className="text-base font-black text-amber-300 mt-3">
-              NATIONAL FINALIST
+              Finalist
             </span>
             {" "}
             <span className="text-[10px] font-mono text-indigo-200 mt-2">

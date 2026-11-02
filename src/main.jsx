@@ -7,8 +7,7 @@ import "./styles/portfolio-theme.css";
 import "./styles/refresh.css";
 import "./styles/mobile.css";
 
-// StrictMode is intentionally not used: the page enhancement modules in `behaviors/`
-// mutate the rendered DOM once and are not safe under double-invoked effects.
+// Behavior modules mutate the DOM, so StrictMode is disabled.
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <App />

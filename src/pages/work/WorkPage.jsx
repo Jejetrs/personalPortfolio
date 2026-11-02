@@ -22,7 +22,7 @@ export default function WorkPage() {
             Different roles, one goal: <em>making things work better.</em>
           </h1>
           <p>
-            From product design and development to team coordination, each experience has taught me something new about solving problems and building better solutions together.
+            From product design and development to team coordination, each experience has taught me something new about understanding business and user needs to designing experiences, building solutions, and collaborating with teams.
           </p>
           <ul className="wk-chips">
             <li className="wk-chip">

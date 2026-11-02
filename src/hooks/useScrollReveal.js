@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 
 const SELECTOR = "main > section, main > div > section, main article.project-card-item";
 
-/** Fades top-level sections in as they enter the viewport. Skipped for reduced-motion users. */
 export default function useScrollReveal() {
   const { pathname } = useLocation();
 

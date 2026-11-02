@@ -364,9 +364,12 @@ export default function CampaignDeckMasterCard() {
                         <div className="w-full h-44 rounded-xl overflow-hidden border border-rose-100/80 bg-slate-50 relative flex items-center justify-center">
                           <img alt="Affinity diagram of the OCA campaign flow" className="h-full w-full object-contain" loading="lazy" src="/assets/projects/UI%20UX/campaign%20deck%20master/Affinity%20Diagram.webp" />
                         </div>
-                        <p className="text-[10px] text-slate-400 italic pt-1 border-t border-slate-100">
-                          Insight clustering from survey data
-                        </p>
+                        <div className="flex items-center justify-between gap-2 pt-1 border-t border-slate-100">
+                          <p className="text-[10px] text-slate-400 italic">
+                            Insight clustering from survey data
+                          </p>
+                          <span data-project-file-inline="OCA affinity diagram"></span>
+                        </div>
                       </div>
                     </div>
                     <div className="p-3.5 rounded-2xl bg-white border border-rose-100 shadow-xs flex flex-col justify-between space-y-3">

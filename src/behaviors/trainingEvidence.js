@@ -1,8 +1,4 @@
-/* Training "proof of work" sections.
- *
- * Each program is described by plain data (video, gallery tiles, documents) and
- * rendered by one function, so all four trainings share the same layout.
- */
+/* Training evidence */
 
 const enc = (path) => encodeURI(path).replace(/'/g, '%27');
 const ASAH = '/assets/experience/ASAH 2025/';
@@ -12,7 +8,6 @@ const SIC = '/assets/experience/Samsung Innovation Campus/';
 
 const drivePreview = (id) => `https://drive.google.com/file/d/${id}/preview?rm=minimal`;
 
-/** size: wide = spans 2 columns, tall = spans 2 rows. gallery = extra images opened together in the viewer. */
 const EVIDENCE = {
   1: {
     group: 'asah',
@@ -187,7 +182,6 @@ function summaryLine(data) {
   return parts.join(' · ');
 }
 
-/** Evidence section for a training id, or '' when none is defined. */
 export function renderTrainingEvidence(id) {
   const data = EVIDENCE[id];
   if (!data) return '';
@@ -214,7 +208,6 @@ export function renderTrainingEvidence(id) {
     </details>`;
 }
 
-/** Wire video play buttons and PDF buttons. `openPdf(record, trigger)` shows the in-page PDF viewer. */
 export function bindTrainingEvidence(root, openPdf) {
   const onClick = (event) => {
     const play = event.target.closest?.('[data-evidence-video] .ev-play');

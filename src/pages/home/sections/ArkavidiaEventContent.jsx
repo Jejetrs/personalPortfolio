@@ -28,7 +28,7 @@ export default function ArkavidiaEventContent() {
             EVENT OUTCOME
           </span>
           <strong>
-            National Finalist
+            Finalist
           </strong>
         </div>
       </div>
@@ -88,7 +88,7 @@ export default function ArkavidiaEventContent() {
             RESULT
           </span>
           <p className="event-story-result">
-            Selected as a national finalist in the Hackvidia competition.
+            Selected as a Finalist in the Hackvidia competition.
           </p>
           <span className="event-story-eyebrow">
             WHAT STAYED WITH ME

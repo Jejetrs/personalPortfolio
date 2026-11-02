@@ -5,11 +5,11 @@ import { ROUTES } from "@/routes/paths.js";
 
 const EMAIL = "jssicatheresia@gmail.com";
 
-/** Navigation entries. `sectionId` marks links that scroll-spy on the home page. */
 const NAV_ITEMS = [
   { key: "about", label: "About", to: "/#about", sectionId: "about" },
   { key: "projects", label: "Projects", to: "/#selected-works", sectionId: "selected-works" },
-  { key: "work", label: "Experience", to: ROUTES.work },
+  { key: "work", label: "Experiences", to: ROUTES.work },
+  { key: "certificates", label: "Certificates", to: "/#resume", sectionId: "resume" },
   { key: "contact", label: "Contact", to: "/#contact", sectionId: "contact" },
 ];
 
@@ -41,20 +41,11 @@ function RollLabel({ label }) {
   );
 }
 
-function PortfolioMark({ variant }) {
-  const isClassic = variant === "classic";
+function PortfolioMark() {
   return (
-    <span className={`portfolio-brand-mark flex items-center gap-2.5 ${isClassic ? "" : "sm:gap-3"}`}>
-      <img
-        src="/assets/Logo.png"
-        alt=""
-        aria-hidden="true"
-        className={`w-auto object-contain ${isClassic ? "h-8" : "h-9 sm:h-10"}`}
-      />
-      <span className={`whitespace-nowrap tracking-[0.24em] ${isClassic ? "text-sm font-bold text-slate-900 group-hover:text-indigo-600" : "text-sm font-extrabold text-[#131b2e] transition group-hover:text-primary sm:text-base"}`}>
-        PORTFOLIO
-      </span>
-      <span aria-hidden="true" className={`hidden items-center gap-1.5 sm:flex ${isClassic ? "text-indigo-300" : "text-indigo-300"}`}>
+    <span className="portfolio-brand-mark flex items-center gap-2.5 whitespace-nowrap text-base font-extrabold tracking-tight text-[#131b2e] transition group-hover:text-primary">
+      JT.Portfolio
+      <span aria-hidden="true" className="hidden items-center gap-1.5 text-indigo-300 sm:flex">
         <span className="h-px w-8 bg-current sm:w-12"></span>
         <span className="h-1.5 w-1.5 rounded-full bg-current"></span>
       </span>
@@ -66,13 +57,13 @@ function Brand({ variant, showStatus }) {
   if (variant === "classic") {
     return (
       <AppLink to="/#about" className="flex items-center group" aria-label="Portfolio home">
-        <PortfolioMark variant={variant} />
+        <PortfolioMark />
       </AppLink>
     );
   }
   return (
     <AppLink to="/#about" className="flex items-center group shrink-0" aria-label="Portfolio home">
-      <PortfolioMark variant={variant} />
+      <PortfolioMark />
       {showStatus && (
         <span className="sr-only">
           Open to Full-time Opportunities
@@ -100,11 +91,6 @@ function EmailButton({ className }) {
   );
 }
 
-/**
- * Site navbar.
- * @param active  key of the nav item that represents the current page ("projects" | "work" | undefined)
- * @param variant "default" | "classic" (the older, flatter header used by the UI/UX page)
- */
 export default function Navbar({ active, variant = "default", showStatus = true }) {
   const v = VARIANTS[variant];
   const headerRef = useRef(null);

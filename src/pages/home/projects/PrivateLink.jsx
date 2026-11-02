@@ -1,4 +1,3 @@
-/** Displays a private placeholder or an external project link. */
 export default function PrivateLink({ label = "Private link", href, restricted = false }) {
   const content = (
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

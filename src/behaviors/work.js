@@ -1,14 +1,8 @@
-﻿/* Work & training page behaviour (ported from the original page script).
- *
- * The experience page builds its training panels, certificate viewer and image
- * lightbox imperatively. `mountWorkExperience` runs once for the rendered <main>
- * and returns a cleanup that removes everything it added to <body>.
- */
+/* Work and training */
 
 import { renderPdf } from '@/lib/pdfCanvas.js';
 import { renderTrainingEvidence, bindTrainingEvidence } from './trainingEvidence.js';
 
-/* Certificate files shipped in /public/assets/certificate, keyed by panel / training id. */
 const CERTIFICATE_FILES = {
   'company-panel-1': { title: 'PT Telekomunikasi Indonesia — Magang Generasi Bertalenta', url: '/assets/certificate/DCI2026.pdf' },
   'company-panel-2': { title: 'Coding Camp powered by DBS Foundation 2026 — Facilitator', type: 'images', urls: ['/assets/certificate/Coding%20Camp%202026%20Facilitator%20sertif1.webp', '/assets/certificate/Coding%20Camp%202026%20Facilitator%20sertif2.webp'] },
@@ -18,7 +12,6 @@ const CERTIFICATE_FILES = {
   'training-4': { title: 'Samsung Innovation Campus Batch 5 — Finalist', url: '/assets/certificate/SIC%20Finalist.pdf' },
 };
 
-/* Capstone → matching card in the project showcase (opened through ?project=<id>). */
 const PROJECT_LINKS = {
   1: { id: 'leadsight-project-card', label: 'View LeadSight project' },
   2: { id: 'skin-classification-card', label: 'View Skin Type Classification project' },
@@ -36,7 +29,7 @@ export const selectTraining = (...args) => handlers.selectTraining?.(...args);
 
 export function mountWorkExperience() {
   const cleanups = [];
-  // Company Switcher Logic
+  // Company switcher
   let activeWorkExperienceId = 1;
   let activeTrainingId = 1;
 
@@ -476,33 +469,28 @@ ${renderTrainingProfile(4).replace(/<p class="px-1 text-\[10px\]/, '<div class="
 
   function selectCompany(id, shouldScroll = true) {
     activeWorkExperienceId = id;
-    // Hide all company panels
     document.querySelectorAll('.company-stage').forEach(panel => {
       panel.classList.add('hidden');
       panel.classList.remove('block');
     });
 
-    // Show active panel
     const activePanel = document.getElementById(`company-panel-${id}`);
     if (activePanel) {
       activePanel.classList.remove('hidden');
       activePanel.classList.add('block');
     }
 
-    // Reset button styling
     document.querySelectorAll('.company-nav-btn').forEach(btn => {
       btn.classList.remove('bg-primary/10', 'border-2', 'border-primary/60', 'shadow-sm');
       btn.classList.add('bg-surface-container-low/60', 'border', 'border-outline-variant/40');
     });
 
-    // Highlight current button
     const currentBtn = document.getElementById(`nav-item-${id}`);
     if (currentBtn) {
       currentBtn.classList.remove('bg-surface-container-low/60', 'border-outline-variant/40');
       currentBtn.classList.add('bg-primary/10', 'border-2', 'border-primary/60', 'shadow-sm');
     }
 
-    // Smooth scroll to top of panel on mobile
     if (shouldScroll && window.innerWidth < 1024) {
       activePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -541,7 +529,7 @@ ${renderTrainingProfile(4).replace(/<p class="px-1 text-\[10px\]/, '<div class="
   });
   cleanups.push(() => certificatePdf?.destroy());
 
-  // Accordion Logic
+  // Accordion
   function toggleAccordion(contentId) {
     const el = document.getElementById(contentId);
     const icon = document.getElementById(`${contentId}-icon`);
@@ -554,7 +542,7 @@ ${renderTrainingProfile(4).replace(/<p class="px-1 text-\[10px\]/, '<div class="
     }
   }
 
-  // State management for 3 slideshow galleries
+  // Slideshow galleries
   const galleryState = {
     1: { current: 0, total: 3 },
     2: { current: 0, total: 1 },
@@ -881,7 +869,6 @@ ${renderTrainingProfile(4).replace(/<p class="px-1 text-\[10px\]/, '<div class="
     updateSlideshowUI(id);
   }
 
-  // Initialize galleries
   initializeAdditionalExperienceGalleries();
   Object.keys(galleryState).forEach(id => {
     updateSlideshowUI(id);
@@ -894,4 +881,3 @@ ${renderTrainingProfile(4).replace(/<p class="px-1 text-\[10px\]/, '<div class="
     Object.keys(handlers).forEach((key) => delete handlers[key]);
   };
 }
-

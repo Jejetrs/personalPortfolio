@@ -1,9 +1,4 @@
-/* Renders PDF files onto <canvas> elements with PDF.js.
- *
- * Mobile browsers (Android Chrome, iOS Safari) cannot display a PDF inside an
- * <iframe>/<embed> and show an "Open" placeholder instead. Drawing the pages
- * ourselves works the same on every device.
- */
+/* PDF canvas */
 
 const MAX_CANVAS_PIXELS = 12_000_000;
 
@@ -41,15 +36,6 @@ function showMessage(container, url, text) {
   container.replaceChildren(box);
 }
 
-/**
- * Draw a PDF into `container`.
- * @param {HTMLElement} container  element that receives the canvases
- * @param {string} url             PDF address
- * @param {object} [options]
- * @param {'pages'|'contain'} [options.mode]  "pages": every page, full width, container scrolls.
- *                                            "contain": first page only, fitted inside the container box.
- * @returns {{ destroy: () => void, ready: Promise<void> }}
- */
 export function renderPdf(container, url, { mode = 'pages' } = {}) {
   let cancelled = false;
   let task = null;

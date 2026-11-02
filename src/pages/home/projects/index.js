@@ -25,7 +25,6 @@ import SmartFocusAlertDeveloperCard from './SmartFocusAlertDeveloperCard.jsx';
 import LeadsightProjectCard from './LeadsightProjectCard.jsx';
 import MovieReviewProjectCard from './MovieReviewProjectCard.jsx';
 
-/** Project showcase entries, in display order. `Card` renders the full case-study card. */
 export const PROJECTS = [
   {
     id: "trustee-business-card",
@@ -192,7 +191,7 @@ export const PROJECTS = [
     category: "developer",
     title: "BOOKSHELF API",
     description: "A RESTful Bookshelf API built with Node.js and Express for CRUD operations, query filtering, validation, and consistent JSON responses.",
-    images: ["bookshelf-preview.svg"],
+    images: ["/assets/projects/Developer/Bookself/Bookself%20Env%20API%20Test%20Overview.png"],
     Card: BookshelfApiProjectCard,
   },
   {
@@ -200,7 +199,7 @@ export const PROJECTS = [
     category: "developer",
     title: "OpenMusic API V3",
     description: "A source-based OpenMusic REST API with Hapi.js, PostgreSQL, JWT authentication, Redis caching, RabbitMQ export jobs, and an interactive API simulator.",
-    images: ["data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201200%20720%22%3E%3Crect%20width%3D%221200%22%20height%3D%22720%22%20fill%3D%22%23edf5ff%22%2F%3E%3Crect%20x%3D%2270%22%20y%3D%2260%22%20width%3D%221060%22%20height%3D%22600%22%20rx%3D%2226%22%20fill%3D%22%23ffffff%22%20stroke%3D%22%23b8d4f2%22%20stroke-width%3D%225%22%2F%3E%3Crect%20x%3D%2270%22%20y%3D%2260%22%20width%3D%221060%22%20height%3D%2272%22%20rx%3D%2226%22%20fill%3D%22%23f0f5fd%22%2F%3E%3Ccircle%20cx%3D%22115%22%20cy%3D%2296%22%20r%3D%229%22%20fill%3D%22%23ff7c7c%22%2F%3E%3Ccircle%20cx%3D%22145%22%20cy%3D%2296%22%20r%3D%229%22%20fill%3D%22%23ffcc67%22%2F%3E%3Ccircle%20cx%3D%22175%22%20cy%3D%2296%22%20r%3D%229%22%20fill%3D%22%2352c988%22%2F%3E%3Ctext%20x%3D%22175%22%20y%3D%22220%22%20font-family%3D%22Arial%22%20font-size%3D%2238%22%20font-weight%3D%22800%22%20fill%3D%22%23182d4a%22%3EOpenMusic%20API%20V3%3C%2Ftext%3E%3Ctext%20x%3D%22175%22%20y%3D%22270%22%20font-family%3D%22Arial%22%20font-size%3D%2218%22%20font-weight%3D%22700%22%20fill%3D%22%232867c4%22%3EBACKEND%20ENGINEERING%3C%2Ftext%3E%3Crect%20x%3D%22175%22%20y%3D%22330%22%20width%3D%22220%22%20height%3D%22220%22%20rx%3D%2218%22%20fill%3D%22%23f4f8ff%22%20stroke%3D%22%23d3e3f8%22%2F%3E%3Crect%20x%3D%22430%22%20y%3D%22330%22%20width%3D%22585%22%20height%3D%22220%22%20rx%3D%2218%22%20fill%3D%22%23101d34%22%2F%3E%3Ctext%20x%3D%22475%22%20y%3D%22390%22%20font-family%3D%22Consolas%22%20font-size%3D%2222%22%20fill%3D%22%23d9eaff%22%3EGET%20%2Falbums%2F%7Bid%7D%3C%2Ftext%3E%3Ctext%20x%3D%22475%22%20y%3D%22440%22%20font-family%3D%22Consolas%22%20font-size%3D%2218%22%20fill%3D%22%2352c988%22%3E200%20OK%20%C2%B7%20JSON%3C%2Ftext%3E%3C%2Fsvg%3E"],
+    images: ["/assets/projects/Developer/openMusicV3/Env%20Test%20Overview.png"],
     Card: OpenmusicApiProjectCard,
   },
   {
@@ -231,7 +230,7 @@ export const PROJECTS = [
     id: "movie-review-project-card",
     category: "developer",
     title: "Movie Review",
-    description: "A React frontend for movie discovery: TMDB-powered browsing with filters, debounced search, trailers, and a watchlist, ratings and reviews persisted through Redux.",
+    description: "A full-stack movie discovery and review app: browse TMDB titles, watch trailers, and manage account-based watchlists, ratings, and reviews with a React frontend and Express/PostgreSQL API.",
     images: ["/assets/projects/movie-review-project-card-2327d862.webp"],
     Card: MovieReviewProjectCard,
   },

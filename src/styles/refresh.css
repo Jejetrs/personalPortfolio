@@ -1,5 +1,4 @@
-/* Visual refresh: bold type, pill shapes, soft blobs, and a clear story from hero to contact.
-   Brand colours stay indigo/blue; coral is used sparingly as the human accent. */
+/* Visual refresh */
 :root {
   --rf-ink: #0f1226;
   --rf-mute: #5b6178;
@@ -50,8 +49,8 @@ em {
 /* ---------- hero ---------- */
 .hx {
   position: relative;
-  overflow: hidden;
-  padding: clamp(2.2rem, 6vw, 4.5rem) 0 0;
+  overflow: visible;
+  padding: clamp(0.75rem, 1.5vw, 1.25rem) 0 0;
   border-bottom: 1px solid var(--rf-line);
 }
 .hx-bg {
@@ -85,23 +84,12 @@ em {
   display: grid;
   grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
   gap: clamp(2rem, 5vw, 4rem);
-  align-items: center;
-}
-.hx-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 0 0 1.2rem;
-  padding: 0.4rem 0.9rem;
-  border: 1px solid var(--rf-line);
-  border-radius: 99px;
-  background: #fff;
-  font: 600 0.75rem/1 "Plus Jakarta Sans", sans-serif;
-  color: var(--rf-ink);
+  align-items: stretch;
 }
 .hx-dot {
   width: 0.5rem;
   height: 0.5rem;
+  flex: 0 0 0.5rem;
   border-radius: 50%;
   background: #22c55e;
   box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
@@ -143,9 +131,16 @@ html body .hx-title {
 .hx-lead {
   max-width: 34rem;
   margin: 1.4rem 0 0;
-  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-size: clamp(0.95rem, 1.25vw, 1.1rem) !important;
   line-height: 1.6;
   color: var(--rf-mute);
+}
+.hx-lead .hx-highlight {
+  padding: 0.05em 0.24em;
+  border-radius: 0.24em;
+  background: #e4e3ff;
+  color: #242450;
+  font-weight: 800;
 }
 .hx-signature {
   margin: 0.9rem 0 0;
@@ -188,44 +183,45 @@ html body .hx-title {
 }
 .hx-visual {
   position: relative;
-  display: flex;
-  justify-content: center;
-  padding: 1.2rem 1.4rem 1.6rem 0;
+  min-height: 0;
 }
-.hx-block {
+.hx-backdrop {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 62%;
-  border-radius: 2rem;
-  background: var(--rf-coral);
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: min(145%, 46rem);
+  aspect-ratio: 1.18 / 1;
+  border-radius: 39% 61% 64% 36% / 46% 37% 63% 54%;
+  background:
+    radial-gradient(ellipse at 32% 38%, rgba(99, 102, 241, 0.3), transparent 58%),
+    radial-gradient(ellipse at 68% 58%, rgba(129, 140, 248, 0.24), rgba(199, 210, 254, 0.12) 42%, transparent 72%),
+    radial-gradient(ellipse at 42% 68%, rgba(199, 210, 254, 0.15), transparent 60%);
+  filter: blur(24px);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: hxBackdropRotate 48s linear infinite;
 }
-.hx-ring {
-  position: absolute;
-  left: -0.4rem;
-  bottom: 0.4rem;
-  width: 7rem;
-  height: 7rem;
-  border-radius: 50%;
-  background-image: radial-gradient(var(--rf-ink) 1.6px, transparent 1.7px);
-  background-size: 0.9rem 0.9rem;
-  opacity: 0.55;
+@keyframes hxBackdropRotate {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 .hx-photo {
-  position: relative;
+  position: absolute;
   z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
   width: min(100%, 25rem);
-  aspect-ratio: 4 / 5;
   overflow: hidden;
   border: 0.45rem solid #fff;
   border-radius: 2.4rem;
   background: #eef0f8;
   box-shadow: 0 30px 60px -28px rgba(15, 18, 38, 0.5);
+  transform: translateX(-50%);
   transition: transform 0.6s var(--rf-ease);
 }
 .hx-visual:hover .hx-photo {
-  transform: rotate(-1.2deg) scale(1.01);
+  transform: translateX(-50%) rotate(-1.2deg) scale(1.01);
 }
 .hx-photo img {
   display: block;
@@ -233,6 +229,24 @@ html body .hx-title {
   height: 100%;
   object-fit: cover;
   object-position: top;
+}
+.hx-status-tag {
+  position: absolute;
+  z-index: 3;
+  bottom: 4%;
+  right: -0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--rf-line);
+  border-radius: 99px;
+  background: #fff;
+  box-shadow: 0 14px 32px -14px rgba(15, 18, 38, 0.4);
+  color: var(--rf-ink);
+  font: 600 0.75rem/1 "Plus Jakarta Sans", sans-serif;
+  white-space: nowrap;
 }
 .hx-float {
   position: absolute;
@@ -335,14 +349,19 @@ html body .hx-title {
 }
 .sb-kicker {
   color: #cfe0ff;
+  font-size: 0.64rem;
 }
 .sb-head h2 {
   max-width: 44rem;
   margin: 0;
-  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-size: clamp(1.7rem, 4.2vw, 2.9rem);
   line-height: 1.04;
   letter-spacing: -0.035em;
   font-weight: 800;
+}
+.sb-head > p:not(.sb-kicker) {
+  font-size: 0.88rem;
+  line-height: 1.55;
 }
 .sb-head h2 em {
   color: #ffd4cf;
@@ -428,6 +447,7 @@ html body .hx-title {
   margin-top: 0.4rem;
   font-size: 0.8rem;
   color: #cfe0ff;
+  font-size: 0.64rem;
 }
 
 /* ---------- previous events ---------- */
@@ -451,6 +471,7 @@ html body #last-events {
   background: var(--rf-coral);
 }
 #last-events .last-events-copy h2 {
+  font-size: clamp(3.3rem, 5.5vw, 4.5rem);
   letter-spacing: -0.045em;
 }
 #last-events .last-event-card {
@@ -507,10 +528,28 @@ html body #last-events {
   border: 1px solid var(--rf-line);
   border-radius: 1.5rem;
   background: var(--rf-paper);
-  transition: transform 0.45s var(--rf-ease), background 0.3s, border-color 0.3s;
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.55s var(--rf-ease), transform 0.55s var(--rf-ease), background 0.3s, border-color 0.3s;
 }
+.pr.rv:not(.rv-in) .pr-step {
+  opacity: 0;
+  transform: translateX(2rem);
+}
+.pr.rv-in .pr-step {
+  transition-delay: var(--pr-reveal-delay, 0s);
+}
+.pr.rv-in .pr-step:hover {
+  transition-delay: 0s;
+}
+.pr-step:nth-child(1) { --pr-reveal-delay: 0.4s; }
+.pr-step:nth-child(2) { --pr-reveal-delay: 0.3s; }
+.pr-step:nth-child(3) { --pr-reveal-delay: 0.2s; }
+.pr-step:nth-child(4) { --pr-reveal-delay: 0.1s; }
+.pr-step:nth-child(5) { --pr-reveal-delay: 0s; }
 .pr-step:hover {
   transform: translateY(-6px);
+  transition-delay: 0s;
   background: #fff;
   border-color: var(--rf-ink);
 }
@@ -591,7 +630,7 @@ html body #selected-works {
 .pj-title {
   margin: 0;
   max-width: 52rem;
-  font-size: clamp(2.3rem, 6vw, 4.4rem);
+  font-size: clamp(1.7rem, 4.2vw, 3rem);
   line-height: 0.98;
   letter-spacing: -0.045em;
   font-weight: 800;
@@ -659,7 +698,7 @@ html body .about-project-category[aria-pressed="true"] {
 .ct-inner {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   gap: clamp(1.8rem, 4vw, 3.5rem);
   align-items: end;
   max-width: 84rem;
@@ -691,16 +730,18 @@ html body .about-project-category[aria-pressed="true"] {
 }
 .ct-links {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.7rem;
 }
 .ct-link {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem 1.3rem;
+  min-width: 0;
+  gap: 0.6rem;
+  padding: 0.8rem 0.9rem;
   border: 1.5px solid rgba(255, 255, 255, 0.7);
-  border-radius: 99px;
+  border-radius: 1rem;
   color: #fff;
   text-decoration: none;
   transition: transform 0.35s var(--rf-ease), background 0.25s, color 0.25s;
@@ -720,21 +761,26 @@ html body .about-project-category[aria-pressed="true"] {
 }
 .ct-link > span:nth-child(2) {
   flex: 1;
+  min-width: 0;
 }
 .ct-link b {
   display: block;
   font-size: 1rem;
 }
 .ct-link small {
+  display: block;
+  overflow: hidden;
   color: #c9cde4;
   font-size: 0.74rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .ct-link i {
   font-style: normal;
   font-size: 1.3rem;
 }
 .ct-link:hover {
-  transform: translateX(6px);
+  transform: translateY(-3px);
   background: #fff;
   color: var(--rf-ink);
 }
@@ -788,11 +834,12 @@ html body .about-project-category[aria-pressed="true"] {
 }
 .wk-kicker {
   color: #cfe0ff;
+  font-size: 0.64rem;
 }
 .wk-intro h1 {
   max-width: 46rem;
   margin: 0;
-  font-size: clamp(2.1rem, 5.4vw, 4rem);
+  font-size: clamp(1.7rem, 4.5vw, 3rem);
   line-height: 1;
   letter-spacing: -0.045em;
   font-weight: 800;
@@ -805,6 +852,7 @@ html body .about-project-category[aria-pressed="true"] {
   max-width: 40rem;
   margin: 0.9rem 0 0;
   color: #dbe6ff;
+  font-size: 0.88rem;
   line-height: 1.65;
 }
 .wk-chips {
@@ -838,7 +886,7 @@ html body .about-project-category[aria-pressed="true"] {
   color: #ffd4cf;
 }
 
-/* storytelling lead above each role */
+/* Role storytelling */
 .wk-lead {
   display: flex;
   gap: 0.8rem;
@@ -888,9 +936,18 @@ html body .work-hero-side {
   .wk-chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 860px) {
-  .hx-grid { grid-template-columns: 1fr; }
-  .hx-visual { order: -1; padding: 0.8rem 1rem 1rem 0; }
-  .hx-photo { width: min(100%, 20rem); }
+  .hx-grid { grid-template-columns: 1fr; align-items: center; }
+  .hx-visual { display: flex; justify-content: center; order: -1; padding: 0.8rem 1rem 1rem 0; }
+  .hx-photo {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    width: min(100%, 20rem);
+    aspect-ratio: 4 / 5;
+    transform: none;
+  }
+  .hx-visual:hover .hx-photo { transform: rotate(-1.2deg) scale(1.01); }
   .ct-inner { grid-template-columns: 1fr; align-items: start; }
 }
 @media (max-width: 560px) {
@@ -901,22 +958,27 @@ html body .work-hero-side {
   .hx-float { padding: 0.45rem 0.7rem; }
   .hx-float b { font-size: 0.85rem; }
   .hx-float.f2 { right: -0.2rem; }
+  .hx-status-tag { right: -0.2rem; padding: 0.55rem 0.75rem; font-size: 0.68rem; }
+  .hx-status-tag { right: -0.2rem; padding: 0.55rem 0.75rem; font-size: 0.68rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hx-float,
   .hx-dot,
+  .hx-backdrop,
   .sb-glow,
   .ct-blob,
   .wk-intro::before { animation: none !important; }
 }
 
-/* The global theme forces heading sizes inside <main>; these win by specificity. */
-html body main .hx-title { font-size: clamp(3.3rem, 9vw, 6.8rem) !important; line-height: 0.92 !important; letter-spacing: -0.05em !important; font-weight: 800 !important; }
-html body main .sb-head h2 { font-size: clamp(2rem, 5vw, 3.4rem) !important; line-height: 1.04 !important; letter-spacing: -0.035em !important; font-weight: 800 !important; color: #fff !important; }
-html body main .pr-head h2 { font-size: clamp(2.1rem, 5vw, 3.6rem) !important; line-height: 1 !important; letter-spacing: -0.045em !important; font-weight: 800 !important; }
-html body main .pj-title { font-size: clamp(2.3rem, 6vw, 4.4rem) !important; line-height: 0.98 !important; letter-spacing: -0.045em !important; font-weight: 800 !important; }
-html body main .ct-copy h2 { font-size: clamp(2.2rem, 6vw, 4.4rem) !important; line-height: 0.98 !important; letter-spacing: -0.045em !important; font-weight: 800 !important; color: #fff !important; }
-html body main .wk-intro h1 { font-size: clamp(2.1rem, 5.4vw, 4rem) !important; line-height: 1 !important; letter-spacing: -0.045em !important; font-weight: 800 !important; color: #fff !important; }
+/* Heading overrides */
+html body main .hx-title { font-size: clamp(2.2rem, 6.2vw, 4.5rem) !important; line-height: 0.92 !important; letter-spacing: -0.05em !important; font-weight: 800 !important; white-space: nowrap; }
+html body main .sb-head h2 { font-size: clamp(1.7rem, 4.2vw, 2.9rem) !important; line-height: 1.04 !important; letter-spacing: -0.035em !important; font-weight: 800 !important; color: #fff !important; }
+html body main .pr-head h2 { font-size: clamp(1.7rem, 4.2vw, 3rem) !important; line-height: 1 !important; letter-spacing: -0.045em !important; font-weight: 800 !important; }
+html body main .pj-title { font-size: clamp(1.7rem, 4.2vw, 3rem) !important; line-height: 0.98 !important; letter-spacing: -0.045em !important; font-weight: 800 !important; }
+html body main .ct-copy h2 { font-size: clamp(1.9rem, 4.8vw, 3.6rem) !important; line-height: 0.98 !important; letter-spacing: -0.045em !important; font-weight: 800 !important; color: #fff !important; }
+html body main .wk-intro h1 { font-size: clamp(1.7rem, 4.5vw, 3rem) !important; line-height: 1 !important; letter-spacing: -0.045em !important; font-weight: 800 !important; color: #fff !important; }
+html body main #experience .experience-heading h2 { font-family: "Plus Jakarta Sans", Inter, sans-serif !important; font-size: clamp(1.7rem, 4.2vw, 3rem) !important; line-height: 1 !important; letter-spacing: -0.045em !important; font-weight: 800 !important; }
+html body main #experience .experience-heading p { font-size: 0.8rem !important; line-height: 1.5 !important; }
 html body main .sb-card h3 { font-size: 1.08rem !important; line-height: 1.25 !important; color: #fff !important; letter-spacing: -0.01em !important; }
 html body main .pr-step h3 { font-size: 1.05rem !important; line-height: 1.25 !important; letter-spacing: -0.01em !important; }
 html body main .hx-pillar h3 { font-size: 1.02rem !important; letter-spacing: -0.01em !important; }

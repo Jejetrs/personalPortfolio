@@ -1,5 +1,4 @@
-/* Bridge between inline event props in the home markup (React) and the imperative page
- * behaviour. `mountHomeInteractions` registers the implementations while it is mounted. */
+/* Home interaction handlers */
 export const handlers = {};
 
 export const cancelHidePillarCard = (...args) => handlers.cancelHidePillarCard?.(...args);

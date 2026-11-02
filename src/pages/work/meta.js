@@ -1,4 +1,4 @@
-// Page-level document metadata (formerly declared in the static page <head>).
+/* Page metadata */
 export const TAILWIND_CONFIG = {
     darkMode: "class",
     theme: {

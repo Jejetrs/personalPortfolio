@@ -1,10 +1,9 @@
-/* The React mount point must not introduce a box: pages were authored with their header,
-   main and footer as direct children of <body>. */
+/* Root layout */
 #root {
   display: contents;
 }
 
-/* PDF pages drawn on canvas (see lib/pdfCanvas.js) */
+/* PDF canvas */
 .pdf-canvas-host {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -49,7 +48,7 @@
   text-decoration: underline;
 }
 
-/* Inline project video highlight */
+/* Video highlight */
 .video-highlight{margin:0 0 20px;display:grid;grid-template-columns:minmax(0,.55fr) minmax(0,1.45fr);gap:20px;align-items:center;padding:16px;border-radius:20px;background:linear-gradient(135deg,#0f172a,#1e1b4b);color:#fff;box-shadow:0 14px 34px rgba(15,23,42,.18)}
 .video-highlight-meta{display:flex;flex-direction:column;gap:8px;min-width:0}
 .video-highlight-label{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;font:700 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#c7d2fe}
@@ -66,7 +65,7 @@
 .video-highlight-poster:hover .video-highlight-play{transform:scale(1.08)}
 @media(max-width:820px){.video-highlight{grid-template-columns:minmax(0,1fr);gap:14px;padding:14px}.video-highlight-meta strong{font-size:16px}}
 
-/* Smooth motion: page changes, section reveals, in-page scrolling */
+/* Page and section transitions */
 @view-transition{navigation:auto}
 ::view-transition-old(root){animation:vt-out .2s ease both}
 ::view-transition-new(root){animation:vt-in .4s cubic-bezier(.2,.7,.2,1) both}

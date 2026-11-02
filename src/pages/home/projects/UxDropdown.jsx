@@ -1,4 +1,4 @@
-// Collapsed-by-default dropdown used for every "UX process" block inside a project card.
+/* UX process dropdown */
 export default function UxDropdown({ title = 'UX process', meta, children }) {
   return (
     <details className="ux-dd">

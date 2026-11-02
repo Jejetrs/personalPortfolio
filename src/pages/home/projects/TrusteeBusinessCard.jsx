@@ -176,7 +176,6 @@ export default function TrusteeBusinessCard() {
 @media(max-width:570px){#trustee-business-card .tr-live{width:100%;justify-content:center}#trustee-business-card .tr-co-list{grid-template-columns:1fr}#trustee-business-card .tr-co-list li:nth-last-child(2){border-bottom:1px solid var(--line)}#trustee-business-card .tr-co-bar{flex-direction:column;align-items:flex-start;gap:6px}#trustee-business-card .tr-flow{grid-template-columns:repeat(2,minmax(0,1fr))}#trustee-business-card .tr-steps{grid-template-columns:1fr}#trustee-business-card .tr-doc-pages{padding:8px;gap:8px}#trustee-business-card .tr-doc-pages[data-layout=deck]{grid-template-columns:repeat(2,minmax(0,1fr))}#trustee-business-card .tr-doc-pages[data-layout=account]{grid-template-columns:1fr}#trustee-business-card .tr-zoom-head,#trustee-business-card .tr-zoom-tools{flex-wrap:wrap}#trustee-business-card .tr-role{max-width:none}#trustee-business-card .tr-value{flex-direction:column;align-items:flex-start;gap:3px}#trustee-business-card .tr-note{flex-direction:column;gap:3px}}
 @media(prefers-reduced-motion:reduce){#trustee-business-card .tr-doc-page{transition:none}#trustee-business-card .tr-live-dot{animation:none}#trustee-business-card .tr-live{transition:none}}
 
-/* Spacing & rhythm pass: one consistent gutter, roomier sections */
 #trustee-business-card{padding:clamp(16px,2.6vw,32px)}
 #trustee-business-card .tr-hero{padding:clamp(24px,3.4vw,40px) clamp(20px,3.2vw,40px)}
 #trustee-business-card .tr-hero-grid{gap:clamp(24px,4vw,48px)}

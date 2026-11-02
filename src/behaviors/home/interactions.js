@@ -1,8 +1,4 @@
-/* Home page interactions (ported from the original inline page script):
- * design-process pillars, hero typewriter, scroll reveal, previous-event stories,
- * honors carousel and the shared image lightbox.
- * `mountHomeInteractions(scope)` runs once against the rendered page; `scope` undoes it on unmount.
- */
+/* Home interactions */
 import { handlers } from './interactionHandlers.js';
 import { renderPdf } from '@/lib/pdfCanvas.js';
 
@@ -98,7 +94,7 @@ export function mountHomeInteractions(scope) {
     const counter = document.getElementById('step-counter');
     if (counter) counter.textContent = `Pillar ${index + 1} of ${pillarsData.length}`;
 
-    // Update Nodes & Callouts
+    // Nodes and callouts
     for (let i = 0; i < pillarsData.length; i++) {
       const nodeBtn = document.getElementById(`node-btn-${i}`);
       const callout = document.getElementById(`callout-${i}`);
@@ -343,7 +339,7 @@ export function mountHomeInteractions(scope) {
   scope.on(window, 'resize', positionPillarCard);
   scope.on(window, 'scroll', positionPillarCard, true);
 
-  // Type and erase the hero tagline continuously.
+  // Hero tagline
   const typewriter = document.getElementById('hero-typewriter-text');
   const typewriterText = 'Turning needs into products that matter.';
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -413,10 +409,10 @@ export function mountHomeInteractions(scope) {
     });
   }
 
-  // Initialize styling
+  // Node styling
   updateActiveNodeStyles(0);
 
-  // Previous Events: three contextual stories, one shared detail overlay.
+  // Previous events
   const lastEventDetail = document.getElementById('last-event-detail');
   const lastEventDetailTitle = document.getElementById('last-event-detail-title');
   const lastEventDetailEyebrow = document.getElementById('last-event-detail-eyebrow');
@@ -426,9 +422,9 @@ export function mountHomeInteractions(scope) {
   const lastEventSection = document.getElementById('last-events');
   const lastEventStories = [...lastEventDetail.querySelectorAll('[data-event-panel]')];
   const lastEventMetadata = [
-    { key: 'digistar', eyebrow: 'TELKOM INDONESIA · DIGISTAR INTERNSHIP 2026', status: '3rd Place · Internal B2B Pitching', statusClass: 'emerald' },
+    { key: 'arkavidia', eyebrow: 'ARKAVIDIA 9.0 · HACKVIDIA CATEGORY', status: 'Finalist', statusClass: 'amber' },
     { key: 'asah', eyebrow: 'DICODING × ACCENTURE · ASAH 2025', status: 'Distinction Graduate', statusClass: 'indigo' },
-    { key: 'arkavidia', eyebrow: 'ARKAVIDIA 9.0 · HACKVIDIA CATEGORY', status: 'National Finalist', statusClass: 'amber' }
+    { key: 'digistar', eyebrow: 'TELKOM INDONESIA · DIGISTAR INTERNSHIP 2026', status: '3rd Place · Internal B2B Pitching', statusClass: 'emerald' }
   ];
   let lastEventTrigger = null;
   let lastEventCloseTimer;
@@ -559,7 +555,6 @@ export function mountHomeInteractions(scope) {
   imageLightbox.querySelector('.image-lightbox-close').addEventListener('click', () => {
     imageLightbox.close();
   });
-  // Zoom by clicking the image itself; while zoomed, dragging pans the picture.
   let dragStart = null;
   let dragMoved = false;
   const setLightboxZoom = (zoomed) => {
@@ -567,7 +562,6 @@ export function mountHomeInteractions(scope) {
     imageLightboxStage.classList.toggle('is-zoomed', zoomed);
     imageLightboxHint.textContent = zoomed ? 'Click to zoom out · drag to move' : 'Click the image to zoom · drag to move';
   };
-  // Pointer capture retargets clicks to the stage, so the stage handles the toggle.
   imageLightboxStage.addEventListener('click', (event) => {
     if (dragMoved) { dragMoved = false; return; }
     const zoomed = imageLightboxImage.classList.contains('is-zoomed');
@@ -612,7 +606,7 @@ export function mountHomeInteractions(scope) {
     imageLightboxTrigger = null;
   });
 
-  // Honors & Achievements Interactive Carousel Controller
+  // Honors carousel
   let honorsCurrentIndex = 0;
   const totalHonors = document.querySelectorAll('#honors-carousel-track .honor-card').length;
 
@@ -658,7 +652,6 @@ export function mountHomeInteractions(scope) {
       card.dataset.index = String(index);
     });
 
-    // Update dots indicator with animated pill transition
     dots.forEach((dot, idx) => {
       if (idx === honorsCurrentIndex) {
         dot.className = "h-2 rounded-full transition-all duration-300 w-7 bg-primary shadow-sm shadow-indigo-600/40 ring-2 ring-primary/20 scale-105";

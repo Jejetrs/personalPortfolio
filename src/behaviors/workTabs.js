@@ -1,4 +1,4 @@
-/* Tab switchers for the experience case studies. */
+/* Experience tabs */
 
 export function switchInaprocTab(tabId) {
     const tabs = ['overview', 'ws1', 'ws2', 'ws3', 'metrics'];

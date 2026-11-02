@@ -9,7 +9,9 @@ export default function DesignProcessPart1() {
           How I work
         </p>
         <h2>
-          My User-Centered <em>Development Process</em>
+          My User-Centered
+          <br />
+          <em>Development Process</em>
         </h2>
         <p>From understanding people to shipping and testing the build. The design side and the engineering side run through every step.</p>
       </div>

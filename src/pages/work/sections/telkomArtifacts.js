@@ -1,4 +1,4 @@
-/* Visual artifacts shown in the Telkom case study studio. `thumb` is a small preview, `src` the full image. */
+/* Telkom artifacts */
 const BASE = '/assets/experience/Telkom%20Designer%20Intern/';
 const local = (file) => BASE + encodeURIComponent(file);
 const thumb = (file) => `${BASE}thumbs/${encodeURIComponent(file.replace(/\.[^.]+$/, ''))}.webp`;

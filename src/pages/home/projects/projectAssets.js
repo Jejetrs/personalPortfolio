@@ -9,7 +9,6 @@ const pdf = (path, title) => ({ src: asset(path), type: 'pdf', title });
 const file = (path, title) => ({ src: asset(path), type: 'file', title });
 
 export const PROJECT_ASSETS = {
-  // The leadership card is self-contained: it renders its own galleries and documents.
   "inaproc-project-card": [
     experienceImage("Telkom Designer Intern/Design Revamp.png", "Landing page revamp board"),
     experienceImage("Telkom Designer Intern/Audit E-Katalog.png", "E-Katalog interface audit"),
@@ -88,7 +87,8 @@ export const PROJECT_ASSETS = {
     image("UI UX/aisee web/Mockup.webp", "AiSee web mockup"),
   ],
   "aoshuttle-project-card": [
-    supportingImage("UI UX/aoshattle/card shorting.png", "Card sorting"),
+    image("UI UX/aoshattle/Mockup.png", "AOShuttle app mockup"),
+    image("UI UX/aoshattle/card shorting.png", "AOShuttle card sorting"),
     image("UI UX/aoshattle/User Flow AOShuttle.webp", "AOShuttle user flow"),
   ],
   "campaign-deck-master-card": [
@@ -158,6 +158,20 @@ export const PROJECT_ASSETS = {
   ],
   "notes-application-project-card": [
     image("Developer/NotesApp.png", "Notes Application"),
+  ],
+  "bookshelf-api-project-card": [
+    image("Developer/Bookself/Bookself Env API Test Overview.png", "Bookshelf API test overview"),
+    image("Developer/Bookself/Post Test Example.png", "Bookshelf POST create-book test"),
+    image("Developer/Bookself/Get Test Example.png", "Bookshelf GET book test"),
+    image("Developer/Bookself/Put Test Example.png", "Bookshelf PUT update-book test"),
+    image("Developer/Bookself/Delete Test Example.png", "Bookshelf DELETE book test"),
+  ],
+  "openmusic-api-project-card": [
+    image("Developer/openMusicV3/Env Test Overview.png", "OpenMusic API test overview"),
+    image("Developer/openMusicV3/GetTest Example.png", "OpenMusic GET songs test"),
+    image("Developer/openMusicV3/Post Test Example.png", "OpenMusic POST song test"),
+    image("Developer/openMusicV3/Put Test Example.png", "OpenMusic PUT album test"),
+    image("Developer/openMusicV3/Delete Test Example.png", "OpenMusic DELETE album test"),
   ],
 };
 

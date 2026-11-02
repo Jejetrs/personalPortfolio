@@ -7,11 +7,6 @@ import { mountHomeInteractions } from "./interactions.js";
 import { createScope } from "./lifecycle.js";
 import { mountProjectSelector } from "./projectSelector.js";
 
-/**
- * Boots the home page widgets once the page markup is committed and tears them down on unmount.
- * Mounting is deferred a microtask so the project showcase can render cards with flushSync
- * outside of React's own commit phase.
- */
 export default function useHomeBehavior() {
   useEffect(() => {
     const scope = createScope();

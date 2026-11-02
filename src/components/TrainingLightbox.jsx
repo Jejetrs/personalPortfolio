@@ -15,10 +15,6 @@ function readPhoto(trigger) {
     : [current];
 }
 
-/**
- * Modal viewer for the training documentation thumbnails.
- * Any element with `data-training-doc="<group>"` opens the viewer on its group.
- */
 export default function TrainingLightbox() {
   const dialogRef = useRef(null);
   const lastFocus = useRef(null);

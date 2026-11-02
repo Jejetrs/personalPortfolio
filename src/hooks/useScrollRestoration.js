@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-/** Scroll to the `#hash` target when present, otherwise to the top on every route change. */
 export default function useScrollRestoration() {
   const { pathname, hash } = useLocation();
 

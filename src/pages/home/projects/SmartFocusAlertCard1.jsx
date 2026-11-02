@@ -1,8 +1,6 @@
 import PrivateLink from "./PrivateLink.jsx";
 import { goToSlide, nextSlide, prevSlide, toggleAccordion } from '@/behaviors/home/projectHandlers.js';
 
-import UxDropdown from './UxDropdown.jsx';
-
 export default function SmartFocusAlertCard1() {
   return (
       <article className="rounded-2xl bg-[#f6f8fd] border border-blue-100 shadow-sm relative overflow-hidden project-card-item p-4 sm:p-6 space-y-4" data-category="aiml web uiux" id="smart-focus-alert-card-1" data-live-url="https://www.figma.com/proto/pBIGNOVNe6UQSEpDH3sqxK/SMART-FOCUS?node-id=19-556&p=f&t=h6tQAszTVhB3iYr3-1&scaling=scale-down-width&content-scaling=fixed&page-id=9%3A108&starting-point-node-id=19%3A556" data-live-health="https://smartfocus.up.railway.app/">
@@ -237,7 +235,11 @@ export default function SmartFocusAlertCard1() {
                   </li>
                 </ul>
               </div>
-              <div className="bg-white rounded-xl p-2.5 border border-blue-100 shadow-xs"><UxDropdown title="Development process" meta="4 steps"><ol className="space-y-1 text-[11px] text-slate-600 font-medium">
+              <div className="bg-white rounded-xl p-3.5 border border-blue-100 shadow-xs space-y-2">
+                <h4 className="font-bold uppercase tracking-wider text-[11px] text-slate-900">
+                  Development Process
+                </h4>
+                <ol className="space-y-1 text-[11px] text-slate-600 font-medium">
                   <li className="flex items-center gap-1.5">
                     <span className="w-4 h-4 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold flex items-center justify-center flex-shrink-0">
                       1
@@ -262,7 +264,8 @@ export default function SmartFocusAlertCard1() {
                     </span>
                     {" Usability & Black-box Testing"}
                   </li>
-                </ol></UxDropdown></div>
+                </ol>
+              </div>
             </div>
             <div className="pt-2 border-t border-blue-100/90">
               <button id="smart-focus-accordion-btn" type="button" onClick={() => { toggleAccordion('smart-focus'); }} aria-expanded="false" className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-white/80 hover:bg-white border border-blue-100 shadow-xs transition group">

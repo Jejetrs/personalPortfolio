@@ -9,11 +9,11 @@ export default function LastEventsGallery() {
           Previous Events
         </h2>
         <p className="mt-3 max-w-sm text-sm sm:text-base leading-relaxed text-slate-600">
-          Three moments that pushed me beyond the classroom: leading a business pitch, delivering a capstone, and building under a hackathon deadline.
+          A few meaningful experiences where I learned to work with different teams, take on new responsibilities, and turn ideas into practical solutions.
         </p>
       </div>
       <div className="w-full max-w-[42rem] justify-self-end lg:col-span-8 grid grid-cols-2 gap-3 sm:gap-4" aria-label="Event stories">
-        <button className="last-event-card event-cover event-cover--indigo" type="button" data-event-index="0" data-event-title="Digistar Class Intern — B2B Pitching" data-event-date="2026" aria-controls="last-event-detail" aria-expanded="false" aria-label="Read Digistar Class Intern — B2B Pitching event story">
+        <button className="last-event-card event-cover event-cover--indigo" style={{ order: 3 }} type="button" data-event-index="2" data-event-title="Digistar Internship — B2B Pitching" data-event-date="2026" aria-controls="last-event-detail" aria-expanded="false" aria-label="Read Digistar Internship — B2B Pitching event story">
           <img className="event-cover-real-image" alt="" hidden aria-hidden="true" />
           {" "}
           <span className="event-cover-grain" aria-hidden="true"></span>
@@ -21,7 +21,7 @@ export default function LastEventsGallery() {
           <span className="event-cover-content">
             <span className="event-cover-top">
               <span className="event-cover-number">
-                01 / 03
+                03 / 03
               </span>
               <svg className="event-cover-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="4" width="18" height="14" rx="2"></rect>
@@ -34,7 +34,7 @@ export default function LastEventsGallery() {
                 B2B PITCHING · 2026
               </span>
               <strong>
-                Digistar Class Intern
+                Digistar Internship
               </strong>
               <span className="event-cover-meta">
                 3rd Place · Internal B2B Pitching
@@ -49,7 +49,7 @@ export default function LastEventsGallery() {
           </span>
         </button>
         {" "}
-        <button className="last-event-card event-cover event-cover--cyan" type="button" data-event-index="1" data-event-title="ASAH 2025 — Leading the LeadSight Capstone" data-event-date="2025–2026 · Distinction Graduate" aria-controls="last-event-detail" aria-expanded="false" aria-label="Read ASAH 2025 — Leading the LeadSight Capstone event story">
+        <button className="last-event-card event-cover event-cover--cyan" style={{ order: 2 }} type="button" data-event-index="1" data-event-title="ASAH 2025 — Leading the LeadSight Capstone" data-event-date="2025–2026 · Distinction Graduate" aria-controls="last-event-detail" aria-expanded="false" aria-label="Read ASAH 2025 — Leading the LeadSight Capstone event story">
           <img className="event-cover-real-image" alt="" hidden aria-hidden="true" />
           {" "}
           <span className="event-cover-grain" aria-hidden="true"></span>
@@ -85,7 +85,7 @@ export default function LastEventsGallery() {
           </span>
         </button>
         {" "}
-        <button className="last-event-card event-cover event-cover--violet" type="button" data-event-index="2" data-event-title="Arkavidia 9.0 — Hackvidia" data-event-date="2025" aria-controls="last-event-detail" aria-expanded="false" aria-label="Read Arkavidia 9.0 — Hackvidia event story">
+        <button className="last-event-card event-cover event-cover--violet" style={{ order: 1 }} type="button" data-event-index="0" data-event-title="Arkavidia 9.0 — Hackvidia" data-event-date="2025" aria-controls="last-event-detail" aria-expanded="false" aria-label="Read Arkavidia 9.0 — Hackvidia event story">
           <img className="event-cover-real-image" alt="" hidden aria-hidden="true" />
           {" "}
           <span className="event-cover-grain" aria-hidden="true"></span>
@@ -93,7 +93,7 @@ export default function LastEventsGallery() {
           <span className="event-cover-content">
             <span className="event-cover-top">
               <span className="event-cover-number">
-                03 / 03
+                01 / 03
               </span>
               <svg className="event-cover-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
                 <path d="m13 2-9 12h7l-1 8 10-12h-7l0-8Z"></path>
@@ -108,7 +108,7 @@ export default function LastEventsGallery() {
                 Arkavidia 9.0
               </strong>
               <span className="event-cover-meta">
-                National Finalist
+                Finalist
               </span>
               <span className="event-cover-cta">
                 {"Explore the story "}

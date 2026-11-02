@@ -1,4 +1,4 @@
-/** Trustee case-study documents (page images live in /public/assets/trustee). */
+/* Trustee documents */
 export const TRUSTEE_DOCUMENTS = {
   "account": {
     "name": "Company Profiling & SWOT",

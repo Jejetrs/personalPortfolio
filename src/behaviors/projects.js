@@ -2,7 +2,7 @@ import { updateGlobalToggleState } from './caseStudy.js';
 
 export { toggleAccordion, toggleAllAccordions } from './caseStudy.js';
 
-/* Projects overview page behaviour (ported from the original page scripts). */
+/* Project page behavior */
 
 export function showProjectCategory(category) {
   document.querySelectorAll('[data-project-panel]').forEach((panel) => panel.classList.toggle('hidden', panel.dataset.projectPanel !== category));
@@ -705,10 +705,6 @@ export function goToSlide(carouselId, index) {
 
 const enhanced = new WeakSet();
 
-/**
- * One-time DOM enhancement of the rendered project cards, in the same order as
- * the original page scripts. Safe to call repeatedly for the same <main>.
- */
 export function enhanceProjectsPage(root) {
   if (!root || enhanced.has(root)) return;
   enhanced.add(root);

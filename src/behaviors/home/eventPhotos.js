@@ -1,9 +1,5 @@
-/* Previous-event photo evidence viewer (ported from the original inline page script). */
+/* Event photos */
 export function mountEventPhotos(scope) {
-  // Event photo placeholders. Set a real, public-safe image path in each
-  // data-photo-src attribute when original event photos become available.
-  // Empty paths never trigger network requests or interactive image buttons.
-
     const slots = Array.from(document.querySelectorAll('#last-events [data-photo-key]'));
     const imagesByEvent = new Map();
     const lightbox = document.createElement('dialog');
@@ -59,7 +55,7 @@ export function mountEventPhotos(scope) {
         group.push({button, image: img});
         group.sort((a,b) => Number(a.button.dataset.eventPhotoOrder)-Number(b.button.dataset.eventPhotoOrder));
         if (Number(button.dataset.eventPhotoOrder) === 0) {
-          const idx = {digistar: 0, asah: 1, arkavidia: 2}[key];
+          const idx = {arkavidia: 0, asah: 1, digistar: 2}[key];
           const cover = document.querySelector('#last-events .last-event-card[data-event-index="' + idx + '"]');
           if (cover) { const coverImg = cover.querySelector('.event-cover-real-image'); coverImg.src = src; coverImg.hidden = false; cover.classList.add('has-real-image'); }
         }

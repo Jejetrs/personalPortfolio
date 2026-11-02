@@ -35,6 +35,10 @@ body > :where(#root) > main {
   padding: clamp(2rem, 3.5vw, 3rem) 0 clamp(3rem, 4vw, 4rem) !important;
 }
 
+body > :where(#root) > main.relative.z-10:has(> section#about) {
+  padding-top: 2.5rem !important;
+}
+
 body > :where(#root) > main.relative.z-10 > section > .max-w-6xl {
   width: 100% !important;
   max-width: none !important;

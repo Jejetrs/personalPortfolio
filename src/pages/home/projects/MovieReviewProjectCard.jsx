@@ -31,7 +31,7 @@ export default function MovieReviewProjectCard() {
 .mv .mv-ico{display:grid;place-items:center;width:24px;height:24px;flex:none;border-radius:8px;background:#ffe4e6;color:#e11d48;font-size:11px}
 .mv .mv-tech{font-size:9.5px;line-height:1.5;color:#475569;background:#ffffffe6;border:1px solid #ffe4e6;border-radius:12px;padding:8px 12px;margin-top:.75rem;box-shadow:0 1px 2px rgba(0,0,0,.05)}.mv .mv-tech b{color:#e11d48}
 .mv .mv-iconbtn{padding:4px 6px;background:#f2f4ff;border:0;border-radius:6px;font-size:10px;color:#5657ab;cursor:pointer}
-.mv .mv-dgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding-top:12px}
+.mv .mv-dgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding-top:12px}
 .mv .mv-dgrid>div{background:#fff;border:1px solid #ffe4e6;border-radius:12px;padding:14px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
 .mv .mv-dgrid h4{margin:0 0 8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#0f172a}.mv .mv-dgrid p{font-size:10.5px;line-height:1.5;color:#475569}
 @media(max-width:1080px){.mv .mv-grid{grid-template-columns:minmax(0,1fr)}}
@@ -73,7 +73,7 @@ export default function MovieReviewProjectCard() {
 .mv .mv-note{margin-top:auto;padding-top:10px;font-size:9.5px;color:#7b7fa0}
 @media(max-width:620px){.mv .mv-stats{grid-template-columns:1fr 1fr 1fr}.mv .mv-metrics{grid-template-columns:repeat(2,1fr)}.mv .mv-feats{grid-template-columns:1fr}}
 
-.mv .mv-dgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mv .mv-dgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .mv .mv-dgrid>div{background:#fff;border:1px solid #ffe4e6;border-radius:12px;padding:14px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
 .mv .mv-dgrid h4{margin:0 0 8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#0f172a}.mv .mv-dgrid p{font-size:10.5px;line-height:1.5;color:#475569}
 @media(max-width:620px){.mv .mv-dgrid{grid-template-columns:1fr}}
@@ -130,42 +130,42 @@ export default function MovieReviewProjectCard() {
               </span>
             </h2>
             <p className="mv-eyebrow">
-              Frontend Engineering · Movie Discovery Web App
+              Full-Stack Engineering · Movie Reviews
             </p>
             <p className="mv-lead">
-              A React frontend for browsing movies and TV shows on the TMDB API: debounced search, filterable browse, trailers, and a watchlist, ratings and reviews that persist in the browser through Redux.
+              Find a film, watch the trailer, then rate it, review it and keep a watchlist that follows you to any device. I built both halves: a React app on top of TMDB, and my own Express + PostgreSQL API that handles accounts and your library.
             </p>
             <div className="mv-metrics">
               <div className="mv-metric">
                 <small>
-                  UI Library
+                  Frontend
                 </small>
                 <b>
-                  React
+                  React · 12 pages
                 </b>
               </div>
               <div className="mv-metric">
                 <small>
-                  Pages
+                  Backend
                 </small>
                 <b>
-                  12
+                  Express · 16 endpoints
                 </b>
               </div>
               <div className="mv-metric">
                 <small>
-                  Components
+                  Database
                 </small>
                 <b>
-                  19
+                  Neon · 4 tables
                 </b>
               </div>
               <div className="mv-metric">
                 <small>
-                  Custom Hooks
+                  Integration tests
                 </small>
                 <b>
-                  6
+                  11 API cases
                 </b>
               </div>
             </div>
@@ -175,29 +175,29 @@ export default function MovieReviewProjectCard() {
               </h3>
               <div className="mv-arch">
                 <span className="mv-node">
-                  Pages + Components
+                  React UI
                 </span>
                 <span className="mv-arrow">
                   →
                 </span>
                 <span className="mv-node">
-                  Data hooks
+                  Redux + Axios
                 </span>
                 <span className="mv-arrow">
                   →
                 </span>
                 <span className="mv-node">
-                  Axios
+                  Express API
                 </span>
                 <span className="mv-arrow">
                   →
                 </span>
                 <span className="mv-node">
-                  TMDB API
+                  Neon PostgreSQL
                 </span>
               </div>
               <p className="mv-micro">
-                Axios is configured once with the TMDB base URL and bearer token. Hooks wrap each request with loading, error and retry state, while Redux holds the trending banner and the user library (watchlist, ratings, reviews).
+                React handles what you see; my Express API handles who you are and what you saved. TMDB supplies titles, posters and trailers, so only ratings, watchlists and reviews live in Neon.
               </p>
             </div>
             <div className="mv-panel">
@@ -209,45 +209,45 @@ export default function MovieReviewProjectCard() {
                   <span className="mv-ico">
                     ▶
                   </span>
-                  Hero Carousel · Trending Today / Week
+                  Frontend · Trending hero and fast browse by genre, rating and year
                 </div>
                 <div className="mv-feat">
                   <span className="mv-ico">
                     ☰
                   </span>
-                  Browse · Genre, Rating, Year, Sort in URL
+                  Frontend · Live search that waits until you stop typing
                 </div>
                 <div className="mv-feat">
                   <span className="mv-ico">
                     ⌕
                   </span>
-                  Debounced Search with Live Suggestions
+                  Frontend · Title page with trailer, cast and similar titles
                 </div>
                 <div className="mv-feat">
                   <span className="mv-ico">
                     ◎
                   </span>
-                  Details · One Request, Trailer, Cast, Similar
+                  Backend · Sign-up and sign-in with JWT
                 </div>
                 <div className="mv-feat">
                   <span className="mv-ico">
                     ★
                   </span>
-                  {"Persistent Ratings & Reviews"}
+                  Backend · Watchlist and ratings saved per account
                 </div>
                 <div className="mv-feat">
                   <span className="mv-ico">
                     ▣
                   </span>
-                  Watchlist · Sort and Filter
+                  Backend · Public reviews written with an account
                 </div>
               </div>
             </div>
             <p className="mv-tech">
               <b>
-                Frontend scope:
+                Stack:
               </b>
-              {" React Router · Redux Toolkit · Axios · custom hooks · react-icons · moment · custom CSS design system."}
+              {" Frontend: React, Redux Toolkit, React Router, Axios · Backend: Express, PostgreSQL (Neon), JWT, bcrypt · Deployed on Vercel."}
             </p>
           </section>
           <section className="mv-demo-col">
@@ -287,10 +287,10 @@ export default function MovieReviewProjectCard() {
                 ☷
               </span>
               <span className="dd-name">
-                Advanced implementation details
+                Under the hood
               </span>
               <span className="project-dropdown-badge dev-badge">
-                3 sections
+                4 sections
               </span>
             </span>
             <span className="dd-act">
@@ -306,26 +306,34 @@ export default function MovieReviewProjectCard() {
             <div className="mv-dgrid">
               <div>
                 <h4>
-                  Data Fetching
+                  FRONTEND · DATA & SEARCH
                 </h4>
                 <p>
-                  useFetch and useFetchDetails return data, loading, error and a reload function, and ignore stale responses. usePagedFetch merges pages without duplicates for Browse and Search. The details page loads credits, videos, similar and recommendations in one request with append_to_response.
+                  Custom hooks load data, handle loading and errors, and ignore outdated responses. Search waits until you stop typing. The title page gets cast, trailer and similar titles in a single request.
                 </p>
               </div>
               <div>
                 <h4>
-                  {"State & Persistence"}
+                  FRONTEND · STATE & FEEL
                 </h4>
                 <p>
-                  userSlice keeps auth, watchlist, ratings and reviews. A store.subscribe listener writes them to localStorage only when those slices change, and auth is hydrated at startup so the header updates right after login.
+                  Changes show instantly and roll back if the server says no. Filters live in the URL, so any view can be shared. Skeletons and retry states cover slow or failed requests.
                 </p>
               </div>
               <div>
                 <h4>
-                  {"Routing & UI"}
+                  BACKEND · API & SECURITY
                 </h4>
                 <p>
-                  Browse filters live in the URL through useSearchParams, so every view is shareable. useDebounce limits search requests, useOutsideClick closes menus, and a toast context replaces alerts. Skeletons and an error state with retry cover slow or failed requests.
+                  Routes call service and repository layers. Passwords are stored as bcrypt hashes and sign-in returns a JWT; an expired token gets a 401 and the app signs you out. Reviews need an account and stop at 600 characters.
+                </p>
+              </div>
+              <div>
+                <h4>
+                  BACKEND · DATA & DELIVERY
+                </h4>
+                <p>
+                  Four PostgreSQL tables point to titles by (media_type, tmdb_id), so there is no movie copy to keep in sync. A guest's watchlist and ratings are merged into the account at first login. 11 integration tests run against a real database, and the API deploys with the app on Vercel.
                 </p>
               </div>
             </div>

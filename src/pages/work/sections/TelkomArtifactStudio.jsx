@@ -1,11 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { TELKOM_ARTIFACTS } from './telkomArtifacts.js';
 
-/**
- * Visual artifact viewer: one large stage, a thumbnail rail and the artifact's
- * explanation underneath. On the last artifact a "Back to start" button appears
- * on the left so the viewer can return to the first one in a single click.
- */
 export default function TelkomArtifactStudio() {
   const [index, setIndex] = useState(0);
   const [zoom, setZoom] = useState(false);

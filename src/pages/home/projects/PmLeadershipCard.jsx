@@ -5,8 +5,6 @@ const EV = (folder, file) => `/assets/events/${encodeURIComponent(folder)}/${enc
 const PM_FILE = (file) => `/assets/projects/Project%20Management/${encodeURIComponent(file)}`;
 const TIMELINE_URL = "https://docs.google.com/spreadsheets/d/1leW0-s1cpyUfS_7pGFf2CgZ8bJ0YVjL1KM1baphrSSc/edit?usp=sharing";
 
-// Each entry is a different management role. The events section above tells the story of
-// each event; this card shows how the work was planned and tracked.
 const PROGRAMS = [
   {
     id: "digistar",
@@ -50,7 +48,7 @@ const PROGRAMS = [
     body:
       "During a 24-hour hackathon, I helped shape AiDorse, an AI-powered endorsement platform for MSMEs. My role focused on defining the product direction, designing user flows, and aligning the team around a solution we could realistically develop and present.",
     contributionsLabel: "MY CONTRIBUTIONS",
-    stats: [["24h", "Hackathon Sprint"], ["Top 10", "National Finalist"]],
+    stats: [["24h", "Hackathon Sprint"], ["Top 10", "Finalist"]],
     points: [
       "Product Planning: Defined key features and user flows to guide design and development.",
       "Product Validation: Discussed the solution with an industry practitioner to refine its direction.",
@@ -112,13 +110,11 @@ const PROGRAMS = [
   },
 ];
 
-// Where the plan lives: the timeline opens in Google Sheets (view only), the plan as a PDF.
 const ARTIFACTS = [
   { href: TIMELINE_URL, title: "Project timeline", text: "Live Google Sheet · view only", icon: "sheet", tag: "Sheet" },
   { href: PM_FILE("Example project plan.pdf"), title: "Project plan", text: "Scope, milestones and responsibilities", icon: "doc", tag: "PDF" },
 ];
 
-// Habits that repeat across all three. Small on purpose: the detail is in the tabs above.
 const PLAYBOOK = [
   ["Write the scope down", "29 activities in six milestones, so “done” was never a feeling."],
   ["Show progress in one place", "A shared sheet with owners and status, so nobody had to ask."],

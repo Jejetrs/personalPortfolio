@@ -1,4 +1,4 @@
-// Page-level document metadata (formerly declared in the static page <head>).
+/* Page metadata */
 export const TAILWIND_CONFIG = {
       darkMode: "class",
       theme: {
@@ -122,7 +122,7 @@ export const PAGE_CSS = `
 
 
 .project-card-item img.zoomable-img{cursor:zoom-in}
-/* Developer cards: align type scale, spacing and components with the UI/UX + AI/ML cards */
+/* Developer cards */
 :is(#openmusic-api-project-card){--dvn:#1d4ed8;box-shadow:0 1px 2px rgba(0,0,0,.05)!important}
 :is(#openmusic-api-project-card) .project-card-header{padding-bottom:.75rem!important;margin-bottom:.75rem!important}
 :is(#openmusic-api-project-card) .project-card-header>div:first-child>span:first-child{width:1.5rem!important;height:1.5rem!important;font-size:.75rem!important;font-weight:700!important;box-shadow:0 1px 2px rgba(0,0,0,.05)}
@@ -147,10 +147,10 @@ export const PAGE_CSS = `
 :is(#openmusic-api-project-card) :is(li,dd,dt){font-size:10px!important;line-height:1.45!important}
 #openmusic-api-project-card .om-gallery,#openmusic-api-project-card .om-details-grid section{border-radius:.75rem}
 #openmusic-api-project-card .om-gallery{box-shadow:0 1px 2px rgba(0,0,0,.05)}
-/* dropdown look (matches UI/UX accordion button) */
+/* Dropdown */
 :is(#openmusic-api-project-card) summary{padding:.625rem .875rem;border-radius:.75rem;font-size:.75rem;font-weight:700;box-shadow:0 1px 2px rgba(0,0,0,.05)}
 #smart-focus-alert-developer-card .title{text-decoration:none!important;border-bottom:0!important;box-shadow:none!important}
-/* ===== developer cards v5: top action row, unified dropdown, no header ===== */
+/* Developer card layout */
 .dev-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem .75rem;margin:0 0 .75rem!important;width:100%}
 .dev-tags{display:flex;flex:1 1 auto;flex-wrap:wrap;align-items:center;gap:.5rem;min-width:0}
 .dev-num{display:inline-grid;place-items:center;width:24px;height:24px;flex:none;border-radius:9999px;background:var(--dev-acc);color:#fff;font-size:12px;font-weight:700;line-height:1;box-shadow:0 1px 2px rgba(0,0,0,.05)}
@@ -182,16 +182,16 @@ export const PAGE_CSS = `
 .dev-dd .project-dropdown-toggle[aria-expanded="true"] .accordion-chevron{transform:rotate(180deg)}
 .dev-dd .dev-dd-body{padding-top:.75rem}.dev-dd .dev-dd-body[hidden]{display:none}
 .dev-dd .om-details-grid{margin:0}
-/* one shared type + spacing scale for every developer card */
+/* Developer card typography */
 :is(#smart-focus-alert-developer-card,#nusca-developer-project-card,#bookshelf-api-project-card,#notes-application-project-card,#openmusic-api-project-card,#leadsight-project-card,#movie-review-project-card){font-family:inherit;font-size:12px;line-height:1.5}
 :is(#smart-focus-alert-developer-card,#nusca-developer-project-card,#bookshelf-api-project-card,#notes-application-project-card,#openmusic-api-project-card,#leadsight-project-card,#movie-review-project-card) :is(button,input,textarea,a){font-family:inherit}
-/* no underline under developer titles */
+/* Developer titles */
 :is(#smart-focus-alert-developer-card,#nusca-developer-project-card,#bookshelf-api-project-card,#notes-application-project-card,#openmusic-api-project-card,#leadsight-project-card,#movie-review-project-card) :is(h1,h2) , :is(#smart-focus-alert-developer-card,#nusca-developer-project-card,#bookshelf-api-project-card,#notes-application-project-card,#openmusic-api-project-card,#leadsight-project-card,#movie-review-project-card) :is(h1,h2) *{text-decoration:none!important;text-decoration-line:none!important;border-bottom:0!important;box-shadow:none!important;background-image:none!important}
 :is(#smart-focus-alert-developer-card,#nusca-developer-project-card,#bookshelf-api-project-card,#notes-application-project-card,#openmusic-api-project-card,#leadsight-project-card,#movie-review-project-card) :is(h1,h2)::before,:is(#smart-focus-alert-developer-card,#nusca-developer-project-card,#bookshelf-api-project-card,#notes-application-project-card,#openmusic-api-project-card,#leadsight-project-card,#movie-review-project-card) :is(h1,h2)::after,:is(#smart-focus-alert-developer-card,#nusca-developer-project-card,#bookshelf-api-project-card,#notes-application-project-card,#openmusic-api-project-card,#leadsight-project-card,#movie-review-project-card) :is(h1,h2) *::after{content:none!important;display:none!important}
 :is(#smart-focus-alert-developer-card .overview,#smart-focus-alert-developer-card .hero)::after{content:none!important}
 
 
-/* Previous Events · photo-ready editorial storytelling */
+/* Previous events */
 #last-events .event-photo-feature{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(230px,.8fr);overflow:hidden;gap:0;border:1px solid #d8e1f2;border-radius:1.1rem;background:#fff;box-shadow:0 8px 26px rgba(15,23,42,.045)}
 #last-events .event-photo-feature-media{position:relative;min-width:0;min-height:215px}
 #last-events .event-photo-feature-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:.65rem;padding:1.35rem 1.5rem}
@@ -453,7 +453,7 @@ export const PAGE_CSS = `
     @keyframes typewriter-caret {
       50% { border-color: transparent; }
     }
-    /* Hide scrollbar for carousel track */
+    /* Carousel */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -461,7 +461,6 @@ export const PAGE_CSS = `
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-    /* Smooth snap scroll container */
     #honors-carousel-viewport {
       position: relative;
       height: min(58vh, 600px);
@@ -1419,7 +1418,7 @@ export const PAGE_CSS = `
       opacity: 0.65;
     }
 
-/* Standardized, synchronized project card design system across all cards */
+/* Project card system */
 .project-card-item {
   border-radius: 1.5rem !important;
   padding: 1.25rem !important;

@@ -6,7 +6,7 @@ export const ROUTES = {
   work: "/work",
 };
 
-/** Legacy static-file URLs -> router paths. */
+/* Legacy routes */
 export const LEGACY_PAGES = {
   "index.html": ROUTES.home,
   "projects.html": ROUTES.projects,
@@ -15,10 +15,6 @@ export const LEGACY_PAGES = {
   "work.html": ROUTES.work,
 };
 
-/**
- * Pages are styled by different Tailwind (Play CDN) configurations. Navigating between
- * groups does a full document load so the right configuration is always compiled.
- */
 export const TAILWIND_GROUP = {
   [ROUTES.home]: "home",
   [ROUTES.projects]: "listing",

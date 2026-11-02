@@ -1,4 +1,4 @@
-/** Project-category filter used by the AI/ML page (and shared by the projects index). */
+/* AI/ML behavior */
 export function showProjectCategory(category) {
   document.querySelectorAll('[data-project-panel]').forEach((panel) => {
     panel.style.display = panel.dataset.projectPanel === category

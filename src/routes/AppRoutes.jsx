@@ -4,7 +4,6 @@ import HomePage from "../pages/home/HomePage.jsx";
 import WorkPage from "../pages/work/WorkPage.jsx";
 import { LEGACY_PAGES, ROUTES } from "./paths.js";
 
-/** Old `*.html` URLs keep working by redirecting to the matching route. */
 function LegacyRedirect({ to }) {
   const { search, hash } = useLocation();
   return <Navigate to={`${to}${search}${hash}`} replace />;

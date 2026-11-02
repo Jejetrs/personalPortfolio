@@ -11,14 +11,8 @@ export default function AboutPart1Part1() {
   return (
     <div className="hx-grid">
       <div className="hx-copy">
-        <p className="hx-eyebrow">
-          <span className="hx-dot" aria-hidden="true" />
-          Open to opportunities · Bekasi, Indonesia
-        </p>
         <h1 className="hx-title">
-          Jessica
-          <br />
-          Theresia<em>.</em>
+          Jessica Theresia<em>.</em>
         </h1>
         <p className="hx-roles">
           <span className="hx-role hot">UI/UX Designer</span>
@@ -26,7 +20,7 @@ export default function AboutPart1Part1() {
           <span className="hx-role">Digital Product Development</span>
         </p>
         <p className="hx-lead">
-          I enjoy understanding real problems and turning ideas into <strong>human-centered digital products</strong>. With
+          I enjoy understanding problems and turning ideas into <strong><span className="hx-highlight">human-centered</span> digital products</strong>. With
           experience in <strong>research and analysis, UI/UX design, AI/ML, and full-stack development</strong>, I bring together
           user needs, business goals, and technical understanding to design, build, and improve meaningful solutions through
           hands-on work and team collaboration.
@@ -54,11 +48,14 @@ export default function AboutPart1Part1() {
         </div>
       </div>
       <div className="hx-visual">
-        <div className="hx-block" aria-hidden="true" />
-        <div className="hx-ring" aria-hidden="true" />
+        <div className="hx-backdrop" aria-hidden="true" />
         <div className="hx-photo">
           <img alt="Jessica Theresia" src="/assets/Photo%20Profile.png" />
         </div>
+        <p className="hx-status-tag">
+          <span className="hx-dot" aria-hidden="true" />
+          Open to opportunities · Bekasi, Indonesia
+        </p>
         {FLOATERS.map(([big, small], index) => (
           <div className={`hx-float f${index + 1}`} key={big}>
             <b>{big}</b>

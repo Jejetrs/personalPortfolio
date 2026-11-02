@@ -52,6 +52,7 @@ export default function BookshelfApiProjectCard() {
 .bk .bk-controls{display:flex;align-items:center;gap:8px}.bk .bk-controls button{border:1px solid #d1fae5;background:#fff;color:#006e4b;border-radius:8px;padding:4px 12px;font-size:13px;cursor:pointer}.bk .bk-controls button:disabled{opacity:.35;cursor:default}.bk .bk-controls span{font:10px ui-monospace,Menlo,monospace;color:#94a3b8}
 .bk .bk-track{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 1px 4px}
 .bk .bk-slide{flex:0 0 calc((100% - 20px)/3);scroll-snap-align:start;margin:0;border:1px solid #d1fae5;border-radius:12px;overflow:hidden;background:#fff;min-width:0}
+.bk .bk-slide>img{display:block;width:100%;aspect-ratio:16/9;height:auto;object-fit:cover;background:#f7fefb;border-bottom:1px solid #d1fae5}
 .bk .bk-ph{height:112px;display:grid;place-content:center;text-align:center;background:repeating-linear-gradient(135deg,#ecfdf5 0 12px,#f7fefb 12px 24px);color:#6b9e8c;font-size:10px;font-weight:700;border-bottom:1px solid #d1fae5}.bk .bk-ph em{font-style:normal;font-size:22px}
 .bk .bk-slide figcaption{padding:9px 10px}.bk .bk-slide figcaption strong{display:block;font-size:10px;font-weight:700;color:#334155}.bk .bk-slide figcaption span{display:block;font-size:9px;color:#94a3b8;margin-top:3px}
 .bk .bk-detail{margin-top:.75rem}
@@ -339,10 +340,10 @@ export default function BookshelfApiProjectCard() {
           <div className="bk-gallery-top">
             <div>
               <h3>
-                ▧ Original Running Project Output
+                ▧ Bookshelf API Test Screenshots
               </h3>
               <p>
-                Replace these slots with real screenshots from your running API, such as Postman requests and terminal output.
+                Postman test overview and examples for creating, reading, updating, and deleting books.
               </p>
             </div>
             <div className="bk-controls">
@@ -350,7 +351,7 @@ export default function BookshelfApiProjectCard() {
                 ←
               </button>
               <span data-gal-counter="">
-                1 / 3
+                1 / 5
               </span>
               <button type="button" data-gal-next="" aria-label="Next screenshot">
                 →
@@ -359,50 +360,57 @@ export default function BookshelfApiProjectCard() {
           </div>
           <div className="bk-track" data-gal-track="">
             <figure className="bk-slide">
-              <div className="bk-ph">
-                <em>
-                  ▧
-                </em>
-                ADD SCREENSHOT 01
-              </div>
+              <div className="bk-ph"><em>▧</em>ADD SCREENSHOT 01</div>
               <figcaption>
                 <strong>
-                  Create Book
+                  Collection run · Bookshelf API Test
                 </strong>
                 <span>
-                  POST /books · HTTP 201 response
+                  104 tests passed, 0 failed, 5 ms average response
                 </span>
               </figcaption>
             </figure>
             <figure className="bk-slide">
-              <div className="bk-ph">
-                <em>
-                  ▧
-                </em>
-                ADD SCREENSHOT 02
-              </div>
+              <div className="bk-ph"><em>▧</em>ADD SCREENSHOT 02</div>
               <figcaption>
                 <strong>
-                  {"Search & Filter"}
+                  POST /books · Add book
                 </strong>
                 <span>
-                  GET /books?reading=1 or ?finished=0
+                  201 Created, response returns the new bookId
                 </span>
               </figcaption>
             </figure>
             <figure className="bk-slide">
-              <div className="bk-ph">
-                <em>
-                  ▧
-                </em>
-                ADD SCREENSHOT 03
-              </div>
+              <div className="bk-ph"><em>▧</em>ADD SCREENSHOT 03</div>
               <figcaption>
                 <strong>
-                  API Runtime
+                  GET /books/:id · Book detail
                 </strong>
                 <span>
-                  Terminal, routes, or Postman test execution
+                  200, full book object with id, name, author and reading progress
+                </span>
+              </figcaption>
+            </figure>
+            <figure className="bk-slide">
+              <div className="bk-ph"><em>▧</em>ADD SCREENSHOT 04</div>
+              <figcaption>
+                <strong>
+                  PUT /books/:id · Update book
+                </strong>
+                <span>
+                  200 on a valid update; 400 when the name is missing
+                </span>
+              </figcaption>
+            </figure>
+            <figure className="bk-slide">
+              <div className="bk-ph"><em>▧</em>ADD SCREENSHOT 05</div>
+              <figcaption>
+                <strong>
+                  DELETE /books/:id · Delete book
+                </strong>
+                <span>
+                  200, then the deleted book is no longer found
                 </span>
               </figcaption>
             </figure>

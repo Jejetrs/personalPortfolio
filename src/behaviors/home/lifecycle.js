@@ -1,7 +1,3 @@
-/**
- * Tracks everything an imperative behaviour module attaches outside of React's tree
- * (global listeners, nodes appended to <body>, observers, timers) so it can be undone on unmount.
- */
 export function createScope() {
   const disposers = [];
   return {

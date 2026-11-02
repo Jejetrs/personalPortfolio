@@ -47,7 +47,7 @@ export default function NuscaDeveloperProjectCard() {
 .nu a:focus-visible,.nu button:focus-visible,.nu summary:focus-visible,.nu input:focus-visible{outline:3px solid #68d0a8;outline-offset:2px}
 @media(max-width:1050px){.nu .nu-grid{grid-template-columns:minmax(0,1fr)}.nu .nu-slide{flex-basis:calc((100% - 10px)/2)}}
 
-/* previous dark grading lab */
+/* Grading lab */
 .nu .nu-gl{margin:0}
 .nu .nu-gl{background:linear-gradient(160deg,#0f4a38 0%,#0c2a21 62%,#08201a 100%);border:1px solid #1f6b52;border-radius:20px;padding:12px 14px 10px;color:#e6f6ef;box-shadow:0 18px 44px rgba(6,60,44,.3)}
 .nu .nu-gl-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px}
@@ -84,7 +84,7 @@ export default function NuscaDeveloperProjectCard() {
 .nu .nu-gl-note{margin-top:6px;font-size:10.5px;color:#9cc9b6}
 @media (max-width:900px){.nu .nu-gl-out{grid-template-columns:repeat(3,minmax(0,1fr))}.nu .nu-final{grid-column:1/-1}.nu .nu-paths{grid-template-columns:minmax(0,1fr)}.nu .nu-paths>.h{display:none}.nu .nu-paths>b{background:var(--soft);border-top:1px solid var(--bd)}.nu .nu-paths>code{margin:4px 11px 0}.nu .nu-paths>span{padding-top:2px}.nu .nu-gotos{grid-template-columns:1fr}}
 
-/* ===== harmonised with UI/UX + AI/ML cards (typography, spacing, radii, dropdown) ===== */
+/* Developer card */
 .nu.project-card-item{padding:1.25rem!important;border:1px solid #a7f3d0cc!important;border-radius:1.5rem!important;background:linear-gradient(135deg,#f0fdf4,#ecfdf5 50%,#e6fcf1)!important;box-shadow:0 1px 2px rgba(0,0,0,.05)!important}
 @media(min-width:640px){.nu.project-card-item{padding:1.5rem!important}}
 .nu{color:#0f172a;font-size:12px;line-height:1.5}
@@ -108,7 +108,7 @@ export default function NuscaDeveloperProjectCard() {
 .nu .nu-gallery-top p{font-size:9.5px;color:#94a3b8}
 .nu .nu-slide{border:1px solid #d1fae5;border-radius:12px}.nu .nu-slide figcaption strong{font-size:10px;font-weight:700;color:#334155}.nu .nu-slide figcaption span{font-size:9px;color:#94a3b8}
 .nu .nu-controls button{border-color:#d1fae5;background:#fff;color:#006e4b;border-radius:8px}.nu .nu-controls span{font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#94a3b8}
-/* dropdown = UI/UX accordion button */
+/* Process dropdown */
 .nu .nu-detail{margin-top:.75rem}
 .nu .nu-detail summary{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 14px;border-radius:12px;background:#ffffffcc;border:1px solid #d1fae5;box-shadow:0 1px 2px rgba(0,0,0,.05);font-size:12px;font-weight:700;letter-spacing:-.025em;color:#1e293b;transition:background .2s}
 .nu .nu-detail summary:hover{background:#fff;color:#006e4b}

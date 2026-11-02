@@ -1,4 +1,4 @@
-/* Mobile layout (<= 640px): compact spacing and continuous sections */
+/* Mobile layout */
 @media (max-width: 640px) {
   html body {
     --m-gutter: 16px;
@@ -13,7 +13,7 @@
     padding: 4px 6px !important;
     gap: 6px !important;
   }
-  html body header.portfolio-navbar > div:first-child > a:first-child span {
+  html body header.portfolio-navbar > div:first-child > a:first-child span:not(.portfolio-brand-mark) {
     display: none;
   }
   html body header.portfolio-navbar nav {
@@ -26,7 +26,7 @@
     padding: 6px 8px;
   }
 
-  /* Section rhythm: one continuous page, thin dividers instead of big gaps */
+  /* Section spacing */
   html body main > section {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
@@ -48,6 +48,9 @@
   html body main h1 {
     font-size: 2.1rem !important;
     line-height: 1.1 !important;
+  }
+  html body main .hx-title {
+    font-size: clamp(1.8rem, 8vw, 3rem) !important;
   }
   html body main section h2 {
     font-size: 1.75rem !important;
@@ -81,7 +84,7 @@
     line-height: 1.5 !important;
   }
 
-  /* Event cards: single column */
+  /* Event cards */
   html body #last-events-gallery [aria-label='Event stories'] {
     grid-template-columns: 1fr 1fr !important;
     gap: 0.625rem !important;
@@ -107,7 +110,7 @@
     font-size: 1.05rem !important;
   }
 
-  /* Skills pathway: reset the desktop centring so the timeline stays inside the screen */
+  /* Skills pathway */
   html body #pathway-track .pathway-node {
     translate: none !important;
     margin: 0 !important;
@@ -125,7 +128,7 @@
     padding-bottom: 2rem !important;
   }
 
-  /* Hero portrait: shorter card */
+  /* Hero portrait */
   html body .about-hero-section [class*='aspect-'] {
     max-height: 18rem;
   }
@@ -147,7 +150,7 @@
     line-height: 1.5 !important;
   }
 
-  /* Category tabs: one swipeable row */
+  /* Category tabs */
   html body #about-project-categories {
     flex-wrap: nowrap !important;
     overflow-x: auto;
@@ -161,7 +164,7 @@
     white-space: nowrap;
   }
 
-  /* Project cards: tighter padding and radius */
+  /* Project cards */
   html body main article,
   html body main section > article {
     border-radius: 1rem;
@@ -184,7 +187,7 @@
     padding-bottom: 1.25rem !important;
   }
 
-  /* Action buttons wrap instead of overflowing */
+  /* Action button wrapping */
   html body main .flex:has(> a + a),
   html body main .flex:has(> button + a),
   html body main .flex:has(> a + button) {
