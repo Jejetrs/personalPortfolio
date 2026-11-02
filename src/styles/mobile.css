@@ -16,6 +16,9 @@
   html body header.portfolio-navbar > div:first-child > a:first-child span:not(.portfolio-brand-mark) {
     display: none;
   }
+  html body header.portfolio-navbar .portfolio-brand-mark > span[aria-hidden="true"] {
+    display: none !important;
+  }
   html body header.portfolio-navbar nav {
     flex: 1;
     justify-content: flex-end;
