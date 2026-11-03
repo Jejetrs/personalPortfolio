@@ -73,6 +73,7 @@ export const PROJECT_ASSETS = {
     image("AI ML Engineer/Skin Type Classification/Result.jpg", "Classification result"),
   ],
   "smart-focus-alert-card-2": [
+    image("UI UX/smart focus alert/Desain Mockup Portfolio.jpg", "Smart Focus Alert portfolio design mockup"),
     image("AI ML Engineer/Smart Focus Alert/Deteksi no Person Full.webp", "No-person detection"),
     image("AI ML Engineer/Smart Focus Alert/Renew Jessica Theresia_MLAI Engineer.webp", "AI engineer output"),
     image("AI ML Engineer/Smart Focus Alert/Result Page.webp", "Result page"),
@@ -126,6 +127,7 @@ export const PROJECT_ASSETS = {
     image("UI UX/nusca/Nusca-Flowchart.webp", "Nusca flowchart"),
   ],
   "smart-focus-alert-card-1": [
+    image("UI UX/smart focus alert/Desain Mockup Portfolio.jpg", "Smart Focus Alert portfolio design mockup"),
     image("UI UX/smart focus alert/Mockup.webp", "Smart Focus Alert mockup"),
     image("UI UX/smart focus alert/Empathy Map.jpg", "Empathy map"),
     image("UI UX/smart focus alert/Flowchart.webp", "Detection flowchart"),
@@ -149,6 +151,7 @@ export const PROJECT_ASSETS = {
     image("AI ML Engineer/Smart Focus Alert/Deteksi no Person Full.webp", "No-person detection"),
     image("AI ML Engineer/Smart Focus Alert/Result Page.webp", "Result page"),
     image("AI ML Engineer/Smart Focus Alert/Sample PDF Report Live.webp", "PDF report preview"),
+    image("UI UX/smart focus alert/Desain Mockup Portfolio.jpg", "Smart Focus Alert portfolio design mockup"),
   ],
   "leadsight-project-card": [
     image("Developer/Leadsight.webp", "LeadSight dashboard"),

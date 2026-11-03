@@ -483,7 +483,7 @@ export default function SmartFocusAlertDeveloperCard() {
                 ←
               </button>
               <span data-gal-counter="">
-                1 / 5
+                1 / 6
               </span>
               <button aria-label="Next screenshot" data-gal-next="" type="button">
                 →
@@ -623,6 +623,19 @@ export default function SmartFocusAlertDeveloperCard() {
                 </strong>
                 <span>
                   Sample PDF report from a live session.
+                </span>
+              </figcaption>
+            </figure>
+            <figure className="sf-gal-slide">
+              <button type="button" className="sf-gal-open" data-gal-open="" aria-label="Enlarge: Portfolio design mockup">
+                <img alt="Portfolio design mockup" loading="lazy" src="/assets/projects/UI%20UX/smart%20focus%20alert/Desain%20Mockup%20Portfolio.jpg" />
+              </button>
+              <figcaption>
+                <strong>
+                  Portfolio design mockup
+                </strong>
+                <span>
+                  Smart Focus Alert portfolio design mockup.
                 </span>
               </figcaption>
             </figure>

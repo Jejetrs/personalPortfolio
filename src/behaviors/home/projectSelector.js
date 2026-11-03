@@ -66,7 +66,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       analytics: 'Business Analytics',
       team: 'Project Management & Leadership',
       uiux: 'UI/UX Design',
-      aiml: 'AI Engineering',
+      aiml: 'ML/AI Engineering',
       developer: 'Developer'
     };
     const categoryDescriptions = {
