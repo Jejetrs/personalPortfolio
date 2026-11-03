@@ -325,8 +325,15 @@ html body .hx-title {
   margin: clamp(1.5rem, 3vw, 2.5rem) 0;
   padding: clamp(2.4rem, 6vw, 4.5rem) clamp(1.2rem, 4vw, 3.5rem);
   border-radius: clamp(1.6rem, 4vw, 3rem);
-  background: linear-gradient(135deg, #2125b8 0%, #3552e8 55%, #4a78ff 100%);
   color: #fff;
+}
+#experience #interactive-pathway-container,
+.sb {
+  border: 1px solid #6d5cff;
+  background:
+    radial-gradient(ellipse at 100% 100%, rgba(36, 143, 255, 0.9), transparent 38%),
+    linear-gradient(115deg, #151a3b 0%, #211344 70%, #25125a 100%);
+  box-shadow: 0 12px 36px rgba(18, 19, 53, 0.22), 0 0 0 1px rgba(109, 92, 255, 0.22);
 }
 .sb-glow {
   position: absolute;
@@ -335,8 +342,8 @@ html body .hx-title {
   pointer-events: none;
   animation: sbFloat 18s ease-in-out infinite;
 }
-.sb-glow.g1 { top: -8rem; right: -6rem; width: 26rem; height: 26rem; background: rgba(255, 74, 61, 0.35); }
-.sb-glow.g2 { bottom: -10rem; left: -8rem; width: 28rem; height: 28rem; background: rgba(120, 220, 255, 0.3); animation-delay: -8s; }
+.sb-glow.g1 { top: -8rem; right: -6rem; width: 26rem; height: 26rem; background: rgba(99, 82, 255, 0.28); }
+.sb-glow.g2 { right: -8rem; bottom: -10rem; width: 28rem; height: 28rem; background: rgba(36, 143, 255, 0.3); animation-delay: -8s; }
 @keyframes sbFloat {
   0%, 100% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(30px, -24px) scale(1.15); }
@@ -348,7 +355,7 @@ html body .hx-title {
   padding: 0;
 }
 .sb-kicker {
-  color: #cfe0ff;
+  color: #43e2f1;
   font-size: 0.64rem;
 }
 .sb-head h2 {
@@ -364,7 +371,7 @@ html body .hx-title {
   line-height: 1.55;
 }
 .sb-head h2 em {
-  color: #ffd4cf;
+  color: #43e2f1;
 }
 .sb-track {
   display: grid;
@@ -407,7 +414,8 @@ html body .hx-title {
 .sb-verb {
   padding: 0.3rem 0.7rem;
   border-radius: 99px;
-  background: var(--rf-coral);
+  background: rgba(67, 226, 241, 0.16);
+  color: #43e2f1;
   font: 700 0.68rem/1 "JetBrains Mono", monospace;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -440,7 +448,7 @@ html body .hx-title {
 }
 .sb-foot i {
   font-style: normal;
-  color: #ffd4cf;
+  color: #43e2f1;
 }
 .sb-foot small {
   flex-basis: 100%;
@@ -813,8 +821,12 @@ html body .about-project-category[aria-pressed="true"] {
   position: relative;
   overflow: hidden;
   padding: clamp(1.4rem, 4vw, 2.4rem);
-  border-radius: 2rem;
-  background: linear-gradient(135deg, #2125b8 0%, #3552e8 60%, #4a78ff 100%);
+  border-radius: clamp(1.6rem, 4vw, 3rem);
+  border: 1px solid #6d5cff;
+  background:
+    radial-gradient(ellipse at 100% 100%, rgba(36, 143, 255, 0.9), transparent 38%),
+    linear-gradient(115deg, #151a3b 0%, #211344 70%, #25125a 100%);
+  box-shadow: 0 12px 36px rgba(18, 19, 53, 0.22), 0 0 0 1px rgba(109, 92, 255, 0.22);
   color: #fff;
 }
 .wk-intro::before {
@@ -825,16 +837,19 @@ html body .about-project-category[aria-pressed="true"] {
   width: 22rem;
   height: 22rem;
   border-radius: 50%;
-  background: rgba(255, 74, 61, 0.4);
+  background: rgba(99, 82, 255, 0.28);
   filter: blur(60px);
   animation: sbFloat 16s ease-in-out infinite;
 }
 .wk-intro > * {
   position: relative;
 }
-.wk-kicker {
-  color: #cfe0ff;
+.wk-intro > .wk-kicker {
+  color: #43e2f1;
   font-size: 0.64rem;
+}
+.wk-kicker span {
+  background: #43e2f1;
 }
 .wk-intro h1 {
   max-width: 46rem;
@@ -846,7 +861,7 @@ html body .about-project-category[aria-pressed="true"] {
   color: #fff;
 }
 .wk-intro h1 em {
-  color: #ffd4cf;
+  color: #43e2f1;
 }
 .wk-intro > p {
   max-width: 40rem;
@@ -983,19 +998,8 @@ html body main .sb-card h3 { font-size: 1.08rem !important; line-height: 1.25 !i
 html body main .pr-step h3 { font-size: 1.05rem !important; line-height: 1.25 !important; letter-spacing: -0.01em !important; }
 html body main .hx-pillar h3 { font-size: 1.02rem !important; letter-spacing: -0.01em !important; }
 html body main .hx-title em, html body main .pj-title em, html body main .pr-head h2 em, html body main .ct-copy h2 em { color: var(--rf-coral) !important; }
-html body main .sb-head h2 em, html body main .wk-intro h1 em { color: #ffd4cf !important; }
-
-/* ── UX process dropdown ───────────────────────────── */
-.ux-dd{border:1px solid rgba(30,41,59,.12);border-radius:14px;background:rgba(255,255,255,.82)}
-.ux-dd-summary{display:flex;align-items:center;gap:.6rem;padding:.6rem .85rem;cursor:pointer;list-style:none;font-size:11px;user-select:none}
-.ux-dd-summary::-webkit-details-marker{display:none}
-.ux-dd-title{font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#1e293b}
-.ux-dd-meta{flex:1;min-width:0;color:#64748b;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ux-dd-chevron{width:16px;height:16px;margin-left:auto;color:#64748b;transition:transform .25s}
-.ux-dd[open] .ux-dd-chevron{transform:rotate(180deg)}
-.ux-dd-summary:hover .ux-dd-title{color:var(--rf-coral,#ff4a3d)}
-.ux-dd-summary:focus-visible{outline:2px solid var(--rf-coral,#ff4a3d);outline-offset:2px;border-radius:14px}
-.ux-dd-body{padding:.2rem .85rem .85rem}
+html body main .sb-head h2 em { color: #43e2f1 !important; }
+html body main .wk-intro h1 em { color: #43e2f1 !important; }
 
 /* ── process: design lane vs engineering lane ──────── */
 .pr-legend{display:flex;gap:.9rem;margin:1.2rem 0 0;font:700 .66rem/1 "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--rf-mute)}

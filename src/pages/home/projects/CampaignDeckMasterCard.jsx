@@ -1,7 +1,5 @@
 import { goToSlide, nextSlide, prevSlide, toggleAccordion } from '@/behaviors/home/projectHandlers.js';
 
-import UxDropdown from './UxDropdown.jsx';
-
 export default function CampaignDeckMasterCard() {
   return (
       <article className="rounded-2xl bg-gradient-to-b from-[#fff8f6] via-[#fffaf7] to-[#fff3f0] border border-rose-200/70 shadow-sm relative overflow-hidden project-card-item p-4 sm:p-5 space-y-3.5" data-category="b2b web uiux" id="campaign-deck-master-card" data-live-url="">
@@ -229,7 +227,7 @@ export default function CampaignDeckMasterCard() {
             <div id="campaign-deck-accordion" className="case-study-accordion-content">
               <div className="case-study-accordion-inner">
                 <div className="pt-3 space-y-2">
-                  <UxDropdown title="UX process" meta="Discovery to validated enterprise interface"><div className="grid grid-cols-2 lg:grid-cols-4 gap-1.5">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-1.5">
                     <div className="p-2 rounded-xl bg-white border border-rose-100 shadow-xs flex flex-col justify-between hover:border-rose-300 transition-colors">
                       <div className="flex items-center gap-1.5 mb-0.5">
                         <span className="w-4 h-4 rounded-full bg-rose-600 text-white text-[9px] font-bold flex items-center justify-center flex-shrink-0">
@@ -282,7 +280,7 @@ export default function CampaignDeckMasterCard() {
                         Structured end-to-end messaging broadcast flow.
                       </p>
                     </div>
-                  </div></UxDropdown>
+                  </div>
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 pt-1">
                     <div className="p-3.5 rounded-2xl bg-white border border-rose-100 shadow-xs flex flex-col justify-between space-y-3">
                       <div className="space-y-2.5">

@@ -142,6 +142,8 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
 
   function organizeProjectOverviewDetails() {
     document.querySelectorAll('.project-card-item .case-study-accordion-content').forEach((caseStudy) => {
+      if (caseStudy.hasAttribute('data-preserve-case-study')) return;
+
       const content = caseStudy.querySelector('.case-study-accordion-inner');
       if (!content) return;
 
@@ -389,13 +391,6 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
           researchOverview.remove();
         }
 
-        if (evidenceContent) {
-          const evidenceCards = Array.from(evidenceContent.children)
-            .flatMap((section) => Array.from(section.children));
-          evidenceCards.forEach((evidenceCard) => evidenceCard.classList.remove('md:col-span-6'));
-          evidenceContent.classList.add('smart-focus-evidence-grid');
-          evidenceContent.replaceChildren(...evidenceCards);
-        }
       }
 
       if (card.id === 'campaign-deck-master-card') {
@@ -472,6 +467,8 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         button.className = 'project-dropdown-toggle nusca-process-toggle';
         return;
       }
+
+      if (button.classList.contains('project-dropdown-toggle')) return;
 
       button.className = 'project-dropdown-toggle';
 

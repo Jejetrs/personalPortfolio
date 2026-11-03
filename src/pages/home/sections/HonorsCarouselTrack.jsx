@@ -323,6 +323,108 @@ export default function HonorsCarouselTrack() {
           </div>
         </div>
       </article>
+      <article aria-label="Fundamental Web Programming, University of Gunadarma, August 2023" data-certificate="/assets/certificate/FUNDAMENTAL%20WEB%20PROGRAMMING.pdf" className="honor-card bg-white rounded-[26px] p-4 border border-slate-200 shadow-[0_8px_32px_rgba(0,0,0,0.08)] flex flex-col justify-between">
+        <div>
+          <h3 className="font-extrabold text-[#131b2e] text-sm sm:text-base text-center leading-tight">
+            Fundamental Web Programming
+          </h3>
+          <p className="text-xs font-semibold text-slate-600 text-center mt-1">
+            - Certificate of Training -
+          </p>
+          <div className="h-36 rounded-2xl bg-gradient-to-br from-cyan-50 via-sky-50 to-blue-100 border border-sky-200 p-0 flex flex-col items-center justify-center text-center mt-4">
+            <span className="text-[10px] font-mono font-bold tracking-widest text-sky-800">
+              UNIVERSITAS GUNADARMA
+            </span>
+            <span className="text-base font-black text-slate-800 mt-3">
+              WEB PROGRAMMING
+            </span>
+            <span className="text-[10px] font-mono text-slate-600 mt-2">
+              AUG 2023
+            </span>
+          </div>
+        </div>
+        <div className="space-y-2 mt-3">
+          <p className="text-[11px] text-slate-600 leading-relaxed">
+            Completed training in fundamental web programming, covering the core concepts used to build websites.
+          </p>
+          <div className="flex items-center justify-between text-[10px] font-mono border-t border-slate-200 pt-2 text-slate-600">
+            <span className="font-bold text-sky-800">
+              GUNADARMA
+            </span>
+            <span>
+              AUG 2023
+            </span>
+          </div>
+        </div>
+      </article>
+      <article aria-label="Data Science Course, First Case, University of Gunadarma, September 2025" data-certificate="/assets/certificate/Datascience%20Case.pdf" className="honor-card bg-white rounded-[26px] p-4 border border-slate-200 shadow-[0_8px_32px_rgba(0,0,0,0.08)] flex flex-col justify-between">
+        <div>
+          <h3 className="font-extrabold text-[#131b2e] text-sm sm:text-base text-center leading-tight">
+            Data Science Course
+          </h3>
+          <p className="text-xs font-semibold text-slate-600 text-center mt-1">
+            - First & Second Case -
+          </p>
+          <div className="h-36 rounded-2xl bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-100 border border-purple-200 p-0 flex flex-col items-center justify-center text-center mt-4">
+            <span className="text-[10px] font-mono font-bold tracking-widest text-purple-800">
+              UNIVERSITAS GUNADARMA
+            </span>
+            <span className="text-base font-black text-slate-800 mt-3">
+              DATA SCIENCE
+            </span>
+            <span className="text-[10px] font-mono text-slate-600 mt-2">
+              SEP 2025
+            </span>
+          </div>
+        </div>
+        <div className="space-y-2 mt-3">
+          <p className="text-[11px] text-slate-600 leading-relaxed">
+            Completed the first and second Data Science course cases, applying data science concepts to practical case studies.
+          </p>
+          <div className="flex items-center justify-between text-[10px] font-mono border-t border-slate-200 pt-2 text-slate-600">
+            <span className="font-bold text-purple-800">
+              GUNADARMA
+            </span>
+            <span>
+              SEP 2025
+            </span>
+          </div>
+        </div>
+      </article>
+      <article aria-label="Go-Lang for Intermediate, University of Gunadarma, February 2025" data-certificate="/assets/certificate/GO-LANG%20FOR%20INTERMEDIATE.pdf" className="honor-card bg-white rounded-[26px] p-4 border border-slate-200 shadow-[0_8px_32px_rgba(0,0,0,0.08)] flex flex-col justify-between">
+        <div>
+          <h3 className="font-extrabold text-[#131b2e] text-sm sm:text-base text-center leading-tight">
+            Go-Lang for Intermediate
+          </h3>
+          <p className="text-xs font-semibold text-slate-600 text-center mt-1">
+            - Certificate of Training -
+          </p>
+          <div className="h-36 rounded-2xl bg-gradient-to-br from-teal-50 via-emerald-50 to-green-100 border border-emerald-200 p-0 flex flex-col items-center justify-center text-center mt-4">
+            <span className="text-[10px] font-mono font-bold tracking-widest text-emerald-800">
+              UNIVERSITAS GUNADARMA
+            </span>
+            <span className="text-base font-black text-slate-800 mt-3">
+              GO · INTERMEDIATE
+            </span>
+            <span className="text-[10px] font-mono text-slate-600 mt-2">
+              FEB 2025
+            </span>
+          </div>
+        </div>
+        <div className="space-y-2 mt-3">
+          <p className="text-[11px] text-slate-600 leading-relaxed">
+            Completed intermediate-level Go programming training, building on core language and programming concepts.
+          </p>
+          <div className="flex items-center justify-between text-[10px] font-mono border-t border-slate-200 pt-2 text-slate-600">
+            <span className="font-bold text-emerald-800">
+              GUNADARMA
+            </span>
+            <span>
+              FEB 2025
+            </span>
+          </div>
+        </div>
+      </article>
     </div>
   );
 }

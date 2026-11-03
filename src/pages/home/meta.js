@@ -1630,15 +1630,6 @@ export const PAGE_CSS = `
   min-width: 0;
   padding: 0.875rem !important;
 }
-#smart-focus-alert-card-1 .smart-focus-evidence-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
-  padding-top: 0.75rem;
-}
-#smart-focus-alert-card-1 .smart-focus-evidence-grid > div {
-  min-width: 0;
-}
 #campaign-deck-master-card .campaign-process-in-dropdown {
   padding: 0.75rem;
   border: 1px solid rgba(251, 207, 232, 0.75);
@@ -1673,9 +1664,6 @@ export const PAGE_CSS = `
   }
   #smart-focus-alert-card-1 .smart-focus-overview-grid {
     grid-template-columns: minmax(0, 1fr) !important;
-  }
-  #smart-focus-alert-card-1 .smart-focus-evidence-grid {
-    grid-template-columns: minmax(0, 1fr);
   }
   #aoshuttle-project-card .aoshuttle-overview-grid {
     grid-template-columns: minmax(0, 1fr) !important;

@@ -77,7 +77,7 @@ export default function SmartFocusAlertCard1() {
                   </div>
                   <div className="text-left">
                     <span className="text-[9px] uppercase font-bold text-slate-400 block leading-tight tracking-wider">
-                      Usability Score
+                      Reported SUS Score
                     </span>
                     <span className="text-xs font-bold text-blue-800">
                       {"87.67 "}
@@ -95,7 +95,7 @@ export default function SmartFocusAlertCard1() {
                   </div>
                   <div className="text-left">
                     <span className="text-[9px] uppercase font-bold text-slate-400 block leading-tight tracking-wider">
-                      Black-box
+                      Functional pass rate
                     </span>
                     <span className="text-xs font-bold text-emerald-700">
                       100%
@@ -277,73 +277,133 @@ export default function SmartFocusAlertCard1() {
                 </div>
                 <div className="flex items-center gap-1.5 text-xs font-semibold text-blue-700">
                   <span className="text-[11px] font-mono uppercase text-slate-400">
-                    {"Wireframes & Insights"}
+                    {"Testing & Research Insights"}
                   </span>
                   <svg className="accordion-chevron w-4 h-4 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                   </svg>
                 </div>
               </button>
-              <div id="smart-focus-accordion" className="case-study-accordion-content">
+              <div id="smart-focus-accordion" className="case-study-accordion-content" data-preserve-case-study="true">
                 <div className="case-study-accordion-inner">
                   <div className="pt-3 grid grid-cols-1 md:grid-cols-12 gap-3 text-xs">
-                    <div className="md:col-span-6 bg-white rounded-xl p-3.5 border border-blue-100/90 shadow-xs space-y-2 flex flex-col">
-                      <div className="flex items-center justify-between">
-                        <h4 className="font-bold uppercase tracking-wider text-[11px] text-slate-900 flex items-center gap-1.5">
-                          <svg className="w-3.5 h-3.5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
-                          </svg>
-                          Sample Wireframe / UI Design
-                        </h4>
-                        <span className="text-[10px] text-slate-400 font-mono">
-                          Figma Architecture
+                    <section aria-label="Smart Focus Alert testing and validation results" className="md:col-span-7 rounded-xl border border-blue-100 bg-white p-3.5 shadow-xs sm:p-4">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                          <h4 className="text-[11px] font-extrabold uppercase tracking-wider text-blue-800">
+                            Testing & validation
+                          </h4>
+                          <p className="mt-0.5 text-[10px] leading-relaxed text-slate-500">
+                            Functional checks answer “does it work?”; usability testing asks “is the experience clear and helpful?”
+                          </p>
+                        </div>
+                        <span className="rounded-full bg-blue-50 px-2.5 py-1 text-[9px] font-semibold text-blue-700">
+                          Prototype evaluation
                         </span>
                       </div>
-                      <div className="rounded-lg bg-slate-50 border border-slate-200/60 flex items-center justify-center overflow-hidden h-full">
-                        <img alt="Smart Focus Alert result page design" className="h-full w-full object-contain" loading="lazy" src="/assets/projects/UI%20UX/smart%20focus%20alert/Result%20Page.webp" />
+
+                      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
+                        <div className="rounded-lg bg-blue-50/80 px-2.5 py-2">
+                          <strong className="block text-sm font-extrabold text-blue-800">87.67 / 100</strong>
+                          <span className="text-[9px] text-slate-500">Reported SUS score</span>
+                        </div>
+                        <div className="rounded-lg bg-blue-50/80 px-2.5 py-2">
+                          <strong className="block text-sm font-extrabold text-blue-800">15</strong>
+                          <span className="text-[9px] text-slate-500">Participants</span>
+                        </div>
+                        <div className="rounded-lg bg-blue-50/80 px-2.5 py-2">
+                          <strong className="block text-sm font-extrabold text-blue-800">10</strong>
+                          <span className="text-[9px] text-slate-500">Questionnaire items</span>
+                        </div>
+                        <div className="rounded-lg bg-emerald-50 px-2.5 py-2">
+                          <strong className="block text-sm font-extrabold text-emerald-800">100%</strong>
+                          <span className="text-[9px] text-slate-500">Documented functional pass rate</span>
+                        </div>
                       </div>
-                    </div>
-                    <div className="md:col-span-6 bg-white rounded-xl p-3.5 border border-blue-100/90 shadow-xs space-y-2">
-                      <div className="flex items-center gap-2.5 mb-2">
-                        <div className="w-8 h-8 rounded-xl bg-blue-100/80 flex items-center justify-center text-blue-700 shadow-xs">
-                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+
+                      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        <div>
+                          <h5 className="text-[10px] font-bold text-slate-700">Usability study</h5>
+                          <p className="mt-1 text-[9px] leading-relaxed text-slate-500">
+                            10 university students, 3 high-school students, and 2 learning companions explored navigation, monitoring, detection, alerts, and reports before answering 10 five-point agreement items.
+                          </p>
+                          <p className="mt-1.5 text-[9px] leading-relaxed text-slate-500">
+                            Topics included navigation clarity, detection feedback, landmark readability, alert timing, text-to-speech, and PDF / recording reports.
+                          </p>
+                        </div>
+                        <div>
+                          <h5 className="text-[10px] font-bold text-slate-700">Functional test coverage · 7 areas</h5>
+                          <div className="mt-1.5 flex flex-wrap gap-1">
+                            <span className="rounded-md bg-slate-50 px-1.5 py-1 text-[9px] text-slate-600">Navigation & responsiveness</span>
+                            <span className="rounded-md bg-slate-50 px-1.5 py-1 text-[9px] text-slate-600">Camera & session controls</span>
+                            <span className="rounded-md bg-slate-50 px-1.5 py-1 text-[9px] text-slate-600">Face / eye landmarks</span>
+                            <span className="rounded-md bg-slate-50 px-1.5 py-1 text-[9px] text-slate-600">Focus & drowsiness alerts</span>
+                            <span className="rounded-md bg-slate-50 px-1.5 py-1 text-[9px] text-slate-600">PDF & recording outputs</span>
+                            <span className="rounded-md bg-slate-50 px-1.5 py-1 text-[9px] text-slate-600">Upload validation</span>
+                            <span className="rounded-md bg-slate-50 px-1.5 py-1 text-[9px] text-slate-600">Upload results & reports</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="mt-3 border-t border-blue-50 pt-2.5">
+                        <div className="mb-1.5 flex flex-wrap items-center justify-between gap-1">
+                          <h5 className="text-[10px] font-bold text-slate-700">Next product questions</h5>
+                          <span className="text-[9px] text-slate-400">Recommended follow-up</span>
+                        </div>
+                        <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-3">
+                          <div className="rounded-lg border border-blue-100 bg-blue-50/40 p-2">
+                            <strong className="block text-[9px] font-extrabold text-blue-800">Alert timing</strong>
+                            <p className="mt-0.5 text-[9px] leading-relaxed text-slate-600">Test thresholds in real study sessions; track usefulness and false alerts.</p>
+                          </div>
+                          <div className="rounded-lg border border-blue-100 bg-blue-50/40 p-2">
+                            <strong className="block text-[9px] font-extrabold text-blue-800">Status comprehension</strong>
+                            <p className="mt-0.5 text-[9px] leading-relaxed text-slate-600">Check whether learners can interpret each focus state.</p>
+                          </div>
+                          <div className="rounded-lg border border-blue-100 bg-blue-50/40 p-2">
+                            <strong className="block text-[9px] font-extrabold text-blue-800">Report usefulness</strong>
+                            <p className="mt-0.5 text-[9px] leading-relaxed text-slate-600">See whether reports help learners and companions reflect on sessions.</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <p className="mt-2.5 text-[9px] leading-relaxed text-slate-400">
+                        The 100% figure is the documented pass rate for tested scenarios, not model accuracy or a guarantee of bug-free behavior. Raw SUS calculations were not provided; confirm the scoring instrument before comparing benchmarks. Item-level results are unavailable, so no individual question is presented as a scored strength or weakness.
+                      </p>
+                    </section>
+
+                    <section aria-label="Smart Focus Alert research and insights" className="md:col-span-5 rounded-xl border border-blue-100 bg-white p-3.5 shadow-xs sm:p-4 space-y-2">
+                      <div className="flex items-center gap-2.5">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-100/80 text-blue-700 shadow-xs">
+                          <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"></path>
                           </svg>
                         </div>
-                        <h4 className="text-sm font-bold text-slate-900 tracking-tight leading-tight">
-                          {"Research & Insights"}
+                        <h4 className="text-sm font-bold leading-tight tracking-tight text-slate-900">
+                          Research & Insights
                         </h4>
                       </div>
                       <div className="relative py-2">
-                        <div className="grid grid-cols-2 gap-3 relative z-10">
-                          <div className="p-3 rounded-2xl bg-rose-50/70 border border-rose-100/70 shadow-xs flex items-center justify-center text-center min-h-[64px]">
-                            <p className="text-xs font-semibold text-slate-700 leading-snug">
-                              Gets distracted easily during online classes
-                            </p>
+                        <div className="relative z-10 grid grid-cols-2 gap-2">
+                          <div className="flex min-h-[64px] items-center justify-center rounded-2xl border border-rose-100/70 bg-rose-50/70 p-3 text-center shadow-xs">
+                            <p className="text-xs font-semibold leading-snug text-slate-700">Gets distracted easily during online classes</p>
                           </div>
-                          <div className="p-3 rounded-2xl bg-blue-50/70 border border-blue-100/70 shadow-xs flex items-center justify-center text-center min-h-[64px]">
-                            <p className="text-xs font-semibold text-slate-700 leading-snug">
-                              Sometimes feels drowsy without noticing
-                            </p>
+                          <div className="flex min-h-[64px] items-center justify-center rounded-2xl border border-blue-100/70 bg-blue-50/70 p-3 text-center shadow-xs">
+                            <p className="text-xs font-semibold leading-snug text-slate-700">Sometimes feels drowsy without noticing</p>
                           </div>
-                          <div className="p-3 rounded-2xl bg-purple-50 border border-purple-200/70 shadow-xs flex items-center justify-center text-center min-h-[64px]">
-                            <p className="text-xs font-semibold text-slate-700 leading-snug">
-                              Wants real-time feedback to stay on track
-                            </p>
+                          <div className="flex min-h-[64px] items-center justify-center rounded-2xl border border-purple-200/70 bg-purple-50 p-3 text-center shadow-xs">
+                            <p className="text-xs font-semibold leading-snug text-slate-700">Wants real-time feedback to stay on track</p>
                           </div>
-                          <div className="p-3 rounded-2xl bg-emerald-50/70 border border-emerald-100/70 shadow-xs flex items-center justify-center text-center min-h-[64px]">
-                            <p className="text-xs font-semibold text-slate-700 leading-snug">
-                              Needs a simple and non-intrusive tool
-                            </p>
+                          <div className="flex min-h-[64px] items-center justify-center rounded-2xl border border-emerald-100/70 bg-emerald-50/70 p-3 text-center shadow-xs">
+                            <p className="text-xs font-semibold leading-snug text-slate-700">Needs a simple and non-intrusive tool</p>
                           </div>
                         </div>
-                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
-                          <div className="w-20 h-20 rounded-full bg-white/95 p-1 shadow-md border border-blue-100/80 flex items-center justify-center">
-                            <div className="w-full h-full rounded-full bg-gradient-to-b from-blue-50 to-indigo-50 flex items-center justify-center overflow-hidden relative">
-                              <svg className="w-14 h-14 translate-y-1" fill="none" viewBox="0 0 100 100">
+                        <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
+                          <div className="flex h-20 w-20 items-center justify-center rounded-full border border-blue-100/80 bg-white/95 p-1 shadow-md">
+                            <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-gradient-to-b from-blue-50 to-indigo-50">
+                              <svg className="h-14 w-14 translate-y-1" fill="none" viewBox="0 0 100 100" aria-hidden="true">
                                 <circle cx="50" cy="50" fill="#EFF6FF" r="48"></circle>
                                 <ellipse cx="50" cy="82" fill="#2563EB" rx="24" ry="16"></ellipse>
-                                <rect fill="FED7AA" height="12" rx="4" width="12" x="44" y="58"></rect>
+                                <rect fill="#FED7AA" height="12" rx="4" width="12" x="44" y="58"></rect>
                                 <circle cx="50" cy="46" fill="#FED7AA" r="16"></circle>
                                 <path d="M34 44 C34 32, 42 26, 52 26 C64 26, 67 33, 67 42 C67 45, 65 48, 63 48 C61 48, 61 44, 57 41 C53 38, 45 40, 42 45 C40 48, 36 50, 34 44 Z" fill="#1E293B"></path>
                                 <circle cx="45" cy="46" fill="#1E293B" r="1.8"></circle>
@@ -354,10 +414,10 @@ export default function SmartFocusAlertCard1() {
                           </div>
                         </div>
                       </div>
-                      <p className="text-xs italic text-slate-500 font-normal pt-1.5 border-t border-slate-100">
+                      <p className="border-t border-slate-100 pt-1.5 text-xs italic font-normal text-slate-500">
                         Insights from user research and empathy mapping.
                       </p>
-                    </div>
+                    </section>
                   </div>
                 </div>
               </div>

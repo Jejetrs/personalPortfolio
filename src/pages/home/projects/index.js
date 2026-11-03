@@ -1,4 +1,5 @@
 import TrusteeBusinessCard from './TrusteeBusinessCard.jsx';
+import LeadsightBusinessAnalysisCard from './LeadsightBusinessAnalysisCard.jsx';
 import PmLeadershipCard from './PmLeadershipCard.jsx';
 import InaprocProjectCard from './InaprocProjectCard.jsx';
 import CampaignDeckMasterCard from './CampaignDeckMasterCard.jsx';
@@ -35,6 +36,14 @@ export const PROJECTS = [
     Card: TrusteeBusinessCard,
   },
   {
+    id: "leadsight-business-analysis-card",
+    category: "analytics",
+    title: "LeadSight — Business Analysis",
+    description: "An ASAH capstone concept for banking sales that combines predictive lead scoring, customer segmentation, and campaign analytics to support more informed outreach planning.",
+    images: ["/assets/projects/Developer/Leadsight.webp"],
+    Card: LeadsightBusinessAnalysisCard,
+  },
+  {
     id: "pm-leadership-card",
     category: "team",
     title: "Project Management & Team Leadership",
@@ -49,14 +58,6 @@ export const PROJECTS = [
     description: "A digital product experience within the INAPROC ecosystem, focusing on design system refinement, component development, and landing page exploration.",
     images: [],
     Card: InaprocProjectCard,
-  },
-  {
-    id: "campaign-deck-master-card",
-    category: "uiux",
-    title: "Campaign Deck Master",
-    description: "Campaign Deck Master is an enterprise messaging campaign web application designed to optimize WhatsApp and Email broadcast communication for businesses, inspired by OCA BLAST by Telkom.",
-    images: [],
-    Card: CampaignDeckMasterCard,
   },
   {
     id: "nusca-project-card-1",
@@ -97,6 +98,14 @@ export const PROJECTS = [
     description: "AiSee is a web-based collaboration platform developed as an extension of AiDorse, offering a more complete set of features and analytics to support scalable partnerships between brands and content creators.",
     images: [],
     Card: AiseeWebsiteCard,
+  },
+  {
+    id: "campaign-deck-master-card",
+    category: "uiux",
+    title: "Campaign Deck Master",
+    description: "Campaign Deck Master is an enterprise messaging campaign web application designed to optimize WhatsApp and Email broadcast communication for businesses, inspired by OCA BLAST by Telkom.",
+    images: [],
+    Card: CampaignDeckMasterCard,
   },
   {
     id: "aoshuttle-project-card",

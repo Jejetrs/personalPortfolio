@@ -183,7 +183,7 @@ export default function TrusteeBusinessCard() {
 #trustee-business-card .tr-lead{margin-bottom:20px;line-height:1.75}
 #trustee-business-card .tr-tagline{margin-bottom:14px}
 #trustee-business-card .tr-role{padding:10px 16px;margin-top:16px}
-#trustee-business-card .tr-stats{gap:14px;margin:20px 0 0}
+#trustee-business-card .tr-stats{gap:14px;margin:-34px clamp(10px,2.4vw,22px) 0}
 #trustee-business-card .tr-stat{padding:14px 18px;gap:12px;box-shadow:0 6px 18px rgba(20,32,63,.06)}
 #trustee-business-card .tr-sec{padding:clamp(32px,4.4vw,52px) 0 0}
 #trustee-business-card .tr-dd .dev-dd-body>.tr-sec:first-child{padding-top:clamp(24px,3vw,36px)}

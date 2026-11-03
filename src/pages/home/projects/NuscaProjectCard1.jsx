@@ -1,7 +1,39 @@
 import PrivateLink from "./PrivateLink.jsx";
 import { goToSlide, nextSlide, prevSlide, toggleAccordion } from '@/behaviors/home/projectHandlers.js';
 
-import UxDropdown from './UxDropdown.jsx';
+const UAT_RATINGS = [
+  ["Perceived usefulness", 4.8],
+  ["Ease of learning", 4.67],
+  ["Decision support", 4.67],
+  ["Visual presentation", 4.6],
+  ["Satisfaction & reuse intent", 4.6],
+  ["Ease of use", 4.53],
+  ["Save / print results", 4.53],
+  ["Information clarity", 4.47],
+  ["Efficiency", 4.4],
+  ["Trust in AI results", 4.27],
+];
+
+const BLACK_BOX_SCENARIOS = [
+  "Valid image upload",
+  "Reject non-images",
+  "Reject files over 5 MB",
+  "Camera capture",
+  "Camera permission denied",
+  "Crop, rotate & zoom",
+  "Confirm & analyze",
+  "Valid nutrition analysis",
+  "Nutri-Level consistency",
+  "Backend disconnection",
+  "Full image view",
+  "Scan another product",
+];
+
+const PRODUCT_OPPORTUNITIES = [
+  ["01 · Trust", "Explain how nutrient values determine the Nutri-Level; let users verify them against the label."],
+  ["02 · Efficiency", "Improve analysis speed and communicate progress while users wait."],
+  ["03 · Continuity", "Explore scan history, clearer GGL guidance, and more visible save/print actions."],
+];
 
 export default function NuscaProjectCard1() {
   return (
@@ -57,29 +89,23 @@ export default function NuscaProjectCard1() {
                     UAT Score
                   </span>
                   <span className="text-xs font-extrabold text-[#006e4b]">
-                    {"4.55 "}
-                    <span className="text-[10px] font-normal text-slate-400">
-                      / 5
-                    </span>
+                    91.07%
                   </span>
                 </div>
                 <div className="rounded-xl border border-emerald-200/70 bg-white/90 px-3.5 py-1.5 text-center shadow-xs backdrop-blur-sm">
                   <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 leading-tight">
-                    Testing
+                    Participants
                   </span>
                   <span className="text-xs font-extrabold text-[#006e4b]">
-                    {"10+ "}
-                    <span className="text-[10px] font-normal text-slate-400">
-                      Users
-                    </span>
+                    15 users
                   </span>
                 </div>
                 <div className="rounded-xl border border-emerald-200/70 bg-white/90 px-3.5 py-1.5 text-center shadow-xs backdrop-blur-sm">
                   <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 leading-tight">
-                    Black-box
+                    Avg. Rating
                   </span>
                   <span className="text-xs font-extrabold text-[#006e4b]">
-                    100%
+                    4.55 / 5
                   </span>
                 </div>
               </div>
@@ -206,7 +232,7 @@ export default function NuscaProjectCard1() {
             </button>
             <div id="nusca-accordion" className="case-study-accordion-content">
               <div className="case-study-accordion-inner">
-                <div className="pt-3"><UxDropdown title="UX process" meta="4 phases · user-centered workflow"><div className="space-y-2.5">
+                <div className="pt-3 space-y-2.5">
                   <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                     <div className="relative space-y-1 rounded-2xl border border-emerald-100 bg-white/95 p-3.5 shadow-xs transition hover:border-emerald-300" style={{ borderRadius: "20px 10px 20px 10px" }}>
                       <div className="flex items-center justify-between">
@@ -266,11 +292,97 @@ export default function NuscaProjectCard1() {
                         Usability Testing
                       </h5>
                       <p className="text-[11px] leading-snug text-slate-500">
-                        Tested with 10+ participants achieving a 4.55 / 5 satisfaction score.
+                        Tested with 15 participants, receiving an average rating of 4.55 / 5.
                       </p>
                     </div>
                   </div>
-                </div></UxDropdown></div>
+                  <section aria-label="Nusca product validation findings" className="rounded-2xl border border-emerald-200/80 bg-white/90 p-3.5 shadow-xs sm:p-4">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <h4 className="text-[11px] font-extrabold uppercase tracking-wider text-[#006e4b]">
+                        Product validation
+                      </h4>
+                      <span className="text-[10px] font-medium text-slate-400">
+                        Prototype evaluation · n=15
+                      </span>
+                    </div>
+                    <p className="mt-1 text-[10px] leading-relaxed text-slate-500">
+                      5 students, 5 homemakers, and 5 employed participants (including one healthcare worker) tried the scan workflow, then rated 10 experience dimensions on a 5-point Likert scale.
+                    </p>
+
+                    <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
+                      <div className="rounded-lg bg-emerald-50 px-2.5 py-2">
+                        <strong className="block text-sm font-extrabold text-[#006e4b]">91.07%</strong>
+                        <span className="text-[9px] leading-tight text-slate-500">Overall UAT questionnaire score</span>
+                      </div>
+                      <div className="rounded-lg bg-emerald-50 px-2.5 py-2">
+                        <strong className="block text-sm font-extrabold text-[#006e4b]">4.55 / 5</strong>
+                        <span className="text-[9px] leading-tight text-slate-500">Average user rating</span>
+                      </div>
+                      <div className="rounded-lg bg-emerald-50 px-2.5 py-2">
+                        <strong className="block text-sm font-extrabold text-[#006e4b]">4.80 / 5</strong>
+                        <span className="text-[9px] leading-tight text-slate-500">Highest: perceived usefulness</span>
+                      </div>
+                      <div className="rounded-lg bg-amber-50 px-2.5 py-2">
+                        <strong className="block text-sm font-extrabold text-amber-700">4.27 / 5</strong>
+                        <span className="text-[9px] leading-tight text-slate-500">Lowest: trust in AI results</span>
+                      </div>
+                    </div>
+
+                    <div className="mt-3">
+                      <div className="mb-1.5 flex items-center justify-between">
+                        <h5 className="text-[10px] font-bold text-slate-700">UAT scores by experience dimension</h5>
+                        <span className="text-[9px] text-slate-400">Mean · / 5</span>
+                      </div>
+                      <div className="grid grid-cols-1 gap-x-4 gap-y-1 sm:grid-cols-2">
+                        {UAT_RATINGS.map(([label, score]) => (
+                          <div className="flex items-center gap-2" key={label}>
+                            <span className="w-36 shrink-0 truncate text-[9px] text-slate-600">{label}</span>
+                            <span className="h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-emerald-50">
+                              <span
+                                className={`block h-full rounded-full ${score <= 4.4 ? 'bg-amber-400' : 'bg-emerald-500'}`}
+                                style={{ width: `${(score / 5) * 100}%` }}
+                              />
+                            </span>
+                            <strong className="w-7 text-right text-[9px] font-bold tabular-nums text-slate-700">{score.toFixed(2)}</strong>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="mt-3 border-t border-emerald-100 pt-2.5">
+                      <div className="mb-1.5 flex flex-wrap items-center justify-between gap-1">
+                        <h5 className="text-[10px] font-bold text-slate-700">Black-box functional coverage</h5>
+                        <span className="text-[9px] text-slate-400">12 scenarios documented · not pass/fail results</span>
+                      </div>
+                      <div className="flex flex-wrap gap-1">
+                        {BLACK_BOX_SCENARIOS.map((scenario, index) => (
+                          <span className="rounded-md bg-slate-50 px-1.5 py-1 text-[9px] leading-tight text-slate-600" key={scenario}>
+                            <strong className="mr-1 text-emerald-700">{String(index + 1).padStart(2, '0')}</strong>{scenario}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="mt-3 border-t border-emerald-100 pt-2.5">
+                      <div className="mb-1.5 flex flex-wrap items-center justify-between gap-1">
+                        <h5 className="text-[10px] font-bold text-slate-700">Product opportunities from feedback</h5>
+                        <span className="text-[9px] text-slate-400">Proposed, not shipped</span>
+                      </div>
+                      <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-3">
+                        {PRODUCT_OPPORTUNITIES.map(([priority, opportunity]) => (
+                          <div className="rounded-lg border border-emerald-100 bg-emerald-50/50 p-2" key={priority}>
+                            <strong className="block text-[9px] font-extrabold uppercase tracking-wide text-emerald-800">{priority}</strong>
+                            <p className="mt-0.5 text-[9px] leading-relaxed text-slate-600">{opportunity}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <p className="mt-2.5 text-[9px] leading-relaxed text-slate-400">
+                      UAT scores reflect this 15-person prototype sample, not population-level adoption, task completion, or model accuracy. The supplied black-box report documents scenarios and expected behavior, but does not include execution outcomes.
+                    </p>
+                  </section>
+                </div>
               </div>
             </div>
           </div>
