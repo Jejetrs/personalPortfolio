@@ -22,7 +22,7 @@ export default function TelkomCtaVault() {
             photo_library
           </span>
           <h3 className="text-body-md font-bold text-on-surface uppercase tracking-wider font-label-kicker">
-            TELKOM DOCUMENTATION VAULT
+            TELKOM DOCUMENTATION
           </h3>
         </div>
         <span className="text-[10px] font-semibold text-on-surface-variant font-label-code">
@@ -44,7 +44,6 @@ export default function TelkomCtaVault() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-on-surface/85 via-transparent to-transparent pointer-events-none"></div>
             <div className="absolute bottom-3 left-4 right-4 z-10 flex items-center justify-between gap-3 text-surface-container-lowest font-label-code text-xs">
-              <span className="min-w-0 truncate font-semibold">{file}</span>
               <span className="shrink-0 rounded-full bg-primary/90 px-2.5 py-1 text-[10px] font-semibold">{title}</span>
             </div>
           </div>

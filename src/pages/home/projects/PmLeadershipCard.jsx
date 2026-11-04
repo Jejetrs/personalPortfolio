@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { startAutoSlideshow } from "@/lib/autoSlideshow.js";
 
 const EV = (folder, file) => `/assets/events/${encodeURIComponent(folder)}/${encodeURIComponent(file)}`;
 const PM_FILE = (file) => `/assets/projects/Project%20Management/${encodeURIComponent(file)}`;
@@ -9,9 +10,11 @@ const TIMELINE_URL = "https://docs.google.com/spreadsheets/d/1leW0-s1cpyUfS_7pGF
 const PROGRAMS = [
   {
     id: "digistar",
-    tab: "Digistar Capstone",
+    number: "01",
+    tab: "Digistar Class Intern",
     role: "Project Management",
-    kicker: "DIGISTAR CAPSTONE · PROJECT MANAGEMENT",
+    tags: ["Marketplace Trust", "Product Management"],
+    kicker: "TRUSTEE - DIGISTAR CLASS INTERN 2026",
     headline: "Keeping the Team Aligned, From Planning to Pitching",
     body:
       "Leading Team 32 meant keeping everyone informed and moving toward the same goal. I used a shared monitoring sheet to organize tasks, track deadlines, and coordinate our progress through mentoring, project discussions, and final pitching.",
@@ -49,9 +52,11 @@ const PROGRAMS = [
   },
   {
     id: "asah",
+    number: "02",
     tab: "ASAH 2026",
     role: "Project Management & Team Leadership",
-    kicker: "PRODUCT SCOPE · PROJECT MANAGEMENT · TECHNICAL DELIVERY",
+    tags: ["Banking & Sales", "Project Management"],
+    kicker: "LEADSIGHT - ASAH 2026",
     headline: "Turning a Sales Problem into a Coordinated Six-Week Build",
     body:
       "LeadSight proposed a predictive lead-scoring portal to help banking sales teams prioritize outreach. As capstone team leader and a front-end contributor, I helped translate the MVP scope into workstreams, dependencies, milestones and delivery preparation.",
@@ -99,9 +104,11 @@ const PROGRAMS = [
   },
   {
     id: "arkavidia",
-    tab: "Arkavidia 9.0",
+    number: "03",
+    tab: "AiDORSE - Arkavidia 9.0",
     role: "Product Management",
-    kicker: "PRODUCT DISCOVERY · MVP PRIORITIZATION · SPRINT COLLABORATION",
+    tags: ["Creator Economy", "Product Management"],
+    kicker: "ARKAVIDIA 9.0",
     headline: "Prioritizing a Product Direction Under a 24-Hour Deadline",
     body:
       "AiDorse was a hackathon concept for helping MSMEs plan creator campaigns. I contributed to early research, translated pain points into proposed features and user flows, and aligned product ideas with the team's technical and presentation constraints.",
@@ -141,57 +148,62 @@ const PROGRAMS = [
   },
 ];
 
-const ARTIFACTS = [
+const ASAH_RESOURCES = [
   { href: TIMELINE_URL, title: "Project timeline", text: "Live Google Sheet · view only", icon: "sheet", tag: "Sheet" },
   { href: PM_FILE("Example project plan.pdf"), title: "Project plan", text: "Scope, milestones and responsibilities", icon: "doc", tag: "PDF" },
 ];
 
 const STYLE = `
-.pmx{--ink:#14284b;--mut:#5f7089;--line:#dbe6f5;--acc:#2a5fb4;--acc2:#7c5cff;position:relative;overflow:hidden;padding:20px;border:1px solid var(--line);border-radius:24px;color:var(--ink);background:linear-gradient(135deg,#fff 0%,#f3f7ff 60%,#f1ecff 100%);font-size:12.5px;line-height:1.5}
+.pmx{--ink:#172033;--mut:#607089;--line:#c9eee0;--acc:#007c56;--acc2:#00805a;--soft:#d8f7e9;--card-start:#f3faf7;--card-mid:#ebf7f2;--card-end:#e4f5ed;position:relative;overflow:hidden;padding:16px;border:1px solid var(--line);border-radius:16px;color:var(--ink);background:linear-gradient(135deg,var(--card-start) 0%,var(--card-mid) 60%,var(--card-end) 100%);font-size:14px;line-height:1.5;box-shadow:0 12px 32px rgba(20,32,63,.06)}
+.pmx.pmx-digistar{--line:#f3d4b2;--acc:#bd641c;--acc2:#d47b2a;--soft:#ffecd8;--card-start:#fffaf4;--card-mid:#fff3e5;--card-end:#ffefd9}
+.pmx.pmx-asah{--line:#dfd2f3;--acc:#7046a8;--acc2:#865ac0;--soft:#eee4fb;--card-start:#fbf8ff;--card-mid:#f4edfc;--card-end:#eee6fa}
+.pmx.pmx-arkavidia{--line:#cbdcf5;--acc:#326ab0;--acc2:#4c83c7;--soft:#e1edfc;--card-start:#f7faff;--card-mid:#edf4fd;--card-end:#e5effc}
 .pmx *{box-sizing:border-box}
-.pmx .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 24px}
-.pmx .eyebrow{margin:0 0 5px;font:700 10.5px/1 "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--acc2)}
-.pmx h2{margin:0;font-size:26px;line-height:1.1;letter-spacing:-.03em;font-weight:800}
-.pmx h2 span{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.pmx .lead{margin:0;max-width:44ch;color:var(--mut);font-size:12.5px}
-.pmx .roles{display:flex;gap:6px;margin:14px 0 0;padding:4px;border:1px solid var(--line);border-radius:14px;background:#ffffffb8}
-.pmx .role{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;padding:8px 12px;text-align:left;font:inherit;color:inherit;cursor:pointer;border:0;border-radius:10px;background:transparent;transition:background .2s,color .2s}
-.pmx .role:hover{background:#eef3fc}
-.pmx .role:focus-visible{outline:3px solid #9fb3d6;outline-offset:1px}
-.pmx .role small{font:700 9.5px/1.2 "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
-.pmx .role b{font-size:13px;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pmx .role[aria-selected=true]{background:var(--ink);color:#fff;box-shadow:0 8px 18px #14284b33}
-.pmx .role[aria-selected=true] small{color:#c4d3ee}
-.pmx .panel{margin-top:14px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:16px;align-items:start;animation:pmxin .35s ease both}
+.pmx .panel{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px;align-items:stretch;animation:pmxin .35s ease both}
 @keyframes pmxin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.pmx .kicker{margin:0 0 4px;font:700 10px/1.3 "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2)}
-.pmx h3{margin:0 0 6px;font-size:19px;line-height:1.2;letter-spacing:-.02em}
-.pmx .body{margin:0;color:#46506a;font-size:12.5px}
-.pmx .stats{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0}
-.pmx .stat{display:flex;align-items:baseline;gap:6px;padding:5px 10px;border-radius:10px;background:#fff;border:1px solid var(--line)}
-.pmx .stat b{font-size:15px;line-height:1.1;color:var(--acc);letter-spacing:-.02em}
-.pmx .stat span{font-size:10.5px;color:var(--mut)}
-.pmx ol.pts{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;counter-reset:p}
-.pmx ol.pts li{counter-increment:p;display:grid;grid-template-columns:22px minmax(0,1fr);column-gap:6px;align-content:start;min-width:0;padding:8px 9px;border:1px solid #dfe7f5;border-left:3px solid var(--acc2);border-radius:5px 10px 10px 5px;background:#ffffffd0}
+.pmx .story{display:flex;grid-column:span 7;min-width:0;flex-direction:column}
+.pmx .project-tags{display:flex;grid-column:1/-1;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:0;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.pmx .project-number{display:inline-flex;align-items:center;justify-content:center;flex:none;width:24px;height:24px;border-radius:50%;background:var(--acc);color:#fff;font-size:12px;font-weight:700}
+.pmx .project-tag{display:inline-flex;align-items:center;min-height:24px;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:#ffffffd9;color:var(--acc);font-size:11px;font-weight:600;line-height:1.4}
+.pmx .project-tag[data-primary=true]{background:var(--soft)}
+.pmx .project-title{margin-top:24px}
+.pmx h3{margin:0;font-size:24px;line-height:1.2;letter-spacing:-.025em;font-weight:700;color:#172033}
+.pmx .kicker{margin:8px 0 0;font-family:inherit;font-size:12px;font-weight:600;line-height:1.4;letter-spacing:.05em;text-transform:uppercase;color:var(--acc)}
+.pmx .body{margin:18px 0 0;color:#40536a;font-size:14px;line-height:1.625}
+.pmx .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:8px;width:100%;margin:14px 0 0}
+.pmx .stat{display:flex;min-width:0;min-height:54px;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:#ffffffd9;text-align:center}
+.pmx .stat b{font-size:14px;line-height:1.2;color:var(--acc);letter-spacing:-.02em}
+.pmx .stat span{font-size:10px;font-weight:700;line-height:1.35;color:#91a4ba;text-transform:uppercase;letter-spacing:.04em}
+.pmx ol.pts{margin:8px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;counter-reset:p}
+.pmx ol.pts li{counter-increment:p;display:grid;grid-template-columns:22px minmax(0,1fr);column-gap:6px;align-content:start;min-width:0;padding:9px 10px;border:1px solid #dfe7f5;border-left:3px solid var(--acc2);border-radius:5px 10px 10px 5px;background:#ffffffd0}
 .pmx ol.pts li::before{content:counter(p,decimal-leading-zero);grid-row:1/3;font:700 10px/1.6 "JetBrains Mono",monospace;color:var(--acc2)}
-.pmx .point-label{display:block;color:#243653;font-size:11px;font-weight:800;line-height:1.3}
-.pmx .point-copy{display:block;margin-top:1px;color:#67738c;font-size:10.5px;line-height:1.4}
-.pmx .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
-.pmx .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:99px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:11px;font-weight:700;text-decoration:none;transition:transform .2s,border-color .2s}
+.pmx .point-label{display:block;color:#243653;font-size:12px;font-weight:700;line-height:1.35}
+.pmx .point-copy{display:block;margin-top:2px;color:#67738c;font-size:12px;line-height:1.45}
+.pmx .chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 0 auto}
+.pmx .chip{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:10px;border:1px solid var(--line);background:#ffffffd9;color:var(--acc);font-size:11px;font-weight:700;text-decoration:none;transition:transform .2s,border-color .2s,background .2s}
 .pmx .chip:hover{transform:translateY(-1px);border-color:#b9c9e6}
-.pmx .chip.solid{background:var(--ink);border-color:var(--ink);color:#fff}
-.pmx .chip em{font:700 9px/1 "JetBrains Mono",monospace;font-style:normal;padding:3px 6px;border-radius:99px;background:#eef3fc;color:var(--acc)}
-.pmx .gal{min-width:0}
-.pmx .feat{position:relative;display:block;width:100%;padding:0;overflow:hidden;cursor:zoom-in;border:1px solid var(--line);border-radius:14px;background:#fff;aspect-ratio:16/10;font:inherit}
-.pmx .feat img{width:100%;height:100%;object-fit:cover;display:block}
-.pmx .feat.contain img{object-fit:contain;background:#fff}
-.pmx .fcap{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;margin:6px 2px 0}.pmx .fcap b{font-size:11.5px}.pmx .fcap span{font-size:10.5px;color:var(--mut)}
-.pmx .thumbs{display:flex;gap:6px;margin-top:6px;overflow-x:auto;padding-bottom:2px}
-.pmx .thumb{flex:1 1 0;max-width:calc((100% - 24px)/5);min-width:54px;aspect-ratio:16/10;padding:0;overflow:hidden;cursor:pointer;border:2px solid transparent;border-radius:8px;background:#e8eefa;opacity:.72;transition:opacity .2s,border-color .2s}
-.pmx .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.pmx .thumb.contain img{object-fit:contain;background:#fff}
-.pmx .thumb:hover{opacity:1}.pmx .thumb[aria-current=true]{opacity:1;border-color:var(--acc2)}
-.pmx .thumb:focus-visible{outline:3px solid #9fb3d6;outline-offset:1px}
+.pmx .chip.solid{background:var(--acc);border-color:var(--acc);color:#fff}
+.pmx .chip em{font:700 9px/1 "JetBrains Mono",monospace;font-style:normal;padding:3px 6px;border-radius:99px;background:var(--soft);color:var(--acc)}
+.pmx .gal{position:relative;display:flex;grid-column:span 5;min-width:0;min-height:0;flex-direction:column;gap:18px;overflow:hidden;padding:18px;border:1px solid #c9e8ff;border-radius:26px;background:#ffffffd9}
+.pmx .gallery-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 2px}
+.pmx .gallery-label{display:flex;align-items:center;gap:7px;min-width:0;color:#607089;font:700 10px/1.3 "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase}
+.pmx .gallery-label::before{content:"";width:7px;height:7px;flex:none;border-radius:50%;background:var(--acc)}
+.pmx .gallery-count{flex:none;padding:4px 10px;border-radius:999px;background:linear-gradient(100deg,var(--acc),var(--acc2));color:#fff;font-size:10px;font-weight:800;line-height:1.2;text-transform:uppercase}
+.pmx .gallery-stage{position:relative;display:flex;flex:1 1 0;align-items:center;justify-content:center;width:100%;min-height:0;padding:14px 18px 64px;overflow:hidden;border-radius:24px;background:radial-gradient(ellipse at 18% 18%,#a9e5f8 0%,transparent 48%),radial-gradient(ellipse at 84% 88%,#d7c4ff 0%,transparent 54%),linear-gradient(135deg,#c8edfb 0%,#edf1ff 54%,#e0d5ff 100%)}
+.pmx .feat{display:flex;flex:1;align-items:center;justify-content:center;width:100%;height:100%;min-width:0;min-height:0;padding:0;overflow:visible;cursor:zoom-in;border:0;border-radius:0;background:transparent;box-shadow:none;font:inherit}
+.pmx .feat img{display:block;width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;border-radius:16px;box-shadow:0 14px 30px #1720331a;animation:pmx-gallery-fade .5s ease-in-out both}
+@keyframes pmx-gallery-fade{from{opacity:0}to{opacity:1}}
+.pmx .gallery-nav{position:absolute;top:50%;display:grid;width:36px;height:36px;padding:0;place-items:center;transform:translateY(-50%);border:1px solid rgba(255,255,255,.55);border-radius:50%;background:rgba(15,23,42,.58);color:#fff;backdrop-filter:blur(8px);box-shadow:0 4px 12px #1720331a;line-height:0;cursor:pointer;transition:background-color .25s ease,opacity .25s ease}
+.pmx .gallery-nav svg{display:block;width:18px;height:18px}
+.pmx .gallery-nav:hover{background:#4f46e5}
+.pmx .gallery-nav:focus-visible,.pmx .gallery-dot:focus-visible{outline:3px solid var(--acc2);outline-offset:2px}
+.pmx .gallery-nav.prev{left:12px}.pmx .gallery-nav.next{right:12px}
+.pmx .gallery-dots{position:absolute;right:0;bottom:14px;left:0;display:flex;justify-content:center;gap:6px;width:max-content;max-width:calc(100% - 24px);margin:auto;padding:5px 8px;border:1px solid #ffffffad;border-radius:999px;background:#ffffffdc;backdrop-filter:blur(8px)}
+.pmx .gallery-dot{width:8px;height:8px;flex:none;padding:0;border:0;border-radius:999px;background:#b8d9ff;cursor:pointer;transition:width .2s,background .2s}
+.pmx .gallery-dot[aria-current=true]{width:20px;background:var(--acc)}
+.pmx .fcap{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 2px;color:var(--mut);font-size:11px;line-height:1.4}
+.pmx .fcap b{overflow:hidden;color:var(--ink);font-size:12px;font-weight:600;text-overflow:ellipsis;white-space:nowrap}
+.pmx .fcap span{flex:none;font:600 10px/1.3 "JetBrains Mono",monospace;letter-spacing:.03em}
 .pmx .dd{margin-top:12px}
 .pmx .dd-btn{display:flex;align-items:center;gap:8px;width:100%;padding:9px 13px;border:1px solid var(--line);border-radius:12px;background:#ffffffcc;color:var(--ink);font:700 12px/1.3 inherit;font-family:inherit;text-align:left;cursor:pointer;transition:background .2s}
 .pmx .dd-btn:hover{background:#fff}
@@ -210,26 +222,30 @@ const STYLE = `
 .pmx .item{padding:7px 9px;border:1px solid #e5e9f5;border-radius:10px;background:#fff}
 .pmx .item b{display:block;margin-bottom:1px;color:var(--ink);font-size:11px}
 .pmx .item span{display:block;color:var(--mut);font-size:10px;line-height:1.4}
-.pmx .note{margin:8px 0 0;padding:7px 10px;border-left:3px solid var(--acc2);border-radius:0 9px 9px 0;background:#f1edff;color:#45526c;font-size:10.5px;line-height:1.45}
-.pmx .note strong{color:#34236b}
-.pmx .tbl-wrap{overflow-x:auto;border:1px solid #e3def7;border-radius:11px;background:#fff}
+.pmx .note{margin:8px 0 0;padding:7px 10px;border-left:3px solid var(--acc2);border-radius:0 9px 9px 0;background:var(--soft);color:#45526c;font-size:10.5px;line-height:1.45}
+.pmx .note strong{color:var(--acc)}
+.pmx .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:11px;background:#fff}
 .pmx table{width:100%;border-collapse:collapse;text-align:left}
-.pmx th,.pmx td{padding:6px 8px;vertical-align:top;border-bottom:1px solid #ece8f7;font-size:10px;line-height:1.4}
-.pmx thead th{background:#f7f4ff;color:var(--acc2);font-size:8.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.pmx th,.pmx td{padding:6px 8px;vertical-align:top;border-bottom:1px solid var(--line);font-size:10px;line-height:1.4}
+.pmx thead th{background:var(--soft);color:var(--acc2);font-size:8.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
 .pmx tbody tr:last-child th,.pmx tbody tr:last-child td{border-bottom:0}
-.pmx tbody th{color:#34236b;font-weight:700}
+.pmx tbody th{color:var(--acc);font-weight:700}
 .pmx tbody th span{display:block;color:var(--acc2);font:800 9px/1.2 "JetBrains Mono",monospace}
-.pmx td{color:#465674}.pmx td:last-child{color:#6f4bce;font-weight:600}
+.pmx td{color:#465674}.pmx td:last-child{color:var(--acc2);font-weight:600}
 .pmx-lb{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(10,14,26,.94);animation:pmxin .25s ease}
 .pmx-lb .stage{flex:1;width:100%;min-height:0;overflow:auto;display:flex;padding:56px 16px 8px}
-.pmx-lb img{margin:auto;max-width:100%;max-height:100%;object-fit:contain;border-radius:10px;cursor:zoom-in}
+.pmx-lb img{margin:auto;max-width:100%;max-height:100%;object-fit:contain;border-radius:10px;cursor:zoom-in;animation:pmx-gallery-fade .5s ease-in-out both}
 .pmx-lb.zoom img{max-width:none;max-height:none;width:min(220%,2400px);cursor:zoom-out}
 .pmx-lb .cap{padding:8px 16px 16px;color:#e8eefc;font:600 13px/1.4 system-ui,sans-serif;text-align:center}
-.pmx-lb button{position:absolute;display:grid;place-items:center;width:42px;height:42px;border:0;border-radius:50%;background:#fff;color:#111;font-size:22px;cursor:pointer}
+.pmx-lb button{position:absolute;display:grid;place-items:center;width:36px;height:36px;padding:0;border:1px solid rgba(255,255,255,.55);border-radius:50%;background:rgba(15,23,42,.58);color:#fff;backdrop-filter:blur(8px);line-height:0;cursor:pointer;transition:background-color .25s ease,opacity .25s ease}
+.pmx-lb .p:hover,.pmx-lb .n:hover{background:#4f46e5}
+.pmx-lb button svg{display:block;width:18px;height:18px}
 .pmx-lb .x{top:12px;right:14px}.pmx-lb .p{left:12px;top:50%}.pmx-lb .n{right:12px;top:50%}
-@media(max-width:900px){.pmx .panel{grid-template-columns:1fr}.pmx .dd-body{grid-template-columns:1fr}.pmx .items.six{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:640px){.pmx{padding:16px;border-radius:20px}.pmx h2{font-size:22px}.pmx .roles{flex-direction:column}.pmx ol.pts,.pmx .items{grid-template-columns:1fr}.pmx .role b{white-space:normal}}
-@media(prefers-reduced-motion:reduce){.pmx .panel{animation:none}}
+@media(min-width:640px){.pmx{padding:20px}.pmx h3{font-size:30px}}
+@media(max-width:1023px){.pmx .panel{grid-template-columns:1fr}.pmx .story,.pmx .gal{grid-column:1}.pmx .gallery-stage{flex:initial;aspect-ratio:1/1}.pmx .feat{height:100%}.pmx .dd-body{grid-template-columns:1fr}.pmx .items.six{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:860px){.pmx .project-tags .chips{flex:1 0 100%;margin-left:0;justify-content:flex-start}}
+@media(max-width:640px){.pmx{padding:16px;border-radius:16px}.pmx h3{font-size:24px}.pmx .project-title{margin-top:18px}.pmx .kicker{font-size:11px}.pmx .body{margin-top:14px;font-size:12px}.pmx .stats{margin-top:12px}.pmx .stat{min-height:50px;padding:7px}.pmx ol.pts,.pmx .items{grid-template-columns:1fr}.pmx .gal{gap:12px;padding:10px;border-radius:20px}.pmx .gallery-stage{padding:10px 12px 48px;border-radius:18px}.pmx .gallery-nav.prev{left:6px}.pmx .gallery-nav.next{right:6px}.pmx .gallery-dots{bottom:10px;gap:5px;padding:4px 7px}.pmx .gallery-dot{width:7px;height:7px}.pmx .gallery-dot[aria-current=true]{width:18px}}
+@media(prefers-reduced-motion:reduce){.pmx .panel,.pmx .feat img,.pmx-lb img{animation:none}}
 `;
 
 function Lightbox({ photos, index, onClose, onMove }) {
@@ -251,14 +267,14 @@ function Lightbox({ photos, index, onClose, onMove }) {
   return createPortal(
     <div className={`pmx-lb${zoom ? " zoom" : ""}`} role="dialog" aria-modal="true" aria-label={photo.title} onClick={onClose}>
       <div className="stage" onClick={onClose}>
-        <img alt={photo.title} src={photo.src} onClick={(event) => { event.stopPropagation(); setZoom((value) => !value); }} />
+        <img key={photo.src} alt={photo.title} src={photo.src} onClick={(event) => { event.stopPropagation(); setZoom((value) => !value); }} />
       </div>
       <div className="cap">{photo.title}{photos.length > 1 ? `  ·  ${index + 1}/${photos.length}` : ""}</div>
-      <button className="x" type="button" aria-label="Close photo" onClick={onClose}>×</button>
+      <button className="x" type="button" aria-label="Close photo" onClick={onClose}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12" /></svg></button>
       {photos.length > 1 && (
         <>
-          <button className="p" type="button" aria-label="Previous photo" onClick={(event) => { event.stopPropagation(); onMove(-1); }}>‹</button>
-          <button className="n" type="button" aria-label="Next photo" onClick={(event) => { event.stopPropagation(); onMove(1); }}>›</button>
+          <button className="p" type="button" aria-label="Previous photo" onClick={(event) => { event.stopPropagation(); onMove(-1); }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></button>
+          <button className="n" type="button" aria-label="Next photo" onClick={(event) => { event.stopPropagation(); onMove(1); }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></button>
         </>
       )}
     </div>,
@@ -352,55 +368,55 @@ function Details({ program }) {
   );
 }
 
-export default function PmLeadershipCard() {
-  const [active, setActive] = useState(PROGRAMS[0].id);
+export default function PmLeadershipCard({ programId = PROGRAMS[0].id }) {
   const [shownIndex, setShownIndex] = useState(0);
   const [open, setOpen] = useState(-1);
-  const program = PROGRAMS.find((item) => item.id === active);
-  const photos = program.photos.map(([folder, file, title, text, fit]) => ({
+  const galleryRef = useRef(null);
+  const program = PROGRAMS.find((item) => item.id === programId) || PROGRAMS[0];
+  const photos = program.photos.map(([folder, file, title, text]) => ({
     src: folder === "Business Analyst" ? BA_FILE(file) : EV(folder, file),
     title,
     text,
-    fit: fit || (folder === "Business Analyst" ? "contain" : ""),
   }));
   const close = useCallback(() => setOpen(-1), []);
   const move = useCallback((step) => setOpen((value) => (value + step + photos.length) % photos.length), [photos.length]);
-  const select = (id) => { setActive(id); setShownIndex(0); };
   const current = photos[Math.min(shownIndex, photos.length - 1)];
+  useEffect(() => {
+    if (photos.length < 2) return undefined;
+    return startAutoSlideshow(galleryRef.current, () => {
+      setShownIndex((index) => (index + 1) % photos.length);
+    });
+  }, [photos.length]);
   const links = [
     ...program.links.map((link) => ({ ...link, solid: true })),
-    ...(program.id === "asah" ? ARTIFACTS.map((file) => ({ href: file.href, label: file.title, tag: file.tag, external: true })) : []),
+    ...(program.id === "asah" ? ASAH_RESOURCES.map((file) => ({ href: file.href, label: file.title, tag: file.tag, external: true })) : []),
   ];
 
   return (
     <>
       <style>{STYLE}</style>
-      <article className="project-card-item pmx" data-category="team leadership" id="pm-leadership-card">
-        <div className="head">
-          <div>
-            <p className="eyebrow">Project management · leadership</p>
-            <h2>
-              How I Keep Projects <span>on Track</span>
-            </h2>
+      <article className={`project-card-item pmx pmx-${program.id}`} data-category="team leadership" id={program.id === "digistar" ? "pm-leadership-card" : `pm-${program.id}-card`}>
+        <div className={`panel panel-${program.id}`}>
+          <div className="project-tags" aria-label="Project number and role">
+            <span className="project-number">{program.number}</span>
+            {(program.tags || [program.role]).map((tag, index) => (
+              <span className="project-tag" key={tag} data-primary={index === 0 ? "true" : undefined}>{tag}</span>
+            ))}
+            {links.length > 0 && (
+              <div className="chips" aria-label="Project links">
+                {links.map((link) => (
+                  <a className={`chip${link.solid ? " solid" : ""}`} key={link.href} href={link.href} {...(link.external ? { target: "_blank", rel: "noreferrer" } : {})}>
+                    {link.label} {link.tag ? <em>{link.tag}</em> : "→"}
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
-          <p className="lead">
-            A closer look at how I plan, coordinate, and support team progress across different projects.
-          </p>
-        </div>
-
-        <div className="roles" role="tablist" aria-label="Management roles">
-          {PROGRAMS.map((item) => (
-            <button key={item.id} type="button" role="tab" className="role" aria-selected={item.id === active} onClick={() => select(item.id)}>
-              <small>{item.tab}</small>
-              <b>{item.role}</b>
-            </button>
-          ))}
-        </div>
-
-        <div className={`panel panel-${program.id}`} key={program.id} role="tabpanel">
           <div className="story">
-            <p className="kicker">{program.kicker}</p>
-            <h3>{program.headline}</h3>
+            <div className="project-title">
+              <h3>{program.headline}</h3>
+              <p className="kicker">{program.kicker}</p>
+            </div>
             <p className="body">{program.body}</p>
             <div className="stats">
               {program.stats.map(([value, label]) => (
@@ -425,30 +441,39 @@ export default function PmLeadershipCard() {
                 );
               })}
             </ol>
-            {links.length > 0 && (
-              <div className="chips">
-                {links.map((link) => (
-                  <a className={`chip${link.solid ? " solid" : ""}`} key={link.href} href={link.href} {...(link.external ? { target: "_blank", rel: "noreferrer" } : {})}>
-                    {link.label} {link.tag ? <em>{link.tag}</em> : "→"}
-                  </a>
-                ))}
-              </div>
-            )}
           </div>
           <div className="gal">
-            <button className={`feat${current.fit === "contain" ? " contain" : ""}`} type="button" onClick={() => setOpen(photos.indexOf(current))} aria-label={`Enlarge ${current.title}`}>
-              <img alt={current.title} src={current.src} />
+            <div className="gallery-head">
+              <span className="gallery-label">Project · {program.tab}</span>
+              <span className="gallery-count">{photos.length} visuals</span>
+            </div>
+            <div className="gallery-stage" ref={galleryRef}>
+              <button className="feat" type="button" onClick={() => setOpen(shownIndex)} aria-label={`Enlarge ${current.title}`}>
+                <img key={current.src} alt={current.title} src={current.src} />
               </button>
-            <p className="fcap"><b>{current.title}</b><span>{current.text}</span></p>
-            {photos.length > 1 && (
-              <div className="thumbs">
-                {photos.map((photo, index) => (
-                  <button className={`thumb${photo.fit === "contain" ? " contain" : ""}`} type="button" key={photo.src} aria-current={index === shownIndex} aria-label={`Show ${photo.title}`} onClick={() => setShownIndex(index)}>
-                    <img alt="" loading="lazy" src={photo.src} />
-                  </button>
-                ))}
-              </div>
-            )}
+              {photos.length > 1 && (
+                <>
+                  <button className="gallery-nav prev" type="button" aria-label="Previous visual" onClick={() => setShownIndex((shownIndex - 1 + photos.length) % photos.length)}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></button>
+                  <button className="gallery-nav next" type="button" aria-label="Next visual" onClick={() => setShownIndex((shownIndex + 1) % photos.length)}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></button>
+                  <div className="gallery-dots" aria-label="Select a visual">
+                    {photos.map((photo, index) => (
+                      <button
+                        key={photo.src}
+                        className="gallery-dot"
+                        type="button"
+                        aria-label={`Show ${photo.title}`}
+                        aria-current={index === shownIndex}
+                        onClick={() => setShownIndex(index)}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+            <p className="fcap">
+              <b title={current.title}>{current.title}</b>
+              <span>Next · {photos[(shownIndex + 1) % photos.length].title} &nbsp; {String(shownIndex + 1).padStart(2, "0")} / {String(photos.length).padStart(2, "0")}</span>
+            </p>
           </div>
         </div>
 

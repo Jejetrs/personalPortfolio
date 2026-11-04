@@ -77,24 +77,28 @@ export default function TrainingLightbox() {
             <span className="training-lightbox-position" id="training-lightbox-position">
               {current ? `${active + 1} / ${photos.length}` : null}
             </span>
-            <button type="button" id="training-lightbox-prev" aria-label="Previous image" onClick={() => step(-1)}>
-              <span aria-hidden="true" style={{ fontSize: "24px", lineHeight: "1" }}>‹</span>
-            </button>
-            <button type="button" id="training-lightbox-next" aria-label="Next image" onClick={() => step(1)}>
-              <span aria-hidden="true" style={{ fontSize: "24px", lineHeight: "1" }}>›</span>
-            </button>
             <button
               type="button"
               id="training-lightbox-close"
               aria-label="Close photo viewer"
               onClick={() => dialogRef.current.close()}
             >
-              <span aria-hidden="true" style={{ fontSize: "23px", lineHeight: "1" }}>×</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12" /></svg>
             </button>
           </div>
         </div>
         <figure className="training-lightbox-figure">
-          <img id="training-lightbox-image" src={current?.src} alt={current?.alt ?? ""} />
+          <img key={current?.src} id="training-lightbox-image" src={current?.src} alt={current?.alt ?? ""} />
+          {photos.length > 1 && (
+            <>
+              <button type="button" className="training-lightbox-nav previous" aria-label="Previous image" onClick={() => step(-1)}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+              </button>
+              <button type="button" className="training-lightbox-nav next" aria-label="Next image" onClick={() => step(1)}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+              </button>
+            </>
+          )}
           <figcaption id="training-lightbox-caption">{current?.caption}</figcaption>
         </figure>
       </div>

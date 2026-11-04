@@ -100,23 +100,10 @@ export default function CompanyPanel3() {
               <span className="material-symbols-outlined text-[16px] text-primary">
                 photo_library
               </span>
-              {"Visual Artifacts & Interactive Screens"}
+              {"LepKom Experience Highlights"}
             </span>
-            <div className="flex items-center gap-1.5">
-              <button className="w-7 h-7 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-all border border-outline-variant/50" data-artifact-direction="-1" type="button" aria-label="Previous visual artifact">
-                <span className="material-symbols-outlined text-[18px]">
-                  arrow_back
-                </span>
-              </button>
-              {" "}
-              <button className="w-7 h-7 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-all border border-outline-variant/50" data-artifact-direction="1" type="button" aria-label="Next visual artifact">
-                <span className="material-symbols-outlined text-[18px]">
-                  arrow_forward
-                </span>
-              </button>
-            </div>
           </div>
-          <div className="flex gap-4 overflow-x-auto pb-3 pt-1 scroll-smooth snap-x snap-mandatory" id="lepkom-artifact-carousel">
+          <div className="flex gap-4 overflow-x-auto pb-3 pt-1 scroll-smooth snap-x snap-mandatory" id="lepkom-experience-carousel">
             <div className="min-w-[340px] md:min-w-[480px] max-w-[500px] flex-shrink-0 snap-start bg-surface-container-low/60 rounded-xl border border-outline-variant/50 overflow-hidden group">
               <div className="aspect-[16/9] w-full overflow-hidden relative">
                 <img alt="LepKom assistant programming instruction" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="/assets/experience/Lepkom%20Gunadarma/Lepkom%20Asisstant.jpg" />

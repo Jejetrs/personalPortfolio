@@ -141,42 +141,44 @@ export default function CompanyPanel2() {
               photo_library
             </span>
             <h3 className="text-body-md font-bold text-on-surface uppercase tracking-wider font-label-kicker">
-              DBS CODING CAMP FACILITATION VAULT
+              DBS CODING CAMP FACILITATION
             </h3>
           </div>
         </div>
-        <div className="flex gap-4 overflow-x-auto pb-3 scroll-smooth snap-x snap-mandatory" id="dbs-documentation-carousel">
+        <div className="relative w-full aspect-[16/9] md:aspect-[21/10] overflow-hidden rounded-xl" id="dbs-documentation-carousel">
           {facilitatorPhotos.map((photo, index) => (
-            <div className="w-full min-w-full flex-shrink-0 snap-start relative aspect-[16/9] md:aspect-[21/10] bg-surface-container rounded-xl border border-outline-variant/50 overflow-hidden shadow-inner group/frame" data-documentation-slide="" key={photo.file}>
-            <img alt={`${photo.title} - Coding Camp Powered by DBS Foundation 2026`} className="w-full h-full object-cover" src={`/assets/experience/Coding%20Camp%202026%20Facilitator/${encodeURIComponent(photo.file).replace(/%2F/g, "/")}`} />
-            <div className="absolute inset-0 z-10 bg-gradient-to-t from-on-surface/85 via-transparent to-transparent pointer-events-none"></div>
-            <div className="absolute bottom-3 left-4 right-4 z-10 flex items-center justify-between gap-3 text-surface-container-lowest font-label-code text-xs">
-              <span className="min-w-0 truncate font-semibold">
-                {photo.file.replace(/\.[^.]+$/, "")}
-              </span>
-              {" "}
-              <span className="shrink-0 max-w-[55%] truncate rounded-full bg-primary/90 px-2.5 py-1 text-[10px] font-semibold">
-                {photo.title}
-              </span>
+            <div
+              className={`dbs-documentation-slide group/frame absolute inset-0 overflow-hidden rounded-xl border border-outline-variant/50 bg-surface-container shadow-inner transition-opacity duration-500 ease-in-out ${index === 0 ? 'z-10 opacity-100' : 'z-0 pointer-events-none opacity-0'}`}
+              data-documentation-slide=""
+              key={photo.file}
+            >
+              <img alt={`${photo.title} - Coding Camp Powered by DBS Foundation 2026`} className="h-full w-full object-cover" src={`/assets/experience/Coding%20Camp%202026%20Facilitator/${encodeURIComponent(photo.file).replace(/%2F/g, "/")}`} />
+              <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-on-surface/85 via-transparent to-transparent"></div>
+              <div className="absolute bottom-3 left-4 right-4 z-10 flex items-center justify-between gap-3 font-label-code text-xs text-surface-container-lowest">
+                <span className="max-w-[55%] shrink-0 truncate rounded-full bg-primary/90 px-2.5 py-1 text-[10px] font-semibold">
+                  {photo.title}
+                </span>
+              </div>
             </div>
-            <button aria-label="Previous documentation image" className="absolute left-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/60 bg-on-surface/50 text-surface-container-lowest backdrop-blur-md transition-all hover:bg-primary" data-dbs-carousel-direction="-1" type="button">
-              <span className="material-symbols-outlined text-[20px]">
-                chevron_left
-              </span>
-            </button>
-            {" "}
-            <button aria-label="Next documentation image" className="absolute right-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/60 bg-on-surface/50 text-surface-container-lowest backdrop-blur-md transition-all hover:bg-primary" data-dbs-carousel-direction="1" type="button">
-              <span className="material-symbols-outlined text-[20px]">
-                chevron_right
-              </span>
-            </button>
-            <div className="absolute bottom-11 left-0 right-0 z-20 flex justify-center gap-1.5" aria-label="Documentation image 1 of 1">
-              {facilitatorPhotos.map((_, dotIndex) => (
-                <span className={`h-2 rounded-full bg-surface-container-lowest ${dotIndex === index ? "w-4" : "w-2 opacity-60"}`} key={dotIndex}></span>
-              ))}
-            </div>
-          </div>
           ))}
+          <button aria-label="Previous documentation image" className="absolute left-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/60 bg-on-surface/50 text-surface-container-lowest backdrop-blur-md transition-all hover:bg-primary" data-dbs-carousel-direction="-1" type="button">
+            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">chevron_left</span>
+          </button>
+          <button aria-label="Next documentation image" className="absolute right-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/60 bg-on-surface/50 text-surface-container-lowest backdrop-blur-md transition-all hover:bg-primary" data-dbs-carousel-direction="1" type="button">
+            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">chevron_right</span>
+          </button>
+          <div className="absolute bottom-11 left-0 right-0 z-20 flex justify-center gap-1.5">
+            {facilitatorPhotos.map((photo, index) => (
+              <button
+                aria-label={`Show documentation image ${index + 1}`}
+                aria-current={index === 0}
+                className={`dbs-documentation-dot h-2 rounded-full transition-all ${index === 0 ? 'w-4 bg-surface-container-lowest' : 'w-2 bg-surface-container-lowest/60'}`}
+                data-dbs-slide-index={index}
+                key={photo.file}
+                type="button"
+              />
+            ))}
+          </div>
         </div>
       </div>
       <CompanyPanel2Part1 />

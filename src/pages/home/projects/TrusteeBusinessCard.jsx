@@ -135,8 +135,14 @@ export default function TrusteeBusinessCard() {
 #trustee-business-card .tr-zoom{border:0;background:transparent;position:fixed;inset:0;width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;padding:4.5rem 1.5rem 1.5rem;color:#fff;overflow:hidden}
 #trustee-business-card .tr-zoom::backdrop{background:rgba(2,6,23,.94)}
 #trustee-business-card .tr-zoom-inner{display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;height:100%;justify-content:center}
-#trustee-business-card .tr-zoom-close{position:fixed;top:1.25rem;right:1.5rem;z-index:3;display:grid;place-items:center;width:42px;height:42px;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:rgba(15,23,42,.72);color:#fff;font-size:25px;line-height:1;cursor:pointer}
-#trustee-business-card .tr-zoom-close:hover,#trustee-business-card .tr-zoom-close:focus-visible{background:rgba(15,23,42,.95);outline:2px solid #fff;outline-offset:3px}
+#trustee-business-card .tr-zoom-close{position:fixed;top:1.25rem;right:1.5rem;z-index:3;display:grid;place-items:center;width:42px;height:42px;padding:0;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:#fff;color:#111;line-height:0;cursor:pointer}
+#trustee-business-card .tr-zoom-close:hover,#trustee-business-card .tr-zoom-close:focus-visible{background:#e2e8f0;outline:2px solid #fff;outline-offset:3px}
+#trustee-business-card .tr-zoom-nav{position:fixed;top:50%;z-index:3;display:grid;place-items:center;width:42px;height:42px;padding:0;transform:translateY(-50%);border:1px solid rgba(255,255,255,.35);border-radius:999px;background:#fff;color:#111;line-height:0;cursor:pointer}
+#trustee-business-card .tr-zoom-nav.prev{left:1rem}
+#trustee-business-card .tr-zoom-nav.next{right:1rem}
+#trustee-business-card .tr-zoom-nav:disabled{opacity:.45;cursor:default}
+#trustee-business-card .tr-zoom-nav:focus-visible{outline:2px solid #fff;outline-offset:3px}
+#trustee-business-card .tr-zoom-nav svg,#trustee-business-card .tr-zoom-close svg{display:block;width:18px;height:18px}
 #trustee-business-card .tr-zoom-image{display:block;max-width:100%;max-height:100%;object-fit:contain;border-radius:10px;background:#fff}
 #trustee-business-card .tr-zoom-image[hidden]{display:none}
 #trustee-business-card .tr-zoom-pdf{display:block;width:min(100%,1000px);height:100%;border:0;background:transparent;overflow:auto}
@@ -665,7 +671,13 @@ export default function TrusteeBusinessCard() {
         <dialog className="tr-zoom" data-tr-dialog="" aria-label="Enlarged Trustee document page">
           <div className="tr-zoom-inner">
             <button className="tr-zoom-close" type="button" data-tr-close="" aria-label="Close document preview">
-              ✕
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12" /></svg>
+            </button>
+            <button className="tr-zoom-nav prev" type="button" data-tr-prev="" aria-label="Previous document page">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+            </button>
+            <button className="tr-zoom-nav next" type="button" data-tr-next="" aria-label="Next document page">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
             </button>
             <img className="tr-zoom-image" data-tr-zoom-image="" alt="" hidden />
           </div>

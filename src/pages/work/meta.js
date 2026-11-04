@@ -123,19 +123,13 @@ export const PAGE_CSS = `
     background-image: radial-gradient(rgba(79, 70, 229, 0.08) 1px, transparent 1px);
     background-size: 20px 20px;
   }
-  #inaproc-artifact-carousel {
+  #inaproc-design-carousel {
     scrollbar-width: none;
   }
-  #inaproc-artifact-carousel::-webkit-scrollbar {
+  #inaproc-design-carousel::-webkit-scrollbar {
     display: none;
   }
-  #dbs-documentation-carousel {
-    scrollbar-width: none;
-    touch-action: pan-y;
-  }
-  #dbs-documentation-carousel::-webkit-scrollbar {
-    display: none;
-  }
+  #dbs-documentation-carousel { touch-action: pan-y; }
   .experience-image-expand {
     position: absolute;
     inset: 0;
@@ -341,12 +335,46 @@ export const PAGE_CSS = `
     display: grid;
     width: 2.75rem;
     height: 2.75rem;
+    padding: 0;
     place-items: center;
     border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 9999px;
     background: rgba(255, 255, 255, 0.12);
     color: #fff;
     cursor: pointer;
+  }
+  .experience-lightbox-close svg,
+  .experience-lightbox-nav svg {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  .experience-lightbox-nav {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    display: grid;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    place-items: center;
+    transform: translateY(-50%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 9999px;
+    background: rgba(15, 23, 42, 0.58);
+    color: #fff;
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition: background-color 0.25s ease, opacity 0.25s ease;
+  }
+  .experience-lightbox-nav:not(:disabled):hover { background: #4f46e5; }
+  .experience-lightbox-nav.previous { left: 1rem; }
+  .experience-lightbox-nav.next { right: 1rem; }
+  .experience-lightbox-nav[hidden] { display: none; }
+  .experience-lightbox-nav:focus-visible,
+  .experience-lightbox-close:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
   }
   .experience-lightbox p {
     min-height: 1.25rem;
@@ -463,11 +491,21 @@ export const PAGE_CSS = `
 .training-lightbox-top{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;color:#fff}
 .training-lightbox-top strong{font-size:13px;line-height:1.3}
 .training-lightbox-controls{display:flex;align-items:center;gap:7px}
-.training-lightbox-controls button{display:inline-flex;align-items:center;justify-content:center;border:1px solid #62677d;background:#252a42;color:#fff;border-radius:11px;width:38px;height:38px;cursor:pointer}
+.training-lightbox-controls button{display:grid;place-items:center;padding:0;border:1px solid rgba(255,255,255,.35);background:#fff;color:#111;border-radius:50%;width:42px;height:42px;line-height:0;cursor:pointer}
+.training-lightbox-controls button svg{display:block;width:18px;height:18px}
 .training-lightbox-controls button:focus-visible{outline:2px solid #b6baff}
-.training-lightbox-figure{display:flex;flex-direction:column;min-height:0;align-items:center;width:100%;gap:10px}
-.training-lightbox-figure img{display:block;object-fit:contain;width:auto;max-width:100%;max-height:calc(96dvh - 158px);border-radius:8px;background:white}
+.training-lightbox-figure{position:relative;display:flex;flex-direction:column;min-height:0;align-items:center;width:100%;gap:10px}
+.training-lightbox-figure img{display:block;object-fit:contain;width:auto;max-width:100%;max-height:calc(96dvh - 158px);border-radius:8px;background:white;animation:work-gallery-fade .5s ease-in-out both}
+@keyframes work-gallery-fade{from{opacity:0}to{opacity:1}}
 .training-lightbox-figure figcaption{text-align:center;color:#d2d6eb;font-size:12px;line-height:1.5;max-width:760px}
+.training-lightbox-nav{position:absolute;top:calc((100% - 24px) / 2);z-index:2;display:grid;place-items:center;width:36px;height:36px;padding:0;transform:translateY(-50%);border:1px solid rgba(255,255,255,.55);border-radius:50%;background:rgba(15,23,42,.58);color:#fff;backdrop-filter:blur(8px);line-height:0;cursor:pointer;transition:background-color .25s ease,opacity .25s ease}
+.training-lightbox-nav:hover{background:#4f46e5}
+.training-lightbox-nav.previous{left:0}.training-lightbox-nav.next{right:0}
+.training-lightbox-nav svg{display:block;width:18px;height:18px}
+.training-lightbox-nav:focus-visible{outline:2px solid #b6baff;outline-offset:3px}
+[data-dbs-carousel-direction]{width:36px!important;height:36px!important;border:1px solid rgba(255,255,255,.55)!important;border-radius:9999px!important;background:rgba(15,23,42,.58)!important;color:#fff!important;backdrop-filter:blur(8px);transition:background-color .25s ease,opacity .25s ease!important}
+[data-dbs-carousel-direction]:hover{background:#4f46e5!important}
+@media(prefers-reduced-motion:reduce){.training-lightbox-figure img{animation:none}}
 .training-lightbox-position{font-family:'JetBrains Mono',monospace;font-size:11px;color:#cbd1ed}
 @media(max-width:790px){.training-doc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.training-doc-grid>:last-child{grid-column:1/-1}.training-doc-grid>:last-child .training-doc-image{height:190px}}
 @media(max-width:480px){.training-doc-grid{grid-template-columns:1fr}.training-doc-grid>:last-child{grid-column:auto}.training-doc-image,.training-doc-grid>:last-child .training-doc-image{height:180px}.training-doc-copy{padding:12px}.training-lightbox-top strong{font-size:11px}}
@@ -563,7 +601,7 @@ export const PAGE_CSS = `
 .ev-project-btn{background:#312e81;color:#fff}
 
 
-/* Telkom artifact studio */
+/* Telkom design showcase */
 .tas{display:grid;gap:14px;padding:clamp(14px,2vw,20px);border-radius:20px;background:linear-gradient(180deg,#f7f8ff,#fff);border:1px solid #e0e5f5}
 .tas-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .tas-title{display:inline-flex;align-items:center;gap:8px;font:800 12px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#172033}

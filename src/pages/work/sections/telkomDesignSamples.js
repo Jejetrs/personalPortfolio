@@ -1,10 +1,10 @@
-/* Telkom artifacts */
+/* Telkom design samples */
 const BASE = '/assets/experience/Telkom%20Designer%20Intern/';
 const local = (file) => BASE + encodeURIComponent(file);
 const thumb = (file) => `${BASE}thumbs/${encodeURIComponent(file.replace(/\.[^.]+$/, ''))}.webp`;
 const item = (file, tag, title, text) => ({ src: local(file), thumb: thumb(file), tag, title, text });
 
-export const TELKOM_ARTIFACTS = [
+export const TELKOM_DESIGN_SAMPLES = [
   item('Audit and Adjusment for Component & Documentation.webp', 'Audit', 'Component audit in action', 'Reviewing component details and documentation to turn inconsistencies into a clearer, more reliable design system.'),
   item('Audit E-Katalog.png', 'Audit', 'E-Katalog interface audit', 'Mapping hierarchy, spacing and interaction patterns across the procurement experience before refining them.'),
   item('Variable Audit & Adjusment.png', 'Design system', 'Token precision', 'Fine-tuning variables and design tokens so visual decisions stay consistent from screen to screen.'),

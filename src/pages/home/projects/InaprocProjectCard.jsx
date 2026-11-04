@@ -135,7 +135,7 @@ export default function InaprocProjectCard() {
             </div>
             <div className="flex items-center gap-1.5 text-xs font-semibold text-rose-700">
               <span className="text-[11px] font-mono uppercase text-slate-400">
-                9 Artifacts
+                9 Design Previews
               </span>
               <svg className="accordion-chevron w-4 h-4 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>

@@ -54,7 +54,7 @@ export default function HomePage() {
               <button aria-pressed="false" className="project-filter about-project-category inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 font-medium text-xs hover:bg-slate-50 hover:text-slate-900 transition shadow-xs active:scale-95" data-project-category="analytics" type="button">
                 <span className="w-2 h-2 rounded-full bg-amber-500"></span>
                 <span>
-                  Business Analytics
+                  Product/Business Analytics
                 </span>
               </button>
               {" "}

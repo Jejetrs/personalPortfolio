@@ -1,6 +1,7 @@
 /* Home interactions */
 import { handlers } from './interactionHandlers.js';
 import { renderPdf } from '@/lib/pdfCanvas.js';
+import { transitionImageSource } from '@/lib/slideTransitions.js';
 
 export function mountHomeInteractions(scope) {
   const pillarsData = [
@@ -485,6 +486,16 @@ export function mountHomeInteractions(scope) {
         <path d="M18 6 6 18M6 6l12 12"></path>
       </svg>
     </button>
+    <button class="image-lightbox-nav previous" type="button" aria-label="Previous image" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m15 18-6-6 6-6"></path>
+      </svg>
+    </button>
+    <button class="image-lightbox-nav next" type="button" aria-label="Next image" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m9 18 6-6-6-6"></path>
+      </svg>
+    </button>
     <div class="image-lightbox-stage">
       <img class="image-lightbox-image" alt="">
       <div class="image-lightbox-art-container" hidden></div>
@@ -501,7 +512,30 @@ export function mountHomeInteractions(scope) {
   const imageLightboxStage = imageLightbox.querySelector('.image-lightbox-stage');
   const imageLightboxHint = imageLightbox.querySelector('.image-lightbox-hint');
   let imageLightboxTrigger = null;
+  let imageLightboxPhotos = [];
+  let imageLightboxIndex = 0;
   let lightboxPdf = null;
+  const imageLightboxPrevious = imageLightbox.querySelector('.image-lightbox-nav.previous');
+  const imageLightboxNext = imageLightbox.querySelector('.image-lightbox-nav.next');
+
+  const showImageLightboxPhoto = (index) => {
+    if (!imageLightboxPhotos.length) return;
+    imageLightboxIndex = (index + imageLightboxPhotos.length) % imageLightboxPhotos.length;
+    const photo = imageLightboxPhotos[imageLightboxIndex];
+    const alt = photo.alt || '';
+    if (imageLightbox.open) transitionImageSource(imageLightboxImage, photo.src, alt);
+    else {
+      imageLightboxImage.src = photo.src;
+      imageLightboxImage.alt = alt;
+    }
+    imageLightboxCaption.textContent = imageLightboxPhotos.length > 1
+      ? `${photo.caption || photo.alt || ''} · ${imageLightboxIndex + 1} / ${imageLightboxPhotos.length}`
+      : photo.caption || photo.alt || '';
+    imageLightboxPrevious.hidden = imageLightboxPhotos.length < 2;
+    imageLightboxNext.hidden = imageLightboxPhotos.length < 2;
+    setLightboxZoom(false);
+    imageLightboxStage.scrollTo?.(0, 0);
+  };
 
   window.createImageExpandButton = (label) => {
     const button = document.createElement('button');
@@ -516,7 +550,7 @@ export function mountHomeInteractions(scope) {
     return button;
   };
 
-  window.openImageLightbox = ({ src, alt = '', artwork = null, caption = '', trigger = null }) => {
+  window.openImageLightbox = ({ src, alt = '', artwork = null, caption = '', trigger = null, photos = null, index = 0 }) => {
     if (!src && !artwork) return;
     imageLightboxTrigger = trigger;
     imageLightboxImage.classList.remove('is-zoomed');
@@ -525,9 +559,19 @@ export function mountHomeInteractions(scope) {
     imageLightboxStage.scrollTo?.(0, 0);
     imageLightboxImage.hidden = !src;
     imageLightboxArt.hidden = !artwork;
-    imageLightboxImage.alt = alt;
-    if (src) imageLightboxImage.src = src;
-    else imageLightboxImage.removeAttribute('src');
+    imageLightboxPdf.hidden = true;
+    imageLightboxPhotos = photos?.length
+      ? photos.filter((photo) => photo?.src)
+      : src ? [{ src, alt, caption }] : [];
+    imageLightboxIndex = Math.min(Math.max(index, 0), Math.max(imageLightboxPhotos.length - 1, 0));
+    if (imageLightboxPhotos.length) showImageLightboxPhoto(imageLightboxIndex);
+    else {
+      imageLightboxPrevious.hidden = true;
+      imageLightboxNext.hidden = true;
+      imageLightboxImage.alt = alt;
+      imageLightboxImage.removeAttribute('src');
+      imageLightboxCaption.textContent = caption;
+    }
     imageLightboxArt.replaceChildren();
     if (artwork) {
       const enlargedArtwork = artwork.cloneNode(true);
@@ -535,7 +579,6 @@ export function mountHomeInteractions(scope) {
       enlargedArtwork.querySelectorAll('.image-expand-button').forEach((button) => button.remove());
       imageLightboxArt.appendChild(enlargedArtwork);
     }
-    imageLightboxCaption.textContent = caption;
     imageLightbox.showModal();
   };
 
@@ -545,6 +588,9 @@ export function mountHomeInteractions(scope) {
     imageLightboxHint.hidden = true;
     imageLightboxImage.hidden = true;
     imageLightboxArt.hidden = true;
+    imageLightboxPrevious.hidden = true;
+    imageLightboxNext.hidden = true;
+    imageLightboxPhotos = [];
     imageLightboxPdf.hidden = false;
     imageLightboxCaption.textContent = caption;
     imageLightbox.showModal();
@@ -554,6 +600,19 @@ export function mountHomeInteractions(scope) {
 
   imageLightbox.querySelector('.image-lightbox-close').addEventListener('click', () => {
     imageLightbox.close();
+  });
+  imageLightboxPrevious.addEventListener('click', () => showImageLightboxPhoto(imageLightboxIndex - 1));
+  imageLightboxNext.addEventListener('click', () => showImageLightboxPhoto(imageLightboxIndex + 1));
+  imageLightbox.addEventListener('keydown', (event) => {
+    if (!imageLightbox.open || imageLightboxPhotos.length < 2) return;
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      showImageLightboxPhoto(imageLightboxIndex - 1);
+    }
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      showImageLightboxPhoto(imageLightboxIndex + 1);
+    }
   });
   let dragStart = null;
   let dragMoved = false;
@@ -602,6 +661,9 @@ export function mountHomeInteractions(scope) {
     lightboxPdf?.destroy();
     lightboxPdf = null;
     imageLightboxPdf.hidden = true;
+    imageLightboxPhotos = [];
+    imageLightboxPrevious.hidden = true;
+    imageLightboxNext.hidden = true;
     if (imageLightboxTrigger && imageLightboxTrigger.isConnected) imageLightboxTrigger.focus();
     imageLightboxTrigger = null;
   });
@@ -783,6 +845,12 @@ export function mountHomeInteractions(scope) {
               src: certificateUrls[certificateIndex],
               alt: certificateImage.alt,
               caption: `${card.getAttribute('aria-label') || 'Certificate'} (${certificateIndex + 1} of ${certificateUrls.length})`,
+              photos: certificateUrls.map((photoSrc, photoIndex) => ({
+                src: photoSrc,
+                alt: `${card.getAttribute('aria-label') || 'Achievement'} certificate ${photoIndex + 1}`,
+                caption: `${card.getAttribute('aria-label') || 'Certificate'} (${photoIndex + 1} of ${certificateUrls.length})`
+              })),
+              index: certificateIndex,
               trigger: expandButton
             });
           });

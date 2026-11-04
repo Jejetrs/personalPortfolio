@@ -1,5 +1,5 @@
 import InaprocCaseStudyPart1 from './InaprocCaseStudyPart1.jsx';
-import TelkomArtifactStudio from './TelkomArtifactStudio.jsx';
+import TelkomDesignShowcase from './TelkomDesignShowcase.jsx';
 
 export default function InaprocCaseStudy() {
   return (
@@ -15,8 +15,8 @@ export default function InaprocCaseStudy() {
           </p>
         </div>
       </div>
-      <TelkomArtifactStudio />
-      <div className="tas-divider"><span>Behind the artifacts</span></div>
+      <TelkomDesignShowcase />
+      <div className="tas-divider"><span>Case Study Details</span></div>
       <InaprocCaseStudyPart1 />
     </div>
   );

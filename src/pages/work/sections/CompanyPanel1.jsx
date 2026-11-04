@@ -103,7 +103,7 @@ export default function CompanyPanel1() {
               photo_library
             </span>
             <h3 className="text-body-md font-bold text-on-surface uppercase tracking-wider font-label-kicker">
-              TELKOM DOCUMENTATION VAULT
+              TELKOM DOCUMENTATION
             </h3>
           </div>
         </div>

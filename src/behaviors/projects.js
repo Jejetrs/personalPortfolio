@@ -1,4 +1,6 @@
 import { updateGlobalToggleState } from './caseStudy.js';
+import { startAutoSlideshow } from '@/lib/autoSlideshow.js';
+import { fadeInSlide } from '@/lib/slideTransitions.js';
 
 export { toggleAccordion, toggleAllAccordions } from './caseStudy.js';
 
@@ -440,7 +442,9 @@ export function updateCarouselView(carouselId, newIndex) {
 
   slides.forEach((slide, idx) => {
     if (idx === index) {
+      const wasHidden = slide.classList.contains('hidden');
       slide.classList.remove('hidden');
+      if (wasHidden) fadeInSlide(slide);
     } else {
       slide.classList.add('hidden');
     }
@@ -523,6 +527,7 @@ export function initializeProjectCarousels() {
     card.querySelectorAll('.slide-nav-btn').forEach((button) => button.hidden = false);
     if (dotsContainer) dotsContainer.hidden = false;
     updateCarouselView(carouselId, getCurrentIndex(carouselId));
+    startAutoSlideshow(card, () => nextSlide(carouselId));
   });
 }
 

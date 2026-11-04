@@ -2,6 +2,8 @@
 import { handlers } from './projectHandlers.js';
 import { renderPdf } from '@/lib/pdfCanvas.js';
 import { getProjectAssets, getProjectProfileAsset } from '@/pages/home/projects/projectAssets.js';
+import { startAutoSlideshow } from '@/lib/autoSlideshow.js';
+import { fadeInSlide, transitionImageSource } from '@/lib/slideTransitions.js';
 
 export async function mountProjectSelector(scope, { projects, trusteeDocuments, renderDetail, clearDetail }) {
   const track = document.getElementById('about-project-track');
@@ -63,7 +65,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       };
     });
     const categoryNames = {
-      analytics: 'Business Analytics',
+      analytics: 'Product/Business Analytics',
       team: 'Project Management & Leadership',
       uiux: 'UI/UX Design',
       aiml: 'ML/AI Engineering',
@@ -551,7 +553,9 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
 
       slides.forEach((slide, idx) => {
         if (idx === index) {
+          const wasHidden = slide.classList.contains('hidden');
           slide.classList.remove('hidden');
+          if (wasHidden) fadeInSlide(slide);
         } else {
           slide.classList.add('hidden');
         }
@@ -718,6 +722,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         card.querySelectorAll('.slide-nav-btn').forEach((button) => button.hidden = false);
         if (dotsContainer) dotsContainer.hidden = false;
         updateCarouselView(carouselId, getCurrentIndex(carouselId));
+        startAutoSlideshow(card, () => nextSlide(carouselId));
       });
     }
 
@@ -803,12 +808,20 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         expandButton.addEventListener('click', (event) => {
           event.preventDefault();
           event.stopPropagation();
-          const activeImage = stage.querySelector('.carousel-slide:not(.hidden) img');
+          const slideImages = Array.from(slidesContainer.querySelectorAll('.carousel-slide img'));
+          const activeIndex = slides.findIndex((slide) => !slide.classList.contains('hidden'));
+          const activeImage = slideImages[activeIndex] || stage.querySelector('.carousel-slide:not(.hidden) img');
           if (!activeImage) return;
           window.openImageLightbox({
             src: activeImage.currentSrc || activeImage.src,
             alt: activeImage.alt || title,
             caption: activeImage.alt || title,
+            photos: slideImages.map((image) => ({
+              src: image.currentSrc || image.src,
+              alt: image.alt || title,
+              caption: image.alt || title
+            })),
+            index: Math.max(activeIndex, 0),
             trigger: expandButton
           });
         });
@@ -841,15 +854,15 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
 
         if (total > 1) {
           [
-            { direction: 'previous', symbol: '‹', action: () => prevSlide(carouselId) },
-            { direction: 'next', symbol: '›', action: () => nextSlide(carouselId) }
-          ].forEach(({ direction, symbol, action }) => {
+            { direction: 'previous', action: () => prevSlide(carouselId) },
+            { direction: 'next', action: () => nextSlide(carouselId) }
+          ].forEach(({ direction, action }) => {
             const button = document.createElement('button');
             button.type = 'button';
             button.className = `project-image-nav ${direction}`;
             button.setAttribute('aria-label', direction === 'previous' ? 'Previous slide' : 'Next slide');
             button.addEventListener('click', action);
-            button.textContent = symbol;
+            button.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${direction === 'previous' ? 'm15 18-6-6 6-6' : 'm9 18 6-6-6-6'}"></path></svg>`;
             stage.appendChild(button);
           });
         } else {
@@ -1263,6 +1276,77 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       video.addEventListener('error', fail);
     }
 
+    function openProjectImagePreview(images, activeIndex, trigger, label) {
+      const photos = images.filter((image) => image?.src).map((image) => ({
+        src: image.currentSrc || image.src,
+        alt: image.alt || label
+      }));
+      if (!photos.length) return;
+      let index = Math.min(Math.max(activeIndex, 0), photos.length - 1);
+      const overlay = document.createElement('div');
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.setAttribute('aria-label', label || photos[index].alt || 'Project image');
+      overlay.style.cssText = 'position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(10,10,20,.92);padding:24px';
+      const big = document.createElement('img');
+      big.style.cssText = 'max-width:94vw;max-height:88vh;object-fit:contain;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)';
+      const button = (direction, ariaLabel, path) => {
+        const control = document.createElement('button');
+        control.type = 'button';
+        control.className = 'project-image-nav';
+        control.setAttribute('aria-label', ariaLabel);
+        control.style.cssText = `position:absolute;${direction === 'previous' ? 'left:16px' : 'right:16px'};top:50%;display:grid;place-items:center;width:42px;height:42px;padding:0;transform:translateY(-50%);border:0;border-radius:50%;background:#fff;color:#1e293b;cursor:pointer`;
+        control.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${path}"></path></svg>`;
+        control.addEventListener('click', (event) => {
+          event.stopPropagation();
+          index = (index + (direction === 'previous' ? -1 : 1) + photos.length) % photos.length;
+          update();
+        });
+        return control;
+      };
+      const close = document.createElement('button');
+      close.type = 'button';
+      close.setAttribute('aria-label', 'Close photo');
+      close.style.cssText = 'position:absolute;top:14px;right:18px;display:grid;place-items:center;width:42px;height:42px;padding:0;border:0;border-radius:50%;background:#fff;color:#111;cursor:pointer';
+      close.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12"></path></svg>';
+      const previous = photos.length > 1 ? button('previous', 'Previous image', 'm15 18-6-6 6-6') : null;
+      const next = photos.length > 1 ? button('next', 'Next image', 'm9 18 6-6-6-6') : null;
+      const dismiss = () => {
+        document.removeEventListener('keydown', onKey);
+        overlay.remove();
+        trigger?.focus?.();
+      };
+      const update = () => {
+        if (big.isConnected) transitionImageSource(big, photos[index].src, photos[index].alt);
+        else {
+          big.src = photos[index].src;
+          big.alt = photos[index].alt;
+        }
+        overlay.setAttribute('aria-label', photos[index].alt || label || 'Project image');
+      };
+      const onKey = (event) => {
+        if (event.key === 'Escape') dismiss();
+        if (photos.length > 1 && event.key === 'ArrowLeft') {
+          index = (index - 1 + photos.length) % photos.length;
+          update();
+        }
+        if (photos.length > 1 && event.key === 'ArrowRight') {
+          index = (index + 1) % photos.length;
+          update();
+        }
+      };
+      close.addEventListener('click', dismiss);
+      overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) dismiss();
+      });
+      update();
+      overlay.append(big, close);
+      if (previous) overlay.append(previous, next);
+      document.addEventListener('keydown', onKey);
+      scope.append(document.body, overlay);
+      close.focus();
+    }
+
     function initializeProjectImageZoom(card) {
       card.querySelectorAll('img').forEach((img) => {
         if (img.dataset.zoomReady || img.closest('a, button, [data-gal-open], .pm-card')) return;
@@ -1271,27 +1355,10 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
           if (img.naturalWidth < 120) return;
           img.classList.add('zoomable-img');
           img.addEventListener('click', () => {
-            const overlay = document.createElement('div');
-            overlay.setAttribute('role', 'dialog');
-            overlay.setAttribute('aria-modal', 'true');
-            overlay.setAttribute('aria-label', img.alt || 'Project image');
-            overlay.style.cssText = 'position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(10,10,20,.88);padding:24px;cursor:zoom-out';
-            const big = document.createElement('img');
-            big.src = img.currentSrc || img.src;
-            big.alt = img.alt;
-            big.style.cssText = 'max-width:94vw;max-height:88vh;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.5);background:#fff';
-            const close = document.createElement('button');
-            close.type = 'button';
-            close.textContent = '×';
-            close.setAttribute('aria-label', 'Close photo');
-            close.style.cssText = 'position:absolute;top:14px;right:18px;width:38px;height:38px;border-radius:9999px;border:0;background:#fff;color:#111;font-size:24px;line-height:1;cursor:pointer';
-            const onKey = (event) => { if (event.key === 'Escape') dismiss(); };
-            const dismiss = () => { document.removeEventListener('keydown', onKey); overlay.remove(); };
-            overlay.addEventListener('click', dismiss);
-            scope.on(document, 'keydown', onKey);
-            overlay.append(big, close);
-            scope.append(document.body, overlay);
-            close.focus();
+            const images = Array.from(card.querySelectorAll('img')).filter((image) => (
+              !image.closest('a, button, [data-gal-open], .pm-card')
+            ));
+            openProjectImagePreview(images, images.indexOf(img), img, img.alt || 'Project image');
           });
         };
         if (img.complete) arm(); else img.addEventListener('load', arm, { once: true });
@@ -1645,35 +1712,23 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
           scope.on(window, 'resize', refresh);
           refresh();
         }
+        if (track?.children.length > 1) {
+          startAutoSlideshow(gallery, () => {
+            const lastSlide = track.lastElementChild;
+            const atEnd = lastSlide
+              && track.scrollLeft + track.clientWidth >= lastSlide.offsetLeft + lastSlide.offsetWidth - 8;
+            track.scrollTo({
+              left: atEnd ? 0 : track.scrollLeft + Math.max(track.clientWidth * 0.8, 200),
+              behavior: 'smooth'
+            });
+          });
+        }
         gallery.querySelectorAll('[data-gal-open]').forEach((item) => {
           item.addEventListener('click', () => {
             const img = item.querySelector('img');
             if (!img) return;
-            const overlay = document.createElement('div');
-            overlay.setAttribute('role', 'dialog');
-            overlay.setAttribute('aria-modal', 'true');
-            overlay.setAttribute('aria-label', img.alt);
-            overlay.style.cssText = 'position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(10,10,20,.88);padding:24px;cursor:zoom-out';
-            const big = document.createElement('img');
-            big.src = img.currentSrc || img.src;
-            big.alt = img.alt;
-            big.style.cssText = 'max-width:94vw;max-height:88vh;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.5);background:#fff';
-            const close = document.createElement('button');
-            close.type = 'button';
-            close.textContent = '×';
-            close.setAttribute('aria-label', 'Close photo');
-            close.style.cssText = 'position:absolute;top:14px;right:18px;width:38px;height:38px;border-radius:9999px;border:0;background:#fff;color:#111;font-size:24px;line-height:1;cursor:pointer';
-            const dismiss = () => {
-              document.removeEventListener('keydown', onKey);
-              overlay.remove();
-              item.focus();
-            };
-            const onKey = (event) => { if (event.key === 'Escape') dismiss(); };
-            overlay.addEventListener('click', dismiss);
-            scope.on(document, 'keydown', onKey);
-            overlay.append(big, close);
-            scope.append(document.body, overlay);
-            close.focus();
+            const images = Array.from(gallery.querySelectorAll('[data-gal-open] img'));
+            openProjectImagePreview(images, images.indexOf(img), item, img.alt || 'Project image');
           });
         });
       });
@@ -1689,6 +1744,8 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       const docBtns = Array.from(card.querySelectorAll('[data-tr-doc]'));
       const dialog = q('[data-tr-dialog]');
       const imgFull = q('[data-tr-zoom-image]');
+      const prevFull = q('[data-tr-prev]');
+      const nextFull = q('[data-tr-next]');
       const pdfFull = document.createElement('div');
       let pdfFullRender = null;
       pdfFull.className = 'tr-zoom-pdf';
@@ -1704,6 +1761,10 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       function updateFull() {
         const slides = visiblePages();
         const slide = slides[page];
+        prevFull.hidden = slides.length < 2;
+        nextFull.hidden = slides.length < 2;
+        prevFull.disabled = page <= 0;
+        nextFull.disabled = page >= slides.length - 1;
         const isPdf = slide.type === 'pdf';
         imgFull.hidden = isPdf;
         pdfFull.hidden = !isPdf;
@@ -1730,6 +1791,13 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         pdfFullRender = renderPdf(pdfFull, slide.src);
       }
       function closeFull() { dialog.close(); }
+      function stepFull(direction) {
+        const nextPage = page + direction;
+        if (nextPage < 0 || nextPage >= visiblePages().length) return;
+        page = nextPage;
+        updateFull();
+        renderFullPdf();
+      }
       function showDoc(key) {
         if (!docs[key]) return;
         current = key;
@@ -1788,11 +1856,13 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         q('[data-tr-viewer]').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
       }));
       q('[data-tr-close]').addEventListener('click',closeFull);
+      prevFull.addEventListener('click', () => stepFull(-1));
+      nextFull.addEventListener('click', () => stepFull(1));
       dialog.addEventListener('close',()=>{imgFull.removeAttribute('src');pdfFullRender?.destroy();pdfFullRender=null;if(previousFocus&&previousFocus.isConnected)previousFocus.focus();});
       dialog.addEventListener('click',e=>{if(e.target===dialog)closeFull()});
       dialog.addEventListener('keydown',e=>{
-        if(e.key==='ArrowLeft'&&page>0){e.preventDefault();page--;updateFull();renderFullPdf()}
-        else if(e.key==='ArrowRight'&&page<docs[current].pages.length-1){e.preventDefault();page++;updateFull();renderFullPdf()}
+        if(e.key==='ArrowLeft'){e.preventDefault();stepFull(-1)}
+        else if(e.key==='ArrowRight'){e.preventDefault();stepFull(1)}
       });
       showDoc('account');
     }

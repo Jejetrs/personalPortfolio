@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import { TELKOM_ARTIFACTS } from './telkomArtifacts.js';
+import { TELKOM_DESIGN_SAMPLES } from './telkomDesignSamples.js';
 
-export default function TelkomArtifactStudio() {
+export default function TelkomDesignShowcase() {
   const [index, setIndex] = useState(0);
   const [zoom, setZoom] = useState(false);
   const rail = useRef(null);
   const zoomRef = useRef(null);
-  const last = TELKOM_ARTIFACTS.length - 1;
-  const current = TELKOM_ARTIFACTS[index];
+  const last = TELKOM_DESIGN_SAMPLES.length - 1;
+  const current = TELKOM_DESIGN_SAMPLES[index];
 
   useEffect(() => {
     const active = rail.current?.children[index];
@@ -34,23 +34,23 @@ export default function TelkomArtifactStudio() {
       <div className="tas-head">
         <span className="tas-title">
           <span className="material-symbols-outlined" aria-hidden="true">photo_library</span>
-          Visual artifacts
+          Design showcase
         </span>
-        <span className="tas-count">{String(index + 1).padStart(2, '0')} / {String(TELKOM_ARTIFACTS.length).padStart(2, '0')}</span>
+        <span className="tas-count">{String(index + 1).padStart(2, '0')} / {String(TELKOM_DESIGN_SAMPLES.length).padStart(2, '0')}</span>
         <div className="tas-controls">
           {index === last ? (
-            <button type="button" className="tas-btn tas-return" onClick={() => go(0)} aria-label="Back to the first artifact">
+            <button type="button" className="tas-btn tas-return" onClick={() => go(0)} aria-label="Back to the first design preview">
               <span className="material-symbols-outlined" aria-hidden="true">keyboard_double_arrow_left</span>
               Back to start
             </button>
           ) : null}
           {index > 0 && index < last ? (
-            <button type="button" className="tas-btn" onClick={() => go(index - 1)} aria-label="Previous artifact">
+            <button type="button" className="tas-btn" onClick={() => go(index - 1)} aria-label="Previous design preview">
               <span className="material-symbols-outlined" aria-hidden="true">arrow_back</span>
             </button>
           ) : null}
           {index < last ? (
-            <button type="button" className="tas-btn tas-next" onClick={() => go(index + 1)} aria-label="Next artifact">
+            <button type="button" className="tas-btn tas-next" onClick={() => go(index + 1)} aria-label="Next design preview">
               <span className="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
             </button>
           ) : null}
@@ -73,24 +73,24 @@ export default function TelkomArtifactStudio() {
         <p>{current.text}</p>
       </div>
 
-      <div className="tas-rail" ref={rail} role="tablist" aria-label="Artifact thumbnails">
-        {TELKOM_ARTIFACTS.map((artifact, i) => (
+      <div className="tas-rail" ref={rail} role="tablist" aria-label="Design preview thumbnails">
+        {TELKOM_DESIGN_SAMPLES.map((sample, i) => (
           <button
             type="button"
-            key={artifact.src}
+            key={sample.src}
             role="tab"
             aria-selected={i === index}
             className={`tas-thumb${i === index ? ' is-active' : ''}`}
             onClick={() => setIndex(i)}
-            aria-label={`Show ${artifact.title}`}
+            aria-label={`Show ${sample.title}`}
           >
-            <img src={artifact.thumb} alt="" loading="lazy" decoding="async" />
+            <img src={sample.thumb} alt="" loading="lazy" decoding="async" />
           </button>
         ))}
       </div>
 
       <dialog className="tas-zoom-dialog" ref={zoomRef} onClose={() => setZoom(false)} onClick={(event) => event.target === zoomRef.current && setZoom(false)}>
-        <button type="button" className="tas-zoom-close" onClick={() => setZoom(false)} aria-label="Close enlarged artifact">×</button>
+        <button type="button" className="tas-zoom-close" onClick={() => setZoom(false)} aria-label="Close enlarged design preview">×</button>
         {zoom ? <img src={current.src} alt={current.title} /> : null}
       </dialog>
     </div>

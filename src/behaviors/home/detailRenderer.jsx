@@ -5,8 +5,8 @@ export function createDetailRenderer(container) {
   const root = createRoot(container);
   return {
     renderDetail(project) {
-      const { Card } = project;
-      flushSync(() => root.render(<Card key={project.id} />));
+      const { Card, cardProps } = project;
+      flushSync(() => root.render(<Card key={project.id} {...cardProps} />));
     },
     clearDetail() {
       flushSync(() => root.render(null));

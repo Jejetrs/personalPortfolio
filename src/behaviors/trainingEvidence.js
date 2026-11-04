@@ -1,4 +1,6 @@
 /* Training evidence */
+import { startAutoSlideshow } from '@/lib/autoSlideshow.js';
+import { transitionImageSource } from '@/lib/slideTransitions.js';
 
 const enc = (path) => encodeURI(path).replace(/'/g, '%27');
 const ASAH = '/assets/experience/ASAH 2025/';
@@ -209,6 +211,17 @@ export function renderTrainingEvidence(id) {
 }
 
 export function bindTrainingEvidence(root, openPdf) {
+  const stopSlideshows = Array.from(root.querySelectorAll('[data-training-gallery]')).map((trigger) => {
+    const gallery = JSON.parse(trigger.dataset.trainingGallery);
+    const image = trigger.querySelector('img');
+    if (!image || gallery.length < 2) return null;
+    let index = 0;
+    return startAutoSlideshow(trigger, () => {
+      index = (index + 1) % gallery.length;
+      transitionImageSource(image, gallery[index].src, gallery[index].alt || '');
+    });
+  }).filter(Boolean);
+
   const onClick = (event) => {
     const play = event.target.closest?.('[data-evidence-video] .ev-play');
     if (play) {
@@ -230,5 +243,8 @@ export function bindTrainingEvidence(root, openPdf) {
     if (doc) openPdf({ title: doc.dataset.docTitle, url: doc.dataset.evidencePdf, type: 'pdf' }, doc);
   };
   root.addEventListener('click', onClick);
-  return () => root.removeEventListener('click', onClick);
+  return () => {
+    root.removeEventListener('click', onClick);
+    stopSlideshows.forEach((stop) => stop());
+  };
 }

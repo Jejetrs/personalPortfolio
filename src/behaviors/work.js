@@ -1,6 +1,8 @@
 /* Work and training */
 
 import { renderPdf } from '@/lib/pdfCanvas.js';
+import { startAutoSlideshow } from '@/lib/autoSlideshow.js';
+import { transitionImageSource } from '@/lib/slideTransitions.js';
 import { renderTrainingEvidence, bindTrainingEvidence } from './trainingEvidence.js';
 
 const CERTIFICATE_FILES = {
@@ -560,6 +562,12 @@ ${renderTrainingProfile(4).replace(/<p class="px-1 text-\[10px\]/, '<div class="
         <path d="M18 6 6 18M6 6l12 12"></path>
       </svg>
     </button>
+    <button class="experience-lightbox-nav previous" type="button" aria-label="Previous image" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+    </button>
+    <button class="experience-lightbox-nav next" type="button" aria-label="Next image" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+    </button>
     <img alt="">
     <p></p>
   `;
@@ -567,13 +575,39 @@ ${renderTrainingProfile(4).replace(/<p class="px-1 text-\[10px\]/, '<div class="
   cleanups.push(() => experienceLightbox.remove());
   const experienceLightboxImage = experienceLightbox.querySelector('img');
   const experienceLightboxCaption = experienceLightbox.querySelector('p');
+  const experienceLightboxPrevious = experienceLightbox.querySelector('.experience-lightbox-nav.previous');
+  const experienceLightboxNext = experienceLightbox.querySelector('.experience-lightbox-nav.next');
   let experienceLightboxTrigger = null;
+  let experienceLightboxPhotos = [];
+  let experienceLightboxIndex = 0;
+
+  function showExperienceImage(index) {
+    if (!experienceLightboxPhotos.length) return;
+    experienceLightboxIndex = (index + experienceLightboxPhotos.length) % experienceLightboxPhotos.length;
+    const image = experienceLightboxPhotos[experienceLightboxIndex];
+    const src = image.currentSrc || image.src;
+    const alt = image.alt || 'Experience image';
+    if (experienceLightbox.open) transitionImageSource(experienceLightboxImage, src, alt);
+    else {
+      experienceLightboxImage.src = src;
+      experienceLightboxImage.alt = alt;
+    }
+    experienceLightboxCaption.textContent = experienceLightboxPhotos.length > 1
+      ? `${image.alt || 'Experience image'} · ${experienceLightboxIndex + 1} / ${experienceLightboxPhotos.length}`
+      : image.alt || '';
+  }
 
   function openExperienceImage(image, trigger) {
     experienceLightboxTrigger = trigger;
-    experienceLightboxImage.src = image.currentSrc || image.src;
-    experienceLightboxImage.alt = image.alt || 'Experience image';
-    experienceLightboxCaption.textContent = image.alt || '';
+    const slide = image.closest('[class*="slide-item-"]');
+    const slideId = slide?.className.match(/slide-item-(\d+)/)?.[1];
+    experienceLightboxPhotos = slideId
+      ? Array.from(document.querySelectorAll(`.slide-item-${slideId} img`))
+      : [image];
+    experienceLightboxIndex = Math.max(experienceLightboxPhotos.indexOf(image), 0);
+    experienceLightboxPrevious.hidden = experienceLightboxPhotos.length < 2;
+    experienceLightboxNext.hidden = experienceLightboxPhotos.length < 2;
+    showExperienceImage(experienceLightboxIndex);
     experienceLightbox.showModal();
   }
 
@@ -604,19 +638,31 @@ ${renderTrainingProfile(4).replace(/<p class="px-1 text-\[10px\]/, '<div class="
   experienceLightbox.querySelector('.experience-lightbox-close').addEventListener('click', () => {
     experienceLightbox.close();
   });
+  experienceLightboxPrevious.addEventListener('click', () => showExperienceImage(experienceLightboxIndex - 1));
+  experienceLightboxNext.addEventListener('click', () => showExperienceImage(experienceLightboxIndex + 1));
   experienceLightbox.addEventListener('click', event => {
     if (event.target === experienceLightbox) experienceLightbox.close();
   });
   const closeLightboxOnEscape = event => {
-    if (event.key === 'Escape' && experienceLightbox.open) {
+    if (!experienceLightbox.open) return;
+    if (event.key === 'Escape') {
       event.preventDefault();
       experienceLightbox.close();
+    } else if (event.key === 'ArrowLeft' && experienceLightboxPhotos.length > 1) {
+      event.preventDefault();
+      showExperienceImage(experienceLightboxIndex - 1);
+    } else if (event.key === 'ArrowRight' && experienceLightboxPhotos.length > 1) {
+      event.preventDefault();
+      showExperienceImage(experienceLightboxIndex + 1);
     }
   };
   document.addEventListener('keydown', closeLightboxOnEscape, true);
   cleanups.push(() => document.removeEventListener('keydown', closeLightboxOnEscape, true));
   experienceLightbox.addEventListener('close', () => {
     experienceLightboxImage.removeAttribute('src');
+    experienceLightboxPhotos = [];
+    experienceLightboxPrevious.hidden = true;
+    experienceLightboxNext.hidden = true;
     if (experienceLightboxTrigger?.isConnected) experienceLightboxTrigger.focus();
     experienceLightboxTrigger = null;
   });
@@ -706,83 +752,48 @@ ${renderTrainingProfile(4).replace(/<p class="px-1 text-\[10px\]/, '<div class="
     const telkomFrame = telkomImage?.closest('.group\\/frame');
     if (telkomFrame) {
       enableExperienceGalleryScroll(telkomFrame, 1);
+      cleanups.push(startAutoSlideshow(telkomFrame, () => changeSlide(1, 1)));
     }
 
     const telkomVault = document.querySelector('#company-panel-1 .slide-item-5')?.parentElement;
-    if (telkomVault) enableExperienceGalleryScroll(telkomVault, 5);
+    if (telkomVault) {
+      enableExperienceGalleryScroll(telkomVault, 5);
+      cleanups.push(startAutoSlideshow(telkomVault, () => changeSlide(5, 1)));
+    }
 
     const dbsCarousel = document.getElementById('dbs-documentation-carousel');
     const dbsSlides = dbsCarousel?.querySelectorAll('[data-documentation-slide]');
     if (dbsCarousel && dbsSlides && dbsSlides.length) {
+      let dbsActiveSlide = 0;
+      const updateDbsSlide = (index) => {
+        dbsActiveSlide = (index + dbsSlides.length) % dbsSlides.length;
+        dbsSlides.forEach((slide, slideIndex) => {
+          const active = slideIndex === dbsActiveSlide;
+          slide.classList.toggle('z-10', active);
+          slide.classList.toggle('z-0', !active);
+          slide.classList.toggle('opacity-100', active);
+          slide.classList.toggle('opacity-0', !active);
+          slide.classList.toggle('pointer-events-none', !active);
+        });
+        dbsCarousel.querySelectorAll('[data-dbs-slide-index]').forEach((dot, dotIndex) => {
+          const active = dotIndex === dbsActiveSlide;
+          dot.setAttribute('aria-current', String(active));
+          dot.classList.toggle('w-4', active);
+          dot.classList.toggle('w-2', !active);
+          dot.classList.toggle('bg-surface-container-lowest', active);
+          dot.classList.toggle('bg-surface-container-lowest/60', !active);
+        });
+      };
+      dbsCarousel.querySelectorAll('[data-dbs-slide-index]').forEach(button => {
+        button.addEventListener('click', () => updateDbsSlide(Number(button.dataset.dbsSlideIndex)));
+      });
       dbsCarousel.querySelectorAll('[data-dbs-carousel-direction]').forEach(button => {
         button.addEventListener('click', () => {
           const direction = Number(button.dataset.dbsCarouselDirection);
-          const atEnd = dbsCarousel.scrollLeft + dbsCarousel.clientWidth >= dbsCarousel.scrollWidth - 8;
-          if (direction > 0 && atEnd) {
-            dbsCarousel.scrollTo({ left: 0, behavior: 'smooth' });
-            return;
-          }
-          if (direction < 0 && dbsCarousel.scrollLeft <= 8) {
-            dbsCarousel.scrollTo({ left: dbsCarousel.scrollWidth, behavior: 'smooth' });
-            return;
-          }
-          dbsCarousel.scrollBy({ left: direction * dbsCarousel.clientWidth, behavior: 'smooth' });
+          updateDbsSlide(dbsActiveSlide + direction);
         });
       });
-
-      let pointerStart = null;
-      let dragged = false;
-      dbsCarousel.addEventListener('pointerdown', event => {
-        if (event.button !== 0 || event.target.closest('button')) return;
-        pointerStart = {
-          x: event.clientX,
-          scrollLeft: dbsCarousel.scrollLeft,
-          scrollBehavior: dbsCarousel.style.scrollBehavior
-        };
-        dbsCarousel.style.scrollBehavior = 'auto';
-        dragged = false;
-      });
-      dbsCarousel.addEventListener('pointermove', event => {
-        if (!pointerStart) return;
-        const deltaX = event.clientX - pointerStart.x;
-        if (Math.abs(deltaX) < 6 && !dragged) return;
-        dragged = true;
-        dbsCarousel.scrollLeft = pointerStart.scrollLeft - deltaX;
-        event.preventDefault();
-      });
-      const stopDbsDrag = () => {
-        if (pointerStart) dbsCarousel.style.scrollBehavior = pointerStart.scrollBehavior;
-        pointerStart = null;
-        if (!dragged) return;
-        window.setTimeout(() => { dragged = false; }, 0);
-      };
-      dbsCarousel.addEventListener('pointerup', stopDbsDrag);
-      dbsCarousel.addEventListener('pointercancel', stopDbsDrag);
-      dbsCarousel.addEventListener('click', event => {
-        if (!dragged) return;
-        event.preventDefault();
-        event.stopPropagation();
-      }, true);
-
-      let lastWheelScroll = 0;
-      dbsCarousel.addEventListener('wheel', event => {
-        const horizontalDelta = event.deltaX;
-        if (Math.abs(horizontalDelta) < 12 || Math.abs(event.deltaX) < Math.abs(event.deltaY)) return;
-        event.preventDefault();
-        const now = performance.now();
-        if (now - lastWheelScroll < 350) return;
-        lastWheelScroll = now;
-        const direction = Math.sign(horizontalDelta);
-        const atEnd = dbsCarousel.scrollLeft + dbsCarousel.clientWidth >= dbsCarousel.scrollWidth - 8;
-        if (direction > 0 && atEnd) {
-          dbsCarousel.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          dbsCarousel.scrollBy({
-            left: direction * Math.max(Math.abs(horizontalDelta), 380),
-            behavior: 'smooth'
-          });
-        }
-      }, { passive: false });
+      cleanups.push(startAutoSlideshow(dbsCarousel, () => updateDbsSlide(dbsActiveSlide + 1)));
     }
 
     document.querySelectorAll('[data-training-doc^="samsung-"][data-training-gallery]').forEach(card => {
@@ -792,38 +803,26 @@ ${renderTrainingProfile(4).replace(/<p class="px-1 text-\[10px\]/, '<div class="
       let active = 0;
       const rotate = () => {
         active = (active + 1) % gallery.length;
-        image.src = gallery[active].src;
-        image.alt = gallery[active].alt;
+        transitionImageSource(image, gallery[active].src, gallery[active].alt || '');
       };
-      const timer = window.setInterval(rotate, 4000);
-      window.addEventListener('beforeunload', () => window.clearInterval(timer), { once: true });
+      cleanups.push(startAutoSlideshow(card, rotate, 4000));
     });
 
-    const lepkomArtifactCarousel = document.getElementById('lepkom-artifact-carousel');
-    if (lepkomArtifactCarousel) {
-      const controls = lepkomArtifactCarousel.previousElementSibling?.querySelectorAll('[data-artifact-direction]');
-      const updateControls = () => {
-        const atStart = lepkomArtifactCarousel.scrollLeft <= 8;
-        const atEnd = lepkomArtifactCarousel.scrollLeft + lepkomArtifactCarousel.clientWidth >= lepkomArtifactCarousel.scrollWidth - 8;
-        controls?.forEach((button) => {
-          const direction = Number(button.dataset.artifactDirection);
-          button.hidden = direction < 0 ? !atEnd : atEnd;
-          button.setAttribute('aria-label', direction < 0 && atEnd ? 'Return to first visual artifact' : direction < 0 ? 'Previous visual artifact' : 'Next visual artifact');
-          if (atStart && direction < 0) button.hidden = true;
+    const lepkomExperienceCarousel = document.getElementById('lepkom-experience-carousel');
+    if (lepkomExperienceCarousel?.children.length > 1) {
+      cleanups.push(startAutoSlideshow(lepkomExperienceCarousel, () => {
+        const slides = Array.from(lepkomExperienceCarousel.children);
+        const currentIndex = slides.reduce((closest, slide, index) => {
+          const currentDistance = Math.abs(slides[closest].offsetLeft - slides[0].offsetLeft - lepkomExperienceCarousel.scrollLeft);
+          const distance = Math.abs(slide.offsetLeft - slides[0].offsetLeft - lepkomExperienceCarousel.scrollLeft);
+          return distance < currentDistance ? index : closest;
+        }, 0);
+        const nextIndex = (currentIndex + 1) % slides.length;
+        lepkomExperienceCarousel.scrollTo({
+          left: slides[nextIndex].offsetLeft - slides[0].offsetLeft,
+          behavior: 'smooth'
         });
-      };
-      controls?.forEach((button) => {
-        button.addEventListener('click', () => {
-          const direction = Number(button.dataset.artifactDirection);
-          const atEnd = lepkomArtifactCarousel.scrollLeft + lepkomArtifactCarousel.clientWidth >= lepkomArtifactCarousel.scrollWidth - 8;
-          lepkomArtifactCarousel.scrollTo({
-            left: direction < 0 && atEnd ? 0 : lepkomArtifactCarousel.scrollLeft + direction * 380,
-            behavior: 'smooth'
-          });
-        });
-      });
-      lepkomArtifactCarousel.addEventListener('scroll', updateControls, { passive: true });
-      window.setTimeout(updateControls, 0);
+      }));
     }
 
     document.querySelectorAll('main img:not([loading])').forEach((image) => {

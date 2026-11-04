@@ -1,11 +1,14 @@
 /* Event photos */
+import { startAutoSlideshow } from '@/lib/autoSlideshow.js';
+import { transitionImageSource } from '@/lib/slideTransitions.js';
+
 export function mountEventPhotos(scope) {
     const slots = Array.from(document.querySelectorAll('#last-events [data-photo-key]'));
     const imagesByEvent = new Map();
     const lightbox = document.createElement('dialog');
     lightbox.className = 'event-proof-lightbox';
     lightbox.setAttribute('aria-label', 'Event documentation image viewer');
-    lightbox.innerHTML = '<div class="event-proof-lightbox-top"><strong data-photo-view-title></strong><div class="event-proof-lightbox-actions"><button type="button" data-photo-view-prev aria-label="Previous event photo">‹</button><button type="button" data-photo-view-next aria-label="Next event photo">›</button><button type="button" data-photo-view-close aria-label="Close photo">×</button></div></div><img class="event-proof-lightbox-img" alt=""><p class="event-proof-lightbox-caption"></p>';
+    lightbox.innerHTML = '<div class="event-proof-lightbox-top"><strong data-photo-view-title></strong><div class="event-proof-lightbox-actions"><button type="button" data-photo-view-close aria-label="Close photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12"></path></svg></button></div></div><div class="event-proof-lightbox-stage"><img class="event-proof-lightbox-img" alt=""><button type="button" class="event-proof-lightbox-nav previous" data-photo-view-prev aria-label="Previous event photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button><button type="button" class="event-proof-lightbox-nav next" data-photo-view-next aria-label="Next event photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></div><p class="event-proof-lightbox-caption"></p>';
     scope.append(document.body, lightbox);
     const imageEl = lightbox.querySelector('img');
     const titleEl = lightbox.querySelector('[data-photo-view-title]');
@@ -20,8 +23,13 @@ export function mountEventPhotos(scope) {
       if (!group.length) return;
       activeIndex = (index + group.length) % group.length;
       const item = group[activeIndex];
-      imageEl.src = item.image.currentSrc || item.image.src;
-      imageEl.alt = item.image.alt;
+      const src = item.image.currentSrc || item.image.src;
+      const alt = item.image.alt;
+      if (lightbox.open) transitionImageSource(imageEl, src, alt);
+      else {
+        imageEl.src = src;
+        imageEl.alt = alt;
+      }
       titleEl.textContent = item.button.dataset.photoTitle || 'Activity documentation';
       captionEl.textContent = item.button.dataset.photoCaption || '';
       prevEl.disabled = nextEl.disabled = group.length <= 1;
@@ -36,8 +44,7 @@ export function mountEventPhotos(scope) {
         : [{ src, title: button.dataset.photoTitle, caption: button.dataset.photoCaption }];
       let galleryIndex = 0;
       const setGalleryItem = item => {
-        img.src = item.src;
-        img.alt = item.title || '';
+        transitionImageSource(img, item.src, item.title || '');
         button.dataset.photoTitle = item.title || '';
         button.dataset.photoCaption = item.caption || '';
       };
@@ -75,8 +82,7 @@ export function mountEventPhotos(scope) {
         advanceGallery();
       });
       if (gallery.length > 1) {
-        const autoplay = window.setInterval(advanceGallery, 4000);
-        scope.add(() => window.clearInterval(autoplay));
+        scope.add(startAutoSlideshow(button, advanceGallery, 4000));
       }
       button.addEventListener('click', () => {
         const group = populated(button.dataset.eventPhoto);
