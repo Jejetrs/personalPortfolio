@@ -232,6 +232,7 @@ const STYLE = `
 .pmx tbody th{color:var(--acc);font-weight:700}
 .pmx tbody th span{display:block;color:var(--acc2);font:800 9px/1.2 "JetBrains Mono",monospace}
 .pmx td{color:#465674}.pmx td:last-child{color:var(--acc2);font-weight:600}
+.pmx .tbl-wrap th,.pmx .tbl-wrap td,.pmx .tbl-wrap th span{color:#000}
 .pmx-lb{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(10,14,26,.94);animation:pmxin .25s ease}
 .pmx-lb .stage{flex:1;width:100%;min-height:0;overflow:auto;display:flex;padding:56px 16px 8px}
 .pmx-lb img{margin:auto;max-width:100%;max-height:100%;object-fit:contain;border-radius:10px;cursor:zoom-in;animation:pmx-gallery-fade .5s ease-in-out both}
