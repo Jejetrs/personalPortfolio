@@ -7,7 +7,9 @@ import { META } from './meta.js';
 import PTTelekomunikasiIndonesia from './sections/PTTelekomunikasiIndonesia.jsx';
 
 export default function WorkPage() {
-  useDocumentMeta(META);
+  useDocumentMeta({
+    ...META,
+  });
   useWorkBehavior();
   return (
     <>
