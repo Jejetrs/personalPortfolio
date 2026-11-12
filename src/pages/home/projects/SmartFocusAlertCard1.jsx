@@ -147,7 +147,7 @@ export default function SmartFocusAlertCard1() {
               </div>
             </div>
           </div>
-          <div className="border-t border-blue-100/90 pt-5 space-y-4">
+          <div className="pt-5 space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
               <div className="bg-white rounded-xl p-3.5 border border-blue-100 shadow-xs space-y-1.5 flex flex-col justify-between">
                 <div className="space-y-1.5">

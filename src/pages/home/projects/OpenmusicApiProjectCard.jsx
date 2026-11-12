@@ -11,6 +11,17 @@ export default function OpenmusicApiProjectCard() {
 .openmusic-card .om-architecture-node em{display:block;margin-top:3px;color:#657c99;font-size:10px;font-weight:500;font-style:normal}
 @media(max-width:640px){.openmusic-card .om-architecture-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
+.openmusic-card .om-crud{margin-top:11px;border:1px solid #d5e5fd;border-radius:12px;background:#fff;padding:12px}
+.openmusic-card .om-crud-intro{margin:0 0 8px;color:#62738b;font-size:11px;line-height:1.5}
+.openmusic-card .om-crud-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 14px}
+.openmusic-card .om-crud-item{display:flex;align-items:flex-start;gap:8px;min-width:0}
+.openmusic-card .om-crud-icon{width:22px;height:22px;flex:none;display:grid;place-items:center;border-radius:6px;background:#182d4a;color:#fff;font-size:10px;font-weight:800}
+.openmusic-card .om-crud-copy{min-width:0;color:#62738b;font-size:10px;line-height:1.45}
+.openmusic-card .om-crud-copy strong{display:flex;align-items:center;gap:6px;margin:0 0 2px;color:#182d4a;font-size:11px}
+.openmusic-card .om-crud-method{border-radius:5px;background:#e8edf4;padding:1px 5px;color:#53657c;font:800 9px/1.5 ui-monospace,Consolas,monospace}
+.openmusic-card .om-crud-note{margin:8px 0 0;color:#71839b;font-size:9px;line-height:1.45}
+@media(max-width:640px){.openmusic-card .om-crud-grid{grid-template-columns:1fr}}
+
 .openmusic-card{--dev-acc:#1853aa;--dev-line:#bfdbfe;font-size:12px;line-height:1.5}
 .openmusic-card .om-layout{padding-top:0!important;gap:20px}
 .openmusic-card .om-copy{margin:.75rem 0!important}
@@ -457,6 +468,47 @@ export default function OpenmusicApiProjectCard() {
                   </div>
                 </article>
               </div>
+            </section>
+            <section className="om-crud" aria-labelledby="openmusic-crud-title">
+              <h3 id="openmusic-crud-title">
+                CRUD, in plain words
+              </h3>
+              <p className="om-crud-intro">
+                CRUD is the four basic things an app does with data: Create, Read, Update and Delete.
+              </p>
+              <div className="om-crud-grid">
+                <div className="om-crud-item">
+                  <span className="om-crud-icon" aria-hidden="true">C</span>
+                  <div className="om-crud-copy">
+                    <strong>Create <span className="om-crud-method">POST</span></strong>
+                    Add an album or a song. Missing fields return 400, for example "title" is required.
+                  </div>
+                </div>
+                <div className="om-crud-item">
+                  <span className="om-crud-icon" aria-hidden="true">R</span>
+                  <div className="om-crud-copy">
+                    <strong>Read <span className="om-crud-method">GET</span></strong>
+                    List songs or open an album. GET /songs returns 200 with id, title and performer.
+                  </div>
+                </div>
+                <div className="om-crud-item">
+                  <span className="om-crud-icon" aria-hidden="true">U</span>
+                  <div className="om-crud-copy">
+                    <strong>Update <span className="om-crud-method">PUT</span></strong>
+                    Edit an album or a song. An invalid payload returns 400, for example "name" is required.
+                  </div>
+                </div>
+                <div className="om-crud-item">
+                  <span className="om-crud-icon" aria-hidden="true">D</span>
+                  <div className="om-crud-copy">
+                    <strong>Delete <span className="om-crud-method">DELETE</span></strong>
+                    Remove an album. A valid id returns 200; an unknown id returns 404.
+                  </div>
+                </div>
+              </div>
+              <p className="om-crud-note">
+                Albums and songs are the CRUD part; playlists, album likes, collaborations and exports add JWT on top. Checked with 457 Postman tests, 0 failed.
+              </p>
             </section>
           </section>
         </div>

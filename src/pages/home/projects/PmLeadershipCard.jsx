@@ -204,14 +204,16 @@ const STYLE = `
 .pmx .fcap{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 2px;color:var(--mut);font-size:11px;line-height:1.4}
 .pmx .fcap b{overflow:hidden;color:var(--ink);font-size:12px;font-weight:600;text-overflow:ellipsis;white-space:nowrap}
 .pmx .fcap span{flex:none;font:600 10px/1.3 "JetBrains Mono",monospace;letter-spacing:.03em}
-.pmx .dd{margin-top:12px}
-.pmx .dd-btn{display:flex;align-items:center;gap:8px;width:100%;padding:9px 13px;border:1px solid var(--line);border-radius:12px;background:#ffffffcc;color:var(--ink);font:700 12px/1.3 inherit;font-family:inherit;text-align:left;cursor:pointer;transition:background .2s}
-.pmx .dd-btn:hover{background:#fff}
-.pmx .dd-btn:focus-visible{outline:3px solid #9fb3d6;outline-offset:2px}
-.pmx .dd-btn i{width:8px;height:8px;border-radius:50%;background:var(--acc2);flex:none}
-.pmx .dd-btn .n{padding:2px 9px;border-radius:99px;background:#eef3fc;color:var(--mut);font-size:10px;font-weight:700}
-.pmx .dd-btn .act{margin-left:auto;display:flex;align-items:center;gap:6px;color:var(--mut);font-size:11px;font-weight:600}
-.pmx .dd-btn svg{transition:transform .25s}.pmx .dd-btn[aria-expanded=true] svg{transform:rotate(180deg)}
+.pmx .project-dropdown-disclosure{--dev-acc:var(--acc);position:relative;z-index:1;width:calc(100% + 2rem);margin:.75rem -1rem -1rem!important;padding:.75rem 1rem!important;border-top:1px solid var(--line);border-radius:0 0 16px 16px;background:rgba(255,255,255,.6)}
+.pmx .pmx-details-toggle{display:flex;width:100%;align-items:center;justify-content:space-between;gap:.75rem;padding:.25rem .5rem;border:0;border-radius:.5rem;background:rgba(255,255,255,.55);color:#0f172a;text-align:left;cursor:pointer;transition:background-color .2s ease}
+.pmx .pmx-details-toggle:hover{background:rgba(255,255,255,.9)}
+.pmx .pmx-details-toggle:focus-visible{outline:2px solid var(--acc2);outline-offset:2px}
+.pmx .dd-title{display:flex;min-width:0;align-items:center;gap:.5rem}
+.pmx .dd-icon{display:block;width:16px;height:16px;flex:none;color:var(--acc)}
+.pmx .dd-name{overflow:hidden;color:#0f172a;font-size:.75rem;font-weight:600;text-overflow:ellipsis;white-space:nowrap}
+.pmx .dd-act{display:flex;flex:none;align-items:center;gap:.375rem;color:#64748b;font-size:.75rem;font-weight:500;white-space:nowrap}
+.pmx .dd-act .accordion-chevron{display:inline-block;color:var(--acc);transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.pmx .pmx-details-toggle[aria-expanded=true] .accordion-chevron{transform:rotate(180deg)}
 .pmx .dd-body{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding-top:10px}
 .pmx .dd-body>*{min-width:0}
 .pmx .box{padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:#ffffffd6}
@@ -246,6 +248,8 @@ const STYLE = `
 @media(max-width:1023px){.pmx .panel{grid-template-columns:1fr}.pmx .story,.pmx .gal{grid-column:1}.pmx .gallery-stage{flex:initial;aspect-ratio:1/1}.pmx .feat{height:100%}.pmx .dd-body{grid-template-columns:1fr}.pmx .items.six{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:860px){.pmx .project-tags .chips{flex:1 0 100%;margin-left:0;justify-content:flex-start}}
 @media(max-width:640px){.pmx{padding:16px;border-radius:16px}.pmx h3{font-size:24px}.pmx .project-title{margin-top:18px}.pmx .kicker{font-size:11px}.pmx .body{margin-top:14px;font-size:12px}.pmx .stats{margin-top:12px}.pmx .stat{min-height:50px;padding:7px}.pmx ol.pts,.pmx .items{grid-template-columns:1fr}.pmx .gal{gap:12px;padding:10px;border-radius:20px}.pmx .gallery-stage{padding:10px 12px 48px;border-radius:18px}.pmx .gallery-nav.prev{left:6px}.pmx .gallery-nav.next{right:6px}.pmx .gallery-dots{bottom:10px;gap:5px;padding:4px 7px}.pmx .gallery-dot{width:7px;height:7px}.pmx .gallery-dot[aria-current=true]{width:18px}}
+@media(min-width:640px){.pmx .project-dropdown-disclosure{width:calc(100% + 2.5rem);margin:.75rem -1.25rem -1.25rem!important;padding:.75rem 1.25rem!important}}
+@media(max-width:480px){.pmx .dd-title{gap:6px}.pmx .dd-act{gap:4px;font-size:10px}}
 @media(prefers-reduced-motion:reduce){.pmx .panel,.pmx .feat img,.pmx-lb img{animation:none}}
 `;
 
@@ -302,12 +306,20 @@ function Details({ program }) {
   const [open, setOpen] = useState(false);
   if (!count) return null;
   return (
-    <div className="dd">
-      <button type="button" className="dd-btn" aria-expanded={open} onClick={() => setOpen((value) => !value)}>
-        <i />
-        <span>Delivery details</span>
-        <span className="n">{count} sections</span>
-        <span className="act">{open ? "Hide" : "Show"} details {CHEVRON}</span>
+    <div className="project-dropdown-disclosure dev-dd">
+      <button type="button" className="pmx-details-toggle" aria-expanded={open} onClick={() => setOpen((value) => !value)}>
+        <span className="dd-title">
+          <svg className="dd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M9 6h11M9 12h11M9 18h11" />
+            <path d="M4 6h.01M4 12h.01M4 18h.01" strokeWidth="3" />
+          </svg>
+          <span className="dd-name">Delivery details</span>
+          <span className="project-dropdown-badge dev-badge">{count} sections</span>
+        </span>
+        <span className="dd-act">
+          <span>{open ? "Hide Details" : "Show Details"}</span>
+          <span className="accordion-chevron" aria-hidden="true">⌄</span>
+        </span>
       </button>
       {open && (
         <div className="dd-body">

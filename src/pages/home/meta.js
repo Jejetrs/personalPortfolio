@@ -680,6 +680,7 @@ export const PAGE_CSS = `
     #modal-bullets > li {
       gap: 0.45rem;
     }
+    #modal-skills span,
     #modal-tools span {
       padding: 0.16rem 0.42rem;
       border-color: #c7d2fe;
@@ -690,12 +691,14 @@ export const PAGE_CSS = `
       line-height: 1.3;
       box-shadow: inset 0 0 0 1px rgba(99, 102, 241, .04);
     }
+    #modal-skills-panel,
     #modal-tools-panel {
       padding: 0.42rem;
       border: 1px solid #c7d2fe;
       border-radius: 0.7rem;
       background: linear-gradient(135deg, #f5f7ff, #eef2ff);
     }
+    #modal-skills-panel h4,
     #modal-tools-panel h4 {
       display: flex;
       align-items: center;
@@ -706,6 +709,7 @@ export const PAGE_CSS = `
       font-weight: 800;
       letter-spacing: 0.12em;
     }
+    #modal-skills-panel h4::before,
     #modal-tools-panel h4::before {
       width: 0.32rem;
       height: 0.72rem;

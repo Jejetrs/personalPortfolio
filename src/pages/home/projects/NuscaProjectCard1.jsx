@@ -305,9 +305,16 @@ export default function NuscaProjectCard1() {
                         Prototype evaluation · n=15
                       </span>
                     </div>
-                    <p className="mt-1 text-[10px] leading-relaxed text-slate-500">
-                      5 students, 5 homemakers, and 5 employed participants (including one healthcare worker) tried the scan workflow, then rated 10 experience dimensions on a 5-point Likert scale.
-                    </p>
+                    <div className="mt-1 grid grid-cols-1 gap-1.5 text-[10px] leading-relaxed text-slate-500 sm:grid-cols-2">
+                      <p>
+                        <strong className="font-bold text-slate-700">Who:</strong>{" "}
+                        5 students, 5 homemakers, and 5 employed participants (including one healthcare worker).
+                      </p>
+                      <p>
+                        <strong className="font-bold text-slate-700">How:</strong>{" "}
+                        A short briefing, then each person ran all 10 planned scenarios (UAT-01 to UAT-10) alone and rated them 1-5. Separately, 12 black-box scenarios covered upload, camera, cropping, analysis and error handling.
+                      </p>
+                    </div>
 
                     <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
                       <div className="rounded-lg bg-emerald-50 px-2.5 py-2">

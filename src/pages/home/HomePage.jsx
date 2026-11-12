@@ -32,7 +32,7 @@ export default function HomePage() {
             <div className="pj-head mb-7">
               <p className="pj-kicker">
                 <span aria-hidden="true" />
-                Selected work
+                Deep Dive : Every Project Card
               </p>
               <h2 className="pj-title">
                 <span id="about-project-heading">
@@ -54,7 +54,7 @@ export default function HomePage() {
               <button aria-pressed="false" className="project-filter about-project-category inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 font-medium text-xs hover:bg-slate-50 hover:text-slate-900 transition shadow-xs active:scale-95" data-project-category="analytics" type="button">
                 <span className="w-2 h-2 rounded-full bg-amber-500"></span>
                 <span>
-                  Product/Business Analytics
+                  IT Product/Business Analytics
                 </span>
               </button>
               {" "}
@@ -75,14 +75,14 @@ export default function HomePage() {
               <button aria-pressed="false" className="project-filter about-project-category inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 font-medium text-xs hover:bg-slate-50 hover:text-slate-900 transition shadow-xs active:scale-95" data-project-category="aiml" type="button">
                 <span className="w-2 h-2 rounded-full bg-purple-500"></span>
                 <span>
-                  ML/AI Engineering
+                  Machine Learning/AI Engineering
                 </span>
               </button>
               {" "}
               <button aria-pressed="false" className="project-filter about-project-category inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 font-medium text-xs hover:bg-slate-50 hover:text-slate-900 transition shadow-xs active:scale-95" data-project-category="developer" type="button">
                 <span className="w-2 h-2 rounded-full bg-blue-500"></span>
                 <span>
-                  Developer
+                  Developer & Database
                 </span>
               </button>
             </div>

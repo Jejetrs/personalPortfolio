@@ -6,14 +6,14 @@ export default function DesignProcessPart1() {
       <div className="pr-head">
         <p className="pr-kicker">
           <span aria-hidden="true" />
-          How I work
+          HOW I WORK
         </p>
         <h2>
-          My User-Centered
+          The Thinking Behind
           <br />
-          <em>Development Process</em>
+          <em>My Work</em>
         </h2>
-        <p>From understanding people to shipping and testing the build. The design side and the engineering side run through every step.</p>
+        <p>Different projects bring different challenges. These are the principles that guide how I approach problems, make decisions, collaborate, and learn from experience.</p>
       </div>
       <DesignProcessPart1Part1 />
     </div>

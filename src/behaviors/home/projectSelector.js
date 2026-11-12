@@ -65,10 +65,10 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       };
     });
     const categoryNames = {
-      analytics: 'Product/Business Analytics',
+      analytics: 'IT Product/Business Analytics',
       team: 'Project Management & Leadership',
       uiux: 'UI/UX Design',
-      aiml: 'ML/AI Engineering',
+      aiml: 'Machine Learning/AI Engineering',
       developer: 'Developer'
     };
     const categoryDescriptions = {

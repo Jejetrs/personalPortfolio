@@ -1,0 +1,24 @@
+{
+  "name": "portfolio-jessica-theresia",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "scripts": {
+    "predev": "npm run check-live",
+    "dev": "vite",
+    "prebuild": "npm run check-live",
+    "build": "vite build",
+    "check-live": "node scripts/check-live.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "pdfjs-dist": "^6.2.108",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.9.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.4",
+    "vite": "^7.1.7"
+  }
+}

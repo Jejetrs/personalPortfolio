@@ -1,12 +1,6 @@
 const LINKEDIN = "https://www.linkedin.com/in/jessica-trs";
 const EMAIL = "mailto:jssicatheresia@gmail.com";
 
-const FLOATERS = [
-  ["GPA 3.97", "Informatics, 4.00 scale"],
-  ["Design Intern ‘26", "Learning on real projects"],
-  ["ASAH", "Distinction graduate"],
-];
-
 export default function AboutPart1Part1() {
   return (
     <div className="hx-grid">
@@ -15,15 +9,16 @@ export default function AboutPart1Part1() {
           Jessica Theresia<em>.</em>
         </h1>
         <p className="hx-roles">
-          <span className="hx-role hot">UI/UX Designer</span>
-          <span className="hx-role">AI/ML Engineer</span>
-          <span className="hx-role">Digital Product Development</span>
+          <span className="hx-role hot">Digital Product & Business Analysis</span>
+          <span className="hx-role">UI/UX Designer</span>
+          <span className="hx-role">Developer & AI/ML</span>
         </p>
+        <div className="hx-profile-tags">
+          <span>Bekasi, Indonesia</span>
+          <span>GPA 3.97</span>
+        </div>
         <p className="hx-lead">
-          I enjoy understanding problems and turning ideas into <strong><span className="hx-highlight">human-centered</span> digital products</strong>. With
-          experience in <strong>research and analysis, UI/UX design, AI/ML, and full-stack development</strong>, I bring together
-          user needs, business goals, and technical understanding to design, build, and improve meaningful solutions through
-          hands-on work and team collaboration.
+          I enjoy turning complex problems into <span className="hx-highlight">human-centered</span> digital solutions. With experience across research and analysis, UI/UX design, AI/ML, and full-stack development, I bring together user needs, business goals, and technical understanding to create products that are practical, meaningful, and built with purpose.
         </p>
         <p
           aria-label="Turning user needs into clear and lasting products"
@@ -52,16 +47,6 @@ export default function AboutPart1Part1() {
         <div className="hx-photo">
           <img alt="Jessica Theresia" src="/assets/Photo%20Profile.png" />
         </div>
-        <p className="hx-status-tag">
-          <span className="hx-dot" aria-hidden="true" />
-          Open to opportunities · Bekasi, Indonesia
-        </p>
-        {FLOATERS.map(([big, small], index) => (
-          <div className={`hx-float f${index + 1}`} key={big}>
-            <b>{big}</b>
-            <span>{small}</span>
-          </div>
-        ))}
       </div>
     </div>
   );

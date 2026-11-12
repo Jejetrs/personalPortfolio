@@ -15,7 +15,8 @@ export function mountHomeInteractions(scope) {
         "Study user needs, pain points, and behaviors",
         "Turn research findings into product opportunities"
       ],
-      tools: ["Market Research", "Business Analysis", "SWOT", "Business Model Canvas", "User Research", "FigJam"],
+      coreSkills: ["User Research", "Interviews & Surveys", "Pain Point Analysis", "Market Research", "Customer Profiling", "SWOT Analysis", "Business Model Canvas"],
+      tools: ["FigJam", "Google Sheets", "Excel", "Word"],
       iconSvg: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>`,
       iconBg: "bg-indigo-50 text-primary border-indigo-100",
       bulletColor: "bg-primary"
@@ -30,7 +31,8 @@ export function mountHomeInteractions(scope) {
         "Model user flows and business processes",
         "Frame problems and solutions with product thinking"
       ],
-      tools: ["Figma", "FigJam", "Requirements Mapping", "User Flows", "Process Mapping", "Product Thinking"],
+      coreSkills: ["Requirements Mapping", "User Flows", "Feature Planning", "MVP Scoping", "Task Prioritization", "Technical Feasibility"],
+      tools: ["Figma", "FigJam", "Google Sheets", "Notion", "Canva", "Word"],
       iconSvg: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path><rect height="4" rx="1" width="6" x="9" y="3"></rect><path d="M9 12h6"></path><path d="M9 16h6"></path></svg>`,
       iconBg: "bg-violet-50 text-violet-700 border-violet-100",
       bulletColor: "bg-violet-600"
@@ -45,7 +47,8 @@ export function mountHomeInteractions(scope) {
         "Design responsive layouts across screen sizes",
         "Build reusable design systems and design tokens"
       ],
-      tools: ["Figma", "Wireframing", "Responsive Design", "Prototyping", "Design Systems", "Design Tokens"],
+      coreSkills: ["Wireframing", "Prototyping", "Information Architecture", "Responsive UI", "Design Systems", "Design Tokens", "Design Handoff"],
+      tools: ["Figma", "FigJam"],
       iconSvg: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>`,
       iconBg: "bg-teal-50 text-teal-700 border-teal-100",
       bulletColor: "bg-teal-600"
@@ -60,7 +63,8 @@ export function mountHomeInteractions(scope) {
         "Integrate REST APIs, databases, and services",
         "Train and integrate AI/ML models into product workflows"
       ],
-      tools: ["React", "Node.js", "FastAPI", "Python", "PostgreSQL", "REST APIs", "PyTorch", "TensorFlow", "Machine Learning", "Git & GitHub", "Docker"],
+      coreSkills: ["Frontend Development", "Backend Development", "REST API Integration", "Database Integration", "Data Preprocessing", "ML Model Evaluation", "AI Integration"],
+      tools: ["React.js", "JavaScript", "Node.js", "Python", "PostgreSQL", "Git & GitHub", "Tailwind", "TensorFlow", "Computer Vision", "PyTorch", "REST API"],
       iconSvg: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline><circle cx="12" cy="12" r="2"></circle></svg>`,
       iconBg: "bg-blue-50 text-blue-700 border-blue-100",
       bulletColor: "bg-blue-600"
@@ -75,7 +79,8 @@ export function mountHomeInteractions(scope) {
         "Coordinate team timelines, milestones, and progress",
         "Document deliverables and support handoffs"
       ],
-      tools: ["Usability Testing", "Black-box Testing", "UAT", "Google Workspace", "Microsoft Office", "Canva", "Agile", "SDLC", "Team Coordination"],
+      coreSkills: ["Usability Testing", "User Acceptance Testing", "Black-Box Testing", "Feedback Analysis", "Milestone Tracking", "Team Coordination", "Project Documentation"],
+      tools: ["Google Sheets", "Excel", "PowerPoint", "Notion", "Word", "Canva"],
       iconSvg: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m9 12 2 2 4-4"></path><path d="M12 3 5 6v5c0 4.5 3 7 7 10 4-3 7-5.5 7-10V6l-7-3z"></path></svg>`,
       iconBg: "bg-amber-50 text-amber-700 border-amber-100",
       bulletColor: "bg-amber-600"
@@ -136,7 +141,9 @@ export function mountHomeInteractions(scope) {
     const descriptionEl = document.getElementById('modal-description');
     const iconBox = document.getElementById('modal-icon-box');
     const bulletsEl = document.getElementById('modal-bullets');
+    const skillsEl = document.getElementById('modal-skills');
     const toolsEl = document.getElementById('modal-tools');
+    const toolsHeadingEl = document.getElementById('modal-tools-heading');
 
     if (titleEl) titleEl.textContent = data.title;
     if (badgeEl) {
@@ -146,6 +153,9 @@ export function mountHomeInteractions(scope) {
       }
     }
     if (descriptionEl) descriptionEl.textContent = data.description;
+    if (toolsHeadingEl) {
+      toolsHeadingEl.textContent = index === 3 ? 'TOOLS & TECHNOLOGIES' : 'TOOLS';
+    }
     if (iconBox) {
       iconBox.className = `w-8 h-8 rounded-xl border flex items-center justify-center shrink-0 transition-colors shadow-sm ${data.iconBg}`;
       iconBox.innerHTML = data.iconSvg;
@@ -160,6 +170,14 @@ export function mountHomeInteractions(scope) {
           <span>${text}</span>
         </li>
       `).join('');
+    }
+    if (skillsEl) {
+      skillsEl.replaceChildren(...data.coreSkills.map((skill) => {
+        const chip = document.createElement('span');
+        chip.className = 'rounded-full border border-indigo-100 bg-white/80 px-1.5 py-0.5 text-[10px] font-medium text-slate-700';
+        chip.textContent = skill;
+        return chip;
+      }));
     }
     if (toolsEl) {
       toolsEl.replaceChildren(...data.tools.map((tool) => {
@@ -212,7 +230,7 @@ export function mountHomeInteractions(scope) {
     }).filter(Boolean);
     const preferredTop = preferredBelow ? nodeBottom + 10 : nodeTop - cardHeight - 10;
     const top = Math.max(12, Math.min(preferredTop, maxTop));
-    if (currentPillar === 2) {
+    if (currentPillar === 2 || currentPillar === 3) {
       overlay.style.left = `${centeredLeft}px`;
       overlay.style.top = `${top}px`;
       return;

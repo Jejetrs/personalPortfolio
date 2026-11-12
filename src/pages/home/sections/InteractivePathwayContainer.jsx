@@ -72,11 +72,15 @@ export default function InteractivePathwayContainer() {
               </li>
             </ul>
           </div>
-          <div className="relative z-10" id="modal-tools-panel">
-            <h4 className="font-mono">
-              {"CORE TOOLS & SKILLS"}
-            </h4>
-            <div className="flex flex-wrap gap-1" id="modal-tools"></div>
+          <div className="relative z-10 space-y-2" id="modal-skills-tools">
+            <div id="modal-skills-panel">
+              <h4 className="font-mono">CORE SKILLS</h4>
+              <div className="flex flex-wrap gap-1" id="modal-skills"></div>
+            </div>
+            <div id="modal-tools-panel">
+              <h4 className="font-mono" id="modal-tools-heading">TOOLS</h4>
+              <div className="flex flex-wrap gap-1" id="modal-tools"></div>
+            </div>
           </div>
         </div>
       </div>

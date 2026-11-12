@@ -1,58 +1,44 @@
 const STEPS = [
   {
     n: "01",
-    verb: "Understand",
-    title: "Know the user, test the assumptions",
-    text: "Who they are, what they do today, and what I only think I know.",
-    design: ["Interviews & surveys", "Card sorting", "Affinity diagram"],
-    tech: ["Data Profiling"],
-    proof: "AOShuttle · card sorting reshaped the app structure",
+    verb: "Question",
+    title: "Look beyond what's being asked.",
+    text: "I try to understand the underlying problem, question assumptions, and identify actual needs before exploring solutions.",
+    question: "Are we solving the right problem?",
   },
   {
     n: "02",
-    verb: "Prioritize",
-    title: "Decide which needs come first",
-    text: "Rank needs by value, time, data and tech limits before drawing anything.",
-    design: ["SWOT", "Business model", "Competitor analysis"],
-    tech: ["Feasibility check"],
-    proof: "Trustee · market research and business model",
+    verb: "Balance",
+    title: "Find the balance between ideal and practical.",
+    text: "I consider user needs, business goals, technical feasibility, and available resources to develop valuable, realistic solutions without unnecessary complexity.",
+    question: "What matters most, and what are we compromising?",
   },
   {
     n: "03",
-    verb: "Design",
-    title: "Shape the solution",
-    text: "Turn the priority list into flows, screens and a system that can be built.",
-    design: ["User flow", "Wireframe", "Figma design system"],
-    tech: ["System design", "API & database plan"],
-    proof: "INAPROC · design system and components",
+    verb: "Clarify",
+    title: "Make the reasoning as clear as the solution.",
+    text: "I communicate the reasoning behind decisions and document key considerations to help others understand the direction and move forward.",
+    question: "Can others understand why this direction makes sense?",
   },
   {
     n: "04",
-    verb: "Build",
-    title: "Make it work end to end",
-    text: "Code the interface, the service and the model so the idea survives real use.",
-    design: ["Design handoff"],
-    tech: ["React", "Flask / Node.js", "Python ML", "Git"],
-    proof: "Smart Focus Alert · detection model, web app, reports",
+    verb: "Align",
+    title: "Progress works better when everyone understands their part.",
+    text: "I focus on clear responsibilities, open communication, and consistent follow-ups to keep teams aligned and dependencies visible.",
+    question: "Does everyone know what needs to happen next?",
   },
   {
     n: "05",
-    verb: "Validate",
-    title: "Test, then improve",
-    text: "Put it in front of testers, measure, and feed the findings back in.",
-    design: ["Usability testing", "SEQ / UAT scoring"],
-    tech: ["Black-box testing", "Model evaluation"],
-    proof: "Nusca · UAT 4.55 / 5 from 10+ testers",
+    verb: "Reflect",
+    title: "Look beyond whether something simply works.",
+    text: "I see testing and feedback as opportunities to challenge assumptions, not just confirm success. I use findings and limitations to identify areas for improvement.",
+    question: "What did we actually learn, and what should change?",
   },
 ];
 
 export default function DesignProcessPart1Part1() {
   return (
     <>
-      <p className="pr-legend" aria-hidden="true">
-        <span className="d">Design &amp; research</span>
-        <span className="t">Engineering</span>
-      </p>
       <ol className="pr-track">
         {STEPS.map((step) => (
           <li className="pr-step" key={step.n}>
@@ -62,20 +48,10 @@ export default function DesignProcessPart1Part1() {
             </div>
             <h3>{step.title}</h3>
             <p>{step.text}</p>
-            <ul className="pr-tags d" aria-label="Design and research">
-              {step.design.map((tag) => (
-                <li key={tag}>{tag}</li>
-              ))}
-            </ul>
-            <ul className="pr-tags t" aria-label="Engineering">
-              {step.tech.map((tag) => (
-                <li key={tag}>{tag}</li>
-              ))}
-            </ul>
-            <p className="pr-proof">
-              <b>Seen in</b>
-              {step.proof}
-            </p>
+            <div className="pr-question">
+              <span>THE QUESTION I ASK</span>
+              <p><em>{step.question}</em></p>
+            </div>
           </li>
         ))}
       </ol>

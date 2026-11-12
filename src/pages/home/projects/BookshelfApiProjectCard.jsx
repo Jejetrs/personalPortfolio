@@ -1,4 +1,6 @@
 
+import CrudExplainer from "./CrudExplainer.jsx";
+
 export default function BookshelfApiProjectCard() {
   return (
       <>
@@ -29,7 +31,7 @@ export default function BookshelfApiProjectCard() {
 .bk .bk-cap{padding:8px 10px;background:#ecfdf5b3;border:1px solid #d1fae5;border-radius:8px}.bk .bk-cap b{display:block;font-size:11px;font-weight:700;color:#1e293b}.bk .bk-cap span{font-size:9.5px;line-height:1.4;color:#475569}
 .bk code{font:10px ui-monospace,Menlo,monospace;background:#d1fae5;color:#065f46;border-radius:4px;padding:0 4px}
 .bk .bk-note{font-size:9.5px;line-height:1.5;color:#475569;background:#ffffffe6;border:1px solid #d1fae5;border-radius:12px;padding:8px 12px;margin-top:.75rem;box-shadow:0 1px 2px rgba(0,0,0,.05)}.bk .bk-note strong{color:#006e4b}
-.bk .bk-api{margin-top:0;background:#fff;border:1px solid #d1fae5;border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.bk .bk-right{display:grid;gap:.75rem;min-width:0;align-content:start}.bk .bk-right .crud-note{margin-top:0}.bk .bk-api{margin-top:0;background:#fff;border:1px solid #d1fae5;border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.05)}
 .bk .bk-bar{display:flex;align-items:center;gap:5px;height:34px;padding:0 12px;background:#f3f7fa;border-bottom:1px solid #d1fae5}
 .bk .bk-bar i{width:8px;height:8px;border-radius:50%;background:#ff8585}.bk .bk-bar i:nth-child(2){background:#ffcf65}.bk .bk-bar i:nth-child(3){background:#52c98c}
 .bk .bk-bar span{margin-left:auto;font-size:9px;font-weight:700;letter-spacing:.05em;color:#94a3b8;text-transform:uppercase}
@@ -246,6 +248,7 @@ export default function BookshelfApiProjectCard() {
               {" Books live in a JavaScript array. Changes work during the running process, but data resets when the server restarts."}
             </p>
           </section>
+          <div className="bk-right">
           <section className="bk-api" data-bk-lab="">
             <div className="bk-bar">
               <i></i>
@@ -335,6 +338,16 @@ export default function BookshelfApiProjectCard() {
               </div>
             </div>
           </section>
+          <CrudExplainer
+            rows={[
+              { verb: "POST /books", text: "Add a book. 201 Created, and the response returns the new bookId." },
+              { verb: "GET /books, /books/:id", text: "List books or open one. 200, with filters ?name, ?reading and ?finished; 404 if the id does not exist." },
+              { verb: "PUT /books/:id", text: "Edit a book. 200 when valid, 400 when the name is missing." },
+              { verb: "DELETE /books/:id", text: "Remove a book. 200, and the book is no longer found." },
+            ]}
+            note="Checked with 104 Postman tests, 0 failed. Books live in memory, so they reset when the server restarts."
+          />
+          </div>
         </div>
         <section className="bk-gallery" data-gallery="" aria-label="Running project output">
           <div className="bk-gallery-top">

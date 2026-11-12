@@ -63,8 +63,16 @@ export default function NotesApplicationProjectCard() {
 .nt .nt-dgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding-top:12px}
 .nt .nt-dgrid>div{background:#fff;border:1px solid #dbeafe;border-radius:12px;padding:14px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
 .nt .nt-dgrid h4{margin:0 0 8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#0f172a}.nt .nt-dgrid p{font-size:10.5px;line-height:1.5;color:#475569}
+.nt .nt-crud{margin-top:11px;background:#fff;border:1px solid #cbd5e1;border-radius:12px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.nt .nt-crud-intro{font-size:10px;line-height:1.5;color:#475569;margin:0 0 8px!important}
+.nt .nt-crud-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 14px}
+.nt .nt-crud-item{display:flex;align-items:flex-start;gap:8px;min-width:0}
+.nt .nt-crud-icon{width:22px;height:22px;flex:none;display:grid;place-items:center;border-radius:6px;background:#111827;color:#fff;font-size:10px;font-weight:800}
+.nt .nt-crud-copy{min-width:0;color:#53647c;font-size:10px;line-height:1.45}
+.nt .nt-crud-copy strong{display:flex;align-items:center;gap:6px;margin:0 0 2px;color:#182338;font-size:11px}
+.nt .nt-crud-note{margin:8px 0 0!important;color:#718096;font-size:9px;line-height:1.45}
 @media(max-width:1080px){.nt .nt-grid{grid-template-columns:minmax(0,1fr)}.nt .nt-appbody{min-height:340px}}
-@media(max-width:620px){.nt .nt-metrics{grid-template-columns:repeat(2,1fr)}.nt .nt-notegrid{grid-template-columns:1fr}.nt .nt-dgrid{grid-template-columns:1fr}}
+@media(max-width:620px){.nt .nt-metrics{grid-template-columns:repeat(2,1fr)}.nt .nt-notegrid,.nt .nt-dgrid,.nt .nt-crud-grid{grid-template-columns:1fr}}
 
 .nt{--dev-acc:#1d4ed8;--dev-line:#bfdbfe}
 .nt .nt-grid{align-items:stretch}
@@ -195,6 +203,45 @@ export default function NotesApplicationProjectCard() {
                 React handles the UI; Router manages protected pages; Context shares authentication and preferences; authenticated requests connect to the external Notes API.
               </p>
             </div>
+            <section className="nt-crud" aria-labelledby="notes-crud-title">
+              <h3 id="notes-crud-title">CRUD, in plain words</h3>
+              <p className="nt-crud-intro">
+                CRUD is the four basic things an app does with data: Create, Read, Update and Delete.
+              </p>
+              <div className="nt-crud-grid">
+                <div className="nt-crud-item">
+                  <span className="nt-crud-icon" aria-hidden="true">C</span>
+                  <div className="nt-crud-copy">
+                    <strong>Create</strong>
+                    Create a note from the form.
+                  </div>
+                </div>
+                <div className="nt-crud-item">
+                  <span className="nt-crud-icon" aria-hidden="true">R</span>
+                  <div className="nt-crud-copy">
+                    <strong>Read</strong>
+                    Read the notes list, search it, and see archived notes.
+                  </div>
+                </div>
+                <div className="nt-crud-item">
+                  <span className="nt-crud-icon" aria-hidden="true">U</span>
+                  <div className="nt-crud-copy">
+                    <strong>Update</strong>
+                    Edit a note, or archive and restore it.
+                  </div>
+                </div>
+                <div className="nt-crud-item">
+                  <span className="nt-crud-icon" aria-hidden="true">D</span>
+                  <div className="nt-crud-copy">
+                    <strong>Delete</strong>
+                    Delete a note.
+                  </div>
+                </div>
+              </div>
+              <p className="nt-crud-note">
+                CRUD here is seen from the interface side: the React app sends token-based requests to the external Dicoding Notes API. The server side is not mine.
+              </p>
+            </section>
             <div className="nt-panel">
               <h3>
                 ⚙ Implemented Features
