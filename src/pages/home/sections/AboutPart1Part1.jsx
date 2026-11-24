@@ -4,7 +4,7 @@ const LINKEDIN = "https://www.linkedin.com/in/jessica-trs";
 const EMAIL = "mailto:jssicatheresia@gmail.com";
 
 const FACTS = [
-  { label: "Education", value: "Informatics / CS", sub: "Gunadarma University" },
+  { label: "Education", value: "Informatics", sub: "Gunadarma University" },
   { label: "Industry Experience", value: "Designer Intern", sub: "Telkom Magenta · INAPROC" },
   { label: "Specialization", value: "AI × Product UX", sub: "DBS Foundation Camp & ASAH" },
 ];
