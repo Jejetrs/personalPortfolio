@@ -21,6 +21,6 @@ export const CHAPTERS = [
     when: "2026",
     verb: "Deliver",
     title: "Work other people depend on",
-    text: "Telkom Magenta internship as a Designer (Mar–Jul), 30+ INAPROC components audited, 3rd in the Digistar B2B pitch, and Coding Camp facilitator for 20+ learners.",
+    text: "Telkom Indonesia- Magenta internship as a Designer (Mar–Jul), 30+ INAPROC components audited, 3rd in the Digistar B2B pitch, and Coding Camp facilitator for 20+ learners.",
   },
 ];

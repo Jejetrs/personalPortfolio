@@ -5,7 +5,7 @@ const EMAIL = "mailto:jssicatheresia@gmail.com";
 
 const FACTS = [
   { label: "Education", value: "Informatics", sub: "Gunadarma University" },
-  { label: "Industry Experience", value: "Designer Intern", sub: "Telkom Magenta · INAPROC" },
+  { label: "Industry Experience", value: "Designer Intern", sub: "Telkom DDP · INAPROC" },
   { label: "Specialization", value: "AI × Product UX", sub: "DBS Foundation Camp & ASAH" },
 ];
 
