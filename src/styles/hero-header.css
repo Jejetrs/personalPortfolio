@@ -12,7 +12,7 @@
   display: grid;
   justify-items: center;
   text-align: center;
-  padding: clamp(3.2rem, 5vw, 4.2rem) 0 clamp(8.2rem, 10vw, 9rem);
+  padding: clamp(2.4rem, 4vw, 3.6rem) 0 clamp(8.2rem, 10vw, 9rem);
 }
 
 .hh-top::before {
@@ -70,7 +70,7 @@ html body main .hh-title {
   margin: clamp(0.9rem, 1.8vw, 1.3rem) 0 0;
   font-family: "Bricolage Grotesque", "Plus Jakarta Sans", Inter, system-ui, sans-serif !important;
   font-weight: 800 !important;
-  font-size: clamp(2.9rem, 6.7vw, 6rem) !important;
+  font-size: clamp(2.8rem, 6.2vw, 5.6rem) !important;
   line-height: 1 !important;
   letter-spacing: -0.045em !important;
   color: #fff !important;
