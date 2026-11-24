@@ -1,4 +1,16 @@
-import { goToSlide, nextSlide, prevSlide, toggleAccordion } from '@/behaviors/home/projectHandlers.js';
+import { goToSlide, nextSlide, prevSlide } from '@/behaviors/home/projectHandlers.js';
+import { toggleAccordion as toggleCaseStudyAccordion } from '@/behaviors/caseStudy.js';
+
+function handleInaprocAccordionClick(event) {
+  const button = event.currentTarget;
+  toggleCaseStudyAccordion('inaproc');
+  const isOpen = button.getAttribute('aria-expanded') === 'true';
+  const label = button.querySelector('.accordion-text, .project-dropdown-title');
+  const actionLabel = button.querySelector('.project-dropdown-action');
+
+  if (label) label.textContent = isOpen ? 'Hide Project Deliverables' : 'View Project Deliverables';
+  if (actionLabel) actionLabel.textContent = isOpen ? 'Hide Details' : 'Show Details';
+}
 
 export default function InaprocProjectCard() {
   return (
@@ -126,7 +138,7 @@ export default function InaprocProjectCard() {
           </div>
         </div>
         <div className="pt-2 border-t border-rose-100">
-          <button id="inaproc-accordion-btn" type="button" onClick={() => { toggleAccordion('inaproc'); }} aria-expanded="false" className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-white/80 hover:bg-white border border-rose-100 shadow-xs transition group">
+          <button id="inaproc-accordion-btn" type="button" data-preserve-toggle="true" onClick={handleInaprocAccordionClick} aria-expanded="false" aria-controls="inaproc-accordion" className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-white/80 hover:bg-white border border-rose-100 shadow-xs transition group">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-rose-600"></span>
               <span className="accordion-text text-xs font-bold text-slate-800 tracking-tight group-hover:text-rose-700 transition-colors">
@@ -145,12 +157,6 @@ export default function InaprocProjectCard() {
           <div id="inaproc-accordion" className="case-study-accordion-content">
             <div className="case-study-accordion-inner">
               <div className="pt-3 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-rose-950">
-                  <span className="w-1.5 h-1.5 rounded-full bg-rose-600"></span>
-                  <h3 className="">
-                    Project Highlights
-                  </h3>
-                </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5" data-project-highlights="">
                   <div className="bg-white rounded-xl p-2.5 border border-rose-100/70 shadow-xs space-y-1.5">
                     <div className="h-16 rounded-lg overflow-hidden bg-rose-50/50 border border-slate-100">

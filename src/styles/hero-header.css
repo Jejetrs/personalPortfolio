@@ -1,0 +1,680 @@
+.hh {
+  position: relative;
+  color: #fff;
+  margin: 0 0 clamp(1.4rem, 3vw, 2.4rem);
+  padding: 0;
+  font-family: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+}
+
+.hh-top {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  padding: clamp(3.2rem, 5vw, 4.2rem) 0 clamp(8.2rem, 10vw, 9rem);
+}
+
+.hh-top::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -10rem;
+  bottom: -4rem;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.075) 1px, transparent 1px) 0 0 / 44px 44px,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.075) 1px, transparent 1px) 0 0 / 44px 44px,
+    radial-gradient(ellipse 70% 90% at 50% 0%, rgba(120, 160, 255, 0.35), transparent 70%),
+    linear-gradient(180deg, #1737dc 0%, #2150ec 62%, #2f68f4 100%);
+}
+
+.hh-top::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  bottom: -4rem;
+  height: 3.2rem;
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.18));
+}
+
+.hh-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0.48rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.1);
+  font: 700 0.78rem/1 "Plus Jakarta Sans", sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #e6eeff;
+}
+
+.hh-pill svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+
+html body main .hh-title {
+  margin: clamp(0.9rem, 1.8vw, 1.3rem) 0 0;
+  font-family: "Bricolage Grotesque", "Plus Jakarta Sans", Inter, system-ui, sans-serif !important;
+  font-weight: 800 !important;
+  font-size: clamp(2.9rem, 6.7vw, 6rem) !important;
+  line-height: 1 !important;
+  letter-spacing: -0.045em !important;
+  color: #fff !important;
+  white-space: nowrap;
+  text-shadow: 0 6px 30px rgba(8, 20, 120, 0.25);
+}
+
+.hh-title em {
+  font-style: normal;
+  color: #fb923c;
+}
+
+.hh-roles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem 0.9rem;
+  margin: clamp(0.6rem, 1.2vw, 0.9rem) 0 0;
+  font: 500 clamp(1rem, 1.4vw, 1.2rem)/1.3 "Plus Jakarta Sans", sans-serif;
+  color: #f2f6ff;
+}
+
+.hh-roles i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.hh-sign {
+  min-height: 1.5em;
+  margin: clamp(0.9rem, 1.8vw, 1.3rem) 0 0;
+  font: 600 clamp(1.8rem, 3.8vw, 2.4rem)/1.15 "Caveat", "Segoe Script", cursive;
+  font-style: normal;
+  color: #fb923c;
+}
+
+.hh-hero-actions {
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.hh-sign::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 0.85em;
+  margin-left: 3px;
+  background: #fb923c;
+  vertical-align: -0.1em;
+  animation: hhBlink 1s steps(1) infinite;
+}
+
+@keyframes hhBlink {
+  50% { opacity: 0; }
+}
+
+body:has(.hh) header.portfolio-navbar:not(.is-compact) .portfolio-brand-mark,
+body:has(.hh) header.portfolio-navbar:not(.is-compact) .portfolio-brand-mark *,
+body:has(.hh) header.portfolio-navbar:not(.is-compact) > div:first-child > a:first-child > div:nth-child(2) > div:first-child > span {
+  color: #fff !important;
+}
+
+body:has(.hh) header.portfolio-navbar:not(.is-compact) nav a:not([href^="mailto:"]) {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+body:has(.hh) header.portfolio-navbar:not(.is-compact) nav a[aria-current="page"] {
+  color: #fff !important;
+  box-shadow: inset 0 -2px 0 #fff;
+}
+
+body:has(.hh) header.portfolio-navbar:not(.is-compact) nav a:not([href^="mailto:"]):hover {
+  color: #fff !important;
+}
+
+.hh-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 84rem;
+  margin: clamp(-4.4rem, -5vw, -3.4rem) auto 0;
+  overflow: hidden;
+  border: 1px solid #e3e8f6;
+  border-radius: clamp(1.1rem, 2.2vw, 1.7rem);
+  background: #fff;
+  color: #0f172a;
+  box-shadow: 0 24px 64px -32px rgba(15, 30, 120, 0.18), 0 2px 6px rgba(15, 30, 120, 0.035);
+}
+
+.hh-body {
+  display: grid;
+  grid-template-columns: minmax(14rem, 16.5rem) minmax(0, 1fr);
+  gap: clamp(1.4rem, 3.4vw, 2.6rem);
+  align-items: stretch;
+  padding: clamp(1.2rem, 3vw, 2rem) clamp(1rem, 3vw, 2.2rem) clamp(1.3rem, 3vw, 1.9rem);
+}
+
+.hh-id {
+  display: grid;
+  height: 100%;
+  gap: 0.8rem;
+  justify-items: center;
+}
+
+.hh-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 1.15rem;
+  background: transparent;
+}
+
+.hh-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+  object-position: center bottom;
+  transform: scale(1.2);
+  transform-origin: center top;
+}
+
+.hh-cap {
+  position: absolute;
+  right: 0.55rem;
+  bottom: 0.55rem;
+  left: 0.55rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 0.6rem;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 6px 16px rgba(10, 20, 90, 0.18);
+}
+
+.hh-cap b {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.hh-cap span {
+  font: 500 0.58rem/1 "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.03em;
+  color: #7a849c;
+}
+
+.hh-summary {
+  min-width: 0;
+}
+
+.hh-kicker {
+  margin: 0;
+  font: 700 0.62rem/1 "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #2d57e6;
+}
+
+html body main .hh-h2 {
+  margin: 0.55rem 0 0;
+  font-family: "Plus Jakarta Sans", Inter, system-ui, sans-serif !important;
+  font-weight: 800 !important;
+  font-size: clamp(1.6rem, 3.2vw, 2.5rem) !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.04em !important;
+  color: #0f172a;
+}
+
+.hh-lead {
+  margin: 0.7rem 0 0;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #667089;
+}
+
+.hh-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin: 1.1rem 0 0;
+}
+
+.hh-facts div {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid #e6eaf5;
+  border-radius: 0.8rem;
+  background: #fafbff;
+}
+
+.hh-facts dt {
+  font: 500 0.6rem/1.1 "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8791aa;
+}
+
+.hh-facts dd {
+  margin: 0.25rem 0 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #0f172a;
+}
+
+.hh-facts small {
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: #7a849c;
+}
+
+.hh-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.15rem;
+}
+
+.hh-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.76rem 1.2rem;
+  border: 1px solid #d9e2fb;
+  border-radius: 99px;
+  background: #f0f4ff;
+  font: 700 0.9rem/1.1 "Plus Jakarta Sans", sans-serif;
+  color: #2447c9;
+  text-decoration: none;
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.hh-actions a:hover {
+  transform: translateY(-2px);
+  background: #e4ebff;
+  box-shadow: 0 8px 18px -10px rgba(36, 71, 201, 0.6);
+}
+
+.hh-actions a.solid {
+  border-color: #0f172a;
+  background: #0f172a;
+  color: #fff;
+}
+
+.hh-actions a.solid:hover {
+  background: #1e293b;
+}
+
+.hh-actions a:focus-visible {
+  outline: 3px solid #2d57e6;
+  outline-offset: 3px;
+}
+
+/* How I got here */
+.hh-story {
+  padding: clamp(1.1rem, 2.6vw, 1.5rem) clamp(1rem, 3vw, 2.2rem) clamp(1.2rem, 2.8vw, 1.7rem);
+  border-top: 1px solid #edf0f8;
+  background: linear-gradient(180deg, #f8faff, #f3f6ff);
+}
+
+.hh-story header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 1rem;
+}
+
+.hh-story header .hh-kicker {
+  color: #2d57e6;
+}
+
+html body main .hh-story h3 {
+  flex: 1 1 100%;
+  margin: 0;
+  font-family: "Plus Jakarta Sans", Inter, system-ui, sans-serif !important;
+  font-weight: 800 !important;
+  font-size: clamp(1.25rem, 2vw, 1.5rem) !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.015em !important;
+  color: #0f172a !important;
+}
+
+.hh-story > ol {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin: 1.1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hh-story > ol > li {
+  position: relative;
+  padding: 0.95rem 1rem 0 0;
+  border-top: 2px solid #d9e1f7;
+  transition: opacity 0.25s, background 0.25s;
+}
+
+.hh-story > ol > li + li {
+  padding-left: 1rem;
+  border-left: 1px solid #e3e8f6;
+}
+
+.hh-story > ol > li::before {
+  content: "";
+  position: absolute;
+  top: -0.4rem;
+  left: 0;
+  width: 0.72rem;
+  height: 0.72rem;
+  border: 2px solid #2d57e6;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.hh-story > ol > li + li::before {
+  left: 1rem;
+}
+
+.hh-yr {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hh-yr b {
+  font: 800 1.25rem/1 "Bricolage Grotesque", "Plus Jakarta Sans", sans-serif;
+  letter-spacing: -0.03em;
+  color: #2d57e6;
+}
+
+.hh-yr span {
+  padding: 0.2rem 0.5rem;
+  border-radius: 99px;
+  background: #e5ecff;
+  font: 700 0.54rem/1 "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #2447c9;
+}
+
+html body main .hh-story > ol > li h4 {
+  margin: 0.55rem 0 0;
+  font-family: "Plus Jakarta Sans", Inter, system-ui, sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 0.84rem !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.01em !important;
+  color: #0f172a;
+}
+
+.hh-story > ol > li p {
+  margin: 0.3rem 0 0;
+  font-size: 0.72rem;
+  line-height: 1.55;
+  color: #667089;
+}
+
+.hh-story-sub {
+  flex: 1 1 100%;
+  margin: 0.15rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #667089;
+}
+
+@media (min-width: 640px) {
+  .hh-story-sub {
+    font-size: 1rem;
+  }
+}
+
+.hh-story > ol > li.is-dim { opacity: 0.45; }
+.hh-story > ol > li.is-lit { border-top-color: #2d57e6; background: linear-gradient(180deg, rgba(45, 87, 230, 0.08), transparent 70%); }
+.hh-story > ol > li.is-lit::before { background: #2d57e6; box-shadow: 0 0 0 4px rgba(45, 87, 230, 0.18); }
+
+.hh-ask {
+  margin-top: 1.3rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #d5dcf0;
+}
+
+.hh-ask-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.9rem;
+}
+
+.hh-ask-label {
+  margin: 0;
+  font: 700 0.62rem/1 "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #2d57e6;
+}
+
+.hh-ask-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.hh-ask-tabs button {
+  padding: 0.38rem 0.75rem;
+  border: 1px solid #d9e2fb;
+  border-radius: 99px;
+  background: #fff;
+  font: 700 0.68rem/1.1 "Plus Jakarta Sans", sans-serif;
+  color: #3a4a78;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.hh-ask-tabs button:hover { background: #eef3ff; }
+.hh-ask-tabs button[aria-selected="true"] { border-color: #0f172a; background: #0f172a; color: #fff; }
+.hh-ask-tabs button:focus-visible { outline: 3px solid #2d57e6; outline-offset: 2px; }
+
+.hh-ask-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.9rem 1.6rem;
+  margin-top: 0.9rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid #e3e8f6;
+  border-radius: 0.9rem;
+  background: #fff;
+  animation: hhAskIn 0.3s ease both;
+}
+
+@keyframes hhAskIn {
+  from { opacity: 0; transform: translateY(4px); }
+}
+
+.hh-ask-col { min-width: 0; }
+
+html body main .hh-ask-title {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", Inter, system-ui, sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 0.7rem !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase;
+  color: #2d57e6;
+}
+
+.hh-ask-headline {
+  margin: 0.35rem 0 0;
+  font-size: 0.98rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: #0f172a;
+}
+
+.hh-ask-sec {
+  margin: 0.7rem 0 0.25rem;
+  font: 700 0.56rem/1 "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8791aa;
+}
+
+.hh-ask-col:not(.hh-ask-intro) .hh-ask-sec { margin-top: 0; }
+
+.hh-ask-copy {
+  margin: 0;
+  font-size: 0.74rem;
+  line-height: 1.6;
+  color: #667089;
+}
+
+.hh-ask-proof {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hh-ask-proof li {
+  position: relative;
+  padding-left: 0.95rem;
+  font-size: 0.74rem;
+  line-height: 1.55;
+  color: #475069;
+}
+
+.hh-ask-proof li::before {
+  content: "";
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: #2d57e6;
+}
+
+.hh-ask-explore {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.7rem 0 0;
+  font-size: 0.7rem;
+  color: #475069;
+}
+
+.hh-ask-explore a {
+  padding: 0.25rem 0.6rem;
+  border-radius: 99px;
+  background: #eef3ff;
+  font-weight: 700;
+  color: #2447c9;
+  text-decoration: none;
+}
+
+.hh-ask-explore a:hover { background: #dfe8ff; }
+
+@media (max-width: 960px) {
+  .hh-story > ol { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1.2rem; }
+  .hh-story > ol > li:nth-child(3) { padding-left: 0; border-left: 0; }
+  .hh-story > ol > li:nth-child(3)::before { left: 0; }
+  .hh-ask-panel { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .hh-ask-intro { grid-column: 1 / -1; }
+}
+
+@media (max-width: 640px) {
+  .hh-story > ol { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+  .hh-story > ol > li,
+  .hh-story > ol > li + li {
+    padding: 0.9rem 0 1rem 1.2rem;
+    border-top: 0;
+    border-left: 2px solid #d9e1f7;
+  }
+  .hh-story > ol > li::before,
+  .hh-story > ol > li + li::before { top: 1rem; left: -0.4rem; }
+  .hh-story > ol > li:nth-child(3) { padding-left: 1.2rem; border-left: 2px solid #d9e1f7; }
+  .hh-story > ol > li:nth-child(3)::before { left: -0.4rem; }
+  .hh-ask-panel { grid-template-columns: minmax(0, 1fr); }
+  .hh-ask-tabs button { flex: 1 1 auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hh-ask-panel { animation: none; }
+  .hh-story > ol > li,
+  .hh-ask-tabs button { transition: none; }
+}
+
+@media (max-width: 820px) {
+  .hh-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hh-id {
+    height: auto;
+    max-width: 17rem;
+    margin: 0 auto;
+  }
+
+  .hh-frame {
+    height: auto;
+    aspect-ratio: 4 / 4.9;
+  }
+}
+
+@media (max-width: 640px) {
+  .hh-top {
+    padding-top: 2.4rem;
+    padding-bottom: 7.4rem;
+  }
+
+  html body main .hh-title {
+    white-space: normal;
+    font-size: clamp(3rem, 16vw, 4.4rem) !important;
+    line-height: 0.95 !important;
+  }
+
+  .hh-title span {
+    display: block;
+  }
+
+  .hh-facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hh-actions a {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hh-sign::after { animation: none; }
+  .hh-actions a { transition: none; }
+}

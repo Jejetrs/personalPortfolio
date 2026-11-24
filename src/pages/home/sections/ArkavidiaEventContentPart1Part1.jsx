@@ -46,13 +46,11 @@ function EvidenceCard({ index, title, description, children }) {
     <article className="event-role-card event-role-card--with-photo">
       <div className="event-proof-visual">
         {children}
-        <span className="event-proof-caption">
-          <span>{String(index).padStart(2, "0")} · EVIDENCE</span>
-          {title}
-        </span>
       </div>
-      <span className="event-role-index">{String(index).padStart(2, "0")}</span>
-      <h5>{title}</h5>
+      <div className="event-role-heading">
+        <span className="event-role-index">{String(index).padStart(2, "0")}</span>
+        <h5>{title}</h5>
+      </div>
       <p>{description}</p>
     </article>
   );
@@ -80,9 +78,21 @@ export default function ArkavidiaEventContentPart1Part1() {
       >
         <EvidenceButton
           order={2}
-          src="/assets/events/Arkavidia%209.0/night%20code.png"
-          title="Night Code"
-          caption="Late-night coding during the 24-hour hackathon sprint."
+          src="/assets/events/Arkavidia%209.0/self%20code.jpeg"
+          title="Self Code"
+          caption="Working on the code during the Hackvidia hackathon."
+          gallery={[
+            {
+              src: "/assets/events/Arkavidia%209.0/self%20code.jpeg",
+              title: "Self Code",
+              caption: "Working on the code during the Hackvidia hackathon.",
+            },
+            {
+              src: "/assets/events/Arkavidia%209.0/night%20code.png",
+              title: "Night Code",
+              caption: "Late-night coding during the 24-hour hackathon sprint.",
+            },
+          ]}
         />
       </EvidenceCard>
       <EvidenceCard

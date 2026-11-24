@@ -13,7 +13,6 @@ export function updateGlobalToggleState() { const wrappers = document.querySelec
     'aisee-mobile': { active: 'bg-sky-700', inactive: 'bg-sky-200' },
     'aidorse': { active: 'bg-purple-700', inactive: 'bg-purple-200' },
     'civision': { active: 'bg-slate-800', inactive: 'bg-slate-300' },
-    'aisee-website': { active: 'bg-lime-800', inactive: 'bg-lime-200' },
     'aoshuttle': { active: 'bg-teal-700', inactive: 'bg-teal-200' },
     'movie-review': { active: 'bg-slate-800', inactive: 'bg-amber-200' }
   };

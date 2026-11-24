@@ -7,7 +7,7 @@ export default function CampaignDeckMasterCard() {
           <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-rose-100/80 pb-2.5">
             <div className="flex flex-wrap items-center gap-1.5">
               <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-rose-600 text-white font-bold text-xs shadow-xs">
-                02
+                06
               </span>
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-rose-500 to-rose-600 text-white text-[11px] font-bold shadow-xs">
                 <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">

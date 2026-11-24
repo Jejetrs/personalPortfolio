@@ -97,7 +97,7 @@ export default function StoryBand() {
         </ol>
         <div className="sb-ask">
           <div className="sb-ask-head">
-            <p className="sb-ask-label" id="sb-ask-label">Read my story as</p>
+            <p className="sb-ask-label" id="sb-ask-label">My short story as</p>
             <div aria-labelledby="sb-ask-label" className="sb-ask-tabs" onKeyDown={onTabKey} role="tablist">
               {ROLES.map((item) => (
                 <button

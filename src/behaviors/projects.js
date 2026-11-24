@@ -99,14 +99,14 @@ export function organizeProjectOverviewDetails() {
       content.replaceChildren(...evidenceSections);
       const label = disclosure.querySelector('.accordion-text');
       if (label) {
-        label.textContent = 'View Supporting Documents & Visual Evidence';
+        label.textContent = 'View Project Deliverables';
         const button = label.closest('button');
         if (button) {
           button.onclick = () => {
             toggleAccordion(caseStudy.id.replace(/-accordion$/, ''));
             label.textContent = button.getAttribute('aria-expanded') === 'true'
-              ? 'Hide Supporting Documents & Visual Evidence'
-              : 'View Supporting Documents & Visual Evidence';
+              ? 'Hide Project Deliverables'
+              : 'View Project Deliverables';
           };
         }
       }
@@ -290,7 +290,6 @@ export function prepareProjectCards() {
       const label = button?.querySelector('.accordion-text');
 
       if (processOverview && evidenceContent && button && label) {
-        processOverview.classList.add('campaign-process-in-dropdown');
         evidenceContent.insertBefore(processOverview, evidenceContent.firstChild);
         label.textContent = 'View UX Process & Supporting Documents';
         button.onclick = () => {
@@ -366,7 +365,7 @@ export function standardizeProjectDropdowns() {
     const title = oldLabelText
       .replace(/^(?:view|hide)\s+/i, '')
       .replace(/\s+/g, ' ')
-      .trim() || 'Supporting Documents & Visual Evidence';
+      .trim() || 'Project Deliverables';
     const oldBadge = button.children[1]?.querySelector('span');
     const badgeText = oldBadge?.textContent.trim() || '';
     const isOpen = accordion.classList.contains('is-open');
@@ -422,7 +421,6 @@ const activeDotColors = {
   'aisee-mobile': { active: 'bg-sky-700', inactive: 'bg-sky-200' },
   'aidorse': { active: 'bg-purple-700', inactive: 'bg-purple-200' },
   'civision': { active: 'bg-slate-800', inactive: 'bg-slate-300' },
-  'aisee-website': { active: 'bg-lime-800', inactive: 'bg-lime-200' },
   'aoshuttle': { active: 'bg-teal-700', inactive: 'bg-teal-200' },
   'movie-review': { active: 'bg-slate-800', inactive: 'bg-amber-200' }
 };

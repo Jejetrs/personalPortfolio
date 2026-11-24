@@ -5,7 +5,7 @@ export default function DiabetesRiskCard() {
         <div className="flex flex-wrap items-center justify-between gap-2 project-card-header">
           <div className="flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-rose-600 text-white font-bold text-xs shadow-xs">
-              07
+              05
             </span>
             {" "}
             <span className="px-2.5 py-0.5 bg-rose-100/70 text-rose-900 text-xs font-semibold rounded-full border border-rose-200/70">

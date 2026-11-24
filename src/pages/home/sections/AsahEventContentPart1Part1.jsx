@@ -33,20 +33,11 @@ export default function AsahEventContentPart1Part1() {
           <button type="button" className="event-proof-next" data-photo-next aria-label="Next team leadership photo">
             Next
           </button>
-          {" "}
-          <span className="event-proof-caption">
-            <span>
-              01 · EVIDENCE
-            </span>
-            Capstone Team Meeting Progress
-          </span>
         </div>
-        <span className="event-story-eyebrow">
-          01
-        </span>
-        <h5>
-          Keeping the Team Moving
-        </h5>
+        <div className="event-role-heading">
+          <span className="event-role-index">01</span>
+          <h5>Keeping the Team Moving</h5>
+        </div>
         <p>
           Led capstone discussions, organized milestones, and coordinated progress with teammates and advisors to keep the project aligned.
         </p>
@@ -80,20 +71,11 @@ export default function AsahEventContentPart1Part1() {
               </svg>
             </span>
           </button>
-          {" "}
-          <span className="event-proof-caption">
-            <span>
-              02 · EVIDENCE
-            </span>
-            Capstone Team Discuss
-          </span>
         </div>
-        <span className="event-story-eyebrow">
-          02
-        </span>
-        <h5>
-          Connecting Ideas with Implementation
-        </h5>
+        <div className="event-role-heading">
+          <span className="event-role-index">02</span>
+          <h5>Connecting Ideas with Implementation</h5>
+        </div>
         <p>
           Contributed to LeadSight's frontend and backend development while collaborating with the team to review features, resolve issues, and refine the prototype.
         </p>
@@ -127,20 +109,11 @@ export default function AsahEventContentPart1Part1() {
               </svg>
             </span>
           </button>
-          {" "}
-          <span className="event-proof-caption">
-            <span>
-              03 · EVIDENCE
-            </span>
-            Pitching
-          </span>
         </div>
-        <span className="event-story-eyebrow">
-          03
-        </span>
-        <h5>
-          Bringing LeadSight to the Final Pitch
-        </h5>
+        <div className="event-role-heading">
+          <span className="event-role-index">03</span>
+          <h5>Bringing LeadSight to the Final Pitch</h5>
+        </div>
         <p>
           Helped prepare and communicate the product's business context, technical approach, and proposed value during the capstone presentation.
         </p>

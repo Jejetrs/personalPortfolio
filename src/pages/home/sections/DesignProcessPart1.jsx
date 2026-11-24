@@ -4,7 +4,7 @@ export default function DesignProcessPart1() {
   return (
     <div className="pr-inner">
       <div className="pr-head">
-        <p className="pr-kicker">
+        <p className="section-kicker">
           <span aria-hidden="true" />
           HOW I WORK
         </p>

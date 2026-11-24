@@ -5,7 +5,7 @@ export default function MovieRecommenderCard() {
         <div className="flex flex-wrap items-center justify-between gap-2 project-card-header">
           <div className="flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-indigo-700 text-white font-bold text-xs shadow-xs">
-              08
+              06
             </span>
             {" "}
             <span className="px-2.5 py-0.5 bg-indigo-100/70 text-indigo-900 text-xs font-semibold rounded-full border border-indigo-200/70">

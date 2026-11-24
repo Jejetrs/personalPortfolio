@@ -11,7 +11,7 @@ export default function SmartFocusAlertCard1() {
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2 project-card-header">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-700 text-white font-bold text-xs shadow-xs">
-                      04
+                      03
                     </span>
                     <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-blue-100/70 text-blue-900 text-xs font-semibold rounded-full border border-blue-200/70">
                       <svg className="w-3 h-3 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -68,8 +68,8 @@ export default function SmartFocusAlertCard1() {
               <p className="text-sm text-slate-600 leading-relaxed font-normal">
                 An AI-powered web application that monitors user focus in real time using computer vision and MediaPipe Face Mesh, helping learners stay aware of distractions and improve productivity during online learning.
               </p>
-              <div className="flex flex-wrap items-center justify-start gap-2.5 pt-1">
-                <div className="px-3.5 py-1.5 rounded-xl bg-white border border-blue-100/90 shadow-xs flex items-center gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <div className="w-full min-w-0 px-3.5 py-1.5 rounded-xl bg-white border border-blue-100/90 shadow-xs flex items-center gap-2.5">
                   <div className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 flex-shrink-0">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
@@ -77,7 +77,7 @@ export default function SmartFocusAlertCard1() {
                   </div>
                   <div className="text-left">
                     <span className="text-[9px] uppercase font-bold text-slate-400 block leading-tight tracking-wider">
-                      Reported SUS Score
+                      SUS Score
                     </span>
                     <span className="text-xs font-bold text-blue-800">
                       {"87.67 "}
@@ -87,7 +87,7 @@ export default function SmartFocusAlertCard1() {
                     </span>
                   </div>
                 </div>
-                <div className="px-3.5 py-1.5 rounded-xl bg-white border border-blue-100/90 shadow-xs flex items-center gap-2.5">
+                <div className="w-full min-w-0 px-3.5 py-1.5 rounded-xl bg-white border border-blue-100/90 shadow-xs flex items-center gap-2.5">
                   <div className="w-7 h-7 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600 flex-shrink-0">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0011 15.9V19H7v2h10v-2h-4v-3.1c1.88-.34 3.32-1.78 3.61-3.96C19.08 11.63 21 9.55 21 7V5c0-1.1-.9-2-2-2zM5 7h2v3c-1.1 0-2-.9-2-2V7zm14 1c0 1.1-.9 2-2 2V5h2v3z"></path>
@@ -95,7 +95,7 @@ export default function SmartFocusAlertCard1() {
                   </div>
                   <div className="text-left">
                     <span className="text-[9px] uppercase font-bold text-slate-400 block leading-tight tracking-wider">
-                      Functional pass rate
+                      Blackbox Testing
                     </span>
                     <span className="text-xs font-bold text-emerald-700">
                       100%

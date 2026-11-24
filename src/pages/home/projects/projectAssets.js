@@ -34,13 +34,6 @@ export const PROJECT_ASSETS = {
     image("AI ML Engineer/Beauty Glossary/Models Ready.png", "Ready models"),
     image("AI ML Engineer/Beauty Glossary/Output Example.png", "Output example"),
   ],
-  "bikesharing-card": [
-    image("AI ML Engineer/Bike Sharing/Apps Overview.png", "Dashboard overview"),
-    image("AI ML Engineer/Bike Sharing/Bike Rental Distribution per day.webp", "Daily rental distribution"),
-    image("AI ML Engineer/Bike Sharing/Conclusion.png", "Analysis conclusion"),
-    image("AI ML Engineer/Bike Sharing/Heatmap.webp", "Rental heatmap"),
-    image("AI ML Engineer/Bike Sharing/Rental Average.webp", "Average rental analysis"),
-  ],
   "diabetes-risk-card": [
     image("AI ML Engineer/Diabets Risk/Home.webp", "Prediction app home"),
     image("AI ML Engineer/Diabets Risk/Data Distribution.png", "Data distribution"),
@@ -83,9 +76,6 @@ export const PROJECT_ASSETS = {
     image("UI UX/aisee/Mockup.webp", "AiSee mobile mockup"),
     image("UI UX/aisee/Information Architecture.webp", "Information architecture"),
     image("UI UX/aisee/User Flow AiSee.webp", "AiSee user flow"),
-  ],
-  "aisee-website-card": [
-    image("UI UX/aisee web/Mockup.webp", "AiSee web mockup"),
   ],
   "aoshuttle-project-card": [
     image("UI UX/aoshattle/Mockup.png", "AOShuttle app mockup"),

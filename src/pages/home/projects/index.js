@@ -7,12 +7,10 @@ import NuscaProjectCard1 from './NuscaProjectCard1.jsx';
 import SmartFocusAlertCard1 from './SmartFocusAlertCard1.jsx';
 import AiseeMobileCard from './AiseeMobileCard.jsx';
 import CivisionProjectCard from './CivisionProjectCard.jsx';
-import AiseeWebsiteCard from './AiseeWebsiteCard.jsx';
 import AoshuttleProjectCard from './AoshuttleProjectCard.jsx';
 import NuscaProjectCard2 from './NuscaProjectCard2.jsx';
 import SmartFocusAlertCard2 from './SmartFocusAlertCard2.jsx';
 import BeautyGlossaryCard from './BeautyGlossaryCard.jsx';
-import BikesharingCard from './BikesharingCard.jsx';
 import BankFraudCard from './BankFraudCard.jsx';
 import WhatsappSentimentCard from './WhatsappSentimentCard.jsx';
 import DiabetesRiskCard from './DiabetesRiskCard.jsx';
@@ -111,14 +109,6 @@ export const PROJECTS = [
     Card: CivisionProjectCard,
   },
   {
-    id: "aisee-website-card",
-    category: "uiux",
-    title: "AiSee",
-    description: "AiSee is a web-based collaboration platform developed as an extension of AiDorse, offering a more complete set of features and analytics to support scalable partnerships between brands and content creators.",
-    images: [],
-    Card: AiseeWebsiteCard,
-  },
-  {
     id: "campaign-deck-master-card",
     category: "uiux",
     title: "Campaign Deck Master",
@@ -157,14 +147,6 @@ export const PROJECTS = [
     description: "A domain-specific LLM chatbot that answers beauty and skincare questions using structured, context-grounded knowledge extracted from trusted web content, helping users get accurate and reliable information.",
     images: [],
     Card: BeautyGlossaryCard,
-  },
-  {
-    id: "bikesharing-card",
-    category: "aiml",
-    title: "Bike Sharing Demand Analysis",
-    description: "An interactive dashboard to analyze bike rental trends using historical data from Capital Bikeshare, enabling users to explore patterns across time, season, weather, and other factors that influence bike demand.",
-    images: [],
-    Card: BikesharingCard,
   },
   {
     id: "bank-fraud-card",

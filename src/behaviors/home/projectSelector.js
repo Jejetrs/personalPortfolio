@@ -72,7 +72,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       developer: 'Developer'
     };
     const categoryDescriptions = {
-      analytics: 'Business and user research, competitor insights, SWOT, and business models translated into evidence-informed product proposals.',
+      analytics: 'Business and user research, competitor insights, SWOT, and business models translated into research-informed product proposals.',
       team: 'Leading and coordinating projects through structured planning, milestone tracking, team collaboration, and delivery management.',
       uiux: 'Transforming user needs and product requirements into intuitive digital experiences through research, user flows, prototyping, and design systems.',
       aiml: 'Developing intelligent solutions using machine learning, computer vision, NLP, and AI integration to address real-world challenges.',
@@ -88,7 +88,6 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         'movie-recommender-card',
         'whatsapp-sentiment-card',
         'bank-fraud-card',
-        'bikesharing-card',
       ],
       developer: [
         'movie-review-project-card',
@@ -203,14 +202,14 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         content.replaceChildren(...evidenceSections);
         const label = disclosure.querySelector('.accordion-text');
         if (label) {
-          label.textContent = 'View Supporting Documents & Visual Evidence';
+          label.textContent = 'View Project Deliverables';
           const button = label.closest('button');
-          if (button) {
+          if (button && !button.hasAttribute('data-preserve-toggle')) {
             button.onclick = () => {
               toggleAccordion(caseStudy.id.replace(/-accordion$/, ''));
               label.textContent = button.getAttribute('aria-expanded') === 'true'
-                ? 'Hide Supporting Documents & Visual Evidence'
-                : 'View Supporting Documents & Visual Evidence';
+                ? 'Hide Project Deliverables'
+                : 'View Project Deliverables';
             };
           }
         }
@@ -403,7 +402,6 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         const label = button?.querySelector('.accordion-text');
 
         if (processOverview && evidenceContent && button && label) {
-          processOverview.classList.add('campaign-process-in-dropdown');
           evidenceContent.insertBefore(processOverview, evidenceContent.firstChild);
           label.textContent = 'View UX Process & Supporting Documents';
           button.onclick = () => {
@@ -479,7 +477,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       const title = oldLabelText
         .replace(/^(?:view|hide)\s+/i, '')
         .replace(/\s+/g, ' ')
-        .trim() || 'Supporting Documents & Visual Evidence';
+        .trim() || 'Project Deliverables';
       const oldBadge = button.children[1]?.querySelector('span');
       const badgeText = oldBadge?.textContent.trim() || '';
       const isOpen = accordion.classList.contains('is-open');
@@ -493,7 +491,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       icon.setAttribute('aria-hidden', 'true');
       icon.textContent = '☷';
       const label = document.createElement('span');
-      label.className = 'truncate text-xs font-semibold';
+      label.className = 'project-dropdown-title truncate text-xs font-semibold';
       label.textContent = title;
       titleGroup.append(icon, label);
 
@@ -507,6 +505,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       const actionGroup = document.createElement('span');
       actionGroup.className = 'flex shrink-0 items-center gap-1.5 text-xs font-medium text-slate-500';
       const actionLabel = document.createElement('span');
+      actionLabel.className = 'project-dropdown-action';
       actionLabel.textContent = isOpen ? 'Hide Details' : 'Show Details';
       const chevron = document.createElement('span');
       chevron.className = 'accordion-chevron';
@@ -516,6 +515,8 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       button.append(titleGroup, actionGroup);
       button.setAttribute('aria-expanded', String(isOpen));
       button.setAttribute('aria-controls', accordion.id);
+
+      if (button.hasAttribute('data-preserve-toggle')) return;
 
       button.onclick = () => {
         const nextIsOpen = accordion.classList.toggle('is-open');
@@ -533,7 +534,6 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       'aisee-mobile': { active: 'bg-sky-700', inactive: 'bg-sky-200' },
       'aidorse': { active: 'bg-purple-700', inactive: 'bg-purple-200' },
       'civision': { active: 'bg-slate-800', inactive: 'bg-slate-300' },
-      'aisee-website': { active: 'bg-lime-800', inactive: 'bg-lime-200' },
       'aoshuttle': { active: 'bg-teal-700', inactive: 'bg-teal-200' },
       'movie-review': { active: 'bg-slate-800', inactive: 'bg-amber-200' }
     };
@@ -632,6 +632,10 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       const supportingImages = assets.filter((item) => item?.type === 'supporting-image');
       const documentAssets = assets.filter((item) => item?.type === 'pdf' || item?.type === 'file');
       const inlineDocumentAssets = new Set();
+      card.querySelectorAll('[data-project-file-inline-asset]').forEach((link) => {
+        const source = link.dataset.projectFileInlineAsset;
+        if (source) inlineDocumentAssets.add(source);
+      });
       card.querySelectorAll('[data-project-file-inline]').forEach((target) => {
         const item = documentAssets.find((asset) => asset.title === target.dataset.projectFileInline);
         if (!item) return;
@@ -642,11 +646,12 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         link.rel = 'noopener noreferrer';
         link.className = 'shrink-0 rounded-full border border-rose-200 bg-rose-50 px-2 py-1 text-[9px] font-bold text-rose-700 transition hover:border-rose-300 hover:bg-rose-100';
         link.textContent = 'PDF ↗';
+        link.dataset.projectFileInlineAsset = item.src;
         link.setAttribute('aria-label', `Open ${item.title} PDF`);
         target.replaceWith(link);
-        inlineDocumentAssets.add(item);
+        inlineDocumentAssets.add(item.src);
       });
-      const remainingDocumentAssets = documentAssets.filter((item) => !inlineDocumentAssets.has(item));
+      const remainingDocumentAssets = documentAssets.filter((item) => !inlineDocumentAssets.has(item.src));
       const highlights = card.querySelector('[data-project-highlights]');
       if (highlights && supportingImages.length) {
         highlights.replaceChildren(...supportingImages.map((item) => {
@@ -1174,7 +1179,6 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       'https://jnotes-application.vercel.app/login',
       'https://jnotes-application.vercel.app/',
       'https://predictive-analytic-diabetes.streamlit.app/',
-      'https://bike-rental-analysis-dashboard.streamlit.app/'
     ];
     function isTrustedLiveUrl(url) {
       const clean = (value) => String(value).trim().replace(/\/+$/, '').toLowerCase();

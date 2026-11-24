@@ -9,7 +9,7 @@ export default function AiseeMobileCard() {
               <div className="flex flex-wrap items-center justify-between gap-2 project-card-header">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-xs shadow-xs">
-                    05
+                    04
                   </span>
                   <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-100/70 text-blue-800 text-[11px] font-semibold border border-blue-200">
                     <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -152,7 +152,7 @@ export default function AiseeMobileCard() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         <div className="p-2.5 rounded-xl bg-white/95 border border-sky-100 shadow-xs flex flex-col justify-between space-y-1.5">
                           <div>
-                            <div className="flex items-center justify-between mb-0.5">
+                            <div className="flex items-center justify-between gap-2 mb-0.5">
                               <div className="flex items-center gap-1.5">
                                 <div className="w-4 h-4 rounded-md bg-sky-50 text-sky-700 flex items-center justify-center flex-shrink-0">
                                   <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -163,7 +163,7 @@ export default function AiseeMobileCard() {
                                   Evaluation
                                 </h4>
                               </div>
-                              <span className="px-2 py-0.5 rounded-full bg-blue-700 text-white font-bold text-[10px] shadow-xs">
+                              <span aria-label="SEQ score: 74.6, Grade B" className="shrink-0 whitespace-nowrap px-3 py-1 rounded-full bg-blue-700 text-white text-xs font-extrabold tracking-wide shadow-md ring-2 ring-blue-100">
                                 74.6 (Grade B)
                               </span>
                             </div>

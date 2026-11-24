@@ -1,53 +1,101 @@
+import ProfileStory from "./ProfileStory.jsx";
+
 const LINKEDIN = "https://www.linkedin.com/in/jessica-trs";
 const EMAIL = "mailto:jssicatheresia@gmail.com";
 
+const FACTS = [
+  { label: "Education", value: "Informatics / CS", sub: "Gunadarma University" },
+  { label: "Industry Experience", value: "Designer Intern", sub: "Telkom Magenta · INAPROC" },
+  { label: "Specialization", value: "AI × Product UX", sub: "DBS Foundation Camp & ASAH" },
+];
+
 export default function AboutPart1Part1() {
   return (
-    <div className="hx-grid">
-      <div className="hx-copy">
-        <h1 className="hx-title">
-          Jessica Theresia<em>.</em>
-        </h1>
-        <p className="hx-roles">
-          <span className="hx-role hot">Digital Product & Business Analysis</span>
-          <span className="hx-role">UI/UX Designer</span>
-          <span className="hx-role">Developer & AI/ML</span>
-        </p>
-        <div className="hx-profile-tags">
+    <>
+      <div className="hh-top">
+        <p className="hh-pill">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+            <circle cx="12" cy="10" r="2.5" />
+          </svg>
           <span>Bekasi, Indonesia</span>
-          <span>GPA 3.97</span>
-        </div>
-        <p className="hx-lead">
-          I enjoy turning complex problems into <span className="hx-highlight">human-centered</span> digital solutions. With experience across research and analysis, UI/UX design, AI/ML, and full-stack development, I bring together user needs, business goals, and technical understanding to create products that are practical, meaningful, and built with purpose.
+        </p>
+        <h1 className="hh-title" aria-label="Jessica Theresia">
+          <span>Jessica</span> <span>Theresia<em>.</em></span>
+        </h1>
+        <p className="hh-roles">
+          <span>Product &amp; Business Analysis</span>
+          <i aria-hidden="true" />
+          <span>UI/UX Design</span>
+          <i aria-hidden="true" />
+          <span>Development &amp; AI/ML</span>
         </p>
         <p
-          aria-label="Turning user needs into clear and lasting products"
-          className="hx-signature hero-typewriter font-handwriting"
+          aria-label="Turning needs into products that matter."
+          className="hh-sign hero-typewriter"
           role="text"
         >
           <span aria-hidden="true" className="hero-typewriter-text" id="hero-typewriter-text"></span>
         </p>
-        <div className="hx-actions">
-          <a className="hx-btn solid" href="#selected-works">
-            See the work
-            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <div className="hh-actions hh-hero-actions">
+          <a
+            className="solid"
+            href="#profile-card"
+            onClick={(event) => {
+              if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+              const profileCard = document.getElementById('profile-card');
+              if (!profileCard) return;
+
+              event.preventDefault();
+              profileCard.scrollIntoView({
+                behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+                block: 'start',
+              });
+              if (window.location.hash !== '#profile-card') {
+                window.history.pushState(null, '', '#profile-card');
+              }
+            }}
+          >
+            Get to Know Me
+            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 5v14M6 13l6 6 6-6" />
             </svg>
           </a>
-          <a className="hx-btn" href={LINKEDIN} target="_blank" rel="noopener noreferrer">
-            LinkedIn ↗
-          </a>
-          <a className="hx-btn" href={EMAIL}>
-            Email me
-          </a>
+          <a href={EMAIL}>Direct Email</a>
+          <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
         </div>
       </div>
-      <div className="hx-visual">
-        <div className="hx-backdrop" aria-hidden="true" />
-        <div className="hx-photo">
-          <img alt="Jessica Theresia" src="/assets/Photo%20Profile.png" />
+
+      <article className="hh-card" id="profile-card" aria-label="Profile">
+        <div className="hh-body">
+          <div className="hh-id">
+            <div className="hh-frame">
+              <img alt="Jessica Theresia" src="/assets/Photo%20Profile.png" />
+              <div className="hh-cap">
+                <b>Jessica Theresia</b>
+                <span>GPA 3.97</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="hh-summary">
+            <h2 className="hh-h2">Bridging business needs, product thinking, and engineering feasibility.</h2>
+            <p className="hh-lead">
+              I enjoy turning complex problems into human-centered digital solutions. My experience spans business and requirements analysis, product planning, and UI/UX design, supported by hands-on knowledge of software development and AI/ML. This allows me to approach problems from both strategic and technical perspectives.
+            </p>
+            <dl className="hh-facts">
+              {FACTS.map((fact) => (
+                <div key={fact.label}>
+                  <dt>{fact.label}</dt>
+                  <dd>{fact.value}</dd>
+                  <small>{fact.sub}</small>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
-      </div>
-    </div>
+        <ProfileStory />
+      </article>
+    </>
   );
 }

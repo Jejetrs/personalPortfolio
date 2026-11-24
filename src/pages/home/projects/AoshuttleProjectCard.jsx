@@ -11,7 +11,7 @@ export default function AoshuttleProjectCard() {
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-1 project-card-header">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-teal-700 text-white font-bold text-xs shadow-xs">
-                        08
+                        07
                       </span>
                       <span className="px-2.5 py-0.5 rounded-full bg-white border border-teal-200/80 text-teal-800 text-[11px] font-semibold shadow-xs">
                         Campus Assignment

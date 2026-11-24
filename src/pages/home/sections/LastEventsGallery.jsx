@@ -2,7 +2,8 @@ export default function LastEventsGallery() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center" id="last-events-gallery">
       <div className="lg:col-span-4 last-events-copy">
-        <p className="text-xs font-mono font-bold uppercase tracking-[0.16em] text-primary mb-3">
+        <p className="section-kicker">
+          <span aria-hidden="true" />
           {"Highlights & Moments"}
         </p>
         <h2 className="text-5xl sm:text-6xl font-extrabold text-[#131b2e] tracking-tight leading-[1]">

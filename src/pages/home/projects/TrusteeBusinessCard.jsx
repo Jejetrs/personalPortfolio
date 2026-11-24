@@ -304,7 +304,7 @@ export default function TrusteeBusinessCard() {
                 </em>
               </strong>
               <span>
-                Pages of evidence
+                Deliverable pages
               </span>
             </div>
             <div className="tr-stat">
@@ -608,7 +608,7 @@ export default function TrusteeBusinessCard() {
             <section className="tr-sec" aria-labelledby="tr-evidence-title">
               <div className="tr-sec-head">
                 <div className="tr-eyebrow" id="tr-evidence-title">
-                  Original project evidence
+                  Original project deliverables
                 </div>
               </div>
               <div className="tr-tabs" role="group" aria-label="Trustee project documents">

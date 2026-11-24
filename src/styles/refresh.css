@@ -19,8 +19,7 @@ html body .tech-grid-pattern {
 }
 
 /* ---------- shared eyebrow ---------- */
-.pj-kicker,
-.pr-kicker,
+.section-kicker,
 .ct-kicker,
 .sb-kicker,
 .wk-kicker {
@@ -33,8 +32,7 @@ html body .tech-grid-pattern {
   text-transform: uppercase;
   color: var(--rf-ink);
 }
-.pj-kicker span,
-.pr-kicker span,
+.section-kicker span,
 .ct-kicker span,
 .wk-kicker span {
   width: 1.6rem;
@@ -378,19 +376,6 @@ html body #last-events {
   padding-top: clamp(3rem, 6vw, 5rem);
   padding-bottom: clamp(3rem, 6vw, 5rem);
 }
-#last-events .last-events-copy > p:first-child {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--rf-ink);
-}
-#last-events .last-events-copy > p:first-child::before {
-  content: "";
-  width: 1.6rem;
-  height: 0.5rem;
-  border-radius: 99px;
-  background: var(--rf-coral);
-}
 #last-events .last-events-copy h2 {
   font-size: clamp(3.3rem, 5.5vw, 4.5rem);
   letter-spacing: -0.045em;
@@ -431,7 +416,7 @@ html body #last-events {
 .pr-head > p:last-child {
   margin: 0.8rem 0 0;
   color: var(--rf-mute);
-  font-size: 0.95rem;
+  font-size: 0.875rem;
 }
 .pr-track {
   display: grid;
@@ -564,9 +549,15 @@ html body #selected-works {
 .pj-lead {
   max-width: 46rem;
   margin: 0.9rem 0 0;
-  font-size: 0.98rem;
+  font-size: 0.875rem;
   line-height: 1.65;
   color: var(--rf-mute);
+}
+@media (min-width: 640px) {
+  .pr-head > p:last-child,
+  .pj-lead {
+    font-size: 1rem;
+  }
 }
 .pj-hint {
   display: inline-block;
@@ -898,7 +889,10 @@ html body main .pj-title { font-size: clamp(1.7rem, 4.2vw, 3rem) !important; lin
 html body main .ct-copy h2 { font-size: clamp(1.9rem, 4.8vw, 3.6rem) !important; line-height: 0.98 !important; letter-spacing: -0.045em !important; font-weight: 800 !important; color: #fff !important; }
 html body main .wk-intro h1 { font-size: clamp(1.7rem, 4.5vw, 3rem) !important; line-height: 1 !important; letter-spacing: -0.045em !important; font-weight: 800 !important; color: #fff !important; }
 html body main #experience .experience-heading h2 { font-family: "Plus Jakarta Sans", Inter, sans-serif !important; font-size: clamp(1.7rem, 4.2vw, 3rem) !important; line-height: 1 !important; letter-spacing: -0.045em !important; font-weight: 800 !important; }
-html body main #experience .experience-heading p { font-size: 0.8rem !important; line-height: 1.5 !important; }
+html body main #experience .experience-heading p { font-size: 0.875rem !important; line-height: 1.625 !important; }
+@media (min-width: 640px) {
+  html body main #experience .experience-heading p { font-size: 1rem !important; }
+}
 html body main .sb-card h3 { font-size: 1.08rem !important; line-height: 1.25 !important; color: #fff !important; letter-spacing: -0.01em !important; }
 html body main .pr-step h3 { font-size: 1.05rem !important; line-height: 1.25 !important; letter-spacing: -0.01em !important; }
 html body main .hx-title em, html body main .pj-title em, html body main .pr-head h2 em, html body main .ct-copy h2 em { color: var(--rf-coral) !important; }

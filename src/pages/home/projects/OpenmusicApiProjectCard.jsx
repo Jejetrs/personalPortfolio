@@ -554,7 +554,7 @@ export default function OpenmusicApiProjectCard() {
               </section>
               <section>
                 <h3>
-                  {"Evidence & limitations"}
+                  {"Deliverables & limitations"}
                 </h3>
                 <p>
                   The available project archive includes source code, migrations, and endpoint documentation. Production deployment, the email consumer, and automated test results are not verified.

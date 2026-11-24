@@ -8,7 +8,6 @@ import DesignProcess from './sections/DesignProcess.jsx';
 import Experience from './sections/Experience.jsx';
 import LastEvents from './sections/LastEvents.jsx';
 import Resume from './sections/Resume.jsx';
-import StoryBand from './sections/StoryBand.jsx';
 
 export default function HomePage() {
   useDocumentMeta(META);
@@ -23,14 +22,13 @@ export default function HomePage() {
       <Navbar />
       <main className="relative z-10">
         <About />
-        <StoryBand />
         <LastEvents />
         <Experience />
         <DesignProcess />
         <section className="rf pjs" id="selected-works">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="pj-head mb-7">
-              <p className="pj-kicker">
+              <p className="section-kicker">
                 <span aria-hidden="true" />
                 Deep Dive : Every Project Card
               </p>
@@ -47,7 +45,7 @@ export default function HomePage() {
                 A collection of human-centered work across research, interaction design, design systems, AI-powered products, and front-end product experiences. Each project reflects my passion for creating meaningful digital experiences.
               </p>
               <p className="pj-hint">
-                Pick a lens below. Each card opens the problem, my role and the evidence.
+                Pick a lens below. Each card opens the problem, my role and the deliverables.
               </p>
             </div>
             <div aria-label="Filter projects by category" className="flex flex-wrap items-center gap-2 pt-1 mb-5" id="about-project-categories" role="group">

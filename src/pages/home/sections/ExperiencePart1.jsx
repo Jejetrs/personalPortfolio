@@ -11,7 +11,7 @@ export default function ExperiencePart1() {
             </h2>
             <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
           </div>
-          <p className="text-slate-600 text-sm mt-1">
+          <p className="text-slate-600 text-sm sm:text-base mt-1">
             Exploring how business, product thinking, design, and technology come together to turn ideas into practical solutions.
           </p>
         </div>

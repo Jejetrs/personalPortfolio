@@ -7,7 +7,7 @@ export default function ResumePart1() {
         <h2 className="text-5xl sm:text-6xl font-extrabold tracking-tight text-[#131b2e] mt-4 uppercase leading-[1]">
           {"CERTIFICATES & ACHIEVEMENTS"}
         </h2>
-        <p className="text-slate-600 text-xs sm:text-sm mt-1 max-w-xl mx-auto">
+        <p className="text-slate-600 text-sm sm:text-base mt-1 max-w-xl mx-auto">
           {"Professional training, technical skills & competition achievements"}
         </p>
       </div>

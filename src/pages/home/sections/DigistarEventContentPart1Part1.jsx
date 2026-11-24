@@ -46,13 +46,11 @@ function EvidenceCard({ index, title, description, children }) {
     <article className="event-role-card event-role-card--with-photo">
       <div className="event-proof-visual">
         {children}
-        <span className="event-proof-caption">
-          <span>{String(index).padStart(2, "0")} · EVIDENCE</span>
-          {title}
-        </span>
       </div>
-      <span className="event-role-index">{String(index).padStart(2, "0")}</span>
-      <h5>{title}</h5>
+      <div className="event-role-heading">
+        <span className="event-role-index">{String(index).padStart(2, "0")}</span>
+        <h5>{title}</h5>
+      </div>
       <p>{description}</p>
     </article>
   );

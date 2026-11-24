@@ -271,7 +271,7 @@ export default function LeadsightBusinessAnalysisCard() {
                 <div className="lba-flow-step"><span className="lba-stepnum">EXPERIENCE</span><strong>Clear dashboard</strong><p>Sales teams view segments, information, and recommendations.</p></div>
                 <div className="lba-flow-step"><span className="lba-stepnum">INTENDED VALUE</span><strong>Better prioritization</strong><p>Focus outreach planning around interpretable lead scores.</p></div>
               </div>
-              <div className="lba-insight"><strong>What the product must get right:</strong> Model outputs need to be understandable and useful for the specific sales task. Technical performance alone is not sufficient evidence of business value.</div>
+              <div className="lba-insight"><strong>What the product must get right:</strong> Model outputs need to be understandable and useful for the specific sales task. Technical performance alone does not demonstrate business value.</div>
             </>
           )}
 
@@ -314,7 +314,7 @@ export default function LeadsightBusinessAnalysisCard() {
                   <div className="lba-insight" style={{ marginTop: 14 }}><strong>Decision principle:</strong> Model quality, user adoption, and sales impact should be measured separately.</div>
                 </div>
               </div>
-              <div className="lba-warning"><strong>Evidence boundary:</strong> LeadSight is an ASAH capstone developed using a public dataset. The four-month rollout and proposed business KPIs in the presentation are plans, not proof of internal bank adoption, real revenue uplift, or operational cost reduction.</div>
+              <div className="lba-warning"><strong>Scope &amp; validation limits:</strong> LeadSight is an ASAH capstone developed using a public dataset. The four-month rollout and proposed business KPIs in the presentation are plans, not proof of internal bank adoption, real revenue uplift, or operational cost reduction.</div>
             </>
           )}
         </section>

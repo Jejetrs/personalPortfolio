@@ -9,7 +9,7 @@ export default function CivisionProjectCard() {
           <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-blue-100/80 pb-2.5">
             <div className="flex flex-wrap items-center gap-1.5">
               <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-xs shadow-xs">
-                06
+                05
               </span>
               <span className="px-2.5 py-0.5 bg-blue-100/70 text-blue-900 text-xs font-semibold rounded-full border border-blue-200/70">
                 Recruitment Platform

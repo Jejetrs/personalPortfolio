@@ -45,7 +45,7 @@ export default function NuscaProjectCard1() {
             <div className="flex flex-wrap items-center justify-between gap-2 project-card-header">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#006e4b] text-white font-bold text-xs shadow-xs">
-                  03
+                  02
                 </span>
                 <span className="px-2.5 py-0.5 bg-emerald-100/90 text-[#006e4b] text-[11px] font-semibold rounded-full border border-emerald-200/80 shadow-xs">
                   {"Nutrition & Health"}
