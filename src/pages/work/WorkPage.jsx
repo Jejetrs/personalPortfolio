@@ -29,7 +29,7 @@ export default function WorkPage() {
           <ul className="wk-chips">
             <li className="wk-chip">
               <small>2026</small>
-              <b>Designer Intern</b>
+              <b>Designer Intern · MAGENTA Program</b>
               <span>Telkom Indonesia · INAPROC</span>
             </li>
             <li className="wk-chip">

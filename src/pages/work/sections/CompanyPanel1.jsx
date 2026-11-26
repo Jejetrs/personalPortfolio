@@ -33,7 +33,7 @@ export default function CompanyPanel1() {
                 PT Telekomunikasi Indonesia (Persero) Tbk
               </h2>
               <p className="text-sm font-bold leading-snug text-indigo-700">
-                Designer Intern
+                Designer Intern · MAGENTA Program
               </p>
             </div>
             <p className="max-w-2xl text-[13px] leading-relaxed text-slate-600">

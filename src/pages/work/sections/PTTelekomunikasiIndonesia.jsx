@@ -41,7 +41,7 @@ export default function PTTelekomunikasiIndonesia() {
                   PT Telekomunikasi Indonesia
                 </h3>
                 <p className="text-[11px] text-on-surface-variant truncate">
-                  Designer Intern
+                  Designer Intern · MAGENTA Program
                 </p>
               </div>
             </button>

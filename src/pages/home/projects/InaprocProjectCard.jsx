@@ -60,7 +60,7 @@ export default function InaprocProjectCard() {
                   INAPROC
                 </h2>
                 <p className="text-xs font-semibold text-rose-800 uppercase tracking-wider mt-0.5">
-                  Designer Intern — Digistar Class Internship 2026 · Telkom Indonesia
+                  Designer Intern · MAGENTA Program — Digistar Class Internship 2026 · Telkom Indonesia
                 </p>
               </div>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
