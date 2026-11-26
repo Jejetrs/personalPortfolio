@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import FullscreenButton from "@/components/FullscreenButton.jsx";
 
 export const drivePreviewUrl = (id) => `https://drive.google.com/file/d/${id}/preview?rm=minimal`;
 
 export default function VideoHighlight({ driveId, poster, label = "Capstone highlight", title, caption, accent = "#4f46e5" }) {
   const [playing, setPlaying] = useState(false);
+  const frameRef = useRef(null);
   return (
     <figure className="video-highlight" style={{ "--vh-accent": accent }}>
       <div className="video-highlight-meta">
@@ -14,10 +16,12 @@ export default function VideoHighlight({ driveId, poster, label = "Capstone high
         <strong>{title}</strong>
         {caption ? <span className="video-highlight-caption">{caption}</span> : null}
       </div>
-      <div className="video-highlight-frame">
+      <div className="video-highlight-frame video-stage" ref={frameRef}>
         {playing ? (
           <>
             <iframe
+              className="drive-video-embed"
+              ref={(frame) => frame?.focus({ preventScroll: true })}
               src={drivePreviewUrl(driveId)}
               title={title}
               allow="autoplay; fullscreen; picture-in-picture"
@@ -25,7 +29,6 @@ export default function VideoHighlight({ driveId, poster, label = "Capstone high
               referrerPolicy="no-referrer"
               sandbox="allow-forms allow-scripts allow-same-origin"
             />
-            <span className="video-highlight-source-guard" aria-hidden="true" />
           </>
         ) : (
           <button type="button" className="video-highlight-poster" onClick={() => setPlaying(true)} aria-label={`Play video: ${title}`}>
@@ -33,6 +36,7 @@ export default function VideoHighlight({ driveId, poster, label = "Capstone high
             <span className="video-highlight-play" aria-hidden="true">▶</span>
           </button>
         )}
+        {playing && <FullscreenButton targetRef={frameRef} />}
       </div>
     </figure>
   );

@@ -227,16 +227,15 @@ export function bindTrainingEvidence(root, openPdf) {
     if (play) {
       const player = play.closest('[data-evidence-video]');
       const frame = document.createElement('iframe');
+      frame.className = 'drive-video-embed';
       frame.src = player.dataset.evidenceVideo;
       frame.title = player.dataset.videoTitle || 'Project video';
       frame.allow = 'autoplay; fullscreen; picture-in-picture';
       frame.allowFullscreen = true;
       frame.referrerPolicy = 'no-referrer';
       frame.setAttribute('sandbox', 'allow-forms allow-scripts allow-same-origin');
-      const guard = document.createElement('span');
-      guard.className = 'ev-player-source-guard';
-      guard.setAttribute('aria-hidden', 'true');
-      player.replaceChildren(frame, guard);
+      player.replaceChildren(frame);
+      frame.focus({ preventScroll: true });
       return;
     }
     const doc = event.target.closest?.('[data-evidence-pdf]');

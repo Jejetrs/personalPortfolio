@@ -113,6 +113,7 @@ html body #about-project-detail .gs-ch-body > .project-card-item, html body #abo
 /* field menu: a dropdown */
 .pj-dd { position: relative; align-self: flex-start; flex: 0 0 13.5rem; align-content: start; display: grid; gap: 0.3rem; }
 .pj-dd-cap { padding-left: 0.2rem; font: 700 0.52rem/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.14em; text-transform: uppercase; color: #7a849c; }
+.pj-dd-help { margin: 0; padding: 0 0.2rem; font: 500 0.66rem/1.4 "Plus Jakarta Sans", sans-serif; color: #66708a; }
 .pj-dd-toggle {
   display: flex; align-items: center; gap: 0.6rem; width: 100%; padding: 0.7rem 0.85rem; border: 1px solid #d5dcf0; border-radius: 0.9rem; background: #f6f8ff;
   font: 700 0.8rem/1.2 "Plus Jakarta Sans", sans-serif; color: #0f172a; text-align: left; cursor: pointer; transition: background 0.2s, border-color 0.2s;

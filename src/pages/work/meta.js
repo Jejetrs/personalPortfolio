@@ -567,7 +567,6 @@ export const PAGE_CSS = `
 .ev-player{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#050b22;box-shadow:0 0 0 1px rgba(255,255,255,.14)}
 .ev-player iframe{position:absolute;z-index:1;inset:0;width:100%;height:100%;border:0;touch-action:manipulation}
 .ev-play{position:absolute;inset:0;width:100%;height:100%;border:0}
-.ev-player-source-guard{position:absolute;z-index:2;top:0;right:0;width:76px;height:58px;background:transparent;pointer-events:none}
 .ev-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.ev-play{display:grid;place-items:center;padding:0;cursor:pointer;background:#0f1a38;color:#4f46e5}
 .ev-play img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6;transition:opacity .2s,transform .4s}
 .ev-play:hover img{opacity:.8;transform:scale(1.03)}

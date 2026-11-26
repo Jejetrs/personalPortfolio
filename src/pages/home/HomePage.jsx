@@ -55,7 +55,8 @@ export default function HomePage() {
                   <p className="hidden" id="about-project-counter"></p>
                   <div className="pj-dd" id="about-project-dropdown">
                     <span className="pj-dd-cap">Field</span>
-                    <button aria-controls="about-project-categories" aria-expanded="false" aria-haspopup="true" className="pj-dd-toggle" id="about-project-dd-toggle" type="button">
+                    <p className="pj-dd-help" id="about-project-category-hint">Choose a field to filter the projects below.</p>
+                    <button aria-controls="about-project-categories" aria-describedby="about-project-category-hint" aria-expanded="false" aria-haspopup="true" className="pj-dd-toggle" id="about-project-dd-toggle" type="button">
                       <span className="pj-dd-dot" id="about-project-dd-dot" aria-hidden="true"></span>
                       <span className="pj-dd-label" id="about-project-dd-label">UI/UX Design</span>
                       <svg aria-hidden="true" className="pj-dd-chev" fill="none" height="16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.4" viewBox="0 0 24 24" width="16"><path d="m6 9 6 6 6-6" /></svg>
