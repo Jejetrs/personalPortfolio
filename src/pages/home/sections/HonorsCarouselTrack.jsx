@@ -1,3 +1,75 @@
+const TRAINING_CERTIFICATES = [
+  {
+    title: "Belajar Membuat Front-End Web untuk Pemula",
+    credential: "INTERACTIVE FRONT-END",
+    date: "SEP 2025 – SEP 2028",
+    description: "Built interactive web interfaces with DOM manipulation, browser events, and Web Storage, then applied them in a final project.",
+    src: "/assets/certificate/Belajar%20Membuat%20Front-End%20Web%20untuk%20Pemula.pdf",
+  },
+  {
+    title: "Belajar Fundamental Aplikasi Web dengan React",
+    credential: "REACT DEVELOPMENT",
+    date: "OCT 2025 – OCT 2028",
+    description: "Built a React app using reusable components, prop validation, routing, lifecycle methods, Context, and Hooks.",
+    src: "/assets/certificate/Belajar%20Fundamental%20Aplikasi%20Web%20dengan%20React.pdf",
+  },
+  {
+    title: "Belajar Fundamental Back-End dengan JavaScript",
+    credential: "BACK-END DEVELOPMENT",
+    date: "DEC 2025 – DEC 2028",
+    description: "Designed secure REST APIs with JavaScript, PostgreSQL, validation, authentication, messaging, storage, and caching.",
+    src: "/assets/certificate/Belajar%20Fundamental%20Back-End%20dengan%20JavaScript.pdf",
+  },
+  {
+    title: "Membangun Sistem Machine Learning",
+    credential: "MACHINE LEARNING OPS",
+    date: "OCT 2025 – OCT 2028",
+    description: "Built reliable ML workflows with MLflow, GitHub, and Docker, covering data preparation, retraining, serving, and monitoring.",
+    src: "/assets/certificate/Membangun%20Sistem%20Machine%20Learning.pdf",
+  },
+  {
+    title: "Belajar Pengembangan Machine Learning",
+    credential: "DEEP LEARNING",
+    date: "APR 2025 – APR 2028",
+    description: "Practiced deep learning with TensorFlow and Keras across NLP, time series, image classification, and recommendation systems.",
+    src: "/assets/certificate/sertifikat_course_Belajar%20Pengembangan%20Machine%20Learning.pdf",
+  },
+  {
+    title: "Machine Learning Terapan",
+    credential: "APPLIED MACHINE LEARNING",
+    date: "MAY 2025 – MAY 2028",
+    description: "Applied predictive analytics, sentiment analysis, computer vision, and recommendation methods to practical use cases.",
+    src: "/assets/certificate/sertifikat_course_Machine%20Learning%20Terapan.pdf",
+  },
+  {
+    title: "Belajar Analisis Data dengan Python",
+    credential: "PYTHON DATA ANALYSIS",
+    date: "MAR 2025 – MAR 2028",
+    description: "Used Python for data cleaning, descriptive statistics, EDA, visualization, and an interactive Streamlit dashboard.",
+    src: "/assets/certificate/Jessica%20Theresia_Belajar%20Analisis%20Data%20dengan%20Python.pdf",
+  },
+  {
+    title: "Belajar Dasar Structured Query Language (SQL)",
+    credential: "SQL FUNDAMENTALS",
+    date: "FEB 2025 – FEB 2028",
+    description: "Practiced relational database concepts and core SQL for structuring, querying, inserting, updating, and deleting data.",
+    src: "/assets/certificate/Jessica%20Theresia_Belajar%20Dasar%20Structured%20Query%20Language%20(SQL).pdf",
+  },
+  {
+    title: "Belajar Fundamental Pemrosesan Data",
+    credential: "DATA PROCESSING",
+    date: "MAY 2025 – MAY 2028",
+    description: "Prepared reliable datasets with Python, data repositories, ETL pipelines, data cleaning, and workflow automation.",
+    src: "/assets/certificate/sertifikat_course_Belajar%20Fundamental%20Pemrosesan%20Data.pdf",
+  },
+  {
+    title: "Belajar Dasar Visualisasi Data",
+    credential: "DATA VISUALIZATION",
+    date: "FEB 2025 – FEB 2028",
+    description: "Learned to prepare data, choose effective charts, and use visual storytelling in Google Sheets to communicate insights.",
+  },
+];
+
 export default function HonorsCarouselTrack() {
   return (
     <div id="honors-carousel-track">
@@ -131,7 +203,7 @@ export default function HonorsCarouselTrack() {
         </div>
         <div className="space-y-2 mt-3">
           <p className="text-[11px] text-slate-600 leading-relaxed">
-            {"React & Back-End with AI cohort. Led the capstone project as Project Manager while contributing to full-stack development and cross-team coordination."}
+            Graduated with Distinction in the React &amp; Back-End with AI path; led the LeadSight capstone as Project Lead and Front-End Developer.
           </p>
           <div className="flex items-center justify-between text-[10px] font-mono border-t border-slate-200 pt-2 text-slate-600">
             <span className="font-bold text-blue-700">
@@ -425,6 +497,43 @@ export default function HonorsCarouselTrack() {
           </div>
         </div>
       </article>
+      {TRAINING_CERTIFICATES.map((certificate) => (
+        <article
+          aria-label={`${certificate.title}, Dicoding course certificate`}
+          className="honor-card flex flex-col justify-between rounded-[26px] border border-slate-200 bg-white p-4 shadow-[0_8px_32px_rgba(0,0,0,0.08)]"
+          data-certificate={certificate.src}
+          key={certificate.title}
+        >
+          <div>
+            <h3 className="text-center text-sm font-extrabold leading-tight text-[#131b2e] sm:text-base">
+              {certificate.title}
+            </h3>
+            <p className="mt-1 text-center text-xs font-semibold text-slate-600">
+              - Course Certificate -
+            </p>
+            <div className="mt-4 flex h-36 flex-col items-center justify-center rounded-2xl border border-indigo-200 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 text-center">
+              <span className="font-mono text-[10px] font-bold tracking-widest text-indigo-700">
+                DICODING
+              </span>
+              <span className="mt-3 text-sm font-black text-slate-800">
+                {certificate.credential}
+              </span>
+              <span className="mt-2 font-mono text-[10px] text-slate-600">
+                {certificate.date.split(" – ")[0]}
+              </span>
+            </div>
+          </div>
+          <div className="mt-3 space-y-2">
+            <p className="text-[11px] leading-relaxed text-slate-600">
+              {certificate.description}
+            </p>
+            <div className="flex items-center justify-between border-t border-slate-200 pt-2 font-mono text-[9px] text-slate-600">
+              <span className="font-bold text-indigo-700">DICODING</span>
+              <span>{certificate.date}</span>
+            </div>
+          </div>
+        </article>
+      ))}
     </div>
   );
 }

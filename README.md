@@ -126,3 +126,15 @@ List vertikal dengan garis meliuk di kiri, card detail di kanan yang berganti sa
 
 Kotak-kotak samar ada di seluruh halaman (`src/styles/portfolio-theme.css`). Di ruang kosong section terang, garisnya lebih tegas:
 `src/behaviors/home/emptyGrid.js` menggambar mask dari posisi teks, gambar, dan kartu, lalu `src/styles/empty-grid.css` menampilkan grid kedua yang tegas hanya di area mask. Kekuatan garis diatur di `empty-grid.css`, kelembutan pinggirannya di konstanta `PADDING` dan `BLUR` pada `emptyGrid.js`.
+
+## Bahasa (EN / ID)
+Navbar punya tombol **EN | ID**. Pilihan bahasa disimpan di `localStorage` (`portfolio-language`) dan bisa dipaksa lewat URL, mis. `https://domain-kamu/?lang=id` (berguna untuk dikirim ke recruiter Indonesia). Default: English.
+
+Cara kerjanya: konten tetap ditulis dalam bahasa Inggris di komponen, lalu `src/i18n/translator.js` mengganti teks di DOM saat bahasa Indonesia aktif (dan mengembalikannya persis seperti semula saat kembali ke EN).
+
+- `src/i18n/id.js` — kamus Inggris → Indonesia. **Untuk mengubah gaya kalimat, cukup edit nilai di kanan.** Kunci di kiri harus sama persis dengan teks Inggris di situs.
+- `src/i18n/patterns.js` — kalimat yang memuat angka/nama (mis. "Show image 3 of 10", "Go to certificate 4", nama bulan di keterangan sertifikat).
+- `src/styles/i18n.css` — teks yang dibuat lewat CSS (`::after`, mis. "Show chapter", "Click to enlarge") dan gaya tombol bahasa.
+- Teks baru yang kamu tambahkan di komponen akan tampil dalam bahasa Inggris sampai ditambahkan ke `id.js`.
+- Sengaja tidak diterjemahkan: nama orang/perusahaan/program, nama tools & teknologi, potongan kode, `alt` gambar, isi PDF dan gambar sertifikat.
+- Logika di `behaviors/*` yang membaca teks Inggris memakai `originalText()` dari `src/i18n/translator.js`, jadi tidak terpengaruh terjemahan.

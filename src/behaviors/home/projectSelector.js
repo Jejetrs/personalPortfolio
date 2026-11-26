@@ -4,6 +4,7 @@ import { groupOfCard, groupFields, partOfCard } from '@/pages/home/projects/grou
 import { renderPdf } from '@/lib/pdfCanvas.js';
 import { getProjectAssets, getProjectProfileAsset } from '@/pages/home/projects/projectAssets.js';
 import { startAutoSlideshow } from '@/lib/autoSlideshow.js';
+import { originalText } from '@/i18n/translator.js';
 import { fadeInSlide, transitionImageSource } from '@/lib/slideTransitions.js';
 
 export async function mountProjectSelector(scope, { projects, trusteeDocuments, renderDetail, clearDetail }) {
@@ -264,7 +265,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       let cardHeader = card.querySelector('.project-card-header');
       if (!cardHeader) {
         const primaryAction = Array.from(card.querySelectorAll('a')).find((link) =>
-          /view (?:prototype|case study|project)|user flow/i.test(link.textContent)
+          /view (?:prototype|case study|project)|user flow/i.test(originalText(link))
         );
         cardHeader = primaryAction?.closest('[class*="border-b"]') || null;
         if (cardHeader && cardHeader !== card) cardHeader.classList.add('project-card-header');
@@ -309,7 +310,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       if (!details.id) details.id = `${card.id}-details`;
 
       card.querySelectorAll('a[href="#"]').forEach((link) => {
-        const isFlowLink = (link.querySelector('span')?.textContent || '').toLowerCase().includes('flow');
+        const isFlowLink = originalText(link.querySelector('span')).toLowerCase().includes('flow');
         if (cardCategory === 'uiux' && !isFlowLink && /^https?:\/\//i.test(card.dataset.figmaUrl || '')) {
           link.href = card.dataset.figmaUrl;
           link.target = '_blank';
@@ -321,7 +322,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         link.href = `#${details.id}`;
         link.setAttribute('aria-label', `View details for ${card.querySelector('h2')?.textContent.trim() || 'this project'}`);
         const label = link.querySelector('span');
-        const originalLabel = label?.textContent.trim().toLowerCase() || '';
+        const originalLabel = originalText(label).trim().toLowerCase();
         if (label) {
           label.textContent = caseStudy
             ? originalLabel.includes('flow') ? 'View User Flow' : (cardCategory === 'uiux' ? 'Figma Preview' : 'View Case Study')
@@ -516,13 +517,13 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       button.className = 'project-dropdown-toggle';
 
       const oldLabel = button.querySelector('.accordion-text');
-      const oldLabelText = oldLabel?.textContent.trim() || '';
+      const oldLabelText = originalText(oldLabel).trim();
       const title = oldLabelText
         .replace(/^(?:view|hide)\s+/i, '')
         .replace(/\s+/g, ' ')
         .trim() || 'Project Deliverables';
       const oldBadge = button.children[1]?.querySelector('span');
-      const badgeText = oldBadge?.textContent.trim() || '';
+      const badgeText = originalText(oldBadge).trim();
       const isOpen = accordion.classList.contains('is-open');
 
       button.replaceChildren();

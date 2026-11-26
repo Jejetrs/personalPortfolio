@@ -24,7 +24,7 @@ export default function AboutPart1Part1() {
           <span>Jessica</span> <span>Theresia<em>.</em></span>
         </h1>
         <p className="hh-roles">
-          <span>Product &amp; Business Analysis</span>
+          <span>IT Product &amp; Business Analysis</span>
           <i aria-hidden="true" />
           <span>UI/UX Design</span>
           <i aria-hidden="true" />
@@ -81,7 +81,7 @@ export default function AboutPart1Part1() {
           <div className="hh-summary">
             <h2 className="hh-h2">Bridging business needs, product thinking, and engineering feasibility.</h2>
             <p className="hh-lead">
-              I enjoy turning complex problems into human-centered digital solutions. My experience spans business and requirements analysis, product planning, and UI/UX design, supported by hands-on knowledge of software development and AI/ML. This allows me to approach problems from both strategic and technical perspectives.
+              My passion for technology goes beyond programming. I am curious about how ideas take shape, why solutions are needed, and how technology creates value for businesses and users. Through my experience in Business Analysis, Product Development, UI/UX Design, Software Development, and AI/ML, I combine strategic thinking, creativity, and technical skills to solve complex challenges.
             </p>
             <dl className="hh-facts">
               {FACTS.map((fact) => (

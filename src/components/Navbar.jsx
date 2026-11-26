@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import AppLink from "@/components/AppLink.jsx";
 import useNavbarBehavior from "@/hooks/useNavbarBehavior.js";
+import LanguageToggle from "@/i18n/LanguageToggle.jsx";
 import { ROUTES } from "@/routes/paths.js";
 
 const EMAIL = "jssicatheresia@gmail.com";
@@ -126,10 +127,12 @@ export default function Navbar({ active, variant = "default", showStatus = true 
         <Brand variant={variant} showStatus={showStatus} />
         <nav className={v.navClass}>
           {links}
+          {variant === "default" && <LanguageToggle />}
           {variant === "default" && <EmailButton className={emailClass} />}
         </nav>
         {variant === "classic" && (
           <div className="flex items-center gap-3">
+            <LanguageToggle />
             <EmailButton className={emailClass} />
           </div>
         )}

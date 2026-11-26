@@ -359,13 +359,15 @@ export function mountHomeInteractions(scope) {
 
   // Hero tagline
   const typewriter = document.getElementById('hero-typewriter-text');
-  const typewriterText = 'Turning needs into products that matter.';
+  const typewriterSource = 'Turning needs into products that matter.';
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let typewriterTimeout;
 
   function animateTypewriter() {
     window.clearTimeout(typewriterTimeout);
     if (!typewriter) return;
+    // Typed character by character, so translate the whole sentence first.
+    const typewriterText = window.portfolioI18n ? window.portfolioI18n.translate(typewriterSource) : typewriterSource;
 
     if (reducedMotion.matches) {
       typewriter.textContent = typewriterText;
@@ -398,6 +400,7 @@ export function mountHomeInteractions(scope) {
   }
 
   animateTypewriter();
+  scope.on(window, 'portfolio:languagechange', animateTypewriter);
   reducedMotion.addEventListener('change', animateTypewriter);
 
   const revealComponents = document.querySelectorAll(
@@ -880,18 +883,20 @@ export function mountHomeInteractions(scope) {
           certificateArtwork.replaceChildren(certificatePreview);
           honorPreviews.push(renderPdf(certificatePreview, certificateUrl, { mode: 'contain' }));
         }
-        const expandButton = window.createImageExpandButton(card.getAttribute('aria-label') || 'achievement');
-        expandButton.setAttribute('aria-label', `Preview certificate: ${card.getAttribute('aria-label') || 'achievement'}`);
-        expandButton.addEventListener('click', (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          window.openCertificatePreview({
-            src: certificateUrl,
-            caption: card.getAttribute('aria-label') || 'Certificate',
-            trigger: expandButton
+        if (certificateUrl) {
+          const expandButton = window.createImageExpandButton(card.getAttribute('aria-label') || 'achievement');
+          expandButton.setAttribute('aria-label', `Preview certificate: ${card.getAttribute('aria-label') || 'achievement'}`);
+          expandButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            window.openCertificatePreview({
+              src: certificateUrl,
+              caption: card.getAttribute('aria-label') || 'Certificate',
+              trigger: expandButton
+            });
           });
-        });
-        certificateArtwork.appendChild(expandButton);
+          certificateArtwork.appendChild(expandButton);
+        }
       }
 
       card.addEventListener('click', () => {

@@ -4,6 +4,7 @@ import { renderPdf } from '@/lib/pdfCanvas.js';
 import { startAutoSlideshow } from '@/lib/autoSlideshow.js';
 import { transitionImageSource } from '@/lib/slideTransitions.js';
 import { renderTrainingEvidence, bindTrainingEvidence } from './trainingEvidence.js';
+import { originalText } from '@/i18n/translator.js';
 
 const CERTIFICATE_FILES = {
   'company-panel-1': { title: 'PT Telekomunikasi Indonesia — Magang Generasi Bertalenta', url: '/assets/certificate/DCI2026.pdf' },
@@ -131,7 +132,7 @@ export function mountWorkExperience() {
         summary.classList.remove('grid-cols-2', 'grid-cols-3', 'md:grid-cols-3', 'md:grid-cols-4', 'md:grid-cols-5', 'xl:grid-cols-5', 'gap-4', 'gap-3.5', 'pt-6', 'mt-6', 'border-t', 'border-outline-variant/30');
         summary.classList.add('items-stretch', 'experience-metrics', 'p-5', 'bg-surface-container-low/70', 'rounded-xl', 'border', 'border-outline-variant/40');
         let toolsTile = [...summary.children].find((item) => {
-          const label = item.querySelector(':scope > span')?.textContent.trim();
+          const label = originalText(item.querySelector(':scope > span')).trim();
           return label === 'Tools' || label === 'Tools & Skills';
         });
         if (!toolsTile) {
