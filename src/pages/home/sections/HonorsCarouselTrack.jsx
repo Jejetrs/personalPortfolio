@@ -66,7 +66,8 @@ const TRAINING_CERTIFICATES = [
     title: "Belajar Dasar Visualisasi Data",
     credential: "DATA VISUALIZATION",
     date: "FEB 2025 – FEB 2028",
-    description: "Learned to prepare data, choose effective charts, and use visual storytelling in Google Sheets to communicate insights.",
+    description: "Learned data visualization fundamentals and Google Sheets, prepared data for visualization, and transformed data into effective charts using Gestalt principles, Preattentive Attributes, and data storytelling.",
+    src: "/assets/certificate/Jessica%20Theresia_Belajar%20Dasar%20Visualisasi%20Data.pdf",
   },
 ];
 
