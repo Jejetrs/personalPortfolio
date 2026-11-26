@@ -65,6 +65,7 @@ export default function LeadsightBusinessAnalysisCard() {
 #leadsight-business-analysis-card.lba .lba-stepnum{color:var(--acc2);font:700 9.5px/1.3 "JetBrains Mono",monospace;letter-spacing:.08em}
 #leadsight-business-analysis-card.lba .lba-flow-step strong{display:block;margin:3px 0 2px;font-size:12px}
 #leadsight-business-analysis-card.lba .lba-flow-step p{color:var(--mut);font-size:10.5px;line-height:1.4}
+#leadsight-business-analysis-card.lba .lba-flow-step-n{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:8px;align-items:baseline}#leadsight-business-analysis-card.lba .lba-flow-step-n strong{margin:0}#leadsight-business-analysis-card.lba .lba-flow-step-n p{grid-column:1/-1;margin-top:4px}
 #leadsight-business-analysis-card.lba .lba-note{margin-top:10px;color:#7a8799;font-size:10.5px}
 #leadsight-business-analysis-card.lba .lba-matrix{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 #leadsight-business-analysis-card.lba .lba-quad{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#ffffffd6}
@@ -144,8 +145,8 @@ export default function LeadsightBusinessAnalysisCard() {
               </div>
               <h2 className="lba-title">LeadSight</h2>
               <p className="lba-summary">
-                A proposed lead-prioritization concept for banking sales teams, combining predictive
-                scoring, customer segmentation, and analytics to support more informed outreach.
+                Business analysis covers the banking sales prioritization problem, target users,
+                competitor positioning, value proposition, and proposed rollout metrics.
               </p>
               <div className="lba-role">
                 <b>My role</b>
@@ -223,10 +224,10 @@ export default function LeadsightBusinessAnalysisCard() {
                 <p className="lba-kicker">ANALYSIS TO SOLUTION</p>
                 <h3 className="lba-value-title">The proposed decision flow</h3>
                 <div className="lba-flow">
-                  <div className="lba-flow-step"><span className="lba-stepnum">STEP 01</span><strong>Understand the challenge</strong><p>Identify inefficiencies in prospect selection and outbound contact workflows.</p></div>
-                  <div className="lba-flow-step"><span className="lba-stepnum">STEP 02</span><strong>Structure the data</strong><p>Use the public UCI Bank Marketing dataset to explore patterns and build a predictive model.</p></div>
-                  <div className="lba-flow-step"><span className="lba-stepnum">STEP 03</span><strong>Surface priorities</strong><p>Present lead scores and segments in a readable sales dashboard.</p></div>
-                  <div className="lba-flow-step"><span className="lba-stepnum">STEP 04</span><strong>Support decisions</strong><p>Help teams review targets, plan outreach, and track campaign activity.</p></div>
+                  <div className="lba-flow-step lba-flow-step-n"><span className="lba-stepnum">STEP 01</span><strong>Understand the challenge</strong><p>Identify inefficiencies in prospect selection and outbound contact workflows.</p></div>
+                  <div className="lba-flow-step lba-flow-step-n"><span className="lba-stepnum">STEP 02</span><strong>Structure the data</strong><p>Use the public UCI Bank Marketing dataset to explore patterns and build a predictive model.</p></div>
+                  <div className="lba-flow-step lba-flow-step-n"><span className="lba-stepnum">STEP 03</span><strong>Surface priorities</strong><p>Present lead scores and segments in a readable sales dashboard.</p></div>
+                  <div className="lba-flow-step lba-flow-step-n"><span className="lba-stepnum">STEP 04</span><strong>Support decisions</strong><p>Help teams review targets, plan outreach, and track campaign activity.</p></div>
                 </div>
               </div>
               <p className="lba-note">Problem framing and product concept are drawn from the LeadSight capstone presentation, not from a live bank deployment.</p>

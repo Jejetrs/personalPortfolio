@@ -18,7 +18,7 @@ export default function SmartFocusAlertDeveloperCard() {
 .sf .hero{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:18px;margin-top:18px;align-items:start}
 .sf .hero>*{min-width:0}
 .sf .title{font-size:clamp(32px,3.2vw,46px);line-height:1.05;letter-spacing:-.05em;color:#182c49;font-weight:800}.sf .title span{color:#2c68c7}
-.sf .overline{color:#2161bd;font-size:10px;font-weight:800;letter-spacing:.09em;margin-top:8px;text-transform:uppercase}
+.sf .overline{text-decoration:none;color:#2161bd;font-size:10px;font-weight:800;letter-spacing:.09em;margin-top:8px;text-transform:uppercase}
 .sf .lead{color:#56708e;font-size:13px;line-height:1.6;margin-top:9px;max-width:70ch}
 .sf .metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:15px}
 .sf .metric{background:#fff;border:1px solid var(--line);border-radius:11px;padding:12px 9px;min-width:0}.sf .metric b{display:block;font-size:13px;color:#195aaf;line-height:1.2}.sf .metric small{display:block;font-size:10px;color:#7589a2;margin-top:3px}
@@ -201,9 +201,6 @@ export default function SmartFocusAlertDeveloperCard() {
           </div>
           <div className="dev-actions">
             <PrivateLink label="GitHub" restricted />
-            <button type="button" className="dev-btn ghost" data-sf-goto="uiux" data-sf-target="smart-focus-alert-card-1">
-              UI/UX case study ↗
-            </button>
             <span className="dev-switch" data-live-badge="" data-state="checking" role="switch" aria-checked="false" aria-readonly="true" aria-disabled="true" aria-label="Live deploy status" tabIndex="-1">
               <span className="dev-switch-label">Live deploy</span>
               <span className="dev-switch-track"><i></i></span>
@@ -224,7 +221,7 @@ export default function SmartFocusAlertDeveloperCard() {
               FULL-STACK DEVELOPMENT · COMPUTER VISION
             </div>
             <p className="lead">
-              A Flask web app that monitors attention through webcam or uploaded media, detects drowsiness and distraction, and generates audio alerts and session reports.
+              Flask routes connect webcam and uploaded-media processing to MediaPipe/OpenCV detection, audio alerts, and PDF/MP4 session-report generation.
             </p>
             <div className="metrics">
               <div className="metric">
@@ -477,17 +474,6 @@ export default function SmartFocusAlertDeveloperCard() {
               <p>
                 Screens from the deployed app · click to enlarge
               </p>
-            </div>
-            <div className="sf-gallery-nav">
-              <button aria-label="Previous screenshot" data-gal-prev="" type="button">
-                ←
-              </button>
-              <span data-gal-counter="">
-                1 / 6
-              </span>
-              <button aria-label="Next screenshot" data-gal-next="" type="button">
-                →
-              </button>
             </div>
           </div>
           <div className="sf-gal-track" data-gal-track="" tabIndex="0">

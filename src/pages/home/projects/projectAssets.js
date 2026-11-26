@@ -105,16 +105,13 @@ export const PROJECT_ASSETS = {
     image("UI UX/nusca/Nusca-Flowchart.webp", "Nusca flowchart"),
   ],
   "nusca-project-card-2": [
-    image("UI UX/nusca/Mockup.webp", "Nusca mockup"),
-    image("UI UX/nusca/Home.webp", "Nusca home"),
-    image("UI UX/nusca/Camera.webp", "Camera capture"),
-    image("UI UX/nusca/Crop.webp", "Label crop"),
-    image("UI UX/nusca/Loading Process.png", "Loading process"),
-    image("UI UX/nusca/Analysist Result Not Found.webp", "Analysis not found"),
-    image("UI UX/nusca/Analysist Result Not Label.png", "Analysis not label"),
-    image("UI UX/nusca/Analysist Result Nutri Level.webp", "Nutri-Level result"),
-    image("UI UX/nusca/Nusca-Alur BE.webp", "Backend flow"),
-    image("UI UX/nusca/Nusca-Flowchart.webp", "Nusca flowchart"),
+    image("AI ML Engineer/Nusca/Deteksi keberadaan label.png", "Nutrition label detection"),
+    image("AI ML Engineer/Nusca/Bounding Box Label Nutrisi.png", "Nutrition label bounding box"),
+    image("AI ML Engineer/Nusca/Target Deteksi Donut.png", "Donut model detection target"),
+    image("AI ML Engineer/Nusca/Confusion Matrix Deteksi per Field (Data Uji, Citra Positif).png", "Per-field detection confusion matrix"),
+    image("AI ML Engineer/Nusca/Hasil Uji.png", "Nutrition field extraction test results"),
+    image("AI ML Engineer/Nusca/Box Drinking Result.png", "Boxed drink analysis result"),
+    image("AI ML Engineer/Nusca/Hasil Minuman Bubuk.png", "Powdered drink analysis result"),
   ],
   "smart-focus-alert-card-1": [
     image("UI UX/smart focus alert/Desain Mockup Portfolio.jpg", "Smart Focus Alert portfolio design mockup"),
@@ -125,16 +122,10 @@ export const PROJECT_ASSETS = {
     image("UI UX/smart focus alert/Time Calculate.webp", "Time calculation"),
   ],
   "nusca-developer-project-card": [
-    image("UI UX/nusca/Mockup.webp", "Nusca developer mockup"),
-    image("UI UX/nusca/Home.webp", "Nusca home"),
-    image("UI UX/nusca/Camera.webp", "Camera capture"),
-    image("UI UX/nusca/Crop.webp", "Label crop"),
-    image("UI UX/nusca/Loading Process.png", "Loading process"),
-    image("UI UX/nusca/Analysist Result Not Found.webp", "Analysis not found"),
-    image("UI UX/nusca/Analysist Result Not Label.png", "Analysis not label"),
-    image("UI UX/nusca/Analysist Result Nutri Level.webp", "Nutri-Level result"),
-    image("UI UX/nusca/Nusca-Alur BE.webp", "Backend flow"),
-    image("UI UX/nusca/Nusca-Flowchart.webp", "Nusca flowchart"),
+    image("Developer/Nusca/Camera.webp", "Live camera scanner"),
+    image("Developer/Nusca/Crop.webp", "Nutrition panel crop"),
+    image("Developer/Nusca/Analysist Result Nutri Level.webp", "Nutri-Level result"),
+    image("Developer/Nusca/Console Result.png", "Backend request logs"),
   ],
   "smart-focus-alert-developer-card": [
     image("UI UX/smart focus alert/Mockup.webp", "Smart Focus Alert developer mockup"),
@@ -143,6 +134,8 @@ export const PROJECT_ASSETS = {
     image("AI ML Engineer/Smart Focus Alert/Sample PDF Report Live.webp", "PDF report preview"),
     image("UI UX/smart focus alert/Desain Mockup Portfolio.jpg", "Smart Focus Alert portfolio design mockup"),
   ],
+  // LeadSight front-end: more dashboard screenshots can be listed here, the same way
+  // (files in public/assets/projects/Developer/LeadSight/).
   "leadsight-project-card": [
     image("Developer/Leadsight.webp", "LeadSight dashboard"),
   ],

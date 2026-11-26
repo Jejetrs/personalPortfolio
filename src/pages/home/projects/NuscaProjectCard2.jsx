@@ -44,16 +44,13 @@ export default function NuscaProjectCard2() {
                 <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
                   NUSCA
                 </h2>
-                <span className="text-2xl">
-                  🍃
-                </span>
               </div>
               <p className="mt-1 text-xs font-bold uppercase tracking-wider text-[#006e4b]">
                 AI/ML Engineer · Nutrition Label Intelligence
               </p>
             </div>
             <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
-              An end-to-end AI pipeline for Indonesian packaged-drink nutrition labels that localizes the nutrition panel, extracts 9 nutritional fields, and determines Nutri-Level A–D classification using a deterministic rule-based approach.
+              The pipeline localizes nutrition panels, extracts and normalizes nine fields, then applies deterministic rules to assign Nutri-Level A–D.
             </p>
             <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5 pt-1">
               <div className="rounded-xl border border-emerald-200/70 bg-white/90 p-2 text-center shadow-xs backdrop-blur-sm">

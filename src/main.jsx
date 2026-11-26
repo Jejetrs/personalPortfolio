@@ -7,6 +7,9 @@ import "./styles/portfolio-theme.css";
 import "./styles/refresh.css";
 import "./styles/mobile.css";
 import "./styles/hero-header.css";
+import "./styles/projects.css";
+import "./styles/skills-journey.css";
+import "./styles/empty-grid.css";
 
 // Behavior modules mutate the DOM, so StrictMode is disabled.
 createRoot(document.getElementById("root")).render(

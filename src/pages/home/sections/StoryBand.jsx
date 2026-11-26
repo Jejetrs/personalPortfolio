@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { openStoryProject, storyProjectHref } from "@/pages/home/projects/storyLinks.js";
 import { CHAPTER_ROLES, FIT, ROLES } from "@/pages/home/data/storyProfile.js";
 import "@/styles/story.css";
 
@@ -141,7 +142,7 @@ export default function StoryBand() {
               <p className="sb-ask-explore">
                 <b>Explore:</b>
                 {fit.links.map((link) => (
-                  <a href={link.to ? `/?project=${link.to}#selected-works` : "#selected-works"} key={link.label}>
+                  <a href={storyProjectHref(role, link.to)} key={link.label} onClick={(event) => openStoryProject(event, role, link.to)}>
                     {link.label}
                   </a>
                 ))}

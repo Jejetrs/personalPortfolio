@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { PROJECTS } from "@/pages/home/projects/index.js";
 import { TRUSTEE_DOCUMENTS } from "@/pages/home/data/trusteeDocuments.js";
 import { createDetailRenderer } from "./detailRenderer.jsx";
+import { mountEmptyGrid } from "./emptyGrid.js";
 import { mountEventPhotos } from "./eventPhotos.js";
 import { mountHomeInteractions } from "./interactions.js";
 import { createScope } from "./lifecycle.js";
@@ -23,6 +24,7 @@ export default function useHomeBehavior() {
         clearDetail: detail.clearDetail,
       });
       mountEventPhotos(scope);
+      mountEmptyGrid(scope);
     });
     return () => {
       cancelled = true;

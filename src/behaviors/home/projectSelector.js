@@ -1,5 +1,6 @@
 /* Project showcase */
 import { handlers } from './projectHandlers.js';
+import { groupOfCard, groupFields, partOfCard } from '@/pages/home/projects/groups.js';
 import { renderPdf } from '@/lib/pdfCanvas.js';
 import { getProjectAssets, getProjectProfileAsset } from '@/pages/home/projects/projectAssets.js';
 import { startAutoSlideshow } from '@/lib/autoSlideshow.js';
@@ -12,46 +13,8 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
     const detail = document.getElementById('about-project-detail');
     const categoryButtons = Array.from(document.querySelectorAll('.about-project-category'));
     if (!track || !dots || !counter || !detail || categoryButtons.length === 0) return;
-    let projectTrackPointer = null;
-    let projectTrackDragged = false;
     let pinnedProjectIndex = -1;
-    let projectTrackWheelAt = 0;
-    let projectTrackDragReset;
 
-    track.addEventListener('pointerdown', (event) => {
-      if (event.button !== 0 || event.target.closest('a, input, select, textarea')) return;
-      projectTrackPointer = { x: event.clientX, scrollLeft: track.scrollLeft };
-    });
-    track.addEventListener('pointermove', (event) => {
-      if (!projectTrackPointer) return;
-      const deltaX = event.clientX - projectTrackPointer.x;
-      if (Math.abs(deltaX) < 6 && !projectTrackDragged) return;
-      projectTrackDragged = true;
-      track.classList.add('is-dragging');
-      track.scrollLeft = projectTrackPointer.scrollLeft - deltaX;
-      event.preventDefault();
-    });
-    const endProjectTrackDrag = () => {
-      projectTrackPointer = null;
-      track.classList.remove('is-dragging');
-      if (projectTrackDragged) {
-        window.clearTimeout(projectTrackDragReset);
-        projectTrackDragReset = window.setTimeout(() => {
-          projectTrackDragged = false;
-        }, 0);
-      }
-    };
-    track.addEventListener('pointerup', endProjectTrackDrag);
-    track.addEventListener('pointercancel', endProjectTrackDrag);
-    track.addEventListener('wheel', (event) => {
-      const horizontalDelta = event.deltaX || (event.shiftKey ? event.deltaY : 0);
-      if (!horizontalDelta) return;
-      event.preventDefault();
-      const now = performance.now();
-      if (now - projectTrackWheelAt < 12) return;
-      projectTrackWheelAt = now;
-      track.scrollLeft += horizontalDelta;
-    }, { passive: false });
 
     const projectData = projects.map((project) => {
       const assets = getProjectAssets(project);
@@ -64,12 +27,38 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         profileImage: profile?.src || (project.category === 'developer' ? '' : project.images?.[0] || ''),
       };
     });
+    // Projects that cover several fields: every one of their cards is listed as the same project.
+    const categoryByCard = new Map(projectData.map((project) => [project.id, project.category]));
+    const categoryOfId = (id) => categoryByCard.get(id);
+    projectData.forEach((project) => {
+      const group = groupOfCard(project.id);
+      if (!group) return;
+      project.group = group;
+      project.title = group.title;
+      project.description = group.summary;
+      project.groupFields = groupFields(group, categoryOfId);
+      project.categoryOf = categoryOfId;
+    });
+    projectData.forEach((project) => {
+      if (project.group) {
+        project.groupSources = project.group.parts.map((part) => projectData.find((item) => item.id === part.id));
+        // a chapter with no visuals of its own still shows the project's picture in the list
+        if (!project.profileImage) project.profileImage = project.groupSources.map((source) => source?.profileImage).find(Boolean) || '';
+      }
+    });
     const categoryNames = {
       analytics: 'IT Product/Business Analytics',
       team: 'Project Management & Leadership',
       uiux: 'UI/UX Design',
       aiml: 'Machine Learning/AI Engineering',
       developer: 'Developer'
+    };
+    const categoryShortNames = {
+      analytics: 'Business Analytics',
+      team: 'Project Management',
+      uiux: 'UI/UX Design',
+      aiml: 'AI / ML',
+      developer: 'Developer',
     };
     const categoryDescriptions = {
       analytics: 'Business and user research, competitor insights, SWOT, and business models translated into research-informed product proposals.',
@@ -78,42 +67,93 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       aiml: 'Developing intelligent solutions using machine learning, computer vision, NLP, and AI integration to address real-world challenges.',
       developer: 'Building functional and scalable web applications through frontend development, backend services, REST APIs, database integration, testing, and deployment.'
     };
-    const categoryProjectOrder = {
-      aiml: [
-        'nusca-project-card-2',
-        'smart-focus-alert-card-2',
-        'beauty-glossary-card',
-        'skin-classification-card',
-        'diabetes-risk-card',
-        'movie-recommender-card',
-        'whatsapp-sentiment-card',
-        'bank-fraud-card',
-      ],
-      developer: [
-        'movie-review-project-card',
-        'nusca-developer-project-card',
-        'smart-focus-alert-developer-card',
-        'leadsight-project-card',
-        'openmusic-api-project-card',
-        'bookshelf-api-project-card',
-        'notes-application-project-card',
-      ],
-    };
+    // Newest year first; inside a year, the order below. Keys are a project's group slug (multi-field
+    // projects count once) or the card id. The year is what the cards show in place of an order number.
+    const projectOrder = [
+      ['movie-review-project-card', 2026], ['nusca', 2026], ['inaproc-project-card', 2026], ['trustee', 2026],
+      ['leadsight', 2026], ['aisee', 2026], ['civision-project-card', 2026],
+      ['smart-focus-alert', 2025], ['beauty-glossary-card', 2025], ['openmusic-api-project-card', 2025],
+      ['bookshelf-api-project-card', 2025], ['notes-application-project-card', 2025], ['skin-classification-card', 2025],
+      ['diabetes-risk-card', 2025], ['movie-recommender-card', 2025], ['whatsapp-sentiment-card', 2025],
+      ['bank-fraud-card', 2025],
+      ['campaign-deck-master-card', 2024], ['aoshuttle-project-card', 2024],
+    ];
+    const orderIndex = new Map(projectOrder.map(([key], index) => [key, index]));
+    const yearByKey = new Map(projectOrder);
+    const orderOf = (project) => orderIndex.get(project.group?.slug || project.id) ?? Number.MAX_SAFE_INTEGER;
+
+    /* Field menu: a dropdown that lists the five fields (with how many projects each has). */
+    const ddToggle = document.getElementById('about-project-dd-toggle');
+    const ddMenu = document.getElementById('about-project-categories');
+    const ddLabel = document.getElementById('about-project-dd-label');
+    /* Floating menu: a small round button that appears once the menu at the top is out of sight. */
+    const fab = document.getElementById('pj-fab');
+    const fabBtn = document.getElementById('pj-fab-btn');
+    const fabList = document.getElementById('pj-fab-list');
+    const fabSelect = document.getElementById('pj-fab-select');
+    const fabTop = document.getElementById('pj-fab-top');
+    const menuBox = document.getElementById('about-project-menu');
+    const sectionBox = document.getElementById('selected-works');
+    function setFab(open) {
+      if (!fab || !fabBtn) return;
+      fab.classList.toggle('is-open', open);
+      fabBtn.setAttribute('aria-expanded', String(open));
+    }
+    function setFieldMenu(open) {
+      if (!ddMenu || !ddToggle) return;
+      ddMenu.hidden = !open;
+      ddToggle.setAttribute('aria-expanded', String(open));
+    }
+    categoryButtons.forEach((button) => {
+      const total = projectData.filter((project) => project.category === button.dataset.projectCategory).length;
+      const count = document.createElement('span');
+      count.className = 'pj-dd-n';
+      count.textContent = String(total);
+      button.appendChild(count);
+    });
+    ddToggle?.addEventListener('click', () => setFieldMenu(ddMenu.hidden));
+    scope.on(document, 'click', (event) => {
+      if (!(event.target instanceof Element) || event.target.closest('#about-project-dropdown')) return;
+      setFieldMenu(false);
+    });
+    scope.on(document, 'keydown', (event) => {
+      if (event.key !== 'Escape' || !ddMenu || ddMenu.hidden) return;
+      setFieldMenu(false);
+      ddToggle?.focus();
+    });
     const heading = document.getElementById('about-project-heading');
     const description = document.getElementById('about-project-description');
     const emptyState = document.getElementById('about-project-empty');
     let activeCategory = 'uiux';
+    // In a multi-field project several cards are stacked, each keeps the field it was written for.
+    const categoryOfCard = (card) => card.closest('[data-part-category]')?.dataset.partCategory || activeCategory;
+
+    /* The project menu is a row above the card: keep the chosen card visible inside the row only (never scroll the page). */
+    function revealInList(index) {
+      const item = track.children[index];
+      if (!item) return;
+      const left = item.offsetLeft - track.offsetLeft;
+      const right = left + item.offsetWidth;
+      if (left < track.scrollLeft) track.scrollLeft = Math.max(0, left - 12);
+      else if (right > track.scrollLeft + track.clientWidth) track.scrollLeft = right - track.clientWidth + 12;
+    }
+    /* Bring the project card to the top of the screen (used by the floating menu, from far down a long project). */
+    function scrollToDetail() {
+      const rect = detail.getBoundingClientRect();
+      window.scrollTo({ top: Math.max(0, window.scrollY + rect.top - 96), behavior: 'smooth' });
+    }
+    /* After choosing a project from far down the page, bring its card back to the top of the screen. */
+    function showDetailTop() {
+      const rect = detail.getBoundingClientRect();
+      if (rect.top < 90 || rect.top > window.innerHeight * 0.8) {
+        window.scrollTo({ top: window.scrollY + rect.top - 100, behavior: 'smooth' });
+      }
+    }
 
     function getVisibleProjects() {
-      const visibleProjects = projectData.filter((project) => project.category === activeCategory);
-      const projectOrder = categoryProjectOrder[activeCategory];
-      if (!projectOrder) return visibleProjects;
-
-      const orderIndex = new Map(projectOrder.map((id, index) => [id, index]));
-      return visibleProjects.sort((a, b) =>
-        (orderIndex.get(a.id) ?? Number.MAX_SAFE_INTEGER)
-        - (orderIndex.get(b.id) ?? Number.MAX_SAFE_INTEGER)
-      );
+      return projectData
+        .filter((project) => project.category === activeCategory)
+        .sort((a, b) => orderOf(a) - orderOf(b));
     }
 
     function findSelectedCard() {
@@ -220,6 +260,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
   }
   function prepareProjectCards() {
     document.querySelectorAll('.project-card-item').forEach((card) => {
+      const cardCategory = categoryOfCard(card);
       let cardHeader = card.querySelector('.project-card-header');
       if (!cardHeader) {
         const primaryAction = Array.from(card.querySelectorAll('a')).find((link) =>
@@ -269,7 +310,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
 
       card.querySelectorAll('a[href="#"]').forEach((link) => {
         const isFlowLink = (link.querySelector('span')?.textContent || '').toLowerCase().includes('flow');
-        if (activeCategory === 'uiux' && !isFlowLink && /^https?:\/\//i.test(card.dataset.figmaUrl || '')) {
+        if (cardCategory === 'uiux' && !isFlowLink && /^https?:\/\//i.test(card.dataset.figmaUrl || '')) {
           link.href = card.dataset.figmaUrl;
           link.target = '_blank';
           link.rel = 'noopener noreferrer';
@@ -283,8 +324,8 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         const originalLabel = label?.textContent.trim().toLowerCase() || '';
         if (label) {
           label.textContent = caseStudy
-            ? originalLabel.includes('flow') ? 'View User Flow' : (activeCategory === 'uiux' ? 'Figma Preview' : 'View Case Study')
-            : (activeCategory === 'uiux' && !originalLabel.includes('flow') ? 'Figma Preview' : 'View Project Details');
+            ? originalLabel.includes('flow') ? 'View User Flow' : (cardCategory === 'uiux' ? 'Figma Preview' : 'View Case Study')
+            : (cardCategory === 'uiux' && !originalLabel.includes('flow') ? 'Figma Preview' : 'View Project Details');
         }
         link.addEventListener('click', (event) => {
           event.preventDefault();
@@ -354,6 +395,8 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
             const accordion = document.createElement('div');
             accordion.id = `${accordionId}-accordion`;
             accordion.className = 'case-study-accordion-content';
+            // already organized here; a later pass over the card must not take this accordion apart
+            accordion.setAttribute('data-preserve-case-study', '');
             const accordionInner = document.createElement('div');
             accordionInner.className = 'case-study-accordion-inner nusca-process-content';
             accordionInner.appendChild(processOverview);
@@ -592,9 +635,53 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         .trim() || 'Project Preview';
     }
 
+    /* Cards whose visuals are added later: with nothing listed in PROJECT_ASSETS they show an empty image slot
+       (same frame as the other projects) instead of another project's pictures. */
+    const EMPTY_IMAGE_SLOT_CARDS = new Set(['nusca-project-card-2']);
+
+    function renderEmptyImageSlot(card) {
+      const preview = card.querySelector('[class~="lg:col-span-5"]');
+      if (!preview) return;
+      const title = (groupOfCard(card.id)?.title || card.querySelector('h2')?.textContent || 'Project').trim();
+      preview.className = 'lg:col-span-5 project-image-card flex flex-col items-center justify-between relative overflow-hidden';
+      preview.dataset.emptySlot = '';
+
+      const header = document.createElement('div');
+      header.className = 'project-image-header';
+      const projectLabel = document.createElement('div');
+      projectLabel.className = 'flex min-w-0 items-center gap-1.5';
+      const dot = document.createElement('span');
+      dot.className = 'h-1.5 w-1.5 shrink-0 rounded-full bg-sky-600';
+      const label = document.createElement('span');
+      label.className = 'truncate font-mono text-[10px] font-semibold uppercase tracking-wider text-slate-500';
+      label.textContent = `Project · ${title}`;
+      projectLabel.append(dot, label);
+      const badge = document.createElement('span');
+      badge.className = 'project-image-badge';
+      badge.textContent = 'Coming soon';
+      header.append(projectLabel, badge);
+
+      const stage = document.createElement('div');
+      stage.className = 'project-image-stage';
+      ['a', 'b', 'c'].forEach((name) => {
+        const blob = document.createElement('span');
+        blob.className = `project-image-blob blob-${name}`;
+        blob.setAttribute('aria-hidden', 'true');
+        stage.appendChild(blob);
+      });
+      const empty = document.createElement('div');
+      empty.className = 'project-image-empty';
+      empty.innerHTML = '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"></rect><circle cx="9" cy="10" r="1.8"></circle><path d="m21 16-5-5-8 9"></path></svg><strong>Project visuals coming soon</strong><span>Screens and diagrams for this chapter will appear here.</span>';
+      stage.appendChild(empty);
+      preview.replaceChildren(header, stage);
+    }
+
     function initializeProjectAssetPreview(card) {
       const assets = getProjectAssets({ id: card.id });
-      if (!assets.length) return;
+      if (!assets.length) {
+        if (EMPTY_IMAGE_SLOT_CARDS.has(card.id)) renderEmptyImageSlot(card);
+        return;
+      }
 
       const imageAssets = assets.filter((item) => item?.type === 'image');
       let slidesContainer = card.querySelector('[id$="-slides"]');
@@ -618,7 +705,9 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         }));
       }
 
-      card.querySelectorAll('[data-gallery] figure, [data-openmusic-gallery] [data-openmusic-slide]').forEach((figure, index) => {
+      const assetFigures = Array.from(card.querySelectorAll('[data-gallery] figure, [data-openmusic-gallery] [data-openmusic-slide]'))
+        .filter((figure) => figure.querySelector('img, [class*="-ph"], [class*="placeholder"]'));
+      assetFigures.forEach((figure, index) => {
         const item = imageAssets[index];
         if (!item) return;
         const image = figure.querySelector('img') || document.createElement('img');
@@ -898,6 +987,8 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
 
     function compactAiMlProjectCards() {
       document.querySelectorAll('#about-project-detail .project-card-item').forEach((card) => {
+        // Only the AI/ML chapters use this compact layout; a UI/UX or developer chapter keeps its own (details bar below the image).
+        if (categoryOfCard(card) !== 'aiml') return;
         const mainLayout = Array.from(card.children).find((child) =>
           child.matches('[class~="lg:grid-cols-12"]')
         );
@@ -1871,15 +1962,36 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       showDoc('account');
     }
 
-    function initializeSelectedProjectCard(card, projectIndex) {
-      if (activeCategory === 'developer') {
-        const projectNumber = card.querySelector('.sf-number')
-          || card.querySelector('.project-card-header > div:first-child > span:first-child');
-        if (projectNumber) {
-          projectNumber.textContent = String(projectIndex + 1).padStart(2, '0');
-          projectNumber.setAttribute('aria-label', `Project ${projectIndex + 1}`);
-        }
-      }
+    /* The header chips and buttons of every card share one size and shape (the full-stack cards are the reference).
+       Cards built from utility classes get the shared classes here; the other card families are matched in CSS. */
+    function standardizeHeaderControls(card) {
+      const tags = card.querySelector('.pj-year')?.parentElement;
+      if (!tags || tags.matches('.dev-tags, .project-tags')) return;
+      tags.querySelectorAll(':scope > span:not(.pj-year)').forEach((chip) => chip.classList.add('pj-chip'));
+      tags.nextElementSibling?.querySelectorAll(':scope > span:not(.dev-switch), :scope > a').forEach((item) => {
+        item.classList.add(item.tagName === 'A' ? 'pj-btn' : 'pj-status');
+      });
+    }
+
+    /* Cards do not show an order number: the badge that used to hold one shows the project's year instead. */
+    function showProjectYear(card) {
+      const key = groupOfCard(card.id)?.slug || card.id;
+      const year = yearByKey.get(key);
+      if (!year) return;
+      const badges = card.querySelectorAll('.sf-number, .project-number, span.inline-flex[class*="w-6"][class*="h-6"][class*="rounded-full"]');
+      badges.forEach((badge) => {
+        if (!/^\d{1,2}$/.test(badge.textContent.trim()) && !badge.classList.contains('pj-year')) return;
+        badge.textContent = String(year);
+        badge.hidden = false;
+        badge.removeAttribute('hidden');
+        badge.classList.add('pj-year');
+        badge.setAttribute('aria-label', `Year ${year}`);
+      });
+    }
+
+    function initializeSelectedProjectCard(card) {
+      showProjectYear(card);
+      standardizeHeaderControls(card);
       organizeProjectOverviewDetails();
       prepareProjectCards();
       standardizeProjectContentRhythm();
@@ -1903,6 +2015,76 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       initializeProjectImageZoom(card);
     }
 
+    /* A multi-field project stacks several cards in the detail panel; wire each one for its own field. */
+    function initializeGroupStack() {
+      const cards = Array.from(detail.querySelectorAll('.project-card-item'));
+      const groupedHeaderSelectors = {
+        'trustee-business-card': ['.tr-chips', '.tr-tagline'],
+        'leadsight-business-analysis-card': ['.lba-chips'],
+        'pm-leadership-card': ['.project-title'],
+        'pm-asah-card': ['.project-title'],
+        'pm-arkavidia-card': ['.project-title'],
+        'leadsight-project-card': ['.ls-eyebrow'],
+        'nusca-project-card-1': ['p.text-xs.font-bold.uppercase.tracking-wider'],
+        'nusca-project-card-2': ['p.text-xs.font-bold.uppercase.tracking-wider'],
+        'smart-focus-alert-card-1': ['p.text-xs.font-semibold.text-blue-800.uppercase'],
+        'smart-focus-alert-card-2': ['p.text-xs.font-semibold.text-blue-800.uppercase'],
+        'smart-focus-alert-developer-card': ['.overline'],
+        'aisee-mobile-card': ['p.text-xs.font-semibold.text-blue-800.uppercase', 'span.text-blue-800.text-xs.font-bold.border'],
+      };
+      const savedCategory = activeCategory;
+      const forEachCard = (callback) => cards.forEach((card, index) => {
+        activeCategory = categoryOfCard(card);
+        callback(card, index);
+      });
+      try {
+        organizeProjectOverviewDetails();
+        prepareProjectCards();
+        standardizeProjectContentRhythm();
+        standardizeProjectDropdowns();
+        forEachCard((card) => initializeProjectAssetPreview(card));
+        initializeProjectCarousels();
+        initializeProjectImageCards();
+        if (cards.some((card) => categoryOfCard(card) === 'aiml')) compactAiMlProjectCards();
+        forEachCard((card) => {
+          initializeBookshelfProjectExplorer(card);
+          initializeOpenMusicProject(card);
+          if (card.id === 'smart-focus-alert-developer-card' || card.id === 'nusca-developer-project-card') initializeSmartFocusLinks(card);
+          if (card.id === 'smart-focus-alert-developer-card') initializeSmartFocusLab(card);
+          if (card.id === 'nusca-developer-project-card') initializeNuscaLab(card);
+          if (card.id === 'bookshelf-api-project-card') initializeBookshelfLab(card);
+          initializeProjectGallery(card);
+          initializeDevDropdowns(card);
+          initializeLiveStatus(card);
+          initializeLeadSightLab(card);
+          initializeTrusteeBusinessCard(card);
+          initializeProjectImageZoom(card);
+          showProjectYear(card);
+          standardizeHeaderControls(card);
+        });
+      } finally {
+        activeCategory = savedCategory;
+      }
+      // Chapters were wired while open (so sizes could be measured); they start closed and the reader opens what they want.
+      detail.querySelectorAll('.gs-ch').forEach((chapter) => {
+        const part = partOfCard(chapter.dataset.partId);
+        // The project's main video/image lives in the overview; the chapter does not repeat it.
+        (part?.hide || []).forEach((selector) => {
+          chapter.querySelectorAll(selector).forEach((element) => {
+            element.dataset.gsDup = '';
+            element.querySelectorAll('iframe').forEach((frame) => frame.removeAttribute('src')); // do not load a video nobody sees
+          });
+        });
+        const projectTitle = chapter.querySelector('.gs-ch-body .project-card-item h2');
+        projectTitle?.remove();
+        (groupedHeaderSelectors[part?.id] || []).forEach((selector) => {
+          chapter.querySelectorAll(`.gs-ch-body .project-card-item ${selector}`).forEach((element) => element.remove());
+        });
+        chapter.open = false;
+        chapter.addEventListener('toggle', () => window.dispatchEvent(new Event('resize')));
+      });
+    }
+
     function selectProject(index, shouldScroll = false) {
       const visibleProjects = getVisibleProjects();
       const selectedProject = visibleProjects[index];
@@ -1914,18 +2096,27 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       Array.from(dots.children).forEach((dot, dotIndex) => {
         dot.setAttribute('aria-current', String(dotIndex === index));
       });
+      Array.from(fabList ? fabList.children : []).forEach((row, rowIndex) => {
+        row.setAttribute('aria-pressed', String(rowIndex === index));
+      });
 
-      counter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(visibleProjects.length).padStart(2, '0')} · ${selectedProject.title.toUpperCase()}`;
+      counter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(visibleProjects.length).padStart(2, '0')}`;
       renderDetail(selectedProject);
+      // A multi-field project is one card holding a chapter per field; every chapter's card is wired for its field.
+      if (selectedProject.group) {
+        initializeGroupStack();
+        if (shouldScroll) revealInList(index);
+        return;
+      }
       const projectCard = findSelectedCard();
       if (!projectCard) {
         console.error(`Project card markup is missing for ${selectedProject.title}.`);
         return;
       }
-      initializeSelectedProjectCard(projectCard, index);
+      initializeSelectedProjectCard(projectCard);
 
       if (shouldScroll) {
-        track.children[index]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        revealInList(index);
       }
     }
 
@@ -1933,10 +2124,14 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       pinnedProjectIndex = -1;
       activeCategory = category;
       heading.textContent = categoryNames[category];
+      if (ddLabel) ddLabel.textContent = categoryNames[category];
+      if (ddToggle) ddToggle.dataset.category = category;
       description.textContent = categoryDescriptions[category];
       const visibleProjects = getVisibleProjects();
       track.replaceChildren();
       dots.replaceChildren();
+      fabList?.replaceChildren();
+      if (fabSelect) fabSelect.value = category;
       clearDetail();
       emptyState.classList.toggle('hidden', visibleProjects.length > 0);
       track.classList.toggle('hidden', visibleProjects.length === 0);
@@ -1957,104 +2152,71 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
 
       visibleProjects.forEach((project, index) => {
         const card = document.createElement('button');
-        card.className = 'about-project-card';
+        card.className = 'pj-item';
         card.type = 'button';
         card.setAttribute('aria-label', `View ${project.title}`);
         card.setAttribute('aria-pressed', 'false');
         card.dataset.projectIndex = String(index);
 
-        const image = document.createElement('img');
+        const thumb = document.createElement('span');
+        thumb.className = 'pj-thumb';
         if (project.profileImage) {
+          const image = document.createElement('img');
           image.src = project.profileImage;
-          image.alt = `${project.title} project`;
+          image.alt = '';
           image.loading = 'lazy';
-          card.appendChild(image);
+          thumb.appendChild(image);
         }
 
-        const shade = document.createElement('span');
-        shade.className = 'about-project-card-shade';
-        card.appendChild(shade);
+        const text = document.createElement('span');
+        text.className = 'pj-text';
+        const fields = document.createElement('small');
+        fields.textContent = (project.group
+          ? project.groupFields.map((key) => categoryShortNames[key])
+          : [categoryShortNames[project.category]]).join(' · ');
+        const name = document.createElement('strong');
+        name.textContent = project.title;
+        const note = document.createElement('em');
+        note.textContent = project.group ? project.group.subtitle : project.description;
+        text.append(fields, name, note);
+        card.append(thumb, text);
 
-        const topBar = document.createElement('span');
-        topBar.className = 'relative z-10 flex items-center justify-between';
-        const number = document.createElement('span');
-        number.className = 'rounded-full bg-orange-400 px-3 py-1 font-mono text-xs font-extrabold text-slate-950';
-        number.textContent = String(index + 1).padStart(2, '0');
-        topBar.append(number);
-        card.appendChild(topBar);
-
-        const compact = document.createElement('span');
-        compact.className = 'about-project-card-compact';
-        const compactTitle = document.createElement('span');
-        compactTitle.className = 'about-project-card-title';
-        const compactText = document.createElement('span');
-        compactText.className = 'about-project-card-name';
-        compactText.textContent = project.title;
-        const compactIcon = document.createElement('span');
-        compactIcon.className = 'about-project-card-title-icon';
-        compactIcon.setAttribute('aria-hidden', 'true');
-        compactIcon.innerHTML = '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 40 40 8M12 8h28v28"/></svg>';
-        compactTitle.append(compactText, compactIcon);
-        compact.appendChild(compactTitle);
-        card.appendChild(compact);
-
-        const expanded = document.createElement('span');
-        expanded.className = 'about-project-card-expanded';
-        const kicker = document.createElement('span');
-        kicker.className = 'block font-mono text-[10px] font-bold uppercase tracking-wider text-amber-300';
-        kicker.textContent = categoryNames[category];
-        const title = document.createElement('span');
-        title.className = 'about-project-card-title-row mt-2 text-white';
-        const titleText = document.createElement('span');
-        titleText.className = 'about-project-card-name';
-        titleText.textContent = project.title;
-        const titleIcon = compactIcon.cloneNode(true);
-        title.append(titleText, titleIcon);
-        const description = document.createElement('span');
-        description.className = 'about-project-card-expanded-description mt-2 text-xs leading-relaxed text-slate-200';
-        description.textContent = project.description;
-        expanded.append(title, kicker, description);
-        card.appendChild(expanded);
-
-        card.addEventListener('mouseenter', () => {
-          if (pinnedProjectIndex === -1) selectProject(index);
-        });
-        card.addEventListener('focus', () => {
-          if (pinnedProjectIndex === -1 || pinnedProjectIndex === index) selectProject(index);
-        });
-        card.addEventListener('click', (event) => {
-          if (event.target.closest('button.project-dropdown-toggle')) return;
-          if (projectTrackDragged) {
-            event.preventDefault();
-            event.stopPropagation();
-            return;
-          }
-          if (pinnedProjectIndex === index) {
-            pinnedProjectIndex = -1;
-            return;
-          }
+        card.addEventListener('click', () => {
           pinnedProjectIndex = index;
           selectProject(index, true);
+          showDetailTop();
         });
         card.addEventListener('keydown', (event) => {
-          if (event.key === 'ArrowRight' && index < visibleProjects.length - 1) {
-            event.preventDefault();
-            track.children[index + 1].focus();
-          } else if (event.key === 'ArrowLeft' && index > 0) {
-            event.preventDefault();
-            track.children[index - 1].focus();
-          }
+          const step = event.key === 'ArrowRight' || event.key === 'ArrowDown' ? 1 : event.key === 'ArrowLeft' || event.key === 'ArrowUp' ? -1 : 0;
+          if (!step || !track.children[index + step]) return;
+          event.preventDefault();
+          track.children[index + step].focus();
         });
+        // the same project as a compact row in the floating menu
+        if (fabList) {
+          const row = document.createElement('button');
+          row.className = 'pj-fab-item';
+          row.type = 'button';
+          row.setAttribute('aria-pressed', 'false');
+          const rowName = document.createElement('strong');
+          rowName.textContent = project.title;
+          const rowFields = document.createElement('small');
+          rowFields.textContent = fields.textContent;
+          row.append(rowName, rowFields);
+          row.addEventListener('click', () => {
+            pinnedProjectIndex = index;
+            selectProject(index, true);
+            setFab(false);
+            scrollToDetail();
+          });
+          fabList.appendChild(row);
+        }
         track.appendChild(card);
 
         const dot = document.createElement('button');
         dot.type = 'button';
         dot.setAttribute('aria-label', `Show ${project.title}`);
         dot.setAttribute('aria-current', 'false');
-        dot.addEventListener('click', () => {
-          pinnedProjectIndex = index;
-          selectProject(index, true);
-        });
         dots.appendChild(dot);
       });
 
@@ -2063,27 +2225,109 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
     }
 
     categoryButtons.forEach((button) => {
-      button.addEventListener('click', () => renderCategory(button.dataset.projectCategory));
+      button.addEventListener('click', () => {
+        renderCategory(button.dataset.projectCategory);
+        setFieldMenu(false);
+        ddToggle?.focus();
+        showDetailTop();
+      });
     });
+    /* Floating menu behaviour: shown only while the top menu is scrolled away and the projects section is still on screen. */
+    if (fab && fabBtn && menuBox && sectionBox) {
+      let frame = 0;
+      let leaveTimer = 0;
+      const updateFab = () => {
+        frame = 0;
+        const menu = menuBox.getBoundingClientRect();
+        const section = sectionBox.getBoundingClientRect();
+        const on = menu.bottom < 120 && section.bottom > 220 && section.top < window.innerHeight;
+        fab.classList.toggle('is-on', on);
+        if (!on) setFab(false);
+      };
+      const queueFab = () => { if (!frame) frame = window.requestAnimationFrame(updateFab); };
+      scope.on(window, 'scroll', queueFab, { passive: true });
+      scope.on(window, 'resize', queueFab);
+      scope.add(() => { window.cancelAnimationFrame(frame); window.clearTimeout(leaveTimer); });
+      // a mouse that is already hovering has opened the panel: its click must keep it open, not toggle it shut
+      let lastPointer = 'mouse';
+      fabBtn.addEventListener('pointerdown', (event) => { lastPointer = event.pointerType; });
+      fabBtn.addEventListener('click', (event) => {
+        const fromMouse = event.detail > 0 && lastPointer === 'mouse';
+        setFab(fromMouse ? true : !fab.classList.contains('is-open'));
+      });
+      // a mouse only needs to hover; touch and keyboard use the button
+      fab.addEventListener('pointerenter', (event) => {
+        if (event.pointerType !== 'mouse') return;
+        window.clearTimeout(leaveTimer);
+        setFab(true);
+      });
+      fab.addEventListener('pointerleave', (event) => {
+        if (event.pointerType !== 'mouse') return;
+        window.clearTimeout(leaveTimer);
+        leaveTimer = window.setTimeout(() => setFab(false), 280);
+      });
+      scope.on(document, 'click', (event) => {
+        if (event.target instanceof Element && !event.target.closest('#pj-fab')) setFab(false);
+      });
+      scope.on(document, 'keydown', (event) => {
+        if (event.key !== 'Escape' || !fab.classList.contains('is-open')) return;
+        setFab(false);
+        fabBtn.focus();
+      });
+      fabSelect?.addEventListener('change', () => {
+        renderCategory(fabSelect.value);
+        scrollToDetail();
+        // keep the list open so the next project can be picked right away (the scroll may have toggled it shut)
+        window.setTimeout(() => setFab(true), 650);
+      });
+      fabTop?.addEventListener('click', () => {
+        setFab(false);
+        menuBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+      queueFab();
+    }
     scope.on(document, 'click', (event) => {
       if (pinnedProjectIndex === -1 || !(event.target instanceof Element)) return;
-      if (event.target.closest('.about-project-card, #about-project-dots')) return;
+      if (event.target.closest('.pj-item, #about-project-dots')) return;
 
       pinnedProjectIndex = -1;
     });
     renderCategory(activeCategory);
     Object.assign(handlers, { toggleAccordion, nextSlide, prevSlide, goToSlide });
     scope.add(() => Object.keys(handlers).forEach((key) => delete handlers[key]));
-    const requestedProject = new URLSearchParams(window.location.search).get('project');
-    if (requestedProject) {
-      const target = projectData.find((project) => project.id === requestedProject || project.id === `${requestedProject}-business-card`);
-      if (target) {
-        const deepLink = window.setTimeout(() => {
-          renderCategory(target.category);
-          selectProject(getVisibleProjects().indexOf(target), true);
-          document.getElementById('selected-works')?.scrollIntoView();
-        }, 150);
-        scope.add(() => window.clearTimeout(deepLink));
+    /* Opens a project under a field: ?project=<card id | group slug>&field=<category>.
+       A project that covers several fields opens under the requested field when it has one,
+       otherwise under the field of the card that was asked for. */
+    function openProject(requestedProject, requestedField, scrollToSection = true) {
+      const base = projectData.find((project) => project.id === requestedProject
+        || project.id === `${requestedProject}-business-card`
+        || project.group?.slug === requestedProject);
+      if (!base) return false;
+      const target = (requestedField && projectData.find((project) => project.group
+        && project.group === base.group && project.category === requestedField)) || base;
+      renderCategory(target.category);
+      const targetIndex = getVisibleProjects().indexOf(target);
+      pinnedProjectIndex = targetIndex;
+      selectProject(targetIndex, true);
+      // The click that triggered this (a story link) also reaches the document handler that unpins; pin again after it.
+      window.setTimeout(() => { pinnedProjectIndex = targetIndex; }, 0);
+      if (scrollToSection) {
+        const chapter = target.group ? detail.querySelector('.gs-ch.is-active') : null;
+        (chapter || detail).scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+      return true;
     }
+    const params = new URLSearchParams(window.location.search);
+    const requestedProject = params.get('project');
+    if (requestedProject) {
+      const deepLink = window.setTimeout(() => {
+        if (openProject(requestedProject, params.get('field'), false)) document.getElementById('selected-works')?.scrollIntoView();
+      }, 150);
+      scope.add(() => window.clearTimeout(deepLink));
+    }
+    // "Read my story as" opens a project without reloading the page.
+    scope.on(window, 'projects:open', (event) => {
+      const { project, field } = event.detail || {};
+      if (!openProject(project, field)) document.getElementById('selected-works')?.scrollIntoView({ behavior: 'smooth' });
+    });
 }

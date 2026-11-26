@@ -240,7 +240,7 @@ export default function TrusteeBusinessCard() {
                   Trusted Review Intelligence for Shopee
                 </p>
                 <p className="tr-lead">
-                  Market research, SWOT, and a business model turned into an AI-assisted proposal to protect review credibility, from Telkom Indonesia’s Digistar Class Internship 2026.
+                  Competitive review-platform research, SWOT findings, stakeholder needs, and business-model decisions shaped the proposal.
                 </p>
                 <div className="tr-hero-actions">
                   <a className="tr-live" href="https://uc12-fakereview.streamlit.app/" target="_blank" rel="noopener noreferrer" aria-label="Open the live Trustee prototype in a new tab">

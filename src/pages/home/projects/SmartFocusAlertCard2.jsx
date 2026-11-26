@@ -23,7 +23,6 @@ export default function SmartFocusAlertCard2() {
           </div>
           <div className="flex items-center gap-2">
             <PrivateLink label="GitHub" restricted />
-            <PrivateLink label="Code" />
             <span className="dev-switch" data-live-badge="" data-state="checking" role="switch" aria-checked="false" aria-readonly="true" aria-disabled="true" aria-label="Live deploy status" tabIndex="-1">
               <span className="dev-switch-label">Live deploy</span>
               <span className="dev-switch-track"><i></i></span>
@@ -43,7 +42,7 @@ export default function SmartFocusAlertCard2() {
               </p>
             </div>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-              A web-based computer vision application that monitors user attention in real time using MediaPipe Face Mesh and triggers automatic alerts when distraction is detected.
+              MediaPipe Face Mesh landmarks feed attention-state features and threshold-based detection; validation focuses on state transitions and alert triggers.
             </p>
             <div className="flex flex-wrap items-center gap-2 pt-1">
               <div className="px-3.5 py-1.5 rounded-xl bg-white border border-blue-100 shadow-xs flex items-center gap-2">

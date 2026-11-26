@@ -309,3 +309,20 @@
     animation: none;
   }
 }
+
+/* ---------- extra mobile and tablet polish ---------- */
+@media (max-width: 900px) {
+  /* Contact: copy on top, links below, nothing truncated. */
+  html body #contact .ct-inner { grid-template-columns: 1fr !important; align-items: start !important; }
+}
+@media (max-width: 520px) {
+  html body #contact .ct-links { grid-template-columns: 1fr !important; }
+
+  /* Previous events: one card per row, so the photo and text have room. */
+  html body #last-events-gallery [aria-label='Event stories'] { grid-template-columns: 1fr !important; }
+  html body #last-events .last-event-card[data-event-index] { grid-column: auto !important; }
+  html body #last-events .event-cover,
+  html body #last-events .last-event-card[data-event-index='2'] { min-height: 176px !important; }
+  html body #last-events .event-cover-cta { display: inline-flex !important; }
+  html body #last-events .event-cover-bottom strong { font-size: 1.15rem !important; }
+}

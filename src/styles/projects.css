@@ -1,0 +1,338 @@
+/* Multi-field projects (Trustee, LeadSight, Nusca, Smart Focus Alert, AiSee): ONE card that holds a
+   chapter per field. The case-study cards inside are unchanged; the card adds an overview, a chapter map
+   and a band + divider for each chapter. */
+
+/* field colours (shared) */
+.tone-amber { --acc: #b45309; --acc-soft: #fef3c7; --acc-line: #fcd34d; --acc-dot: #f59e0b; }
+.tone-cyan { --acc: #0e7490; --acc-soft: #cffafe; --acc-line: #67e8f9; --acc-dot: #06b6d4; }
+.tone-indigo { --acc: #3730a3; --acc-soft: #e0e7ff; --acc-line: #a5b4fc; --acc-dot: #6366f1; }
+.tone-violet { --acc: #5b21b6; --acc-soft: #ede9fe; --acc-line: #c4b5fd; --acc-dot: #8b5cf6; }
+.tone-sky { --acc: #075985; --acc-soft: #e0f2fe; --acc-line: #7dd3fc; --acc-dot: #0ea5e9; }
+
+/* Landing on a project (from the story or a link) keeps its card clear of the fixed navbar. */
+#about-project-detail { scroll-margin-top: 5.5rem; }
+.gs-ch { scroll-margin-top: 5.5rem; }
+
+.gs {
+  min-width: 0; overflow: hidden; border: 1px solid #dfe5f6; border-radius: 1.3rem; background: #fff;
+  box-shadow: 0 26px 44px -30px rgba(30, 40, 120, 0.45);
+}
+.gs-top { padding: clamp(1rem, 2.4vw, 1.6rem); }
+.gs-id { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 0.6rem 1rem; }
+.gs-thumb { width: 3.6rem; height: 3.6rem; border: 1px solid #dfe5f6; border-radius: 0.9rem; object-fit: cover; object-position: 50% 20%; }
+.gs-kicker { margin: 0; font: 700 0.58rem/1.2 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.14em; text-transform: uppercase; color: #ea580c; }
+html body main .gs-title { margin: 0.3rem 0 0; font: 800 clamp(1.5rem, 3vw, 2.1rem)/1.05 "Plus Jakarta Sans", Inter, sans-serif !important; letter-spacing: -0.035em !important; color: #0f172a; }
+.gs-sub { margin: 0.3rem 0 0; font: 600 0.78rem/1.4 "Plus Jakarta Sans", sans-serif; color: #5b6078; }
+.gs-fields { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.3rem; margin: 0; padding: 0; list-style: none; }
+.gs-fields li, .gs-map i, .gs-band-tag {
+  display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.26rem 0.65rem; border: 1px solid var(--acc-line); border-radius: 99px; background: var(--acc-soft);
+  font: 700 0.6rem/1.1 "Plus Jakarta Sans", sans-serif; font-style: normal; color: var(--acc); white-space: nowrap;
+}
+.gs-fields li::before, .gs-map i::before, .gs-band-tag::before { content: ""; width: 0.38rem; height: 0.38rem; border-radius: 50%; background: var(--acc-dot); }
+.gs-fields li.is-on { border-color: var(--acc-dot); background: var(--acc-dot); color: #fff; }
+.gs-fields li.is-on::before { background: #fff; }
+.gs-summary { max-width: 52rem; margin: 0.9rem 0 0; font: 400 0.9rem/1.65 "Plus Jakarta Sans", sans-serif; color: #475069; }
+.gs-map-label { margin: 1rem 0 0.55rem; padding-top: 0.9rem; border-top: 1px dashed #d5dcf0; font: 700 0.58rem/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.14em; text-transform: uppercase; color: #4338ca; }
+.gs-map { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
+.gs-map a {
+  display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; gap: 0.2rem 0.8rem; height: 100%; padding: 0.65rem 0.85rem;
+  border: 1px solid #e3e8f6; border-radius: 0.9rem; background: #f8faff; text-decoration: none; transition: background 0.2s, border-color 0.2s;
+}
+.gs-map li.is-active a { border-color: #fdba74; background: linear-gradient(135deg, #fff1e6, #fff); }
+.gs-map a:hover { border-color: #a5b4fc; background: #eef2ff; }
+.gs-map a:focus-visible { outline: 3px solid #6366f1; outline-offset: 2px; }
+.gs-map span { display: grid; gap: 0.12rem; min-width: 0; }
+.gs-map strong { font: 800 0.82rem/1.25 "Plus Jakarta Sans", sans-serif; color: #0f172a; }
+.gs-map small { font-size: 0.74rem; line-height: 1.45; color: #55607c; }
+.gs-map i { grid-column: 1; justify-self: start; font-size: 0.72rem; padding: 0.32rem 0.8rem; }
+
+/* chapters */
+.gs-stack { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; }
+.gs-ch { min-width: 0; border-top: 2px solid var(--acc-line); }
+.gs-band {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto auto; align-items: center; gap: 0.5rem 0.8rem;
+  padding: 0.85rem clamp(1rem, 2.4vw, 1.6rem); background: linear-gradient(180deg, var(--acc-soft), #fff 170%); list-style: none; cursor: pointer;
+}
+.gs-band::-webkit-details-marker { display: none; }
+.gs-band:focus-visible { outline: 3px solid #6366f1; outline-offset: -3px; }
+.gs-band-tag { padding: 0.4rem 0.9rem; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.01em; }
+.gs-section-tag {
+  display: inline-flex; align-items: center; gap: 0.35rem; width: fit-content; margin-bottom: 0.35rem; padding: 0.3rem 0.7rem;
+  border: 1px solid var(--acc-line); border-radius: 99px; background: var(--acc-soft);
+  font: 700 0.62rem/1.2 "Plus Jakarta Sans", sans-serif; letter-spacing: 0.04em; text-transform: uppercase; color: var(--acc);
+}
+.gs-section-tag::before { content: ""; width: 0.38rem; height: 0.38rem; border-radius: 50%; background: var(--acc-dot); }
+.gs-band-text { display: grid; min-width: 0; gap: 0.15rem; }
+.gs-band-text strong { font: 800 clamp(1rem, 1.8vw, 1.3rem)/1.15 "Plus Jakarta Sans", sans-serif; letter-spacing: -0.02em; color: #0f172a; }
+.gs-band-text small { font: 500 0.76rem/1.45 "Plus Jakarta Sans", sans-serif; color: #55607c; }
+.gs-band-sel { padding: 0.2rem 0.55rem; border-radius: 99px; background: var(--acc-dot); font: 700 0.54rem/1.2 "Plus Jakarta Sans", sans-serif; font-style: normal; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; white-space: nowrap; }
+.gs-band-act { font: 700 0.6rem/1 "Plus Jakarta Sans", sans-serif; letter-spacing: 0.06em; text-transform: uppercase; color: var(--acc); white-space: nowrap; }
+.gs-band-act::after { content: "Show chapter"; }
+.gs-ch[open] > .gs-band .gs-band-act::after { content: "Hide chapter"; }
+.gs-band-chev { width: 0.55rem; height: 0.55rem; margin: 0 0.2rem; border-right: 2px solid var(--acc); border-bottom: 2px solid var(--acc); transform: rotate(45deg); transition: transform 0.2s; }
+.gs-ch[open] > .gs-band .gs-band-chev { transform: rotate(-135deg); }
+.gs-ch.is-active > .gs-band { box-shadow: inset 4px 0 0 var(--acc-dot); }
+.gs-ch-body { padding: 0.25rem 0 0.5rem; background: #fff; min-width: 0; }
+/* the case-study card sits directly in the project card: no second frame */
+html body #about-project-detail .gs-ch-body > .project-card-item, html body #about-project-detail .gs-ch-body > article {
+  margin: 0; min-width: 0; border: 0 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; backdrop-filter: none !important;
+}
+.gs-next {
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem; padding: 0.8rem 1rem; border-top: 1px dashed #d5dcf0; background: #fff;
+  font: 700 0.62rem/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--acc); text-decoration: none; transition: background 0.2s;
+}
+.gs-next:hover { background: var(--acc-soft); }
+.gs-next:focus-visible { outline: 3px solid #6366f1; outline-offset: -3px; }
+.gs-next span { width: 1.6rem; height: 2px; background: var(--acc-line); }
+
+@media (max-width: 860px) {
+  .gs-id { grid-template-columns: auto minmax(0, 1fr); }
+  .gs-fields { grid-column: 1 / -1; justify-content: flex-start; }
+  .gs-band { grid-template-columns: minmax(0, 1fr) auto; }
+  .gs-band-act { display: none; }
+  .gs-band-tag { grid-column: 1; justify-self: start; }
+  .gs-band-text { grid-column: 1; }
+  .gs-band-sel { grid-column: 1; justify-self: start; }
+  .gs-band-chev { grid-column: 2; grid-row: 1; }
+}
+@media (max-width: 480px) {
+  .gs-thumb { width: 3rem; height: 3rem; }
+  .gs-map { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gs-map a, .gs-band-chev, .gs-next { transition: none; }
+}
+
+/* ───────── Projects section: menu (field dropdown + project cards) on top, the project card full width below ───────── */
+.pj-split { display: grid; gap: 1.1rem; margin-top: 0.5rem; }
+.pj-top { min-width: 0; }
+.pj-top-in {
+  display: flex; align-items: stretch; gap: 1.1rem; min-width: 0; padding: 0.7rem;
+  border: 1px solid #dfe5f6; border-radius: 1.2rem; background: linear-gradient(135deg, #ffffff, #f5f7ff); box-shadow: 0 18px 44px -26px rgba(30, 40, 120, 0.4);
+}
+/* field menu: a dropdown */
+.pj-dd { position: relative; align-self: flex-start; flex: 0 0 13.5rem; align-content: start; display: grid; gap: 0.3rem; }
+.pj-dd-cap { padding-left: 0.2rem; font: 700 0.52rem/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.14em; text-transform: uppercase; color: #7a849c; }
+.pj-dd-toggle {
+  display: flex; align-items: center; gap: 0.6rem; width: 100%; padding: 0.7rem 0.85rem; border: 1px solid #d5dcf0; border-radius: 0.9rem; background: #f6f8ff;
+  font: 700 0.8rem/1.2 "Plus Jakarta Sans", sans-serif; color: #0f172a; text-align: left; cursor: pointer; transition: background 0.2s, border-color 0.2s;
+}
+.pj-dd-toggle:hover { background: #eaefff; }
+.pj-dd-toggle[aria-expanded="true"] { border-color: #4f46e5; background: #fff; }
+.pj-dd-toggle:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
+.pj-dd-dot { flex: none; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: #6366f1; }
+.pj-dd-toggle[data-category="analytics"] .pj-dd-dot { background: #f59e0b; }
+.pj-dd-toggle[data-category="team"] .pj-dd-dot { background: #06b6d4; }
+.pj-dd-toggle[data-category="uiux"] .pj-dd-dot { background: #6366f1; }
+.pj-dd-toggle[data-category="aiml"] .pj-dd-dot { background: #8b5cf6; }
+.pj-dd-toggle[data-category="developer"] .pj-dd-dot { background: #0ea5e9; }
+.pj-dd-label { flex: 1; min-width: 0; }
+.pj-dd-chev { flex: none; color: #4f46e5; transition: transform 0.2s; }
+.pj-dd-toggle[aria-expanded="true"] .pj-dd-chev { transform: rotate(180deg); }
+html body .pj-dd .pj-dd-menu {
+  position: absolute; z-index: 30; top: calc(100% + 0.4rem); left: 0; right: 0; display: grid; gap: 0.15rem; padding: 0.35rem;
+  border: 1px solid #dfe5f6; border-radius: 0.9rem; background: #fff; box-shadow: 0 22px 44px -18px rgba(30, 40, 120, 0.5); overflow: visible;
+}
+html body .pj-dd .pj-dd-menu[hidden] { display: none; }
+html body .pj-dd .pj-dd-menu .about-project-category {
+  display: flex !important; align-items: center; gap: 0.6rem; width: 100%; padding: 0.55rem 0.65rem !important; border: 0 !important; border-radius: 0.65rem !important;
+  background: transparent !important; font: 600 0.76rem/1.25 "Plus Jakarta Sans", sans-serif !important; color: #334155 !important; text-align: left; white-space: normal; flex-shrink: 1;
+}
+html body .pj-dd .pj-dd-menu .about-project-category:hover { background: #eef2ff !important; transform: none; }
+html body .pj-dd .pj-dd-menu .about-project-category[aria-pressed="true"] { background: #eef2ff !important; color: #3730a3 !important; box-shadow: none !important; }
+html body .pj-dd .pj-dd-menu .about-project-category > span:first-child { flex: none; width: 0.55rem; height: 0.55rem; }
+html body .pj-dd .pj-dd-menu .about-project-category > span:nth-child(2) { flex: 1; min-width: 0; }
+.pj-dd-n { flex: none; min-width: 1.3rem; padding: 0.1rem 0.4rem; border-radius: 99px; background: #e8ecfb; font: 700 0.58rem/1.3 "JetBrains Mono", ui-monospace, monospace; text-align: center; color: #515b78; }
+[aria-pressed="true"] > .pj-dd-n { background: #c7d2fe; color: #3730a3; }
+
+/* the projects of the chosen field: one row of cards (scrolls sideways when there are many) */
+.pj-list { flex: 1 1 0; display: flex; flex-wrap: nowrap; align-items: stretch; gap: 0.5rem; min-width: 0; margin: 0; padding: 0.15rem 0.1rem 0.5rem 1.1rem; border-left: 1px dashed #cdd5ee; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity; scroll-padding-inline: 0.2rem; overscroll-behavior-x: contain; scrollbar-width: thin; scrollbar-color: #b9c4ef transparent; }
+.pj-list::-webkit-scrollbar { height: 6px; }
+.pj-list::-webkit-scrollbar-thumb { border-radius: 99px; background: #b9c4ef; }
+.pj-list > .pj-item { flex: 0 0 10.8rem; scroll-snap-align: start; }
+.pj-item {
+  display: flex; flex-direction: column; align-items: stretch; gap: 0.4rem; min-width: 0; padding: 0.4rem; border: 1px solid #e4e9f7; border-radius: 0.95rem;
+  background: #fff; text-align: left; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.pj-item:hover { border-color: #b9c4ef; background: #f3f6ff; transform: translateY(-2px); box-shadow: 0 10px 20px -14px rgba(40, 50, 140, 0.6); }
+.pj-item:focus-visible { outline: 3px solid #6366f1; outline-offset: 2px; }
+.pj-item[aria-pressed="true"] { border-color: #fb923c; background: linear-gradient(135deg, #fff1e6, #fff); box-shadow: 0 10px 22px -14px rgba(249, 115, 22, 0.7); }
+.pj-thumb { position: relative; flex: none; display: block; width: 100%; height: 4.8rem; overflow: hidden; border-radius: 0.65rem; background: #e3e8fb; }
+.pj-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; }
+.pj-text { display: grid; min-width: 0; gap: 0.1rem; padding: 0 0.15rem 0.1rem; }
+.pj-text small { font: 700 0.48rem/1.25 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.08em; text-transform: uppercase; color: #6b7690; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pj-text strong { font: 800 0.84rem/1.2 "Plus Jakarta Sans", sans-serif; letter-spacing: -0.02em; color: #0f172a; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pj-text em { display: block; font: 400 0.64rem/1.35 "Plus Jakarta Sans", sans-serif; font-style: normal; color: #55607c; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* floating menu: appears when the menu above is out of sight, so a long project never needs a scroll back up */
+.pj-fab { position: fixed; right: clamp(0.75rem, 2vw, 1.5rem); bottom: clamp(0.9rem, 2.5vw, 1.5rem); z-index: 60; opacity: 0; visibility: hidden; transform: translateY(10px) scale(0.92); transition: opacity 0.2s, transform 0.2s, visibility 0.2s; }
+.pj-fab.is-on { opacity: 1; visibility: visible; transform: none; }
+.pj-fab-btn {
+  display: grid; place-items: center; width: 3rem; height: 3rem; padding: 0; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 50%; background: #0f172a;
+  box-shadow: 0 14px 30px -10px rgba(15, 23, 42, 0.65); cursor: pointer; transition: transform 0.2s, background 0.2s;
+}
+.pj-fab-btn:hover, .pj-fab.is-open .pj-fab-btn { background: #4338ca; transform: scale(1.06); }
+.pj-fab-btn:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 3px; }
+.pj-fab-bars { display: grid; gap: 0.2rem; width: 1.1rem; }
+.pj-fab-bars i { display: block; height: 2px; border-radius: 2px; background: #fff; transition: transform 0.2s, opacity 0.2s; }
+.pj-fab.is-open .pj-fab-bars i:nth-child(1) { transform: translateY(0.4rem) rotate(45deg); }
+.pj-fab.is-open .pj-fab-bars i:nth-child(2) { opacity: 0; }
+.pj-fab.is-open .pj-fab-bars i:nth-child(3) { transform: translateY(-0.4rem) rotate(-45deg); }
+.pj-fab-panel {
+  position: absolute; right: 0; bottom: calc(100% + 0.6rem); display: grid; gap: 0.5rem; width: min(19rem, calc(100vw - 1.5rem)); max-height: min(28rem, 62vh); padding: 0.7rem;
+  overflow-y: auto; border: 1px solid #dfe5f6; border-radius: 1rem; background: #fff; box-shadow: 0 24px 48px -16px rgba(30, 40, 120, 0.5);
+  opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity 0.18s, transform 0.18s, visibility 0.18s;
+}
+.pj-fab-panel::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 0.8rem; }
+.pj-fab.is-open .pj-fab-panel { opacity: 1; visibility: visible; transform: none; }
+.pj-fab-field { display: grid; gap: 0.2rem; }
+.pj-fab-field span { font: 700 0.52rem/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.12em; text-transform: uppercase; color: #7a849c; }
+.pj-fab-field select { width: 100%; padding: 0.5rem 0.6rem; border: 1px solid #d5dcf0; border-radius: 0.7rem; background: #f6f8ff; font: 700 0.74rem/1.2 "Plus Jakarta Sans", sans-serif; color: #0f172a; }
+.pj-fab-field select:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 1px; }
+.pj-fab-list { display: grid; gap: 0.2rem; }
+.pj-fab-item { display: grid; gap: 0.1rem; width: 100%; padding: 0.45rem 0.6rem; border: 1px solid transparent; border-radius: 0.65rem; background: transparent; text-align: left; cursor: pointer; transition: background 0.15s; }
+.pj-fab-item:hover { background: #eef2ff; }
+.pj-fab-item:focus-visible { outline: 3px solid #6366f1; outline-offset: -2px; }
+.pj-fab-item[aria-pressed="true"] { border-color: #fdba74; background: #fff3e8; }
+.pj-fab-item strong { font: 800 0.8rem/1.2 "Plus Jakarta Sans", sans-serif; color: #0f172a; }
+.pj-fab-item small { font: 700 0.5rem/1.25 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase; color: #7a849c; }
+.pj-fab-top { padding: 0.4rem 0.6rem; border: 0; border-top: 1px solid #e9edf8; background: transparent; font: 700 0.64rem/1.2 "Plus Jakarta Sans", sans-serif; text-align: left; color: #4338ca; cursor: pointer; }
+.pj-fab-top:hover { text-decoration: underline; }
+.pj-fab-top:focus-visible { outline: 3px solid #6366f1; outline-offset: 2px; }
+
+@media (max-width: 900px) {
+  .pj-top-in { flex-direction: column; gap: 0.7rem; }
+  .pj-dd { flex: none; width: 100%; padding: 0 0 0.7rem; border-right: 0; border-bottom: 1px dashed #cdd5ee; }
+  .pj-list { flex: none; width: 100%; padding-left: 0.1rem; border-left: 0; }
+}
+@media (max-width: 560px) {
+  .pj-list { gap: 0.4rem; }
+  .pj-list > .pj-item { flex-basis: 9.8rem; }
+  .pj-thumb { height: 4.2rem; }
+  .pj-fab-btn { width: 2.8rem; height: 2.8rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pj-item, .pj-fab, .pj-fab-btn, .pj-fab-panel, .pj-fab-bars i { transition: none; }
+}
+
+/* the counter is only kept for the selector script; the menu shows no index text */
+html body #about-project-counter { display: none !important; }
+/* field dots in the dropdown keep one colour per field, selected or not */
+html body .pj-dd .about-project-category[data-project-category="analytics"] > span:first-child { background: #f59e0b !important; }
+html body .pj-dd .about-project-category[data-project-category="team"] > span:first-child { background: #06b6d4 !important; }
+html body .pj-dd .about-project-category[data-project-category="uiux"] > span:first-child { background: #6366f1 !important; }
+html body .pj-dd .about-project-category[data-project-category="aiml"] > span:first-child { background: #8b5cf6 !important; }
+html body .pj-dd .about-project-category[data-project-category="developer"] > span:first-child { background: #0ea5e9 !important; }
+
+/* Overview: text on one side, the project's main video/image on the other. Both kinds share one frame,
+   and the frame is as tall as the text beside it. Stacked on small screens. */
+.gs-top.has-media { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 30rem); align-items: stretch; gap: 1.2rem 1.8rem; }
+.gs-copy { min-width: 0; }
+.gs-media { min-width: 0; margin: 0; display: flex; flex-direction: column; overflow: hidden; border: 1px solid #dfe5f6; border-radius: 1.1rem; background: linear-gradient(160deg, #f4f6ff, #fff 70%); box-shadow: 0 18px 34px -26px rgba(40, 50, 140, 0.55); }
+.gs-media-bar { display: flex; align-items: center; gap: 0.32rem; padding: 0.55rem 0.8rem; border-bottom: 1px solid #e6eaf8; background: #fff; font: 700 0.58rem/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.12em; text-transform: uppercase; color: #66708a; }
+.gs-media-bar i { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #fb923c; }
+.gs-media-bar i:nth-child(2) { background: #facc15; }
+.gs-media-bar i:nth-child(3) { background: #34d399; }
+.gs-media-bar span { margin-left: 0.4rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gs-media-stage { position: relative; flex: 1 1 auto; min-height: 15rem; margin: 0.7rem 0.7rem 0; border-radius: 0.8rem; overflow: hidden; background: radial-gradient(circle at 30% 20%, #eaf0ff, #f8faff 70%); }
+.gs-media-stage > img { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0.6rem; object-fit: contain; }
+.gs-media-stage .video-highlight { position: absolute; inset: 0; display: block; margin: 0; padding: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.gs-media-stage .video-highlight-meta { display: none; }
+.gs-media-stage .video-highlight-frame { position: absolute; inset: 0; aspect-ratio: auto; border-radius: 0; box-shadow: none; background: #e9eefc; }
+.gs-media-stage .video-highlight-poster { background: #e9eefc; }
+.gs-media-stage .video-highlight-poster img { opacity: 1; object-fit: cover; }
+.gs-media-cap { display: grid; gap: 0.2rem; padding: 0.75rem 1rem 0.9rem; }
+.gs-media-cap strong { font: 800 0.88rem/1.25 "Plus Jakarta Sans", sans-serif; color: #0f172a; }
+.gs-media-cap span { font: 400 0.76rem/1.5 "Plus Jakarta Sans", sans-serif; color: #66708a; }
+@media (max-width: 1000px) {
+  .gs-top.has-media { grid-template-columns: minmax(0, 1fr); }
+  .gs-media-stage { flex: none; min-height: 0; aspect-ratio: 16 / 9; }
+}
+
+/* what a chapter does not repeat from the overview, and the number badges that are not shown anywhere */
+[data-gs-dup] { display: none !important; }
+.gs-ch :is(.grid):has(> [data-gs-dup]) > :not([data-gs-dup]) { grid-column: 1 / -1 !important; }
+
+/* A chapter without its media: nothing is left empty. The facts row moves into the free corner of the hero,
+   and the dashboard's text panels sit side by side instead of leaving a blank column. */
+@media (min-width: 901px) {
+  #about-project-detail .tr-top:has(.tr-video[data-gs-dup]) { position: relative; }
+  #about-project-detail #trustee-business-card .tr-top:has(.tr-video[data-gs-dup]) .tr-stats {
+    position: absolute; top: 50%; right: clamp(22px, 3.2vw, 40px); width: min(25rem, 42%); margin: 0; transform: translateY(-50%); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;
+  }
+  #about-project-detail .lba-top:has(.lba-video-highlight[data-gs-dup]) { position: relative; }
+  #about-project-detail #leadsight-business-analysis-card .lba-top:has(.lba-video-highlight[data-gs-dup]) .lba-stats {
+    position: absolute; top: 50%; right: clamp(22px, 3.2vw, 40px); width: min(23rem, 38%); margin: 0; transform: translateY(-50%); grid-template-columns: minmax(0, 1fr); gap: 10px;
+  }
+}
+.ls-demo-col > .project-image-card { flex: 1 1 auto; width: 100%; min-width: 0; }
+
+/* The year badge (replaces the old order number) */
+#about-project-detail .pj-year {
+  display: inline-flex !important; align-items: center; justify-content: center; width: auto !important; min-width: 0 !important; height: 1.5rem !important;
+  padding: 0 0.7rem !important; border-radius: 999px !important; font-variant-numeric: tabular-nums; letter-spacing: 0.04em; white-space: nowrap;
+}
+
+/* "Show Details": a clearly clickable bar, so readers know there is more inside.
+   The toggle's last child is always its action group (label + chevron). */
+#about-project-detail :is(.project-dropdown-toggle, .pmx-details-toggle) {
+  --tg: var(--dev-acc, var(--acc, #4f46e5));
+  padding: 0.5rem 0.55rem 0.5rem 0.85rem !important; border: 1px solid color-mix(in srgb, var(--tg) 30%, #fff) !important; border-radius: 0.9rem !important;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--tg) 9%, #fff), #fff 80%) !important;
+  box-shadow: 0 8px 18px -16px color-mix(in srgb, var(--tg) 80%, transparent); transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+#about-project-detail :is(.project-dropdown-toggle, .pmx-details-toggle):hover {
+  border-color: var(--tg) !important; box-shadow: 0 12px 22px -16px color-mix(in srgb, var(--tg) 90%, transparent);
+}
+#about-project-detail :is(.project-dropdown-toggle, .pmx-details-toggle) > :last-child {
+  display: inline-flex !important; align-items: center; gap: 0.45rem !important; flex: none; padding: 0.38rem 0.45rem 0.38rem 0.9rem; border-radius: 999px;
+  background: var(--tg); color: #fff !important; font-size: 0.72rem !important; font-weight: 800 !important; letter-spacing: 0.03em; white-space: nowrap;
+  box-shadow: 0 8px 16px -10px var(--tg); animation: pj-nudge 2.8s ease-in-out infinite;
+}
+#about-project-detail :is(.project-dropdown-toggle, .pmx-details-toggle) > :last-child .accordion-chevron {
+  display: grid !important; place-items: center; width: 1.3rem; height: 1.3rem; padding: 0; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28); color: #fff !important; font-size: 0.95rem; line-height: 1.3rem;
+}
+#about-project-detail :is(.project-dropdown-toggle, .pmx-details-toggle)[aria-expanded="true"] > :last-child {
+  background: #fff; color: var(--tg) !important; box-shadow: inset 0 0 0 1.5px var(--tg); animation: none;
+}
+#about-project-detail :is(.project-dropdown-toggle, .pmx-details-toggle)[aria-expanded="true"] > :last-child .accordion-chevron { background: color-mix(in srgb, var(--tg) 14%, #fff); color: var(--tg) !important; }
+@keyframes pj-nudge { 0%, 78%, 100% { box-shadow: 0 8px 16px -10px var(--tg), 0 0 0 0 color-mix(in srgb, var(--tg) 45%, transparent); } 88% { box-shadow: 0 8px 16px -10px var(--tg), 0 0 0 7px color-mix(in srgb, var(--tg) 0%, transparent); } }
+@media (prefers-reduced-motion: reduce) { #about-project-detail :is(.project-dropdown-toggle, .pmx-details-toggle) > :last-child { animation: none; } }
+
+/* empty image slot (visuals added later) */
+.project-image-empty { position: relative; z-index: 1; display: grid; place-items: center; align-content: center; gap: 0.4rem; min-height: 15rem; margin: 0.5rem; padding: 1.5rem 1rem; border: 1.5px dashed #b9c4ef; border-radius: 1rem; background: rgba(255, 255, 255, 0.55); text-align: center; color: #66708a; }
+.project-image-empty svg { color: #8a96c8; }
+.project-image-empty strong { font: 800 0.85rem/1.3 "Plus Jakarta Sans", sans-serif; color: #1e293b; }
+.project-image-empty span { max-width: 17rem; font: 400 0.74rem/1.5 "Plus Jakarta Sans", sans-serif; }
+.project-image-card[data-empty-slot] .project-image-stage { display: grid; align-items: stretch; flex: 1 1 auto; width: 100%; }
+
+/* Header chips and buttons: one size and shape everywhere (reference: the full-stack cards) */
+#about-project-detail .pj-year { height: 1.75rem !important; font-size: 12px !important; font-weight: 700 !important; line-height: 1.25rem; }
+#about-project-detail .pj-chip, #about-project-detail .project-tag, #about-project-detail #trustee-business-card .tr-chip, #about-project-detail #leadsight-business-analysis-card .lba-chips > span {
+  display: inline-flex !important; align-items: center; gap: 0.375rem; min-height: 28px; padding: 4px 12px !important; border-radius: 9999px !important;
+  font-size: 12px !important; font-weight: 600 !important; line-height: 18px !important; letter-spacing: 0 !important; text-transform: none !important;
+}
+#about-project-detail .pj-status {
+  display: inline-flex !important; align-items: center; min-height: 32px; padding: 6px 12px !important; border-radius: 12px !important; font-size: 12px !important; font-weight: 400 !important; line-height: 18px !important;
+}
+#about-project-detail .pj-status svg { width: 13px; height: 13px; }
+#about-project-detail .pj-btn, #about-project-detail .pmx .chip {
+  display: inline-flex !important; align-items: center; gap: 0.375rem; min-height: 36px; padding: 7.2px 15.2px !important; border-radius: 12px !important; font-size: 12px !important; font-weight: 600 !important; line-height: 20px !important;
+}
+
+/* Trustee hero without its video: compact, nothing left empty (copy on the left, facts on the right) */
+@media (min-width: 901px) {
+  #about-project-detail #trustee-business-card .tr-top:has(.tr-video[data-gs-dup]) .tr-hero { padding: 20px clamp(22px, 3.2vw, 36px) 22px; padding-right: calc(min(25rem, 42%) + 3.2rem); }
+  #about-project-detail #trustee-business-card .tr-top:has(.tr-video[data-gs-dup]) .tr-hero-grid { grid-template-columns: minmax(0, 1fr); }
+  #about-project-detail #trustee-business-card .tr-top:has(.tr-video[data-gs-dup]) .tr-hero-copy { display: flex; flex-wrap: wrap; align-items: center; gap: 0 14px; }
+  #about-project-detail #trustee-business-card .tr-top:has(.tr-video[data-gs-dup]) .tr-hero-copy > * { flex: 1 1 100%; }
+  #about-project-detail #trustee-business-card .tr-top:has(.tr-video[data-gs-dup]) .tr-hero-copy > .tr-hero-actions,
+  #about-project-detail #trustee-business-card .tr-top:has(.tr-video[data-gs-dup]) .tr-hero-copy > .tr-role { flex: 0 0 auto; margin-top: 4px; }
+  #about-project-detail #trustee-business-card .tr-top:has(.tr-video[data-gs-dup]) .tr-chips { margin-bottom: 10px; }
+  #about-project-detail #trustee-business-card .tr-top:has(.tr-video[data-gs-dup]) .tr-title { font-size: 38px !important; }
+  #about-project-detail #trustee-business-card .tr-top:has(.tr-video[data-gs-dup]) .tr-lead { max-width: none; margin-bottom: 12px; line-height: 1.6; }
+}
+
+/* a line between the tag row and the title in the developer cards (same as the other cards) */
+#about-project-detail .dev-top { padding-bottom: 0.85rem; margin-bottom: 0.85rem !important; border-bottom: 1px solid var(--dev-line, #e2e8f0); }

@@ -78,7 +78,7 @@ export default function AiseeMobileCard() {
                 </p>
               </div>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal mt-1.5">
-                AiSee is the mobile evolution of AiDorse, transforming influencer collaboration into a mobile-first experience with AI-powered insights, campaign analytics, and transparent brand–creator collaboration workflows.
+                Research and design define the creator and brand journeys, mobile navigation, campaign setup, matching insights, and performance-tracking views.
               </p>
             </div>
             <div className="space-y-2">

@@ -73,14 +73,14 @@ export default function NuscaProjectCard1() {
                   <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
                     Nusca
                   </h2>
-                  <p className="mt-1 text-xs font-bold uppercase tracking-wider text-[#006e4b]">
-                    {"Final Research Project · UI/UX Designer & UX Researcher"}
+                  <p className="text-xs font-bold uppercase tracking-wider text-[#006e4b]">
+                    {"UI/UX Designer & Researcher"}
                   </p>
                 </div>
               </div>
             </div>
             <p className="text-sm font-normal leading-relaxed text-slate-700">
-              A web application designed to help users scan packaged drink nutrition labels and instantly understand Nutri-Level results through an accessible, human-centered experience.
+              Research findings informed the label-scanning flow, accessible result presentation, prototype decisions, and usability evaluation with 15 participants.
             </p>
             <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
               <div className="flex flex-wrap items-center gap-2 w-full justify-start">
@@ -235,62 +235,66 @@ export default function NuscaProjectCard1() {
                 <div className="pt-3 space-y-2.5">
                   <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                     <div className="relative space-y-1 rounded-2xl border border-emerald-100 bg-white/95 p-3.5 shadow-xs transition hover:border-emerald-300" style={{ borderRadius: "20px 10px 20px 10px" }}>
-                      <div className="flex items-center justify-between">
-                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#006e4b] text-[10px] font-bold text-white shadow-xs">
+                      <div className="flex items-center gap-2">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#006e4b] text-[10px] font-bold text-white shadow-xs">
                           01
                         </span>
+                        <h5 className="text-xs font-bold leading-tight text-slate-900">
+                        User Research
+                      </h5>
                         <span className="absolute -right-2.5 top-1/2 z-10 hidden -translate-y-1/2 text-xs font-bold text-emerald-400 sm:block">
                           ›
                         </span>
                       </div>
-                      <h5 className="mt-1.5 text-xs font-bold leading-tight text-slate-900">
-                        User Research
-                      </h5>
+                      
                       <p className="text-[11px] leading-snug text-slate-500">
                         {"Conducted surveys & interviews on nutritional label readability habits."}
                       </p>
                     </div>
                     <div className="relative space-y-1 rounded-2xl border border-emerald-100 bg-white/95 p-3.5 shadow-xs transition hover:border-emerald-300" style={{ borderRadius: "10px 20px 10px 20px" }}>
-                      <div className="flex items-center justify-between">
-                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#006e4b] text-[10px] font-bold text-white shadow-xs">
+                      <div className="flex items-center gap-2">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#006e4b] text-[10px] font-bold text-white shadow-xs">
                           02
                         </span>
+                        <h5 className="text-xs font-bold leading-tight text-slate-900">
+                        Wireframing
+                      </h5>
                         <span className="absolute -right-2.5 top-1/2 z-10 hidden -translate-y-1/2 text-xs font-bold text-emerald-400 sm:block">
                           ›
                         </span>
                       </div>
-                      <h5 className="mt-1.5 text-xs font-bold leading-tight text-slate-900">
-                        Wireframing
-                      </h5>
+                      
                       <p className="text-[11px] leading-snug text-slate-500">
                         {"Mapped fast scanning viewfinder heuristics & quick summary wireflows."}
                       </p>
                     </div>
                     <div className="relative space-y-1 rounded-2xl border border-emerald-100 bg-white/95 p-3.5 shadow-xs transition hover:border-emerald-300" style={{ borderRadius: "20px 10px 20px 10px" }}>
-                      <div className="flex items-center justify-between">
-                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#006e4b] text-[10px] font-bold text-white shadow-xs">
+                      <div className="flex items-center gap-2">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#006e4b] text-[10px] font-bold text-white shadow-xs">
                           03
                         </span>
+                        <h5 className="text-xs font-bold leading-tight text-slate-900">
+                        Interface Design
+                      </h5>
                         <span className="absolute -right-2.5 top-1/2 z-10 hidden -translate-y-1/2 text-xs font-bold text-emerald-400 sm:block">
                           ›
                         </span>
                       </div>
-                      <h5 className="mt-1.5 text-xs font-bold leading-tight text-slate-900">
-                        Interface Design
-                      </h5>
+                      
                       <p className="text-[11px] leading-snug text-slate-500">
                         {"Designed high-contrast, accessible typography & clean data cards."}
                       </p>
                     </div>
                     <div className="space-y-1 rounded-2xl border border-emerald-100 bg-white/95 p-3.5 shadow-xs transition hover:border-emerald-300 sm:grid-cols-4" style={{ borderRadius: "10px 20px 10px 20px" }}>
-                      <div className="flex items-center justify-between">
-                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#006e4b] text-[10px] font-bold text-white shadow-xs">
+                      <div className="flex items-center gap-2">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#006e4b] text-[10px] font-bold text-white shadow-xs">
                           04
                         </span>
-                      </div>
-                      <h5 className="mt-1.5 text-xs font-bold leading-tight text-slate-900">
+                        <h5 className="text-xs font-bold leading-tight text-slate-900">
                         Usability Testing
                       </h5>
+                      </div>
+                      
                       <p className="text-[11px] leading-snug text-slate-500">
                         Tested with 15 participants, receiving an average rating of 4.55 / 5.
                       </p>

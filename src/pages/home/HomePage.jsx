@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import Navbar from '@/components/Navbar.jsx';
 import Footer from '@/components/Footer.jsx';
 import useDocumentMeta from '@/hooks/useDocumentMeta.js';
@@ -45,54 +46,88 @@ export default function HomePage() {
                 A collection of human-centered work across research, interaction design, design systems, AI-powered products, and front-end product experiences. Each project reflects my passion for creating meaningful digital experiences.
               </p>
               <p className="pj-hint">
-                Pick a lens below. Each card opens the problem, my role and the deliverables.
+                Pick a field, then a project. Deep in a long project, the round menu button in the corner switches projects without scrolling back up.
               </p>
             </div>
-            <div aria-label="Filter projects by category" className="flex flex-wrap items-center gap-2 pt-1 mb-5" id="about-project-categories" role="group">
-              <button aria-pressed="false" className="project-filter about-project-category inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 font-medium text-xs hover:bg-slate-50 hover:text-slate-900 transition shadow-xs active:scale-95" data-project-category="analytics" type="button">
-                <span className="w-2 h-2 rounded-full bg-amber-500"></span>
-                <span>
-                  IT Product/Business Analytics
-                </span>
-              </button>
-              {" "}
-              <button aria-pressed="false" className="project-filter about-project-category inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 font-medium text-xs hover:bg-slate-50 hover:text-slate-900 transition shadow-xs active:scale-95" data-project-category="team" type="button">
-                <span className="w-2 h-2 rounded-full bg-cyan-500"></span>
-                <span>
-                  {"Project Management & Leadership"}
-                </span>
-              </button>
-              {" "}
-              <button aria-pressed="true" className="project-filter about-project-category inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-medium text-xs shadow-xs hover:bg-indigo-700 transition active:scale-95" data-project-category="uiux" type="button">
-                <span className="w-2 h-2 rounded-full bg-emerald-300"></span>
-                <span>
-                  UI/UX Design
-                </span>
-              </button>
-              {" "}
-              <button aria-pressed="false" className="project-filter about-project-category inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 font-medium text-xs hover:bg-slate-50 hover:text-slate-900 transition shadow-xs active:scale-95" data-project-category="aiml" type="button">
-                <span className="w-2 h-2 rounded-full bg-purple-500"></span>
-                <span>
-                  Machine Learning/AI Engineering
-                </span>
-              </button>
-              {" "}
-              <button aria-pressed="false" className="project-filter about-project-category inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 font-medium text-xs hover:bg-slate-50 hover:text-slate-900 transition shadow-xs active:scale-95" data-project-category="developer" type="button">
-                <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-                <span>
-                  Developer & Database
-                </span>
-              </button>
+            <div className="pj-split">
+              <div aria-label="Project menu" className="pj-top" id="about-project-menu" role="group">
+                <div className="pj-top-in">
+                  <p className="hidden" id="about-project-counter"></p>
+                  <div className="pj-dd" id="about-project-dropdown">
+                    <span className="pj-dd-cap">Field</span>
+                    <button aria-controls="about-project-categories" aria-expanded="false" aria-haspopup="true" className="pj-dd-toggle" id="about-project-dd-toggle" type="button">
+                      <span className="pj-dd-dot" id="about-project-dd-dot" aria-hidden="true"></span>
+                      <span className="pj-dd-label" id="about-project-dd-label">UI/UX Design</span>
+                      <svg aria-hidden="true" className="pj-dd-chev" fill="none" height="16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.4" viewBox="0 0 24 24" width="16"><path d="m6 9 6 6 6-6" /></svg>
+                    </button>
+                    <div aria-label="Filter projects by category" className="pj-dd-menu" hidden id="about-project-categories" role="group">
+                      <button aria-pressed="false" className="project-filter about-project-category inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 font-medium text-xs hover:bg-slate-50 hover:text-slate-900 transition shadow-xs active:scale-95" data-project-category="analytics" type="button">
+                        <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+                        <span>
+                          IT Product/Business Analytics
+                        </span>
+                      </button>
+                      {" "}
+                      <button aria-pressed="false" className="project-filter about-project-category inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 font-medium text-xs hover:bg-slate-50 hover:text-slate-900 transition shadow-xs active:scale-95" data-project-category="team" type="button">
+                        <span className="w-2 h-2 rounded-full bg-cyan-500"></span>
+                        <span>
+                          {"Project Management & Leadership"}
+                        </span>
+                      </button>
+                      {" "}
+                      <button aria-pressed="true" className="project-filter about-project-category inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-medium text-xs shadow-xs hover:bg-indigo-700 transition active:scale-95" data-project-category="uiux" type="button">
+                        <span className="w-2 h-2 rounded-full bg-emerald-300"></span>
+                        <span>
+                          UI/UX Design
+                        </span>
+                      </button>
+                      {" "}
+                      <button aria-pressed="false" className="project-filter about-project-category inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 font-medium text-xs hover:bg-slate-50 hover:text-slate-900 transition shadow-xs active:scale-95" data-project-category="aiml" type="button">
+                        <span className="w-2 h-2 rounded-full bg-purple-500"></span>
+                        <span>
+                          Machine Learning/AI Engineering
+                        </span>
+                      </button>
+                      {" "}
+                      <button aria-pressed="false" className="project-filter about-project-category inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 font-medium text-xs hover:bg-slate-50 hover:text-slate-900 transition shadow-xs active:scale-95" data-project-category="developer" type="button">
+                        <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                        <span>
+                          Developer & Database
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                  <div aria-label="Projects in this field" className="pj-list" id="about-project-track" role="group"></div>
+                  <p className="hidden rounded-xl border border-dashed border-slate-300 bg-white/70 px-4 py-6 text-center text-xs text-slate-500" id="about-project-empty">
+                    Belum ada proyek untuk kategori ini.
+                  </p>
+                  <div className="hidden" id="about-project-dots"></div>
+                </div>
+              </div>
+              <div aria-live="polite" className="pj-main min-w-0" id="about-project-detail"></div>
             </div>
-            <div aria-label="Project showcase" aria-live="polite" className="about-project-track" id="about-project-track"></div>
-            <p className="hidden rounded-xl border border-dashed border-slate-300 bg-white/70 px-6 py-10 text-center text-sm text-slate-500" id="about-project-empty">
-              Belum ada proyek untuk kategori ini.
-            </p>
-            <div className="mt-3 flex items-center justify-between gap-4 px-1">
-              <div aria-label="Select a project" className="flex flex-wrap items-center gap-2" id="about-project-dots"></div>
-              <p className="shrink-0 font-mono text-[10px] font-bold uppercase tracking-wider text-slate-500" id="about-project-counter"></p>
-            </div>
-            <div aria-live="polite" className="mt-8" id="about-project-detail"></div>
+            {createPortal(
+            <div className="pj-fab" id="pj-fab">
+              <button aria-controls="pj-fab-panel" aria-expanded="false" aria-haspopup="true" aria-label="Open the project menu" className="pj-fab-btn" id="pj-fab-btn" type="button">
+                <span aria-hidden="true" className="pj-fab-bars"><i /><i /><i /></span>
+              </button>
+              <div aria-label="Switch project" className="pj-fab-panel" id="pj-fab-panel" role="group">
+                <label className="pj-fab-field">
+                  <span>Field</span>
+                  <select id="pj-fab-select">
+                    <option value="analytics">IT Product/Business Analytics</option>
+                    <option value="team">Project Management &amp; Leadership</option>
+                    <option value="uiux">UI/UX Design</option>
+                    <option value="aiml">Machine Learning/AI Engineering</option>
+                    <option value="developer">Developer &amp; Database</option>
+                  </select>
+                </label>
+                <div className="pj-fab-list" id="pj-fab-list"></div>
+                <button className="pj-fab-top" id="pj-fab-top" type="button">Back to the full menu ↑</button>
+              </div>
+            </div>,
+              document.body,
+            )}
           </div>
         </section>
         <Resume />

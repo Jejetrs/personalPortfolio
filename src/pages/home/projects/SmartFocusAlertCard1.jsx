@@ -66,7 +66,7 @@ export default function SmartFocusAlertCard1() {
                 </p>
               </div>
               <p className="text-sm text-slate-600 leading-relaxed font-normal">
-                An AI-powered web application that monitors user focus in real time using computer vision and MediaPipe Face Mesh, helping learners stay aware of distractions and improve productivity during online learning.
+                User research informed the monitoring flow, focus-state feedback, alert controls, and report presentation, with usability evaluation guiding interface revisions.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                 <div className="w-full min-w-0 px-3.5 py-1.5 rounded-xl bg-white border border-blue-100/90 shadow-xs flex items-center gap-2.5">

@@ -386,17 +386,6 @@ export default function OpenmusicApiProjectCard() {
                 <h3>
                   OpenMusic API Test Screenshots
                 </h3>
-                <div className="om-gallery-controls">
-                  <button type="button" data-openmusic-prev="" aria-label="Previous screenshot" disabled>
-                    ←
-                  </button>
-                  <span data-openmusic-counter="">
-                    1 / 5
-                  </span>
-                  <button type="button" data-openmusic-next="" aria-label="Next screenshot">
-                    →
-                  </button>
-                </div>
               </div>
               <p className="om-api-intro">
                 Postman screenshots showing the API test run and sample song and album responses.

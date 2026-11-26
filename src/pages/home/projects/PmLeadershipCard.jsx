@@ -17,7 +17,7 @@ const PROGRAMS = [
     kicker: "TRUSTEE - DIGISTAR CLASS INTERN 2026",
     headline: "Keeping the Team Aligned, From Planning to Pitching",
     body:
-      "Leading Team 32 meant keeping everyone informed and moving toward the same goal. I used a shared monitoring sheet to organize tasks, track deadlines, and coordinate our progress through mentoring, project discussions, and final pitching.",
+      "Coordinated Team 32 through task ownership, shared progress tracking, mentoring check-ins, stakeholder alignment, and pitch preparation.",
     contributionsLabel: "MY CONTRIBUTIONS",
     stats: [["Team 32", "Team leadership"], ["Top 3", "Internal pitch result"]],
     points: [
@@ -42,7 +42,7 @@ const PROGRAMS = [
     ],
     digistarDecisionNote: "What this demonstrates: business analysis used to guide product choices and cross-team alignment—not a claim of commercial deployment.",
     digistarLearning: "Product direction becomes clearer when business challenges are explicitly connected to proposed capabilities and decision criteria.",
-    links: [{ label: "Open the Trustee case study", href: "/?project=trustee-business-card", internal: true }],
+    links: [],
     photos: [
       ["Business Analyst", "Fase Pembuatan Feature Request - Digistar.png", "Feature request development", "Documenting the stages of the feature request process."],
       ["Business Analyst", "Metrik Evaluasi - Digistar.png", "Evaluation metrics", "Defining metrics to assess the proposed product feature."],
@@ -59,7 +59,7 @@ const PROGRAMS = [
     kicker: "LEADSIGHT - ASAH 2026",
     headline: "Turning a Sales Problem into a Coordinated Six-Week Build",
     body:
-      "LeadSight proposed a predictive lead-scoring portal to help banking sales teams prioritize outreach. As capstone team leader and a front-end contributor, I helped translate the MVP scope into workstreams, dependencies, milestones and delivery preparation.",
+      "Translated MVP scope into six-week workstreams, dependencies, milestones, and delivery checkpoints across machine learning, front-end, and back-end.",
     contributionsLabel: "MY CONTRIBUTIONS",
     stats: [["5", "Team members"], ["3", "Workstreams"], ["6 weeks", "Planned timeline"]],
     points: [
@@ -94,7 +94,7 @@ const PROGRAMS = [
         ],
       },
     ],
-    links: [{ label: "Open the LeadSight developer project", href: "/?project=leadsight-project-card#selected-works", internal: true }],
+    links: [],
     photos: [
       ["ASAH 2026", "Capstone Team Meeting Progress.jpeg", "Writing the plan live", "Drafting the project plan with the team."],
       ["ASAH 2026", "Advisor Meeting.webp", "Advisor session", "Syncing direction with our advisor."],
@@ -111,7 +111,7 @@ const PROGRAMS = [
     kicker: "ARKAVIDIA 9.0",
     headline: "Prioritizing a Product Direction Under a 24-Hour Deadline",
     body:
-      "AiDorse was a hackathon concept for helping MSMEs plan creator campaigns. I contributed to early research, translated pain points into proposed features and user flows, and aligned product ideas with the team's technical and presentation constraints.",
+      "Prioritized the MVP within a 24-hour schedule by aligning user needs, feature scope, team responsibilities, and pitch preparation.",
     contributionsLabel: "MY CONTRIBUTIONS",
     stats: [["5", "MSME respondents"], ["1", "Creator interview"], ["Top 10", "Finalist"]],
     points: [

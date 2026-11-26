@@ -13,7 +13,7 @@ export default function LastEventsGallery() {
           A few meaningful experiences where I learned to work with different teams, take on new responsibilities, and turn ideas into practical solutions.
         </p>
       </div>
-      <div className="w-full max-w-[42rem] justify-self-end lg:col-span-8 grid grid-cols-2 gap-3 sm:gap-4" aria-label="Event stories">
+      <div className="w-full lg:max-w-[42rem] lg:justify-self-end lg:col-span-8 grid grid-cols-2 gap-3 sm:gap-4" aria-label="Event stories">
         <button className="last-event-card event-cover event-cover--indigo" style={{ order: 3 }} type="button" data-event-index="2" data-event-title="Digistar Internship — B2B Pitching" data-event-date="2026" aria-controls="last-event-detail" aria-expanded="false" aria-label="Read Digistar Internship — B2B Pitching event story">
           <img className="event-cover-real-image" alt="" hidden aria-hidden="true" />
           {" "}

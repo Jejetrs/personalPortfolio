@@ -359,17 +359,6 @@ export default function BookshelfApiProjectCard() {
                 Postman test overview and examples for creating, reading, updating, and deleting books.
               </p>
             </div>
-            <div className="bk-controls">
-              <button type="button" data-gal-prev="" aria-label="Previous screenshot">
-                ←
-              </button>
-              <span data-gal-counter="">
-                1 / 5
-              </span>
-              <button type="button" data-gal-next="" aria-label="Next screenshot">
-                →
-              </button>
-            </div>
           </div>
           <div className="bk-track" data-gal-track="">
             <figure className="bk-slide">

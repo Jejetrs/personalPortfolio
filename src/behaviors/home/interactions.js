@@ -92,9 +92,8 @@ export function mountHomeInteractions(scope) {
   let isCardVisible = false;
   let pinnedPillarIndex = -1;
   let cardHideTimer;
-  document.getElementById('experience').append(
-    document.getElementById('pathway-modal-overlay')
-  );
+  const legacyPathwayOverlay = document.getElementById('pathway-modal-overlay');
+  if (legacyPathwayOverlay) document.getElementById('experience')?.append(legacyPathwayOverlay);
 
   function updateActiveNodeStyles(index) {
     const counter = document.getElementById('step-counter');

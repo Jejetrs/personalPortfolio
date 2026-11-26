@@ -103,7 +103,7 @@ export default function NuscaDeveloperProjectCard() {
 .nu .nu-panel h3,.nu .nu-gallery-top h3{font-size:11px;font-weight:700;color:#1e293b;letter-spacing:0;margin-bottom:8px;line-height:1.4}.nu .nu-gallery-top h3{margin-bottom:0}
 .nu .nu-process{gap:6px}.nu .nu-step{font-size:9.5px;font-weight:600;padding:8px 6px;border-radius:8px;background:#ecfdf5b3;border:1px solid #d1fae5;color:#334155}.nu .nu-step small{font-size:8.5px;color:#64748b}
 .nu .nu-micro{font-size:9.5px;color:#64748b;line-height:1.4}
-.nu .nu-stack{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}.nu .nu-stackpanel .nu-stack>div{padding:8px 10px;background:#ecfdf5b3;border:1px solid #d1fae5;border-radius:8px}
+.nu .nu-stack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.nu .nu-stackpanel .nu-stack>div{padding:8px 10px;background:#ecfdf5b3;border:1px solid #d1fae5;border-radius:8px}
 .nu .nu-stack h4{font-size:11px;font-weight:700;color:#1e293b;margin-bottom:3px}.nu .nu-stack p{font-size:9.5px;line-height:1.4;color:#475569}
 .nu .nu-gallery-top p{font-size:9.5px;color:#94a3b8}
 .nu .nu-slide{border:1px solid #d1fae5;border-radius:12px}.nu .nu-slide figcaption strong{font-size:10px;font-weight:700;color:#334155}.nu .nu-slide figcaption span{font-size:9px;color:#94a3b8}
@@ -121,7 +121,7 @@ export default function NuscaDeveloperProjectCard() {
 .nu .nu-dgrid{gap:12px}.nu .nu-dgrid>div{background:#fff;border:1px solid #d1fae5;border-radius:12px;padding:14px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
 .nu .nu-dgrid h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#0f172a;margin-bottom:8px}.nu .nu-dgrid li{font-size:10.5px;line-height:1.5;color:#475569}
 .nu .nu-footer{font-size:10px;color:#94a3b8}.nu .nu-links button{font-size:11px;font-weight:600;border-radius:12px;padding:6px 12px;border:1px solid #d1fae5;background:#fff;color:#006e4b;box-shadow:0 1px 2px rgba(0,0,0,.05)}.nu .nu-links button:hover{background:#ecfdf5b3}
-@media(max-width:650px){.nu.project-card-item{padding:1.25rem!important}}
+@media(max-width:650px){.nu.project-card-item{padding:1.25rem!important}.nu .nu-stack{grid-template-columns:minmax(0,1fr)}}
 
 .nu{--dev-acc:#006e4b;--dev-line:#a7f3d0}
 .nu .nu-dgrid{padding-top:0}
@@ -152,12 +152,6 @@ export default function NuscaDeveloperProjectCard() {
           </div>
           <div className="dev-actions">
             <PrivateLink label="GitHub" restricted />
-            <button type="button" className="dev-btn ghost" data-sf-goto="uiux" data-sf-target="nusca-project-card-1">
-              UI/UX case study ↗
-            </button>
-            <button type="button" className="dev-btn ghost" data-sf-goto="aiml" data-sf-target="nusca-project-card-2">
-              AI/ML case study ↗
-            </button>
             <span className="dev-switch" data-live-badge="" data-state="checking" role="switch" aria-checked="false" aria-readonly="true" aria-disabled="true" aria-label="Live deploy status" tabIndex="-1">
               <span className="dev-switch-label">Live deploy</span>
               <span className="dev-switch-track"><i></i></span>
@@ -174,11 +168,8 @@ export default function NuscaDeveloperProjectCard() {
                 / NutriScan
               </span>
             </h2>
-            <div className="nu-eyebrow">
-              Full-stack Development · Nutrition Label Analysis
-            </div>
             <p className="nu-lead">
-              A full-stack nutrition-label scanner built with React and FastAPI. It converts beverage-label photos into structured nutrition data and a Nutri-Level A–D grade.
+              The React client handles camera capture, crop and result views, while FastAPI exposes the scan endpoints and connects the interface to the processing pipeline.
             </p>
             <div className="nu-metrics">
               <div className="nu-metric">
@@ -397,26 +388,15 @@ export default function NuscaDeveloperProjectCard() {
             </p>
           </div>
         </div>
-        <section className="nu-gallery" data-gallery="" aria-label="Running app screenshots">
+        <section className="nu-gallery" data-gallery="" aria-label="Nusca app and backend screenshots">
           <div className="nu-gallery-top">
             <div>
               <h3>
-                Running App Screens
+                App & Backend Screens
               </h3>
               <p>
-                Screens from the deployed app · click to enlarge
+                Application flow and backend evidence · click to enlarge
               </p>
-            </div>
-            <div className="nu-controls">
-              <button type="button" data-gal-prev="" aria-label="Previous screenshot">
-                ←
-              </button>
-              <span data-gal-counter="">
-                1 / 6
-              </span>
-              <button type="button" data-gal-next="" aria-label="Next screenshot">
-                →
-              </button>
             </div>
           </div>
           <div className="nu-track" data-gal-track="" tabIndex="0">
@@ -525,67 +505,54 @@ export default function NuscaDeveloperProjectCard() {
               </figcaption>
             </figure>
             <figure className="nu-slide">
-              <button type="button" className="nu-open" data-gal-open="" aria-label="Enlarge: Camera capture">
-                <img src="nusca-dev-1-capture.webp" alt="Nusca · Camera capture" loading="lazy" decoding="async" />
+              <button type="button" className="nu-open" data-gal-open="" aria-label="Enlarge: Live camera scanner">
+              <img src="/assets/projects/Developer/Nusca/Camera.webp" alt="Nusca live camera scanner" loading="lazy" decoding="async" />
               </button>
               <figcaption>
                 <strong>
-                  Camera capture
+                Live camera scanner
                 </strong>
                 <span>
-                  Screenshot from the running app.
+                Capture a nutrition label directly in the app.
                 </span>
               </figcaption>
             </figure>
             <figure className="nu-slide">
-              <button type="button" className="nu-open" data-gal-open="" aria-label="Enlarge: Crop the label">
-                <img src="nusca-dev-2-crop.webp" alt="Nusca · Crop the label" loading="lazy" decoding="async" />
+              <button type="button" className="nu-open" data-gal-open="" aria-label="Enlarge: Nutrition panel crop">
+                <img src="/assets/projects/Developer/Nusca/Crop.webp" alt="Nusca nutrition panel crop" loading="lazy" decoding="async" />
               </button>
               <figcaption>
                 <strong>
-                  Crop the label
+                  Nutrition panel crop
                 </strong>
                 <span>
-                  Screenshot from the running app.
+                  Adjust the detected label area before analysis.
                 </span>
               </figcaption>
             </figure>
             <figure className="nu-slide">
-              <button type="button" className="nu-open" data-gal-open="" aria-label="Enlarge: Analyzing">
-                <img src="nusca-dev-3-analyze.webp" alt="Nusca · Analyzing" loading="lazy" decoding="async" />
+              <button type="button" className="nu-open" data-gal-open="" aria-label="Enlarge: Nutri-Level result">
+                <img src="/assets/projects/Developer/Nusca/Analysist Result Nutri Level.webp" alt="Nusca extracted nutrition and Nutri-Level result" loading="lazy" decoding="async" />
               </button>
               <figcaption>
                 <strong>
-                  Analyzing
+                  Nutri-Level result
                 </strong>
                 <span>
-                  Screenshot from the running app.
+                  Review extracted nutrition values and the final grade.
                 </span>
               </figcaption>
             </figure>
             <figure className="nu-slide">
-              <button type="button" className="nu-open" data-gal-open="" aria-label="Enlarge: Grade result">
-                <img src="nusca-dev-4-result.webp" alt="Nusca · Grade result" loading="lazy" decoding="async" />
+              <button type="button" className="nu-open" data-gal-open="" aria-label="Enlarge: Backend request logs">
+                <img src="/assets/projects/Developer/Nusca/Console Result.png" alt="Nusca backend request logs" loading="lazy" decoding="async" />
               </button>
               <figcaption>
                 <strong>
-                  Grade result
+                  Backend request logs
                 </strong>
                 <span>
-                  Screenshot from the running app.
-                </span>
-              </figcaption>
-            </figure>
-            <figure className="nu-slide">
-              <button type="button" className="nu-open" data-gal-open="" aria-label="Enlarge: Result on mobile">
-                <img src="nusca-dev-mobile.webp" alt="Nusca · Result on mobile" loading="lazy" decoding="async" />
-              </button>
-              <figcaption>
-                <strong>
-                  Result on mobile
-                </strong>
-                <span>
-                  Screenshot from the running app.
+                  Confirm successful status checks and analysis requests.
                 </span>
               </figcaption>
             </figure>

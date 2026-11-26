@@ -672,6 +672,12 @@ html body main .hh-ask-title {
     flex: 1 1 auto;
     justify-content: center;
   }
+
+  /* Roles stack as a short centred list (no dangling dots); the main button spans the row, the other two share the next. */
+  .hh-roles { flex-direction: column; gap: 0.15rem; }
+  .hh-roles i { display: none; }
+  .hh-hero-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  .hh-hero-actions a:first-child { grid-column: 1 / -1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
