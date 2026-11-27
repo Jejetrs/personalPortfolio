@@ -46,7 +46,7 @@ export default function GroupCard({ group, field, image, fields, sources, year }
     <article className="gs" data-group={group.slug}>
       <header className={`gs-top${group.overview ? " has-media" : ""}`}>
         <div className="gs-copy">
-        <div className="gs-id">
+        <div className={`gs-id${image ? " has-thumb" : " no-thumb"}`}>
           {image && <img alt="" className="gs-thumb" decoding="async" loading="lazy" src={image} />}
           <div>
             <p className="gs-kicker">Multi-field project</p>

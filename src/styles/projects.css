@@ -20,9 +20,9 @@
 .gs-top { padding: clamp(1rem, 2.4vw, 1.6rem); }
 .gs-id { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0.6rem 1rem; }
 .gs-id > div { min-width: 0; }
-.gs-id:has(> .gs-thumb) .gs-fields { grid-column: 2; justify-content: flex-start; }
-.gs-id:not(:has(> .gs-thumb)) { grid-template-columns: minmax(0, 1fr); }
-.gs-id:not(:has(> .gs-thumb)) .gs-fields { grid-column: 1; justify-content: flex-start; }
+.gs-id.has-thumb .gs-fields { grid-column: 2; grid-row: 2; justify-content: flex-start; }
+.gs-id.no-thumb { grid-template-columns: minmax(0, 1fr); }
+.gs-id.no-thumb .gs-fields { grid-column: 1; grid-row: 2; justify-content: flex-start; }
 .gs-thumb { width: 3.6rem; height: 3.6rem; border: 1px solid #dfe5f6; border-radius: 0.9rem; object-fit: cover; object-position: 50% 20%; }
 .gs-kicker { margin: 0; font: 700 0.58rem/1.2 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.14em; text-transform: uppercase; color: #ea580c; }
 html body main .gs-title { margin: 0.3rem 0 0; font: 800 clamp(1.5rem, 3vw, 2.1rem)/1.05 "Plus Jakarta Sans", Inter, sans-serif !important; letter-spacing: -0.035em !important; color: #0f172a; }

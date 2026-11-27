@@ -638,6 +638,7 @@ html body main .hh-ask-title {
 
   .hh-id {
     height: auto;
+    width: 100%;
     max-width: 17rem;
     margin: 0 auto;
   }
