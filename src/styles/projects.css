@@ -18,7 +18,11 @@
   box-shadow: 0 26px 44px -30px rgba(30, 40, 120, 0.45);
 }
 .gs-top { padding: clamp(1rem, 2.4vw, 1.6rem); }
-.gs-id { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 0.6rem 1rem; }
+.gs-id { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0.6rem 1rem; }
+.gs-id > div { min-width: 0; }
+.gs-id:has(> .gs-thumb) .gs-fields { grid-column: 2; justify-content: flex-start; }
+.gs-id:not(:has(> .gs-thumb)) { grid-template-columns: minmax(0, 1fr); }
+.gs-id:not(:has(> .gs-thumb)) .gs-fields { grid-column: 1; justify-content: flex-start; }
 .gs-thumb { width: 3.6rem; height: 3.6rem; border: 1px solid #dfe5f6; border-radius: 0.9rem; object-fit: cover; object-position: 50% 20%; }
 .gs-kicker { margin: 0; font: 700 0.58rem/1.2 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.14em; text-transform: uppercase; color: #ea580c; }
 html body main .gs-title { margin: 0.3rem 0 0; font: 800 clamp(1.5rem, 3vw, 2.1rem)/1.05 "Plus Jakarta Sans", Inter, sans-serif !important; letter-spacing: -0.035em !important; color: #0f172a; }
@@ -88,8 +92,6 @@ html body #about-project-detail .gs-ch-body > .project-card-item, html body #abo
 .gs-next span { width: 1.6rem; height: 2px; background: var(--acc-line); }
 
 @media (max-width: 860px) {
-  .gs-id { grid-template-columns: auto minmax(0, 1fr); }
-  .gs-fields { grid-column: 1 / -1; justify-content: flex-start; }
   .gs-band { grid-template-columns: minmax(0, 1fr) auto; }
   .gs-band-act { display: none; }
   .gs-band-tag { grid-column: 1; justify-self: start; }
