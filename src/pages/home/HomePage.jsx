@@ -100,7 +100,7 @@ export default function HomePage() {
                   </div>
                   <div aria-label="Projects in this field" className="pj-list" id="about-project-track" role="group"></div>
                   <p className="hidden rounded-xl border border-dashed border-slate-300 bg-white/70 px-4 py-6 text-center text-xs text-slate-500" id="about-project-empty">
-                    Belum ada proyek untuk kategori ini.
+                    No projects in this category yet.
                   </p>
                   <div className="hidden" id="about-project-dots"></div>
                 </div>

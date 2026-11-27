@@ -15,6 +15,7 @@ export function createDetailRenderer(container) {
             group={project.group}
             sources={project.groupSources}
             image={project.profileImage}
+            year={project.projectYear}
             key={`${project.group.slug}-${project.category}`}
           />,
         ));

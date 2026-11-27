@@ -12,6 +12,7 @@ const localizeDate = (text) => text
   .replace(/\b(January|February|March|May|June|July|August|October|December)\b/g, (m) => MONTHS[m]);
 
 export default [
+  [/^(\d+) of (\d+) ideas$/, (a, b) => `${a} dari ${b} ide`],
   [/^Project (\d+)$/, (n) => `Proyek ${n}`],
   [/^Show image (\d+) of (\d+) for (.+)$/, (n, total, name) => `Tampilkan gambar ${n} dari ${total} untuk ${name}`],
   [/^Show image (\d+) of (\d+)$/, (n, total) => `Tampilkan gambar ${n} dari ${total}`],

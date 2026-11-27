@@ -1,5 +1,6 @@
 import TrusteeBusinessCard from './TrusteeBusinessCard.jsx';
 import LeadsightBusinessAnalysisCard from './LeadsightBusinessAnalysisCard.jsx';
+import AgrosenseBusinessAnalysisCard from './AgrosenseBusinessAnalysisCard.jsx';
 import PmLeadershipCard from './PmLeadershipCard.jsx';
 import InaprocProjectCard from './InaprocProjectCard.jsx';
 import CampaignDeckMasterCard from './CampaignDeckMasterCard.jsx';
@@ -40,6 +41,14 @@ export const PROJECTS = [
     description: "An ASAH capstone concept for banking sales that combines predictive lead scoring, customer segmentation, and campaign analytics to support more informed outreach planning.",
     images: ["/assets/projects/Developer/Leadsight.webp"],
     Card: LeadsightBusinessAnalysisCard,
+  },
+  {
+    id: "agrosense-business-analysis-card",
+    category: "analytics",
+    title: "AgroSense — Product Analysis",
+    description: "A Samsung Innovation Campus prototype that puts hydroponic sensor readings and AI leaf-disease detection in one dashboard, from pain points and prioritization to the built product.",
+    images: ["/assets/experience/Samsung%20Innovation%20Campus/Agrosense%20IoT%20Hardware1.jpeg"],
+    Card: AgrosenseBusinessAnalysisCard,
   },
   {
     id: "pm-leadership-card",

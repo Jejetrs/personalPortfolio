@@ -41,7 +41,7 @@ function Overview({ media, title }) {
 
 /* ONE card for a project that covers several fields: a short overview and chapter map on top, then the
    case-study card of each field stacked as chapters. The cards themselves are unchanged. */
-export default function GroupCard({ group, field, image, fields, sources }) {
+export default function GroupCard({ group, field, image, fields, sources, year }) {
   return (
     <article className="gs" data-group={group.slug}>
       <header className={`gs-top${group.overview ? " has-media" : ""}`}>
@@ -54,8 +54,9 @@ export default function GroupCard({ group, field, image, fields, sources }) {
             <p className="gs-sub">{group.subtitle}</p>
           </div>
           <ul className="gs-fields" aria-label="Fields covered">
+            {year && <li className="gs-year" aria-label={`Project year ${year}`}>{year}</li>}
             {fields.map((key) => (
-              <li className={`tone-${FIELD_LABELS[key].tone}${key === field ? " is-on" : ""}`} key={key}>{FIELD_LABELS[key].short}</li>
+              <li className={`tone-${FIELD_LABELS[key].tone}${key === field ? " is-on" : ""}`} key={key}>{group.fieldLabels?.[key] || FIELD_LABELS[key].short}</li>
             ))}
           </ul>
         </div>
@@ -64,10 +65,11 @@ export default function GroupCard({ group, field, image, fields, sources }) {
         <ol className="gs-map">
           {group.parts.map((part, index) => {
             const category = sources[index].category;
+            const fieldLabel = part.fieldLabel || FIELD_LABELS[category].short;
             return (
               <li className={category === field ? "is-active" : ""} key={part.id}>
                 <a href={`#gs-${group.slug}-${index + 1}`} onClick={(event) => goToChapter(event, `gs-${group.slug}-${index + 1}`)}>
-                  <i className={`tone-${FIELD_LABELS[category].tone}`}>{FIELD_LABELS[category].short}</i>
+                  <i className={`tone-${FIELD_LABELS[category].tone}`}>{fieldLabel}</i>
                   <span>
                     <strong className="sr-only">{part.chapter}</strong>
                     <small>{part.lead}</small>
@@ -87,6 +89,7 @@ export default function GroupCard({ group, field, image, fields, sources }) {
           const { Card, cardProps } = source;
           const active = source.category === field;
           const next = group.parts[index + 1];
+          const fieldLabel = part.fieldLabel || FIELD_LABELS[source.category].short;
           return (
             <details
               className={`gs-ch tone-${FIELD_LABELS[source.category].tone}${active ? " is-active" : ""}`}
@@ -97,7 +100,7 @@ export default function GroupCard({ group, field, image, fields, sources }) {
               open
             >
               <summary className="gs-band">
-                <span className="gs-band-tag">{FIELD_LABELS[source.category].short}</span>
+                <span className="gs-band-tag">{fieldLabel}</span>
                 <span className="gs-band-text">
                   <strong className="sr-only">{part.chapter}</strong>
                   <small>{part.lead}</small>

@@ -138,3 +138,9 @@ Cara kerjanya: konten tetap ditulis dalam bahasa Inggris di komponen, lalu `src/
 - Teks baru yang kamu tambahkan di komponen akan tampil dalam bahasa Inggris sampai ditambahkan ke `id.js`.
 - Sengaja tidak diterjemahkan: nama orang/perusahaan/program, nama tools & teknologi, potongan kode, `alt` gambar, isi PDF dan gambar sertifikat.
 - Logika di `behaviors/*` yang membaca teks Inggris memakai `originalText()` dari `src/i18n/translator.js`, jadi tidak terpengaruh terjemahan.
+
+## Kartu Business / Product Analysis (LeadSight & AgroSense)
+Kedua kartu memakai format ringkas **Problem – Role – Solusi – Dampak (P–R–S–I)** dari komponen bersama `src/pages/home/projects/AnalysisKit.jsx` (`<Prsi items={...}/>` dan `baseCss`). Satu kolom = satu judul kalimat, maksimal 3 poin pendek, dan angka di `nums` (tambahkan `warn: true` untuk angka yang menandai kelemahan). Semua bagan dibuat dengan HTML/CSS, tanpa gambar; datanya ada di konstanta atas tiap file.
+- `LeadsightBusinessAnalysisCard.jsx` — `PRSI`, `MAP_POINTS` (posisi peta kompetitor, dalam persen: x sederhana → enterprise, y prediktif → rule-based), `ROLLOUT`, `KPIS`, `BUDGET_GROUPS`.
+- `AgrosenseBusinessAnalysisCard.jsx` — `PRSI`, `FUNNEL` (alur riset → ruang lingkup), `MATRIX` (jumlah ide per kuadran prioritas). Foto di `dist/assets/projects/agrosense/` (pindahkan ke folder aset kamu).
+Kartu AgroSense didaftarkan di `projects/index.js` (kategori `analytics`). Teks Inggris baru perlu entri di `src/i18n/id.js`.

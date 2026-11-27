@@ -78,10 +78,14 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       ['diabetes-risk-card', 2025], ['movie-recommender-card', 2025], ['whatsapp-sentiment-card', 2025],
       ['bank-fraud-card', 2025],
       ['campaign-deck-master-card', 2024], ['aoshuttle-project-card', 2024],
+      ['agrosense-business-analysis-card', 2024],
     ];
     const orderIndex = new Map(projectOrder.map(([key], index) => [key, index]));
     const yearByKey = new Map(projectOrder);
     const orderOf = (project) => orderIndex.get(project.group?.slug || project.id) ?? Number.MAX_SAFE_INTEGER;
+    projectData.forEach((project) => {
+      if (project.group) project.projectYear = yearByKey.get(project.group.slug);
+    });
 
     /* Field menu: a dropdown that lists the five fields (with how many projects each has). */
     const ddToggle = document.getElementById('about-project-dd-toggle');
@@ -1990,6 +1994,12 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
       });
     }
 
+    function removeProjectNumber(card) {
+      card.querySelectorAll('.sf-number, .project-number, span.inline-flex[class*="w-6"][class*="h-6"][class*="rounded-full"]').forEach((badge) => {
+        if (/^\d{1,2}$/.test(badge.textContent.trim()) || badge.classList.contains('pj-year')) badge.remove();
+      });
+    }
+
     function initializeSelectedProjectCard(card) {
       showProjectYear(card);
       standardizeHeaderControls(card);
@@ -2060,7 +2070,7 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
           initializeLeadSightLab(card);
           initializeTrusteeBusinessCard(card);
           initializeProjectImageZoom(card);
-          showProjectYear(card);
+          removeProjectNumber(card);
           standardizeHeaderControls(card);
         });
       } finally {
@@ -2172,9 +2182,11 @@ export async function mountProjectSelector(scope, { projects, trusteeDocuments, 
         const text = document.createElement('span');
         text.className = 'pj-text';
         const fields = document.createElement('small');
-        fields.textContent = (project.group
+        const projectYear = yearByKey.get(project.group?.slug || project.id);
+        const projectFields = (project.group
           ? project.groupFields.map((key) => categoryShortNames[key])
-          : [categoryShortNames[project.category]]).join(' · ');
+          : [categoryShortNames[project.category]]);
+        fields.textContent = [...(projectYear ? [String(projectYear)] : []), ...projectFields].join(' · ');
         const name = document.createElement('strong');
         name.textContent = project.title;
         const note = document.createElement('em');

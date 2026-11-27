@@ -62,12 +62,12 @@ export default function DigistarEventContentPart1Part1() {
       <EvidenceCard index={1} title="Frame the problem" description="Built the business context through mentor discussions and pitching practice.">
         <EvidenceButton
           order={1}
-          src="/assets/events/B2B%20DCI%202026/Discuss%20With%20Mentor.webp"
+          src="/assets/events/B2B%20DCI%202026/Discuss%20With%20Mentor.jpg"
           title="Discuss With Mentor"
           caption="Discussion with a mentor to frame the business problem."
           gallery={[
-            { src: "/assets/events/B2B%20DCI%202026/Discuss%20With%20Mentor.webp", title: "Discuss With Mentor", caption: "Discussion with a mentor to frame the business problem." },
-            { src: "/assets/events/B2B%20DCI%202026/Pitching%20Practice%20Class.webp", title: "Pitching Practice Class", caption: "Pitching practice to refine the problem statement and solution story." },
+            { src: "/assets/events/B2B%20DCI%202026/Discuss%20With%20Mentor.jpg", title: "Discuss With Mentor", caption: "Discussion with a mentor to frame the business problem." },
+            { src: "/assets/events/B2B%20DCI%202026/Pitching%20Practice%20Class.jpg", title: "Pitching Practice Class", caption: "Pitching practice to refine the problem statement and solution story." },
           ]}
         />
       </EvidenceCard>

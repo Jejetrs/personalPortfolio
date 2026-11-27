@@ -1,152 +1,163 @@
-import { useState } from "react";
 import VideoHighlight from "@/components/VideoHighlight.jsx";
+import { Prsi, baseCss } from "./AnalysisKit.jsx";
 
 const LEADSIGHT_VIDEO_ID = "1YcuRaOq3cR49pWVPmXh29hRSJCqcGhOX";
 const LEADSIGHT_VIDEO_POSTER = "/assets/experience/ASAH%202025/Leadsight%20Profile.png";
 
-const detailTabs = [
-  { id: "problem", num: "01", label: "Business Problem" },
-  { id: "market", num: "02", label: "Market & Users" },
-  { id: "strategy", num: "03", label: "Product Strategy" },
-  { id: "rollout", num: "04", label: "Success Metrics" },
+/* ---- Numbers come from the ASAH capstone deck (A25-CS086). Edit here to change the card. ---- */
+
+/* Problem – Role – Solution – Impact. Keep each column short; numbers go in `nums`. */
+const PRSI = [
+  {
+    key: "problem", letter: "P", label: "Problem",
+    head: "Sales teams call broad lists with no clear priority.",
+    points: [
+      "Outbound banking calls spread effort across prospects without ranking them.",
+      "Reviewing leads by hand takes time and gives little context.",
+    ],
+    nums: [{ n: "3×", l: "Up to 3× better prospect identification with ML (Cowan et al., 2023; third-party study)" }],
+  },
+  {
+    key: "role", letter: "R", label: "Role",
+    head: "Project Manager and Front-End Contributor.",
+    points: [
+      "Planned the capstone across ML, front-end and back-end workstreams.",
+      "Built front-end dashboard views as a contributor.",
+      "Framed the business case: users, competitors and rollout metrics.",
+    ],
+    nums: [{ n: "6", l: "weeks of delivery planned" }],
+  },
+  {
+    key: "solution", letter: "S", label: "Solution",
+    head: "A dashboard that scores leads and shows why.",
+    points: [
+      "Predictive lead scoring: priority vs. non-priority customers.",
+      "Customer segmentation and campaign analytics in one view.",
+      "AI-assisted insights for more relevant outreach.",
+    ],
+    nums: [{ n: "3", l: "core capabilities" }, { n: "6", l: "existing tools benchmarked" }],
+  },
+  {
+    key: "impact", letter: "I", label: "Impact",
+    head: "Works as a prototype. Business impact is not measured.",
+    points: ["Tests show the features work, not that sales improve."],
+    nums: [
+      { n: "16/16", l: "black-box tests passed" },
+      { n: "87.5%", l: "accuracy (ROC-AUC 77%)" },
+      { n: "38%", l: "priority-class recall, the weak spot", warn: true },
+      { n: "0.29 s", l: "prediction time" },
+    ],
+    note: "Capstone concept on a public dataset. Never launched in a bank.",
+  },
 ];
 
-export default function LeadsightBusinessAnalysisCard() {
-  const [activeTab, setActiveTab] = useState(detailTabs[0].id);
+/* Positions are percentages inside the plot: x = left → right (simple/niche → enterprise/complex), y = top → bottom (predictive → rule-based). */
+const MAP_POINTS = [
+  { name: "LeadSight", x: 23, y: 15, self: true },
+  { name: "Freshworks", x: 31, y: 41 },
+  { name: "Salesforce", x: 58, y: 43 },
+  { name: "Dynamics 365", x: 73, y: 30 },
+  { name: "Zoho", x: 88, y: 43 },
+  { name: "Google Sheets", x: 29, y: 77 },
+  { name: "HubSpot", x: 75, y: 77 },
+];
 
+const KPIS = ["User adoption", "Operational efficiency", "Scoring performance", "User satisfaction", "Business impact"];
+
+const ROLLOUT = [
+  { when: "Weeks 1–2", what: "Soft launch" },
+  { when: "Weeks 3–4", what: "Iterate" },
+  { when: "Month 2", what: "Internal pilot" },
+  { when: "Month 3", what: "Wider deployment" },
+  { when: "Month 4", what: "Improve" },
+];
+
+/* Budget share by category (IDR 22M in total; the four groups are my own, for readability). */
+const BUDGET_GROUPS = [
+  { g: 1, label: "Infrastructure & hosting", pct: 57 },
+  { g: 2, label: "Tools", pct: 20 },
+  { g: 3, label: "Quality & enablement", pct: 14 },
+  { g: 4, label: "Contingency", pct: 9 },
+];
+
+const S = "#leadsight-business-analysis-card.lba";
+const LS_THEME = { acc: "#4f46e5", acc2: "#f07838", glow1: "rgba(79,70,229,.5)", glow2: "rgba(240,120,56,.34)", soft: "#f4f5ff", strong: "#4338ca", roleTint: "#ffb98a", base: "linear-gradient(135deg,#0d1735 0%,#16244f 55%,#1d2f6b 100%)" };
+const EXTRA_CSS = baseCss(S, "lba", LS_THEME) + `
+${S} .lba-roll{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px}
+${S} .lba-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:0;padding:0;list-style:none}
+${S} .lba-steps li{min-width:0;padding-top:14px;border-top:3px solid var(--acc)}
+${S} .lba-steps b{display:block;color:#70798a;font:600 11px/1.35 "Plus Jakarta Sans",sans-serif}
+${S} .lba-steps span{display:block;margin-top:4px;color:var(--ink);font-size:12px;font-weight:700;line-height:1.35}
+${S} .lba-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+${S} .lba-pills em{width:100%;color:#70798a;font:600 11px/1.4 "Plus Jakarta Sans",sans-serif;font-style:normal}
+${S} .lba-pills span{display:inline-flex;padding:5px 10px;border:1px solid #e2e5eb;border-radius:9px;background:#fff;color:var(--ink);font-size:11px;font-weight:600}
+${S} .lba-budget-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin-bottom:12px}
+${S} .lba-budget-top b{color:var(--acc);font-size:26px;font-weight:800;letter-spacing:-.04em;line-height:1}
+${S} .lba-budget-top span{color:var(--mut);font-size:11px}
+${S} .lba-stack{display:flex;height:15px;overflow:hidden;border-radius:5px;background:#e8eefa}
+${S} .lba-stack i{display:block;height:100%}
+${S} .lba-g1{background:#4338ca}${S} .lba-g2{background:#818cf8}${S} .lba-g3{background:#c7d2fe}${S} .lba-g4{background:#9ca3af}
+${S} .lba-legend{display:flex;flex-direction:column;gap:7px;margin:14px 0 0;color:#556176;font-size:11px}
+${S} .lba-legend span{display:flex;align-items:center;gap:7px}
+${S} .lba-legend i{flex:none;width:10px;height:10px;border-radius:3px}
+${S} .lba-legend b{margin-left:auto;color:var(--ink);font-weight:800}
+${S} .lba-box{padding:22px 24px;border:1px solid #e2e5eb;border-radius:16px;background:#fff;box-shadow:none}
+${S} .lba-box{padding:18px 20px}
+${S} .lba-box h3{margin:0 0 12px;color:var(--ink);font-size:15px;font-weight:700}
+${S} .lba-note{margin-top:8px;color:#7a8799;font-size:10px;line-height:1.7}
+${S} .lba-map{margin:0 0 12px}
+${S} .lba-map-grid{display:grid;grid-template-columns:minmax(80px,.55fr) minmax(0,3fr) minmax(80px,.55fr);grid-template-areas:". top ." "left plot right" ". bottom .";gap:8px 12px;align-items:center}
+${S} .lba-ax{text-align:center;color:var(--acc);font-style:italic}
+${S} .lba-ax b{display:block;font-size:11.5px;font-weight:800;line-height:1.3}
+${S} .lba-ax span{display:block;font-size:10.5px;font-weight:600;opacity:.85}
+${S} .lba-ax-top{grid-area:top}${S} .lba-ax-left{grid-area:left}${S} .lba-ax-right{grid-area:right}${S} .lba-ax-bottom{grid-area:bottom}
+${S} .lba-plot{grid-area:plot;position:relative;aspect-ratio:2/1;min-height:300px;overflow:hidden;border:1px solid var(--line);border-radius:16px;background-color:#fbfcff;background-image:radial-gradient(rgba(79,70,229,.10) 1px,transparent 1px);background-size:20px 20px}
+${S} .lba-plot-hl{position:absolute;left:0;top:0;width:50%;height:50%;background:linear-gradient(135deg,rgba(79,70,229,.13),rgba(79,70,229,.02))}
+${S} .lba-axis-h,${S} .lba-axis-v{position:absolute;background:var(--acc);opacity:.8}
+${S} .lba-axis-h{left:12px;right:12px;top:50%;height:2px;margin-top:-1px}
+${S} .lba-axis-v{top:12px;bottom:12px;left:50%;width:2px;margin-left:-1px}
+${S} .lba-axis-h::before,${S} .lba-axis-h::after,${S} .lba-axis-v::before,${S} .lba-axis-v::after{content:"";position:absolute;border:5px solid transparent}
+${S} .lba-axis-h::before{left:-3px;top:-4px;border-left:0;border-right:8px solid var(--acc)}
+${S} .lba-axis-h::after{right:-3px;top:-4px;border-right:0;border-left:8px solid var(--acc)}
+${S} .lba-axis-v::before{top:-3px;left:-4px;border-top:0;border-bottom:8px solid var(--acc)}
+${S} .lba-axis-v::after{bottom:-3px;left:-4px;border-bottom:0;border-top:8px solid var(--acc)}
+${S} .lba-pt{position:absolute;z-index:1;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border:1px solid var(--line);border-radius:99px;background:#fff;box-shadow:0 6px 16px rgba(20,32,63,.09);color:var(--ink);font-size:11px;font-weight:700;white-space:nowrap}
+${S} .lba-pt i{width:8px;height:8px;border-radius:50%;background:#9aa6c4}
+${S} .lba-pt-self{z-index:2;padding:7px 14px;border-color:var(--acc);background:var(--acc);color:#fff;font-size:12.5px;font-weight:800;box-shadow:0 10px 24px rgba(79,70,229,.38)}
+${S} .lba-pt-self i{background:#ffb98a}
+${S} .lba-pt-self::after{content:"";position:absolute;inset:-5px;border:2px solid rgba(79,70,229,.35);border-radius:99px;animation:lba-ring 2.4s ease-out infinite}
+${S} .lba-map-cap{margin:8px 2px 0;color:#7a8799;font-size:10.5px}
+@keyframes lba-ring{0%{transform:scale(.92);opacity:.9}100%{transform:scale(1.18);opacity:0}}
+@media(max-width:900px){${S} .lba-roll{grid-template-columns:1fr}}
+@media(max-width:640px){
+${S} .lba-steps{grid-template-columns:1fr;gap:10px}
+${S} .lba-steps li{padding:0 0 0 18px;border-top:0;border-left:3px solid var(--acc)}
+${S} .lba-steps li{padding:0 0 0 14px;border-top:0;border-left:3px solid var(--acc)}
+${S} .lba-map-grid{grid-template-columns:1fr 1fr;grid-template-areas:"top top" "plot plot" "left right" "bottom bottom"}
+${S} .lba-plot{aspect-ratio:auto;height:340px;min-height:0}
+${S} .lba-pt{padding:4px 9px;font-size:10.5px}
+${S} .lba-pt-self{padding:6px 11px;font-size:11.5px}
+}
+@media(prefers-reduced-motion:reduce){${S} .lba-pt-self::after{animation:none;opacity:.5}}
+`;
+
+export default function LeadsightBusinessAnalysisCard() {
   return (
     <>
-      <style>{`
-.lba{--ink:#14284b;--mut:#5f7089;--line:#dbe6f5;--acc:#2a5fb4;--acc2:#7c5cff;position:relative;overflow:hidden;padding:clamp(10px,1.6vw,16px);border:1px solid #dde3f2;border-radius:28px;color:var(--ink);background:#fff;font-size:12.5px;line-height:1.5;box-shadow:0 18px 50px rgba(20,32,63,.08)}
-.lba *{box-sizing:border-box}
-#leadsight-business-analysis-card.lba h2,#leadsight-business-analysis-card.lba h3,#leadsight-business-analysis-card.lba p{margin:0}
-#leadsight-business-analysis-card.lba .lba-head{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.04fr);gap:clamp(16px,3vw,32px);align-items:center;padding:clamp(16px,2.4vw,24px) clamp(16px,2.4vw,26px) clamp(34px,3.6vw,44px);border-radius:18px;color:#fff;background:radial-gradient(760px 380px at 92% -12%,rgba(42,95,180,.42),transparent 62%),radial-gradient(620px 360px at -8% 112%,rgba(124,92,255,.44),transparent 62%),linear-gradient(135deg,#0d1735 0%,#16244f 55%,#1d2f6b 100%)}
-#leadsight-business-analysis-card.lba .lba-eyebrow{margin-bottom:8px;font:800 10px/1.3 "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#ffb98a}
-#leadsight-business-analysis-card.lba .lba-title{font-size:clamp(30px,4vw,42px)!important;line-height:1.02;letter-spacing:-.05em;font-weight:800;color:#fff}
-#leadsight-business-analysis-card.lba .lba-title span{color:#ffc79f}
-#leadsight-business-analysis-card.lba .lba-summary{margin:10px 0;color:rgba(228,234,255,.84);font-size:12.5px;line-height:1.65;max-width:52ch}
-#leadsight-business-analysis-card.lba .lba-role{display:inline-flex;padding:8px 12px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:rgba(255,255,255,.07);color:#eef2ff;font:700 10px/1.4 "JetBrains Mono",monospace;letter-spacing:.05em;text-transform:uppercase}
-#leadsight-business-analysis-card.lba .lba-stats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:-34px clamp(10px,2.4vw,22px) 0}
-#leadsight-business-analysis-card.lba .lba-stat{display:flex;align-items:center;gap:9px;min-width:0;padding:8px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 10px 22px rgba(20,32,63,.08)}
-#leadsight-business-analysis-card.lba .lba-stat b{flex:none;color:var(--ink);font-size:19px;line-height:1.1;font-weight:800;letter-spacing:-.04em}
-#leadsight-business-analysis-card.lba .lba-stat span{color:#4a5b78;font-size:10.5px;font-weight:700;line-height:1.3}
-#leadsight-business-analysis-card.lba .lba-photo{margin:0}
-#leadsight-business-analysis-card.lba .lba-photo img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--line);border-radius:14px;background:#e8eefa}
-#leadsight-business-analysis-card.lba .lba-photo figcaption{margin:6px 2px 0;font-size:10.5px;color:var(--mut)}
-#leadsight-business-analysis-card.lba .lba-video-highlight{min-width:0;border:1px solid rgba(255,255,255,.2);border-radius:14px;overflow:hidden;background:#0a1230;box-shadow:0 24px 44px -12px rgba(3,8,28,.6)}
-#leadsight-business-analysis-card.lba .lba-video-highlight .video-highlight{display:block;margin:0;padding:0;border-radius:0;background:transparent;box-shadow:none}
-#leadsight-business-analysis-card.lba .lba-video-highlight .video-highlight-meta{display:none}
-#leadsight-business-analysis-card.lba .lba-video-highlight .video-highlight-frame{border-radius:0;box-shadow:none}
-#leadsight-business-analysis-card.lba .lba-video-highlight .video-highlight-poster img{opacity:.82}
-#leadsight-business-analysis-card.lba .lba-tabs{display:flex;gap:6px;margin:14px 0 0;padding:4px;border:1px solid var(--line);border-radius:14px;background:#ffffffb8}
-#leadsight-business-analysis-card.lba .lba-tab{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;padding:8px 12px;text-align:left;font:inherit;color:inherit;cursor:pointer;border:0;border-radius:10px;background:transparent;transition:background .2s}
-#leadsight-business-analysis-card.lba .lba-tab:hover{background:#eef3fc}
-#leadsight-business-analysis-card.lba .lba-tab:focus-visible{outline:3px solid #9fb3d6;outline-offset:1px}
-#leadsight-business-analysis-card.lba .lba-tab small{font:700 9.5px/1.2 "JetBrains Mono",monospace;letter-spacing:.1em;color:var(--mut)}
-#leadsight-business-analysis-card.lba .lba-tab b{font-size:13px;letter-spacing:-.01em}
-#leadsight-business-analysis-card.lba .lba-tab[aria-selected=true]{background:var(--ink);color:#fff;box-shadow:0 8px 18px #14284b33}
-#leadsight-business-analysis-card.lba .lba-tab[aria-selected=true] small{color:#c4d3ee}
-#leadsight-business-analysis-card.lba .lba-panel{margin-top:14px;animation:lba-fade .3s ease both}
-#leadsight-business-analysis-card.lba .lba-kicker{margin-bottom:4px;font:700 10px/1.3 "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2)}
-#leadsight-business-analysis-card.lba .lba-panel-title{font-size:19px!important;line-height:1.2;letter-spacing:-.02em;margin-bottom:6px}
-#leadsight-business-analysis-card.lba .lba-sub{margin-bottom:10px;color:#46506a;font-size:12.5px}
-#leadsight-business-analysis-card.lba .lba-value-title{margin:14px 0 8px!important;font-size:14px!important;letter-spacing:-.01em}
-#leadsight-business-analysis-card.lba .lba-grid3,#leadsight-business-analysis-card.lba .lba-persona{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-#leadsight-business-analysis-card.lba .lba-card{padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:#ffffffd6}
-#leadsight-business-analysis-card.lba .lba-card h3{margin:6px 0 3px;font-size:12.5px;color:var(--ink)}
-#leadsight-business-analysis-card.lba .lba-card p{color:var(--mut);font-size:11px;line-height:1.45}
-#leadsight-business-analysis-card.lba .lba-glyph{display:grid;width:28px;height:28px;place-items:center;border-radius:9px;background:#eef3fc;color:var(--acc);font-size:14px}
-#leadsight-business-analysis-card.lba .lba-label{color:var(--acc2);font:700 9.5px/1.3 "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase}
-#leadsight-business-analysis-card.lba .lba-persona .lba-card{border-top:3px solid var(--acc2)}
-#leadsight-business-analysis-card.lba .lba-insight{margin-top:10px;padding:8px 12px;border-left:3px solid var(--acc2);border-radius:0 10px 10px 0;background:#f1edff;color:#45526c;font-size:11.5px;line-height:1.5}
-#leadsight-business-analysis-card.lba .lba-insight strong{color:#34236b}
-#leadsight-business-analysis-card.lba .lba-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
-#leadsight-business-analysis-card.lba .lba-flow-step{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#ffffffd6}
-#leadsight-business-analysis-card.lba .lba-stepnum{color:var(--acc2);font:700 9.5px/1.3 "JetBrains Mono",monospace;letter-spacing:.08em}
-#leadsight-business-analysis-card.lba .lba-flow-step strong{display:block;margin:3px 0 2px;font-size:12px}
-#leadsight-business-analysis-card.lba .lba-flow-step p{color:var(--mut);font-size:10.5px;line-height:1.4}
-#leadsight-business-analysis-card.lba .lba-flow-step-n{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:8px;align-items:baseline}#leadsight-business-analysis-card.lba .lba-flow-step-n strong{margin:0}#leadsight-business-analysis-card.lba .lba-flow-step-n p{grid-column:1/-1;margin-top:4px}
-#leadsight-business-analysis-card.lba .lba-note{margin-top:10px;color:#7a8799;font-size:10.5px}
-#leadsight-business-analysis-card.lba .lba-matrix{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-#leadsight-business-analysis-card.lba .lba-quad{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#ffffffd6}
-#leadsight-business-analysis-card.lba .lba-qtag{color:var(--acc2);font:700 9.5px/1.3 "JetBrains Mono",monospace;letter-spacing:.08em}
-#leadsight-business-analysis-card.lba .lba-quad h3{margin:3px 0 2px;font-size:12.5px}
-#leadsight-business-analysis-card.lba .lba-quad p{color:var(--mut);font-size:11px;line-height:1.45}
-#leadsight-business-analysis-card.lba .lba-metricrow,#leadsight-business-analysis-card.lba .lba-phase{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
-#leadsight-business-analysis-card.lba .lba-metric-card{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#ffffffd6}
-#leadsight-business-analysis-card.lba .lba-tag{color:var(--acc2);font:700 9.5px/1.3 "JetBrains Mono",monospace}
-#leadsight-business-analysis-card.lba .lba-metric-card strong{display:block;margin:3px 0 2px;font-size:12px}
-#leadsight-business-analysis-card.lba .lba-metric-card p{color:var(--mut);font-size:10.5px;line-height:1.4}
-#leadsight-business-analysis-card.lba .lba-phase{margin:0}
-#leadsight-business-analysis-card.lba .lba-phase .lba-card{border-top:3px solid var(--acc2)}
-#leadsight-business-analysis-card.lba .lba-phase h3{font-size:12px}
-#leadsight-business-analysis-card.lba .lba-impact{display:grid;grid-template-columns:1.05fr .95fr;gap:8px;margin-top:10px}
-#leadsight-business-analysis-card.lba .lba-impact h3{font-size:14px;margin:2px 0 6px}
-#leadsight-business-analysis-card.lba .lba-barrow{display:flex;align-items:center;gap:10px;margin:7px 0}
-#leadsight-business-analysis-card.lba .lba-barlabel{width:128px;color:var(--mut);font-size:11px}
-#leadsight-business-analysis-card.lba .lba-bartrack{height:10px;flex:1;overflow:hidden;border-radius:8px;background:#e8eefa}
-#leadsight-business-analysis-card.lba .lba-barfill{height:100%;border-radius:8px;background:linear-gradient(90deg,#7c9cf0,var(--acc))}
-#leadsight-business-analysis-card.lba .lba-barfill.coral{background:linear-gradient(90deg,#b9a2ff,var(--acc2))}
-#leadsight-business-analysis-card.lba .lba-pct{width:52px;color:var(--ink);font-size:12px;font-weight:800;text-align:right}
-#leadsight-business-analysis-card.lba .lba-impact-copy{color:var(--mut);font-size:11px;line-height:1.5}
-#leadsight-business-analysis-card.lba .lba-warning{margin-top:10px;padding:8px 12px;border-left:3px solid #d9a441;border-radius:0 10px 10px 0;background:#fff8e8;color:#6d5a2a;font-size:11px;line-height:1.5}
-#leadsight-business-analysis-card.lba .lba-source{margin-top:12px;padding-top:9px;border-top:1px solid var(--line);color:#7a8799;font-size:10px}
-@keyframes lba-fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
-@media(max-width:900px){#leadsight-business-analysis-card.lba .lba-head{grid-template-columns:1fr}#leadsight-business-analysis-card.lba .lba-flow,#leadsight-business-analysis-card.lba .lba-metricrow,#leadsight-business-analysis-card.lba .lba-phase{grid-template-columns:repeat(2,minmax(0,1fr))}#leadsight-business-analysis-card.lba .lba-impact{grid-template-columns:1fr}}
-@media(max-width:900px){#leadsight-business-analysis-card.lba .lba-stats{margin-top:-34px}}
-@media(max-width:640px){.lba{padding:14px;border-radius:22px}#leadsight-business-analysis-card.lba .lba-title{font-size:28px!important}#leadsight-business-analysis-card.lba .lba-stats{grid-template-columns:1fr;margin:-34px 8px 0}#leadsight-business-analysis-card.lba .lba-tabs{flex-direction:column}#leadsight-business-analysis-card.lba .lba-grid3,#leadsight-business-analysis-card.lba .lba-persona,#leadsight-business-analysis-card.lba .lba-matrix,#leadsight-business-analysis-card.lba .lba-flow,#leadsight-business-analysis-card.lba .lba-metricrow,#leadsight-business-analysis-card.lba .lba-phase{grid-template-columns:1fr}#leadsight-business-analysis-card.lba .lba-barlabel{width:96px}}
-@media(prefers-reduced-motion:reduce){#leadsight-business-analysis-card.lba .lba-panel{animation:none}}
-#leadsight-business-analysis-card.lba{--ink:#14203f;--mut:#5d6b86;--line:#e2e8f4;--acc:#4f46e5;--acc2:#f07838;padding:clamp(16px,2.6vw,32px)}
-#leadsight-business-analysis-card.lba .lba-head{padding:clamp(24px,3.4vw,40px) clamp(20px,3.2vw,40px);background:radial-gradient(760px 380px at 92% -12%,rgba(240,120,56,.34),transparent 62%),radial-gradient(620px 360px at -8% 112%,rgba(79,70,229,.5),transparent 62%),linear-gradient(135deg,#0d1735 0%,#16244f 55%,#1d2f6b 100%)}
-#leadsight-business-analysis-card.lba .lba-head::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:22px 22px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 70%);mask-image:linear-gradient(90deg,transparent,#000 70%);pointer-events:none}
-#leadsight-business-analysis-card.lba .lba-hero-copy,#leadsight-business-analysis-card.lba .lba-video-highlight{position:relative;z-index:1}
-#leadsight-business-analysis-card.lba .lba-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
-#leadsight-business-analysis-card.lba .lba-chips span{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.09);color:#dfe6ff;border-radius:99px;padding:3px 10px;font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
-#leadsight-business-analysis-card.lba .lba-chips .lba-chip-warn{background:rgba(255,184,107,.14);border-color:rgba(255,184,107,.4);color:#ffd2a1}
-#leadsight-business-analysis-card.lba .lba-title{font-size:clamp(34px,4.4vw,46px)!important;line-height:1!important;letter-spacing:-.05em}
-#leadsight-business-analysis-card.lba .lba-title span{color:#ffc79f}
-#leadsight-business-analysis-card.lba .lba-summary{margin:10px 0 0;line-height:1.75}
-#leadsight-business-analysis-card.lba .lba-role{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;padding:10px 16px;margin-top:16px;border-radius:12px;background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14);max-width:max-content}
-#leadsight-business-analysis-card.lba .lba-role b{color:#ffb98a;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
-#leadsight-business-analysis-card.lba .lba-role span{color:#eef2ff;font-size:11px;font-weight:700}
-#leadsight-business-analysis-card.lba .lba-role span+span::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.4);margin-right:12px;vertical-align:middle}
-#leadsight-business-analysis-card.lba .lba-stats{gap:14px}
-#leadsight-business-analysis-card.lba .lba-stat{padding:14px 18px;gap:12px;box-shadow:0 6px 18px rgba(20,32,63,.06)}
-#leadsight-business-analysis-card.lba .lba-stat b{color:#0f1a38}
-#leadsight-business-analysis-card.lba .lba-stat:nth-child(2) b{color:#f07838}
-#leadsight-business-analysis-card.lba .lba-tabs{gap:8px;padding:6px;border-color:var(--line);border-radius:16px;background:#f6f8fd}
-#leadsight-business-analysis-card.lba .lba-tab{padding:12px 14px;border-radius:12px}
-#leadsight-business-analysis-card.lba .lba-tab:hover{background:#f4f5ff}
-#leadsight-business-analysis-card.lba .lba-tab[aria-selected=true]{background:#16244f;color:#fff;border:1px solid #2b3e8c;box-shadow:0 8px 18px rgba(22,36,79,.24)}
-#leadsight-business-analysis-card.lba .lba-tab[aria-selected=true] small{color:#c4d3ee}
-#leadsight-business-analysis-card.lba .lba-panel{margin-top:20px}
-#leadsight-business-analysis-card.lba .lba-kicker,#leadsight-business-analysis-card.lba .lba-label,#leadsight-business-analysis-card.lba .lba-qtag,#leadsight-business-analysis-card.lba .lba-tag,#leadsight-business-analysis-card.lba .lba-stepnum{color:var(--acc)}
-#leadsight-business-analysis-card.lba .lba-panel-title{color:#0f1a38;font-weight:800}
-#leadsight-business-analysis-card.lba .lba-card,#leadsight-business-analysis-card.lba .lba-flow-step,#leadsight-business-analysis-card.lba .lba-quad,#leadsight-business-analysis-card.lba .lba-metric-card{border-color:var(--line);border-radius:16px;background:#fff;box-shadow:0 8px 22px rgba(20,32,63,.04)}
-#leadsight-business-analysis-card.lba .lba-glyph{background:#f4f5ff;color:#4338ca}
-#leadsight-business-analysis-card.lba .lba-persona .lba-card,#leadsight-business-analysis-card.lba .lba-phase .lba-card{border-top:3px solid var(--acc)}
-#leadsight-business-analysis-card.lba .lba-insight{border-left-color:var(--acc);border-radius:0 12px 12px 0;background:#f4f5ff}
-#leadsight-business-analysis-card.lba .lba-insight strong{color:#4338ca}
-#leadsight-business-analysis-card.lba .lba-bartrack{background:#e8eefa}
-#leadsight-business-analysis-card.lba .lba-barfill{background:linear-gradient(90deg,#8b83f5,var(--acc))}
-#leadsight-business-analysis-card.lba .lba-barfill.coral{background:linear-gradient(90deg,#ffb98a,#f07838)}
-#leadsight-business-analysis-card.lba .lba-warning{border-left-color:#f07838}
-@media(max-width:900px){#leadsight-business-analysis-card.lba .lba-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:640px){#leadsight-business-analysis-card.lba{padding:14px;border-radius:22px}#leadsight-business-analysis-card.lba .lba-head{padding:22px 18px}#leadsight-business-analysis-card.lba .lba-stats{grid-template-columns:1fr;gap:10px;margin:-34px 8px 0}#leadsight-business-analysis-card.lba .lba-stat{padding:12px 14px}#leadsight-business-analysis-card.lba .lba-role{max-width:none}}
-      `}</style>
+      <style>{EXTRA_CSS}</style>
       <article className="project-card-item lba" id="leadsight-business-analysis-card">
         <div className="lba-top">
           <header className="lba-head">
             <div className="lba-hero-copy">
               <div className="lba-chips" aria-label="Project categories">
-                <span>Business Analysis</span>
+                <span>Product Analysis</span>
                 <span>ASAH Capstone</span>
                 <span className="lba-chip-warn">Concept · Not launched</span>
               </div>
               <h2 className="lba-title">LeadSight</h2>
               <p className="lba-summary">
-                Business analysis covers the banking sales prioritization problem, target users,
-                competitor positioning, value proposition, and proposed rollout metrics.
+                How a banking sales team could rank leads with machine learning: the problem, the
+                competitors, and how success would be measured.
               </p>
               <div className="lba-role">
                 <b>My role</b>
@@ -171,155 +182,63 @@ export default function LeadsightBusinessAnalysisCard() {
           </div>
         </div>
 
-        <nav className="lba-tabs" role="tablist" aria-label="LeadSight case study sections">
-          {detailTabs.map((tab) => (
-            <button
-              aria-controls={`panel-${tab.id}`}
-              aria-selected={activeTab === tab.id}
-              className="lba-tab"
-              id={`tab-${tab.id}`}
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              onKeyDown={(event) => {
-                if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
-                event.preventDefault();
-                const currentIndex = detailTabs.findIndex(({ id }) => id === tab.id);
-                const direction = event.key === "ArrowRight" ? 1 : -1;
-                const nextIndex = (currentIndex + direction + detailTabs.length) % detailTabs.length;
-                const nextTab = detailTabs[nextIndex];
-                setActiveTab(nextTab.id);
-                event.currentTarget.parentElement
-                  ?.querySelector(`#tab-${nextTab.id}`)
-                  ?.focus();
-              }}
-              role="tab"
-              tabIndex={activeTab === tab.id ? 0 : -1}
-              type="button"
-            >
-              <small>{tab.num}</small>
-              <b>{tab.label}</b>
-            </button>
-          ))}
-        </nav>
+        <div className="lba-body">
+          <Prsi items={PRSI} />
 
-        <section
-          className="lba-panel"
-          id={`panel-${activeTab}`}
-          role="tabpanel"
-          aria-labelledby={`tab-${activeTab}`}
-          aria-live="polite"
-        >
-          {activeTab === "problem" && (
-            <>
-              <p className="lba-kicker">01 / PROBLEM DEFINITION</p>
-              <h2 className="lba-panel-title">Why does lead prioritization matter?</h2>
-              <p className="lba-sub">The project explores a common outbound banking challenge: broad calling lists and simple demographic grouping may make it harder for sales teams to decide whom to approach first.</p>
-              <div className="lba-grid3">
-                <div className="lba-card soft"><div className="lba-glyph">☎</div><h3>Untargeted outreach</h3><p>Conventional calling strategies can distribute effort across prospects without clear prioritization.</p></div>
-                <div className="lba-card soft"><div className="lba-glyph">▦</div><h3>Limited decision context</h3><p>Sales teams need a clearer view of customer characteristics, priority groups, and campaign information.</p></div>
-                <div className="lba-card soft"><div className="lba-glyph">◷</div><h3>Operational inefficiency</h3><p>Time spent reviewing leads manually creates an opportunity to improve selection and planning.</p></div>
+          <section className="lba-sec">
+            <p className="lba-kicker">Market</p>
+            <h2 className="lba-h">Competitive positioning</h2>
+            <figure className="lba-map" role="group" aria-label="Competitor positioning map">
+              <div className="lba-map-grid">
+                <div className="lba-ax lba-ax-top"><b>Predictive ML &amp; bank-focused</b><span>(many features)</span></div>
+                <div className="lba-ax lba-ax-left"><b>Simple &amp; niche focus</b><span>(specific conditions)</span></div>
+                <div className="lba-plot">
+                  <div className="lba-plot-hl" />
+                  <div className="lba-axis-h" />
+                  <div className="lba-axis-v" />
+                  {MAP_POINTS.map((p) => (
+                    <span className={`lba-pt${p.self ? " lba-pt-self" : ""}`} key={p.name} style={{ left: `${p.x}%`, top: `${p.y}%` }}><i />{p.name}</span>
+                  ))}
+                </div>
+                <div className="lba-ax lba-ax-right"><b>Enterprise &amp; complex</b><span>(dynamic conditions)</span></div>
+                <div className="lba-ax lba-ax-bottom"><b>Rule-based &amp; general</b><span>(few products)</span></div>
               </div>
-              <div className="lba-insight"><strong>Business question:</strong> How could a sales team prioritize likely prospects and understand campaign performance without relying only on broad, manual segmentation?</div>
-              <div style={{ marginTop: 12 }}>
-                <p className="lba-kicker">ANALYSIS TO SOLUTION</p>
-                <h3 className="lba-value-title">The proposed decision flow</h3>
-                <div className="lba-flow">
-                  <div className="lba-flow-step lba-flow-step-n"><span className="lba-stepnum">STEP 01</span><strong>Understand the challenge</strong><p>Identify inefficiencies in prospect selection and outbound contact workflows.</p></div>
-                  <div className="lba-flow-step lba-flow-step-n"><span className="lba-stepnum">STEP 02</span><strong>Structure the data</strong><p>Use the public UCI Bank Marketing dataset to explore patterns and build a predictive model.</p></div>
-                  <div className="lba-flow-step lba-flow-step-n"><span className="lba-stepnum">STEP 03</span><strong>Surface priorities</strong><p>Present lead scores and segments in a readable sales dashboard.</p></div>
-                  <div className="lba-flow-step lba-flow-step-n"><span className="lba-stepnum">STEP 04</span><strong>Support decisions</strong><p>Help teams review targets, plan outreach, and track campaign activity.</p></div>
+              <figcaption className="lba-map-cap">Placement is the team&apos;s qualitative judgment in the capstone deck, not a formal market study.</figcaption>
+            </figure>
+            <div className="lba-insight"><strong>Reading:</strong> LeadSight sits in the predictive, niche corner: one banking use case, against broader enterprise suites.</div>
+          </section>
+
+          <section className="lba-sec">
+            <p className="lba-kicker">Plan</p>
+            <h2 className="lba-h">Proposed rollout and budget</h2>
+            <div className="lba-roll">
+              <div className="lba-box">
+                <h3>Proposed rollout roadmap</h3>
+                <ol className="lba-steps">
+                  {ROLLOUT.map((r) => (
+                    <li key={r.when}><b>{r.when}</b><span>{r.what}</span></li>
+                  ))}
+                </ol>
+                <div className="lba-pills">
+                  <em>Five KPIs to track</em>
+                  {KPIS.map((k) => <span key={k}>{k}</span>)}
                 </div>
               </div>
-              <p className="lba-note">Problem framing and product concept are drawn from the LeadSight capstone presentation, not from a live bank deployment.</p>
-            </>
-          )}
-
-          {activeTab === "market" && (
-            <>
-              <p className="lba-kicker">02 / BUSINESS &amp; COMPETITOR ANALYSIS</p>
-              <h2 className="lba-panel-title">Designed for internal banking teams.</h2>
-              <p className="lba-sub">Rather than a consumer-facing app, the proposed product focuses on sales and management decision-making. The deck also positions LeadSight against more generic and complex CRM/analytics alternatives.</p>
-              <div className="lba-persona">
-                <div className="lba-card"><div className="lba-label">Primary user</div><h3>Sales &amp; Marketing</h3><p>Review prospect priority, plan contact activities, and navigate candidate lists with relevant context.</p></div>
-                <div className="lba-card"><div className="lba-label">Decision stakeholder</div><h3>Management</h3><p>Review high-level campaign performance and gain visibility into sales activity.</p></div>
-                <div className="lba-card"><div className="lba-label">Supporting stakeholders</div><h3>Data / BI &amp; IT</h3><p>Provide technical and data-integration considerations for a potential internal rollout.</p></div>
-              </div>
-              <h3 className="lba-value-title">Competitive positioning</h3>
-              <div className="lba-matrix">
-                <div className="lba-quad"><div className="lba-qtag">DIFFERENTIATION</div><h3>Focused banking use case</h3><p>LeadSight was conceived around deposit-sales lead prioritization rather than broad, multi-industry CRM workflows.</p></div>
-                <div className="lba-quad"><div className="lba-qtag">USABILITY</div><h3>Simpler internal experience</h3><p>A focused interface is intended to make predictive scoring and outreach decisions easier for sales users to interpret.</p></div>
-                <div className="lba-quad"><div className="lba-qtag">ANALYTICS</div><h3>Predictive lead scoring</h3><p>AI-supported segmentation is proposed as an alternative to simple rules or demographic-only lists.</p></div>
-                <div className="lba-quad"><div className="lba-qtag">PRODUCT SCOPE</div><h3>Analytics + workflow</h3><p>Combines dashboards, lead grouping, and AI insights in one concept instead of presenting a model in isolation.</p></div>
-              </div>
-              <div className="lba-insight"><strong>Positioning hypothesis:</strong> A narrower workflow may be easier for a banking sales team to learn than an enterprise suite—but user research and live adoption data would be needed to validate this advantage.</div>
-            </>
-          )}
-
-          {activeTab === "strategy" && (
-            <>
-              <p className="lba-kicker">03 / PRODUCT DEFINITION</p>
-              <h2 className="lba-panel-title">Make predictions actionable, not just visible.</h2>
-              <p className="lba-sub">The value proposition connects three capabilities that support the same decision: understand performance, identify priority leads, and prepare more relevant outreach.</p>
-              <div className="lba-grid3">
-                <div className="lba-card"><div className="lba-glyph">▥</div><h3>01 · Analytics dashboard</h3><p>Summarizes customer and campaign information in a single view for review and monitoring.</p></div>
-                <div className="lba-card"><div className="lba-glyph">◉</div><h3>02 · Customer segmentation</h3><p>Groups prospective customers into priority and non-priority categories, with supporting demographic and financial context.</p></div>
-                <div className="lba-card"><div className="lba-glyph">✧</div><h3>03 · AI-assisted insights</h3><p>Explores more personalized outreach recommendations based on customer and campaign context.</p></div>
-              </div>
-              <h3 className="lba-value-title">Product value chain</h3>
-              <div className="lba-flow lba-product-flow">
-                <div className="lba-flow-step"><span className="lba-stepnum">INPUT</span><strong>Customer data</strong><p>Structured information from the public Bank Marketing dataset.</p></div>
-                <div className="lba-flow-step"><span className="lba-stepnum">ANALYSIS</span><strong>Predictive scoring</strong><p>Machine-learning model produces lead prioritization output.</p></div>
-                <div className="lba-flow-step"><span className="lba-stepnum">EXPERIENCE</span><strong>Clear dashboard</strong><p>Sales teams view segments, information, and recommendations.</p></div>
-                <div className="lba-flow-step"><span className="lba-stepnum">INTENDED VALUE</span><strong>Better prioritization</strong><p>Focus outreach planning around interpretable lead scores.</p></div>
-              </div>
-              <div className="lba-insight"><strong>What the product must get right:</strong> Model outputs need to be understandable and useful for the specific sales task. Technical performance alone does not demonstrate business value.</div>
-            </>
-          )}
-
-          {activeTab === "rollout" && (
-            <>
-              <div className="lba-panel-head">
-                <div>
-                  <p className="lba-kicker">04 / BUSINESS METRICS &amp; IMPLEMENTATION PLANNING</p>
-                  <h2 className="lba-panel-title">Defining success before deployment.</h2>
-                  <p className="lba-sub">The team proposed a phased internal rollout and five measurement areas. These are planned evaluation criteria—not observed business outcomes.</p>
+              <div className="lba-box">
+                <h3>Where the budget would go</h3>
+                <div className="lba-budget-top"><b>IDR 22M</b><span>proposed, 9 line items</span></div>
+                <div className="lba-stack" role="img" aria-label="Budget split by category">
+                  {BUDGET_GROUPS.map((b) => (<i className={`lba-g${b.g}`} key={b.g} style={{ width: `${b.pct}%` }} />))}
                 </div>
-              </div>
-              <div className="lba-metricrow">
-                <div className="lba-metric-card"><div className="lba-tag">KPI 01</div><strong>User adoption</strong><p>Active users and login frequency during the first 30 days.</p></div>
-                <div className="lba-metric-card"><div className="lba-tag">KPI 02</div><strong>Operational efficiency</strong><p>Time required to select leads and support outbound contact.</p></div>
-                <div className="lba-metric-card"><div className="lba-tag">KPI 03</div><strong>Scoring performance</strong><p>Alignment between lead scores and actual conversions.</p></div>
-                <div className="lba-metric-card"><div className="lba-tag">KPI 04</div><strong>User satisfaction</strong><p>Feedback after early usage and requested improvements.</p></div>
-                <div className="lba-metric-card"><div className="lba-tag">KPI 05</div><strong>Business impact</strong><p>Conversion and operating-cost outcomes if deployed.</p></div>
-              </div>
-              <h3 className="lba-value-title">Proposed rollout roadmap</h3>
-              <div className="lba-phase">
-                <div className="lba-card"><span className="lba-stepnum">WEEKS 1–2</span><h3>Soft launch</h3><p>Gather feedback from a small pilot group.</p></div>
-                <div className="lba-card"><span className="lba-stepnum">WEEKS 3–4</span><h3>Iterate</h3><p>Refine workflows and integration based on feedback.</p></div>
-                <div className="lba-card"><span className="lba-stepnum">MONTH 2</span><h3>Internal pilot</h3><p>Support testing and onboarding of sales users.</p></div>
-                <div className="lba-card"><span className="lba-stepnum">MONTH 3</span><h3>Wider deployment</h3><p>Expand operational usage, subject to validation.</p></div>
-                <div className="lba-card"><span className="lba-stepnum">MONTH 4</span><h3>Improve</h3><p>Maintain and iterate against usage data.</p></div>
-              </div>
-              <div className="lba-impact">
-                <div className="lba-card soft">
-                  <p className="lba-kicker">MODEL EVALUATION · REPORTED IN TEAM DECK</p>
-                  <h3>A metric worth questioning</h3>
-                  <div className="lba-barrow"><div className="lba-barlabel">Overall accuracy</div><div className="lba-bartrack"><div className="lba-barfill" style={{ width: "87.5%" }} /></div><div className="lba-pct">87.5%</div></div>
-                  <div className="lba-barrow"><div className="lba-barlabel">Priority-class recall</div><div className="lba-bartrack"><div className="lba-barfill coral" style={{ width: "38%" }} /></div><div className="lba-pct">38%</div></div>
-                  <p className="lba-impact-copy">The deck reports strong overall accuracy but lower recall for the priority class. That matters because overlooking genuinely promising leads may weaken the tool&apos;s intended business value.</p>
+                <div className="lba-legend">
+                  {BUDGET_GROUPS.map((b) => (<span key={b.g}><i className={`lba-g${b.g}`} />{b.label}<b>{`${b.pct}%`}</b></span>))}
                 </div>
-                <div className="lba-card soft">
-                  <p className="lba-kicker">PRODUCT LEARNING</p>
-                  <h3>Validate the right outcome</h3>
-                  <p>Before claiming lead selection is more efficient, a real pilot would need to test threshold choices, false-negative trade-offs, workflow usability, and actual conversion outcomes.</p>
-                  <div className="lba-insight" style={{ marginTop: 14 }}><strong>Decision principle:</strong> Model quality, user adoption, and sales impact should be measured separately.</div>
-                </div>
+                <p className="lba-note">Line items are from the deck. Grouping into four categories is my own, for readability.</p>
               </div>
-              <div className="lba-warning"><strong>Scope &amp; validation limits:</strong> LeadSight is an ASAH capstone developed using a public dataset. The four-month rollout and proposed business KPIs in the presentation are plans, not proof of internal bank adoption, real revenue uplift, or operational cost reduction.</div>
-            </>
-          )}
-        </section>
-
+            </div>
+            <p className="lba-note">Rollout, budget and KPIs are capstone proposals, not observed results.</p>
+          </section>
+        </div>
       </article>
     </>
   );

@@ -31,10 +31,11 @@ export const GROUPS = [
     overview: { kind: "video", driveId: "1YcuRaOq3cR49pWVPmXh29hRSJCqcGhOX", poster: `${A}/experience/ASAH%202025/Leadsight%20Profile.png`, title: "LeadSight capstone presentation", caption: "The ASAH capstone walkthrough: the sales-lead problem, the scoring approach and the dashboard.", accent: "#6d28d9" },
     title: "LeadSight",
     subtitle: "Lead prioritization for banking sales",
+    fieldLabels: { analytics: "Product Analysis" },
     summary:
       "The ASAH capstone concept for banking sales teams: predictive lead scoring, customer segmentation and campaign analytics, from the business case, through six weeks of delivery planning, to the dashboard.",
     parts: [
-      { id: "leadsight-business-analysis-card", hide: [".lba-video-highlight"], chapter: "Business analysis", lead: "Target users, competitor positioning, value proposition, and proposed rollout metrics." },
+      { id: "leadsight-business-analysis-card", hide: [".lba-video-highlight"], chapter: "Business analysis", fieldLabel: "Product Analysis", lead: "Problem, role, solution and impact, plus competitor positioning and the proposed rollout." },
       { id: "pm-asah-card", chapter: "Project management", lead: "Six-week workstreams, dependencies, milestones, and delivery checkpoints." },
       { id: "leadsight-project-card", chapter: "Front-end development", lead: "React dashboard structure, customer-priority views, campaign charts, and interaction patterns." },
     ],

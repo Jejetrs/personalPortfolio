@@ -14,7 +14,7 @@
 import ID_DICTIONARY from "./id.js";
 import ID_PATTERNS from "./patterns.js";
 
-const ATTRIBUTES = ["aria-label", "title", "placeholder"];
+const ATTRIBUTES = ["aria-label", "title", "placeholder", "alt"];
 const SKIP_TAGS = new Set(["SCRIPT", "STYLE", "NOSCRIPT", "TEXTAREA", "CODE", "PRE"]);
 const ATTRIBUTE_SELECTOR = ATTRIBUTES.map((name) => `[${name}]`).join(",");
 
@@ -56,11 +56,14 @@ function lookup(raw) {
 const skipped = (element) =>
   !element || SKIP_TAGS.has(element.tagName) || Boolean(element.closest?.('[translate="no"],.notranslate'));
 
+/* Attributes (aria-label, title…) are translated everywhere except inside translate="no" areas; only the text of code blocks is left alone. */
+const noTranslate = (element) => !element || Boolean(element.closest?.('[translate="no"],.notranslate'));
+
 function processText(node) {
   const record = textRecords.get(node);
   const current = node.nodeValue;
   if (record && current === record.shown) return; // our own write
-  if (skipped(node.parentElement)) return;
+  if (skipped(node.parentElement) || node.parentElement.closest("pre,code")) return;
   const next = language === "id" ? lookup(current) : null;
   if (next != null && next !== current) {
     textRecords.set(node, { original: current, shown: next });
@@ -71,7 +74,7 @@ function processText(node) {
 }
 
 function processAttribute(element, name) {
-  if (skipped(element)) return;
+  if (noTranslate(element)) return;
   const current = element.getAttribute(name);
   if (current == null) return;
   const records = attrRecords.get(element) || {};
@@ -94,7 +97,7 @@ function processTree(root) {
     return;
   }
   if (root.nodeType !== Node.ELEMENT_NODE) return;
-  if (skipped(root) && root.tagName !== "TITLE") return;
+  if (noTranslate(root) && root.tagName !== "TITLE") return;
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   let node = walker.nextNode();
   while (node) {
